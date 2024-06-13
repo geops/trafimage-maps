@@ -109,7 +109,6 @@ class TopicLoader extends PureComponent {
       layers,
       language,
     } = this.props;
-
     // Sometimes the array object is different but the content is the same as before.
     const areTopicsReallyUpdated =
       topics?.map((t) => `${t.key}`).join() !==

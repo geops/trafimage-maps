@@ -9,6 +9,7 @@ import Geolocate from "../../../img/Geolocate";
 import geolocateMarkerWithDirection from "../../../img/geolocate_marker_direction.svg";
 import geolocateMarker from "../../../img/geolocate_marker.svg";
 import { setGeolocating } from "../../../model/app/actions";
+import { trackEvent } from "../../../utils/trackingUtils";
 
 const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
@@ -84,6 +85,12 @@ function Geolocation() {
       );
       return;
     }
+    trackEvent({
+      eventType: "action",
+      componentName: "icon button",
+      label: t("Lokalisieren"),
+      variant: "lokalisieren",
+    });
     dispatch(setGeolocating(true));
     if ("ondeviceorientationabsolute" in window) {
       window.addEventListener(
@@ -105,7 +112,7 @@ function Geolocation() {
     } else {
       window.addEventListener("deviceorientation", deviceOrientationListener);
     }
-  }, [deviceOrientationListener, dispatch, isGeolocating]);
+  }, [deviceOrientationListener, dispatch, isGeolocating, t]);
 
   const styleFunction = useCallback(
     (feature) => {

@@ -6,14 +6,16 @@ import ExportButton from "../../components/ExportButton/ExportButton";
 import { ReactComponent as Loader } from "../../img/loader.svg";
 import { RAILPLUS_EXPORTBTN_ID } from "../../utils/constants";
 
-function BtnCmpt({ children }) {
+function BtnCmpt({ children = <BsDownload />, style = {}, ...props }) {
   return (
-    <MapButton style={{ padding: 8, color: "#444" }}>{children}</MapButton>
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <MapButton {...props} style={{ padding: 8, color: "#444", ...style }}>
+      {children}
+    </MapButton>
   );
 }
 
-BtnCmpt.propTypes = { children: PropTypes.node };
-BtnCmpt.defaultProps = { children: <BsDownload /> };
+BtnCmpt.propTypes = { children: PropTypes.node, style: PropTypes.object };
 
 const center = [909001.8239356248, 5915092.625643606];
 

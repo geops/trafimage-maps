@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { FaInfoCircle } from "react-icons/fa";
 import { IconButton } from "@mui/material";
 import { setSelectedForInfos } from "../../model/app/actions";
+import { trackEvent } from "../../utils/trackingUtils";
 
 function InfosButton({ selectedInfo, className }) {
   const { t } = useTranslation();
@@ -29,6 +30,12 @@ function InfosButton({ selectedInfo, className }) {
       className={classNam}
       title={t("Layerinformationen anzeigen", { layer: t(selectedInfo.key) })}
       onClick={(evt) => {
+        trackEvent({
+          eventType: "action",
+          componentName: "icon button",
+          label: t(selectedInfo.key),
+          variant: selectedInfo?.get ? "Layer" : "Topic", // We test the get method for layer or topic, see LayerInfosDialog.js
+        });
         dispatch(setSelectedForInfos(isSelected ? null : selectedInfo));
         evt.stopPropagation();
       }}
