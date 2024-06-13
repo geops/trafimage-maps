@@ -65,7 +65,7 @@ function Draw() {
                 eventType: "action",
                 componentName: "secondary button",
                 label: t("Neue Zeichnung"),
-                variant: "neue_zeichnung_erstellen",
+                variant: "Neue Zeichnung",
               });
             }}
           >
@@ -79,7 +79,7 @@ function Draw() {
                 eventType: "action",
                 componentName: "secondary button",
                 label: t("Zeichnung bearbeiten"),
-                variant: "zeichnung_bearbeiten",
+                variant: "Zeichnung bearbeiten",
               });
             }}
           />
