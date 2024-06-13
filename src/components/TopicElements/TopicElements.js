@@ -228,7 +228,7 @@ function TopicElements({ history }) {
               if (layer) {
                 trackEvent({
                   eventType: "action",
-                  componentName: "layer toggle button",
+                  componentName: "layer switch button",
                   label: t(layer.key),
                   variant: "Layer Switch",
                 });
