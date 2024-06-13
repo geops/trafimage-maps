@@ -57,7 +57,7 @@ function Head({ topics, displayConsent, domainConsentId }) {
         data-domain-script={domainConsentId}
         data-language={`${language}-ch`}
       />
-      {trackingScriptSrc && <script src={trackingScriptSrc} />}
+      {trackingScriptSrc && <script type="text/javascript" src={trackingScriptSrc} />}
     </Helmet>
   );
 }
