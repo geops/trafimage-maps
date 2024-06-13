@@ -11,7 +11,10 @@ function useTrackTopic(topicKey) {
     if (env && topicKey) {
       window.digitalDataLayer = window.digitalDataLayer || [];
       window.digitalDataLayer.push({
-        pageInstanceID: env === "prod" ? "TODO: prod pageInstanceID" : "TODO: stag pageInstanceID",
+        pageInstanceID:
+          env === "prod"
+            ? "TODO: prod pageInstanceID"
+            : "TODO: stag pageInstanceID",
         page: {
           pageInfo: {
             topic: topicKey,
