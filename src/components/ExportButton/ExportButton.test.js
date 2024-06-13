@@ -13,6 +13,9 @@ import theme from "../../themes/default";
 
 describe("ExportButton", () => {
   let store;
+  delete global.window.location;
+  global.window = Object.create(window);
+  global.window.location = { hostname: "wkp-dev.foo" };
   afterEach(() => jest.restoreAllMocks());
   [tarifverbundkarteLegend, energieLegend, railplusLegend].forEach((legend) => {
     test("legend svg must be parseable/serializable by native DOMParser and XML Serializer", (done) => {
@@ -38,7 +41,7 @@ describe("ExportButton", () => {
     });
   });
 
-  test("should add  Ganze Schweiz to tracking event when exportCoordinates is [SWISS_CENTER, SWISS_CENTER]", () => {
+  test("should add Ganze Schweiz to tracking event when exportCoordinates is [SWISS_CENTER, SWISS_CENTER]", () => {
     const exportCoordinates = [SWISS_CENTER, SWISS_CENTER];
     // Ignore errors, because test case is about tracking event
     jest.spyOn(console, "error");

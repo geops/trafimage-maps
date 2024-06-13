@@ -6,6 +6,8 @@ import Helmet from "react-helmet";
 import { setConsentGiven } from "../../model/app/actions";
 import { getTrackingLaunchScriptSrc } from "../../utils/trackingUtils";
 
+const trackingScriptSrc = getTrackingLaunchScriptSrc();
+
 /**
  * This component adds a script tag in the HTML head for SBB consent management.
  */
@@ -55,7 +57,7 @@ function Head({ topics, displayConsent, domainConsentId }) {
         data-domain-script={domainConsentId}
         data-language={`${language}-ch`}
       />
-      <script src={getTrackingLaunchScriptSrc()} />
+      {trackingScriptSrc && <script src={trackingScriptSrc} />}
     </Helmet>
   );
 }

@@ -19,11 +19,18 @@ import { trackEvent } from "../../utils/trackingUtils";
 import { SWISS_CENTER } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
+  buttonWrapper: {
+    ...theme.styles.flexCenter,
+    flexGrow: 1,
+    maxWidth: 150,
+  },
   buttonContent: {
     ...theme.styles.flexCenter,
-    padding: "5px 10px",
-    height: 35,
-    width: 110,
+    border: "none",
+    padding: "0 10px",
+    height: 40,
+    maxHeight: 40,
+    width: "100%",
     backgroundColor: "#dcdcdc",
     "&:hover": {
       backgroundColor: "#cdcdcd",
@@ -32,21 +39,21 @@ const useStyles = makeStyles((theme) => ({
   canvasButton: { ...theme.styles.flexCenter },
 }));
 
-function ExportButton({
-  exportFormat,
-  exportScale,
-  exportSize,
-  exportCoordinates,
-  exportZoom,
-  exportExtent,
-  exportCopyright,
-  children,
-  loadingComponent,
-  style,
-  id,
-  scaleLineConfig,
-}) {
-  const classes = useStyles();
+function ExportButton(props) {
+  const {
+    exportFormat,
+    exportScale,
+    exportSize,
+    exportCoordinates,
+    exportZoom,
+    exportExtent,
+    exportCopyright,
+    children,
+    loadingComponent,
+    style,
+    id,
+    scaleLineConfig,
+  } = props;
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
@@ -56,16 +63,21 @@ function ExportButton({
   const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
 
+  const renderChildren = () => {
+    const styles = {
+      pointerEvents: isLoading ? "none" : "auto",
+      opacity: isLoading ? 0.5 : 1,
+      ...style,
+    };
+    return isLoading
+      ? React.cloneElement(loadingComponent, { style: styles })
+      : React.Children.map(children, (child) => {
+          return React.cloneElement(child, { style: styles, id });
+        });
+  };
+
   return (
     <CanvasSaveButton
-      id={id}
-      title={t("Karte als PDF exportieren")}
-      className={classes.canvasButton}
-      style={{
-        pointerEvents: isLoading ? "none" : "auto",
-        opacity: isLoading ? 0.3 : 1,
-        ...style,
-      }}
       extraData={exportCopyright ? generateExtraData(layers) : null}
       autoDownload={false}
       format="image/jpeg"
@@ -136,27 +148,51 @@ function ExportButton({
         setLoading(false);
       }}
     >
-      {isLoading ? loadingComponent : children}
+      {renderChildren()}
     </CanvasSaveButton>
   );
 }
 
-function DefaultLoadingComponent() {
+function DefaultLoadingComponent({ style = null }) {
   const classes = useStyles();
   const { t } = useTranslation();
   return (
-    <span className={classes.buttonContent}>
-      <Loader />
-      {t("Export läuft...")}
-    </span>
+    <div className={classes.buttonWrapper} style={style}>
+      <span className={classes.buttonContent}>
+        <Loader />
+        {t("Export läuft...")}
+      </span>
+    </div>
   );
 }
 
-function DefaultChildren() {
+DefaultLoadingComponent.propTypes = {
+  style: PropTypes.object,
+};
+
+function DefaultChildren({ id, style, onClick }) {
   const classes = useStyles();
   const { t } = useTranslation();
-  return <span className={classes.buttonContent}>{t("PDF exportieren")}</span>;
+  return (
+    <div className={classes.buttonWrapper} style={style}>
+      <button
+        type="button"
+        className={classes.buttonContent}
+        id={id}
+        style={style}
+        onClick={onClick}
+      >
+        {t("PDF exportieren")}
+      </button>
+    </div>
+  );
 }
+
+DefaultChildren.propTypes = {
+  style: PropTypes.object,
+  id: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
 ExportButton.propTypes = {
   exportFormat: PropTypes.string,

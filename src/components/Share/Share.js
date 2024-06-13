@@ -135,7 +135,6 @@ function Share() {
       <ShareLink config={socialShareConfig[0]} />
       <CanvasSaveButton
         map={map}
-        title={t("Karte als Bild speichern")}
         extraData={generateExtraData(layers)}
         onSaveStart={(mapp) => {
           handleTracking(
@@ -150,7 +149,14 @@ function Share() {
           return Promise.resolve(mapp);
         }}
       >
-        <TiImage focusable={false} />
+        <button
+          className="rs-canvas-save-button"
+          type="button"
+          aria-label="download"
+          title={t("Karte als Bild speichern")}
+        >
+          <TiImage focusable={false} />
+        </button>
       </CanvasSaveButton>
       <ShareLink config={socialShareConfig[1]} />
       <ShareLink config={socialShareConfig[2]} />

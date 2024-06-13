@@ -5,11 +5,7 @@
   padding: 10px 16px;
 
   > *:first-child {
-    padding-left:12px
-  }
-
-  .wkp-permalink-bt {
-    width: 20px;
+    padding-left:8px
   }
 
   .ta-mail-icon {
@@ -17,18 +13,21 @@
     font-size: 23px;
   }
 
-  .ta-facebook-icon {
-    width: 11px;
-    font-size: 30px;
-  }
-
   .ta-twitter-icon,
-  .rs-canvas-save-button {
+  .rs-canvas-save-button,
+  .ta-facebook-icon {
     font-size: 30px;
   }
 
   .rs-canvas-save-button {
+    background-color: transparent;
+    border: none;
     font-size: 28px;
+    padding: 0;
+
+    svg {
+      margin-top: 3px;
+    }
   }
 
   svg:hover {
@@ -37,7 +36,7 @@
 
 
 
-  > div, a {
+  > div, a, button {
     width: 30px;
     height: 30px;
     margin: 0;

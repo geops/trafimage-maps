@@ -1,9 +1,5 @@
 export function getTrackingEnv() {
   const { hostname } = window?.location || {};
-  if (hostname?.includes("localhost")) {
-    // TODO: Remove before merging
-    return "test";
-  }
   if (hostname?.includes("dev") || hostname?.includes("stag")) {
     return "stag";
   }
@@ -21,8 +17,7 @@ export function getTrackingLaunchScriptSrc() {
   if (env === "prod") {
     return "https://assets.adobedtm.com/15ff638fdec4/4c38131c34e1/launch-02c7e7b710c9.min.js";
   }
-  // TODO: set to null before merging
-  return "https://example.com/";
+  return null;
 }
 
 export function trackEvent({
@@ -30,6 +25,9 @@ export function trackEvent({
   componentPosition = 1,
   ...eventInfo
 }) {
+  if (!getTrackingEnv()) {
+    return;
+  }
   window.digitalDataLayer = window.digitalDataLayer || [];
   window.digitalDataLayer.push({
     event: {

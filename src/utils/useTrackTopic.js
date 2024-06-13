@@ -6,7 +6,6 @@ let prevUrl;
 
 function useTrackTopic(topicKey) {
   const { i18n } = useTranslation();
-
   useEffect(() => {
     const env = getTrackingEnv();
     if (env && topicKey) {

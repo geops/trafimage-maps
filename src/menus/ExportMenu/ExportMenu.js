@@ -20,7 +20,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
     marginLeft: 20,
-    gap: 25,
+    gap: 15,
+  },
+  selectResolution: {
+    width: 145,
   },
   input: {
     width: 140,
@@ -73,7 +76,10 @@ function ExportMenu() {
     >
       <div className={classes.menuContent}>
         <div className={classes.selectWrapper}>
-          <ExportResolutionSelect options={options} />
+          <ExportResolutionSelect
+            options={options}
+            className={classes.selectResolution}
+          />
           <ExportButton
             exportFormat={exportPrintOptions.paperSize}
             exportScale={exportPrintOptions.quality}

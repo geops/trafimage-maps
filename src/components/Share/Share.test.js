@@ -9,6 +9,9 @@ import Share from ".";
 
 describe("Share", () => {
   let store;
+  delete global.window.location;
+  global.window = Object.create(window);
+  global.window.location = { hostname: "wkp-dev.foo" };
   beforeEach(() => {
     store = global.global.mockStore({
       map: {},
@@ -33,7 +36,8 @@ describe("Share", () => {
         </ThemeProvider>
       </MatomoProvider>,
     );
-    expect(container.querySelectorAll("button").length).toBe(1);
+    expect(container.querySelectorAll("button").length).toBe(2);
+    expect(container.innerHTML).toMatchSnapshot();
   });
 
   describe("should send track event on click", () => {

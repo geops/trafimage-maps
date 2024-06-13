@@ -10,6 +10,9 @@ import { setSelectedForInfos } from "../../model/app/actions";
 
 describe("InfosButton", () => {
   let store;
+  delete global.window.location;
+  global.window = Object.create(window);
+  global.window.location = { hostname: "wkp-dev.foo" };
   beforeEach(() => {
     window.digitalDataLayer = [];
   });
