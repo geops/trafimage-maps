@@ -48,23 +48,15 @@ function RailplusPopup({ feature, layer }) {
           {longName}
         </Typography>
       )}
-      {address && (
-        <Typography paragraph variant="body2">
-          {address}
-        </Typography>
-      )}
+      {address && <Typography paragraph>{address}</Typography>}
       {cantons?.length ? (
         <div>
-          <Typography variant="body2">
+          <Typography>
             <b>{t(`${layer.key}.cantons`)}</b>:
           </Typography>
           <List sx={{ listStyleType: "disc", listStylePosition: "inside" }}>
             {cantons.map((canton) => (
-              <ListItem
-                key={canton}
-                sx={{ display: "list-item", typography: "body2" }}
-                dense
-              >
+              <ListItem key={canton} sx={{ display: "list-item" }} dense>
                 {t(`kantone.${canton.toLowerCase()}`)}
               </ListItem>
             ))}
@@ -72,28 +64,28 @@ function RailplusPopup({ feature, layer }) {
         </div>
       ) : null}
       {numberOfEmployees && (
-        <Typography variant="body2">
+        <Typography>
           <b>{t(`${layer.key}.number_of_employees`)}</b>: {numberOfEmployees}
         </Typography>
       )}
       {yearlyNumberOfPassengers && (
-        <Typography variant="body2">
+        <Typography>
           <b>{t(`${layer.key}.yearly_number_of_passengers`)}</b>:{" "}
           {yearlyNumberOfPassengers}
         </Typography>
       )}
       {routeLength && (
-        <Typography variant="body2">
+        <Typography>
           <b>{t(`${layer.key}.length`)}</b>: {routeLength}
         </Typography>
       )}
       {highestPoint && (
-        <Typography variant="body2">
+        <Typography>
           <b>{t(`${layer.key}.highest_point`)}</b>: {highestPoint}
         </Typography>
       )}
       {lowestPoint && (
-        <Typography variant="body2">
+        <Typography>
           <b>{t(`${layer.key}.lowest_point`)}</b>: {lowestPoint}
         </Typography>
       )}
