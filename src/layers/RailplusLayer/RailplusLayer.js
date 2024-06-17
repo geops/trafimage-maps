@@ -15,7 +15,7 @@ class RailplusLayer extends MapboxStyleLayer {
 
   fetchRailplusProviders() {
     fetch(
-      `${this.mapboxLayer?.url}/data/ch.railplus.meterspurbahnen.json?key=${this.mapboxLayer?.apiKey}`,
+      `${this.mapboxLayer?.url}/data/ch.railplus.betreiberinnen.json?key=${this.mapboxLayer?.apiKey}`,
     )
       .then((res) => res.json())
       .then((data) => {
