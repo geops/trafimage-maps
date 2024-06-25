@@ -81,7 +81,7 @@ function RailplusPopup({ feature, layer }) {
                   <ListItemIcon>
                     <FaCircle size={7} />
                   </ListItemIcon>
-                  <ListItemText>{trans}</ListItemText>
+                  <ListItemText sx={{ margin: 0 }}>{trans}</ListItemText>
                 </ListItem>
               ))}
           </List>
