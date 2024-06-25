@@ -176,7 +176,7 @@ function GeltungsbereichePopup({
                   <ListItemText primaryTypographyProps={{ variant: "body1" }}>
                     {
                       // eslint-disable-next-line react/no-danger
-                      <span dangerouslySetInnerHTML={{ __html: t(product) }} />
+                      <span dangerouslySetInnerHTML={{ __html: t(product) }} /> // For proper line breaks
                     }
                   </ListItemText>
                 </ListItem>
