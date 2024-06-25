@@ -58,7 +58,12 @@ function RailplusPopup({ feature, layer }) {
         </Typography>
       )}
       {address && (
-        <Typography data-testid="railplus-address">{address}</Typography>
+        <div data-testid="railplus-address">
+          <Typography sx={{ paddingBottom: 0.5 }}>
+            <b>{t(`${layer.key}.headquarters`)}:</b>
+          </Typography>
+          <Typography>{address}</Typography>
+        </div>
       )}
       {cantons?.length ? (
         <div data-testid="railplus-cantons">
