@@ -1817,6 +1817,11 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.1.tgz#16308cea045f0fc777b6ff20a9f25474dd8293d2"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
+"@geoblocks/ol-maplibre-layer@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@geoblocks/ol-maplibre-layer/-/ol-maplibre-layer-1.0.0.tgz#177862a71785a9676cb929f4e530fb6c585207b4"
+  integrity sha512-18EWTRBBt6xB2pJaEas3k887VZUAHGgk2U3v7D/5XtPTR91kUb0OAAOfShnfrET3iwO3SnJ6c0NrJ4anw0qobA==
+
 "@geops/create-react-web-component@3.0.5":
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/@geops/create-react-web-component/-/create-react-web-component-3.0.5.tgz#db60bd510899e8e28e33251c68991701912dbeef"
@@ -11391,11 +11396,12 @@ mkdirp@^1.0.3:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mobility-toolbox-js@3.0.0-beta.14:
-  version "3.0.0-beta.14"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-3.0.0-beta.14.tgz#d454ab6ac20c3333f74e33529a1e28ef62ec39ac"
-  integrity sha512-iiF+SNIQw4kGbhOP2FZdkMWQt8nCHRvmKITNMgLvbSCyh/+moz9UK7V+iWB1vaW2M0DFxKMYEgcxG4Q09Kno9w==
+mobility-toolbox-js@3.0.0-beta.17:
+  version "3.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-3.0.0-beta.17.tgz#0683a7be02b4a96f70eb29eb1cf7905c5a54b9f3"
+  integrity sha512-Tg718+PDVwF5U6qH46twa8KEVdMadlu48YpU1WZGgW9ofZT9o/BvPAKKE2YiKqM0wQ37nsnSl/qNVUF24EGN8A==
   dependencies:
+    "@geoblocks/ol-maplibre-layer" "^1.0.0"
     "@turf/helpers" "6.5.0"
     "@turf/transform-rotate" "6.5.0"
     lodash.debounce "4.0.8"
