@@ -91,37 +91,19 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
       const [feature] = data.features; // Municipality feature containing the zone objects in the properties
       const zones = feature?.get("zones");
 
-      if (!feature || !zones || !zones[0]) {
+      if (!feature || !zones?.length) {
         // Abort if no zone or feature present
         return null;
       }
 
       /**
-       * If multiple zones present, the zones are intersected with one another
-       * Then they are intersected with the municipality feature separately for readability
-       * @ignore
+       * If multiple zones present, the zones are intersected with one another adn the municipality feature
        */
-      let intersectedZones = null;
-      zones.forEach((zone, index) => {
-        const olFeature = new Feature(zone.geometry);
-        if (index === 0) {
-          intersectedZones = format.writeFeatureObject(olFeature);
-        } else if (intersectedZones) {
-          intersectedZones = intersect(
-            intersectedZones,
-            format.writeFeatureObject(olFeature),
-          );
-        }
-      });
-
-      let finalIntersection = null;
-      if (intersectedZones) {
-        // Intersect zones with municipality feature
-        finalIntersection = intersect(
-          intersectedZones,
-          format.writeFeatureObject(feature),
-        );
-      }
+      const featCollection = format.writeFeaturesObject([
+        ...zones.map((zone) => new Feature(zone.geometry)),
+        feature,
+      ]);
+      const finalIntersection = intersect(featCollection);
 
       if (finalIntersection) {
         // Create and highlight ol feature, add properties for use in popup
