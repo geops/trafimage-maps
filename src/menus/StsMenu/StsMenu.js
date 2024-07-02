@@ -114,26 +114,6 @@ function StsTopicMenu() {
     }
   }, [layers]);
 
-  const layerSwitcher = useMemo(() => {
-    if (activeMenu === "sts") {
-      return <StsValidityLayerSwitcher />;
-    }
-    if (activeMenu === "dv") {
-      return <DvLayerSwitcher />;
-    }
-    return null;
-  }, [activeMenu]);
-
-  const featureInfos = useMemo(() => {
-    if (activeMenu === "sts") {
-      return <StsValidityFeatureInfo menuOpen={!featureInfo} />;
-    }
-    if (activeMenu === "dv") {
-      return <DvFeatureInfo filterByType />;
-    }
-    return null;
-  }, [activeMenu, featureInfo]);
-
   useEffect(() => {
     let updateLayersListeners = [];
     if (dvBaseLayer && stsBaseLayer) {
@@ -217,14 +197,20 @@ function StsTopicMenu() {
               {t("Direct trains to Switzerland")}
             </StyledMenuItem>
           </StyledMenu>
-          <div className={classes.layerSwitcher}>{layerSwitcher}</div>
+          <div className={classes.layerSwitcher}>
+            {activeMenu === "sts" && <StsValidityLayerSwitcher />}
+            {activeMenu === "dv" && <DvLayerSwitcher />}
+          </div>
         </>
       }
-      title={activeMenu === "dv" ? <DvFeatureInfoTitle /> : null}
+      title={activeMenu === "dv" && <DvFeatureInfoTitle />}
       body={
         <>
-          {isMobile ? null : <Divider />}
-          {featureInfos}
+          {!isMobile && <Divider />}
+          {activeMenu === "sts" && (
+            <StsValidityFeatureInfo menuOpen={!featureInfo} />
+          )}
+          {activeMenu === "dv" && <DvFeatureInfo filterByType />}
         </>
       }
     />
