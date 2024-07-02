@@ -43,7 +43,7 @@ import {
 } from "../utils/constants";
 import DvMenu from "../menus/DirektverbindungenMenu/DvMenu";
 import DvListButton from "./ch.sbb.direktverbindungen/DvListButton";
-import applPermalinkVisiblity from "../utils/applyPermalinkVisibility";
+import applyPermalinkVisiblity from "../utils/applyPermalinkVisibility";
 import RailplusMenu from "../menus/RailplusMenu";
 import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
 import GaExportMapButton from "../menus/GaExportMenu/GaExportMapButton";
@@ -512,7 +512,7 @@ const topics = {
 };
 
 topics.wkp.forEach((topic) => {
-  applPermalinkVisiblity(
+  applyPermalinkVisiblity(
     topic.layers,
     (pathname) => pathname?.indexOf(`/${topic.key}`) !== -1,
   );
