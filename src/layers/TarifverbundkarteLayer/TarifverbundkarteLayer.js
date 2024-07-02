@@ -97,7 +97,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
       }
 
       /**
-       * If multiple zones present, the zones are intersected with one another adn the municipality feature
+       * If multiple zones present, the zones are intersected with one another and the municipality feature
        */
       const featCollection = format.writeFeaturesObject([
         ...zones.map((zone) => new Feature(zone.geometry)),
