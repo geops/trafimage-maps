@@ -7,8 +7,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 - **direktverbindung:** display the main layer when day or night layer become visible ([a529b37](https://github.com/geops/trafimage-maps/commit/a529b37fb38dd0941c39918ef5fa21685341836b))
-- loading of sts layers ([e07b74f](https://github.com/geops/trafimage-maps/commit/e07b74f402fb1553e5223f3c3e3b3f6772b288a2))
-- use of intersects ([08d3348](https://github.com/geops/trafimage-maps/commit/08d3348212a2db95ad06f24b420ca9324b408ca3))
 
 ### [1.29.3](https://github.com/geops/trafimage-maps/compare/v1.29.2...v1.29.3) (2024-06-04)
 
