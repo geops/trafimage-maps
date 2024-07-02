@@ -202,12 +202,6 @@ export const stsDvMain = new DirektverbindungenLayer({
   },
 });
 
-// [stsDvDay, stsDvNight].forEach((layer) => {
-//   layer.on("change:visible", () => {
-//     stsDvMain.visible = stsDvDay.visible || stsDvNight.visible;
-//   });
-// });
-
 export default [
   stsValidityDataLayer,
   stsDirektverbindungenDataLayer,
