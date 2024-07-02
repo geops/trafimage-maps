@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { MdContentCopy } from "react-icons/md";
-import Button from "../Button";
+import { IconButton } from "@mui/material";
 
 const propTypes = {
   /**
@@ -129,7 +129,7 @@ class PermalinkInput extends PureComponent {
           onClick={() => PermalinkInput.selectInput()}
           onChange={() => {}}
         />
-        <Button
+        <IconButton
           className={classNameCopyBt}
           title={titleCopyBt}
           onClick={() => {
@@ -137,7 +137,7 @@ class PermalinkInput extends PureComponent {
           }}
         >
           {button}
-        </Button>
+        </IconButton>
       </div>
     );
   }

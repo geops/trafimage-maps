@@ -174,6 +174,9 @@ const v5 = {
             //   width: '100%',
             //   height: '100%',
             // },
+            "&:hover": {
+              color: colors.redDark,
+            },
           },
           "& .wkp-arrow-center-left": {
             position: "absolute",

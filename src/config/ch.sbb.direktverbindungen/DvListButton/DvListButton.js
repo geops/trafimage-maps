@@ -68,7 +68,6 @@ function DvListButton({ ...props }) {
           },
         });
       }}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       <List />

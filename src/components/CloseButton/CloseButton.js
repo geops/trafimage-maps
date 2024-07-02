@@ -15,7 +15,6 @@ function CloseButton({ children, ...props }) {
         zIndex: 1002,
       }}
       title={t("Schliessen")}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {children || <MdClose focusable={false} alt={t("Schliessen")} />}

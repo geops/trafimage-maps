@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import PropTypes from "prop-types";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
@@ -6,7 +7,7 @@ import { useSelector } from "react-redux";
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from "react-icons/ti";
 import { FaEnvelope } from "react-icons/fa";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
-import { Link } from "@mui/material";
+import { IconButton } from "@mui/material";
 import SharePermalinkButton from "../SharePermalinkButton";
 import {
   TRACK_SHARE_DL_ACTION,
@@ -21,21 +22,21 @@ const socialShareConfig = [
   {
     url: "mailto:?body={url}",
     title: "Per Email versenden",
-    icon: <FaEnvelope focusable={false} />,
+    children: <FaEnvelope focusable={false} style={{ fontSize: 23 }} />,
     className: "ta-mail-icon",
     trackEventAction: TRACK_SHARE_MAIL_ACTION,
   },
   {
     url: "//www.facebook.com/sharer.php?u={url}",
     title: "Auf Facebook teilen",
-    icon: <TiSocialFacebook focusable={false} />,
+    children: <TiSocialFacebook focusable={false} style={{ fontSize: 30 }} />,
     className: "ta-facebook-icon",
     trackEventAction: TRACK_SHARE_FB_ACTION,
   },
   {
     url: "//twitter.com/intent/tweet?url={url}",
     title: "Auf Twitter teilen",
-    icon: <TiSocialTwitter focusable={false} />,
+    children: <TiSocialTwitter focusable={false} style={{ fontSize: 30 }} />,
     className: "ta-twitter-icon",
     trackEventAction: TRACK_SHARE_TW_ACTION,
   },
@@ -48,43 +49,38 @@ const replaceParams = (url, language, appBaseUrl) => {
     .replace("{appBaseUrl}", appBaseUrl);
 };
 
-function ShareLink({ config }) {
+function ShareLink({ url, title, trackEventAction, children, ...props }) {
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const language = useSelector((state) => state.app.language);
   const { t } = useTranslation();
   const { trackEvent } = useMatomo();
-  const { className, url, title, trackEventAction, icon } = config;
   return (
-    <div className={className}>
-      <Link
-        href={replaceParams(url, language, appBaseUrl)}
-        title={t(title)}
-        target="_blank"
-        tabIndex="0"
-        onClick={() => {
-          if (trackEventAction) {
-            trackEvent({
-              category: activeTopic?.key,
-              action: trackEventAction,
-            });
-          }
-        }}
-      >
-        {icon}
-      </Link>
-    </div>
+    <IconButton
+      href={replaceParams(url, language, appBaseUrl)}
+      title={t(title)}
+      target="_blank"
+      tabIndex={0}
+      onClick={() => {
+        if (trackEventAction) {
+          trackEvent({
+            category: activeTopic?.key,
+            action: trackEventAction,
+          });
+        }
+      }}
+      {...props}
+    >
+      {children}
+    </IconButton>
   );
 }
 
 ShareLink.propTypes = {
-  config: PropTypes.shape({
-    url: PropTypes.string,
-    className: PropTypes.string,
-    title: PropTypes.string,
-    trackEventAction: PropTypes.string,
-    icon: PropTypes.node,
-  }).isRequired,
+  url: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  trackEventAction: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 function Share() {
@@ -106,10 +102,9 @@ function Share() {
           },
         }}
       />
-      <ShareLink config={socialShareConfig[0]} />
+      <ShareLink {...socialShareConfig[0]} />
       <CanvasSaveButton
         map={map}
-        title={t("Karte als Bild speichern")}
         extraData={generateExtraData(layers)}
         onSaveStart={(mapp) => {
           trackEvent({
@@ -119,10 +114,16 @@ function Share() {
           return Promise.resolve(mapp);
         }}
       >
-        <TiImage focusable={false} />
+        <IconButton
+          className="rs-canvas-save-button"
+          title={t("Karte als Bild speichern")}
+          size="large"
+        >
+          <TiImage focusable={false} />
+        </IconButton>
       </CanvasSaveButton>
-      <ShareLink config={socialShareConfig[1]} />
-      <ShareLink config={socialShareConfig[2]} />
+      <ShareLink {...socialShareConfig[1]} />
+      <ShareLink {...socialShareConfig[2]} />
     </div>
   );
 }
