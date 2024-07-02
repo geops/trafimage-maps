@@ -30,7 +30,7 @@ describe("PhotoCarusel", () => {
         </ThemeProvider>
       </MatomoProvider>,
     );
-    expect(queryByTestId("fmw-photo")).toBeNull();
+    expect(queryByTestId("carousel-photo")).toBeNull();
   });
 
   test("should match snapshot with two photos and cycle buttons should behave correctly.", () => {
@@ -43,11 +43,11 @@ describe("PhotoCarusel", () => {
         </ThemeProvider>
       </MatomoProvider>,
     );
-    expect(queryByTestId("fmw-photo")).toBeTruthy();
-    expect(queryByTestId("fmw-photo-increment-button")).toBeTruthy();
-    const decrementBtn = getByTestId("fmw-photo-decrement-button");
+    expect(queryByTestId("carousel-photo")).toBeTruthy();
+    expect(queryByTestId("carousel-photo-increment-button")).toBeTruthy();
+    const decrementBtn = getByTestId("carousel-photo-decrement-button");
     expect(decrementBtn).toBeDisabled();
-    const incrementBtn = getByTestId("fmw-photo-increment-button");
+    const incrementBtn = getByTestId("carousel-photo-increment-button");
     fireEvent.click(incrementBtn);
     expect(decrementBtn).not.toBeDisabled();
     expect(incrementBtn).toBeDisabled();

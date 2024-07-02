@@ -8,14 +8,22 @@ import MapboxStyleLayer from "../MapboxStyleLayer";
  * @param {Object} [options] Layer options.
  */
 class RailplusLayer extends MapboxStyleLayer {
+  constructor(options = {}) {
+    super(options);
+    this.abortController = new AbortController();
+  }
+
   onLoad() {
     super.onLoad();
     this.fetchRailplusProviders();
   }
 
   fetchRailplusProviders() {
+    this.abortController.abort();
+    this.abortController = new AbortController();
     fetch(
-      `${this.mapboxLayer?.url}/data/ch.railplus.meterspurbahnen.json?key=${this.mapboxLayer?.apiKey}`,
+      `${this.mapboxLayer?.url}/data/ch.railplus.betreiberinnen.json?key=${this.mapboxLayer?.apiKey}`,
+      { signal: this.abortController.signal },
     )
       .then((res) => res.json())
       .then((data) => {

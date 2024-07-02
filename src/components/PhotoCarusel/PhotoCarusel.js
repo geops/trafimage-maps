@@ -30,7 +30,7 @@ function Photo({ src }) {
           maxHeight: "80vh",
           display: loading ? "none" : "block",
         }}
-        data-testid="fmw-photo"
+        data-testid="carousel-photo"
       />
     </div>
   );
@@ -136,7 +136,7 @@ function PhotoCarusel({
           type="button"
           onMouseEnter={() => setImageHover(true)}
           onMouseLeave={() => setImageHover(false)}
-          data-testid="fmw-photo-button"
+          data-testid="carousel-photo-button"
           title={t("Foto vergrössern")}
           tabIndex={0}
         >
@@ -156,7 +156,7 @@ function PhotoCarusel({
             title={t("zurück")}
             disabled={currentPhotoIndex === 0}
             onClick={decrementPhotoIndex}
-            data-testid="fmw-photo-decrement-button"
+            data-testid="carousel-photo-decrement-button"
           >
             <ChevronLeft />
           </IconButton>
@@ -167,7 +167,7 @@ function PhotoCarusel({
             title={t("weiter")}
             disabled={currentPhotoIndex === photos.length - 1}
             onClick={incrementPhotoIndex}
-            data-testid="fmw-photo-increment-button"
+            data-testid="carousel-photo-increment-button"
           >
             <ChevronRight />
           </IconButton>

@@ -11,6 +11,7 @@ const useFetch = (url, options, useCache = true) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!url) return;
       setLoading(true);
       if (useCache && cache[url]) {
         setData(cache[url]);
