@@ -80,8 +80,8 @@ function LayerInfosDialog(props) {
         )}
         {dataService && (
           <p>
-            <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
-              {t("Diesen Datensatz als Service einbinden (SBB-intern)")}
+            <DataLink href="https://geo.sbb.ch/portal/home/group.html?id=4778f8efa0ad41a6829f0094339158e2#overview">
+              {t("Zu den Trafimage-Datensätzen im SBB Geoportal (SBB-intern)")}
             </DataLink>
           </p>
         )}
@@ -103,7 +103,6 @@ function LayerInfosDialog(props) {
       }
       body={body}
       style={style}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
   );

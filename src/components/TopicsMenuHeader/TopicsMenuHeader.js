@@ -45,7 +45,7 @@ function TopicsMenuHeader({ isOpen, onToggle }) {
   return (
     <Button
       className={`wkp-menu-header${isOpen ? " open" : ""}`}
-      ariaExpanded={isOpen}
+      aria-expanded={isOpen}
       tabIndex={0}
       title={t("Menü")}
       onClick={() => onToggle()}

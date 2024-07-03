@@ -25,7 +25,7 @@ exports[`Dialog should match snapshot. 1`] = `
             style="cursor: move;"
         >
         </h2>
-        <button class="MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-10 css-1perq7w-MuiButtonBase-root-MuiIconButton-root"
+        <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-10 css-1perq7w-MuiButtonBase-root-MuiIconButton-root"
                 tabindex="0"
                 type="button"
                 title="Dialog schließen"

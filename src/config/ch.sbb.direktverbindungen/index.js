@@ -108,12 +108,6 @@ export const dvMain = new DirektverbindungenLayer({
   },
 });
 
-[dvNight, dvDay].forEach((layer) =>
-  layer.on("change:visible", (evt) => {
-    dvMain.onChangeVisible(evt.target);
-  }),
-);
-
 export default [
   dataLayer,
   dvBaseLight,

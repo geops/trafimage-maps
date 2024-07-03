@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.5](https://github.com/geops/trafimage-maps/compare/v1.29.3...v1.29.5) (2024-07-03)
+
+### Bug Fixes
+
+- **DataLink:** replace text and url of SBB geoportal link ([#1179](https://github.com/geops/trafimage-maps/issues/1179)) ([7ca3c10](https://github.com/geops/trafimage-maps/commit/7ca3c10555656671edfcfea8d9838a6dea4d530f))
+- **direktverbindung:** display the main layer when day or night layer become visible ([#1176](https://github.com/geops/trafimage-maps/issues/1176)) ([fae81ff](https://github.com/geops/trafimage-maps/commit/fae81ff2fb227d4740484c8335e3466bfb2ab455))
+
+### [1.29.4](https://github.com/geops/trafimage-maps/compare/v1.29.3...v1.29.4) (2024-07-02)
+
+### Bug Fixes
+
+- **direktverbindung:** display the main layer when day or night layer become visible ([a529b37](https://github.com/geops/trafimage-maps/commit/a529b37fb38dd0941c39918ef5fa21685341836b))
+
 ### [1.29.3](https://github.com/geops/trafimage-maps/compare/v1.29.2...v1.29.3) (2024-06-04)
 
 ### Bug Fixes
