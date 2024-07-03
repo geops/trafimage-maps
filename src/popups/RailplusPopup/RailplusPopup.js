@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Feature } from "ol";
 import {
@@ -12,6 +12,14 @@ import { useTranslation } from "react-i18next";
 import { FaCircle } from "react-icons/fa";
 import RailplusLayer from "../../layers/RailplusLayer";
 import PhotoCarusel from "../../components/PhotoCarusel";
+
+function useZoomOnFeature(bbox, layer) {
+  useEffect(() => {
+    if (bbox && layer) {
+      layer.zoomOnBbox(bbox);
+    }
+  }, [bbox, layer]);
+}
 
 function RailplusPopup({ feature, layer }) {
   const { t } = useTranslation();
@@ -27,7 +35,10 @@ function RailplusPopup({ feature, layer }) {
     number_of_employees: numberOfEmployees,
     yearly_number_of_passengers: yearlyNumberOfPassengers,
     route_length: routeLength,
+    bbox,
   } = layer.railplusProviders[feature.get("isb_tu_nummer")] || {};
+
+  useZoomOnFeature(bbox, layer);
 
   return (
     <div

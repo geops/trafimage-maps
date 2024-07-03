@@ -1,3 +1,4 @@
+import { LineString } from "ol/geom";
 import MapboxStyleLayer from "../MapboxStyleLayer";
 
 /**
@@ -31,6 +32,15 @@ class RailplusLayer extends MapboxStyleLayer {
       })
       // eslint-disable-next-line no-console
       .catch((err) => console.error(err));
+  }
+
+  zoomOnBbox(bbox) {
+    if (!bbox) return;
+    const geom = new LineString([
+      [bbox[0], bbox[1]],
+      [bbox[2], bbox[3]],
+    ]);
+    this.map.getView().fit(geom.getExtent(), { duration: 1000 });
   }
 }
 
