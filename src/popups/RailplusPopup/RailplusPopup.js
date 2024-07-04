@@ -10,15 +10,43 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { FaCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { LineString } from "ol/geom";
+import { containsExtent } from "ol/extent";
 import RailplusLayer from "../../layers/RailplusLayer";
 import PhotoCarusel from "../../components/PhotoCarusel";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 function useZoomOnFeature(bbox, layer) {
+  const map = useSelector((state) => state.app.map);
+  const isMobile = useHasScreenSize();
   useEffect(() => {
-    if (bbox && layer) {
-      layer.zoomOnBbox(bbox);
+    if (!map || !bbox) return;
+    const extent = map.getView().calculateExtent(map.getSize());
+    const leftBottomPixel = map.getPixelFromCoordinate([extent[0], extent[1]]);
+    const leftBottomCoordWithOverlay = map.getCoordinateFromPixel([
+      isMobile ? leftBottomPixel[0] : leftBottomPixel[0] + 400,
+      isMobile ? leftBottomPixel[1] + 200 : leftBottomPixel[1],
+    ]);
+    const visibleMapExtent = new LineString([
+      leftBottomCoordWithOverlay,
+      [extent[2], extent[3]],
+    ]).getExtent();
+    const padding = isMobile ? [50, 50, 200, 50] : [100, 100, 100, 400];
+    const featureExtent =
+      bbox &&
+      new LineString([
+        [bbox[0], bbox[1]],
+        [bbox[2], bbox[3]],
+      ]).getExtent();
+    if (!containsExtent(visibleMapExtent, featureExtent)) {
+      map.getView().fit(featureExtent, {
+        duration: 1000,
+        padding,
+        maxZoom: map.getView().getZoom(),
+      });
     }
-  }, [bbox, layer]);
+  }, [bbox, map, layer, isMobile]);
 }
 
 function RailplusPopup({ feature, layer }) {

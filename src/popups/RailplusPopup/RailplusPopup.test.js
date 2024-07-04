@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { Feature } from "ol";
+import { Feature, Map, View } from "ol";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material";
 import { MatomoProvider } from "@jonkoops/matomo-tracker-react";
@@ -38,11 +38,25 @@ describe("RailplusPopup", () => {
       route_length: "20km",
     },
   };
+  let mapElement;
+  let map;
   let store;
   beforeEach(() => {
+    mapElement = document.createElement("div");
+    mapElement.tabIndex = 1;
+    document.body.appendChild(mapElement);
+    map = new Map({
+      target: mapElement,
+      view: new View({
+        center: [0, 0],
+        zoom: 0,
+      }),
+    });
     store = global.global.mockStore({
       map: {},
-      app: {},
+      app: {
+        map,
+      },
     });
   });
 
