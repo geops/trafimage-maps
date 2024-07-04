@@ -22,6 +22,7 @@ function useZoomOnFeature(bbox) {
   const isMobile = useHasScreenSize();
   useEffect(() => {
     if (!map || !bbox) return;
+    // calculate extent with open overlay
     const extent = map.getView().calculateExtent(map.getSize());
     const leftBottomPixel = map.getPixelFromCoordinate([extent[0], extent[1]]);
     const leftBottomCoordWithOverlay = map.getCoordinateFromPixel([
@@ -32,15 +33,10 @@ function useZoomOnFeature(bbox) {
       leftBottomCoordWithOverlay,
       [extent[2], extent[3]],
     ]).getExtent();
-    const padding = isMobile ? [50, 50, 200, 50] : [100, 100, 100, 400];
-    const featureExtent =
-      bbox &&
-      new LineString([
-        [bbox[0], bbox[1]],
-        [bbox[2], bbox[3]],
-      ]).getExtent();
-    if (!containsExtent(visibleMapExtent, featureExtent)) {
-      map.getView().fit(featureExtent, {
+    // only zoom if bbox is partly obscured by map edge or overlay
+    if (!containsExtent(visibleMapExtent, bbox)) {
+      const padding = isMobile ? [50, 50, 200, 50] : [100, 100, 100, 400];
+      map.getView().fit(bbox, {
         duration: 1000,
         padding,
         maxZoom: map.getView().getZoom(),
