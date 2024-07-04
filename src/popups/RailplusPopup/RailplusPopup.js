@@ -17,7 +17,7 @@ import RailplusLayer from "../../layers/RailplusLayer";
 import PhotoCarusel from "../../components/PhotoCarusel";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 
-function useZoomOnFeature(bbox, layer) {
+function useZoomOnFeature(bbox) {
   const map = useSelector((state) => state.app.map);
   const isMobile = useHasScreenSize();
   useEffect(() => {
@@ -46,7 +46,7 @@ function useZoomOnFeature(bbox, layer) {
         maxZoom: map.getView().getZoom(),
       });
     }
-  }, [bbox, map, layer, isMobile]);
+  }, [bbox, map, isMobile]);
 }
 
 function RailplusPopup({ feature, layer }) {
