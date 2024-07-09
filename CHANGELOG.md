@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.6](https://github.com/geops/trafimage-maps/compare/v1.29.5...v1.29.6) (2024-07-09)
+
+### Bug Fixes
+
+- **zweitausbildung:** disolve clusters on high zoom levels ([#1180](https://github.com/geops/trafimage-maps/issues/1180)) ([66acecf](https://github.com/geops/trafimage-maps/commit/66acecfd039259655002699bf5d18b88d809f969))
+
 ### [1.29.5](https://github.com/geops/trafimage-maps/compare/v1.29.3...v1.29.5) (2024-07-03)
 
 ### Bug Fixes
