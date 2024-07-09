@@ -10,13 +10,19 @@ import MapboxStyleLayer from "../MapboxStyleLayer";
  */
 class ZweitausbildungPoisLayer extends MapboxStyleLayer {
   constructor(options = {}) {
-    const { filter, sourceId } = options.properties.zweitausbildung;
+    const {
+      styleLayersFilter,
+      properties: {
+        zweitausbildung: { filter, sourceId },
+      },
+    } = options;
     // We request cluster and unclustered point, not the number.
     super({
       ...options,
       queryRenderedLayersFilter: ({ metadata }) => {
         const mdValue = !!metadata && metadata["trafimage.filter"];
-        return mdValue === sourceId && !/number/.test(mdValue);
+        const isValid = styleLayersFilter && styleLayersFilter({ metadata });
+        return isValid && !/number/.test(mdValue);
       },
     });
     this.filter = filter;
@@ -92,7 +98,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     }, 150);
   }
 
-  // Upodate sources for features with multiple lines.
+  // Update sources for features with multiple POIs.
   updateClusterSource() {
     if (!this.visible || !this.map || !this.mapboxLayer.mbMap) {
       return;

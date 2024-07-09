@@ -131,7 +131,9 @@ export const zweitausbildungPois = new Layer({
       styleLayersFilter: ({ metadata }) => {
         return (
           !!metadata &&
-          /clusters\.no_railaway/.test(metadata["trafimage.filter"])
+          /(clusters|noclusters)\.no_railaway/.test(
+            metadata["trafimage.filter"],
+          )
         );
       },
       properties: {
@@ -162,7 +164,8 @@ export const zweitausbildungPois = new Layer({
       mapboxLayer: zweitausbildungDataLayer,
       styleLayersFilter: ({ metadata }) => {
         return (
-          !!metadata && /clusters\.railaway/.test(metadata["trafimage.filter"])
+          !!metadata &&
+          /(clusters|noclusters)\.railaway/.test(metadata["trafimage.filter"])
         );
       },
       properties: {
