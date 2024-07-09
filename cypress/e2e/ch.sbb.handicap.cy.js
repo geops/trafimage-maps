@@ -23,6 +23,8 @@ describe("Handicap Topic", () => {
       .type("r")
       .type("n");
 
+    cy.wait(1000);
+
     cy.get("#react-autowhatever-1-section-0-item-0", { timeout: 10000 }).click({
       force: true,
     });
