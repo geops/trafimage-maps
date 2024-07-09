@@ -28,7 +28,6 @@ const eslintConfig = {
     "react/jsx-props-no-spreading": "Off",
     "react/require-default-props": "Off",
     "prettier/prettier": "error",
-    "react/require-default-props": "Off",
   },
   settings: {
     react: {
