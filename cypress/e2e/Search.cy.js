@@ -17,6 +17,8 @@ describe("Search", () => {
       .type("r")
       .type("n");
 
+    cy.wait(1000);
+
     cy.get("#react-autowhatever-1-section-0-item-0").click({ force: true });
 
     // Popup is opened.
@@ -34,6 +36,8 @@ describe("Search", () => {
       .type("r")
       .type("n");
 
+    cy.wait(1000);
+
     cy.get("#react-autowhatever-1-section-0-item-0").click({ force: true });
 
     cy.get(".wkp-search-button-clear").click();
@@ -48,6 +52,8 @@ describe("Search", () => {
 
     cy.get(".wkp-search-input input").focus().type("Bern Bahnhof");
 
+    cy.wait(1000);
+
     cy.get("#react-autowhatever-1-section-0-item-0").click({ force: true });
 
     // Popup is opened.
@@ -59,6 +65,8 @@ describe("Search", () => {
     cy.get(".wkp-feature-information").should("not.exist");
 
     cy.get(".wkp-search-input input").focus().type("Bern Bahnhof");
+
+    cy.wait(1000);
 
     cy.get("#react-autowhatever-1-section-0-item-0").click({ force: true });
 
@@ -78,6 +86,8 @@ describe("Search", () => {
       .type("e")
       .type("r")
       .type("n");
+
+    cy.wait(1000);
 
     cy.get("#react-autowhatever-1-section-0-item-0").click({ force: true });
 
@@ -101,6 +111,7 @@ describe("Search", () => {
       },
     );
     cy.get(".wkp-search-input input").focus().type("Ber");
+    cy.wait(1000);
     cy.get(".wkp-search-input input", { timeout: 20000 }).should("be.visible");
   });
 
@@ -117,7 +128,7 @@ describe("Search", () => {
       },
     );
     cy.get(".wkp-search-input input").focus().type("Ber");
-
+    cy.wait(1000);
     cy.get(".wkp-search-input input", { timeout: 20000 }).should("be.visible");
   });
 
@@ -125,6 +136,7 @@ describe("Search", () => {
     // Input is not visible
     cy.get(".wkp-search-toggle-button").click();
     cy.get(".wkp-search-input input").focus().type("Bern");
+    cy.wait(1000);
     cy.get(".wkp-search-section-header").should(
       "contain",
       "Ergebnisse", // plural
