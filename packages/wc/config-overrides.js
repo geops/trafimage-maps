@@ -56,10 +56,22 @@ const overrideModule = (module) => {
     };
   }
 
-  module.rules[ruleIndex].oneOf.push({
-    test: /\.url\.svg$/,
-    loader: "url-loader",
-  });
+  module.rules[ruleIndex].oneOf.push(
+    {
+      test: /\.url\.svg$/,
+      loader: "url-loader",
+    },
+    {
+      test: /\.m?js$/,
+      resolve: {
+        fullySpecified: false,
+      },
+    },
+  );
+  module.rules[ruleIndex].oneOf[4].resolve = {
+    fullySpecified: false,
+  };
+  console.log(module.rules[ruleIndex]);
 
   return module;
 };

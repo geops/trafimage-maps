@@ -36,7 +36,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
   attachToMap(map) {
     super.attachToMap(map);
 
-    this.olListenersKeys.push(
+    this.olEventsKeys.push(
       this.on("change:visible", () => {
         this.updateClusterSource();
       }),

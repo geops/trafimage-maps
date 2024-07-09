@@ -26,7 +26,12 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
       // eslint-disable-next-line no-param-reassign
       delete options.mapboxLayer;
     }
-    super({ ...options, isHoverActive: false, isClickActive: false });
+    super({
+      ...options,
+      layersFilter: options.styleLayersFilter,
+      isHoverActive: false,
+      isClickActive: false,
+    });
 
     this.style = options.style;
     this.filters = options.filters;
@@ -41,7 +46,7 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
 
   attachToMap(map) {
     super.attachToMap(map);
-    this.olListenersKeys.push(
+    this.olEventsKeys.push(
       this.on("change:visible", () => {
         if (!this.visible) {
           this.cleanFeatureState();

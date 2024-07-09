@@ -33,7 +33,7 @@ class StationsLayer extends MapboxStyleLayer {
   attachToMap(map) {
     super.attachToMap(map);
 
-    this.olListenersKeys.push(
+    this.olEventsKeys.push(
       this.on("change:visible", () => {
         this.ready = false;
         this.updateSource();
@@ -49,12 +49,12 @@ class StationsLayer extends MapboxStyleLayer {
    * @override
    */
   detachFromMap(map) {
-    super.detachFromMap(map);
     const { maplibreMap } = this.mapboxLayer;
     if (maplibreMap) {
       maplibreMap.off("idle", this.onIdle);
       this.removeSource();
     }
+    super.detachFromMap(map);
   }
 
   /**
@@ -143,7 +143,7 @@ class StationsLayer extends MapboxStyleLayer {
 
   // Remove source added by addSources().
   removeSource() {
-    if (!this.mapboxLayer.maplibreMap) {
+    if (!this.mapboxLayer.maplibreMap.style) {
       return;
     }
     const { maplibreMap } = this.mapboxLayer;

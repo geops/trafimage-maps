@@ -42,7 +42,7 @@ class MesswagenLayer extends Layer {
       this.start();
     }
 
-    this.olListenersKeys.push(
+    this.olEventsKeys.push(
       this.olLayer.on("change:visible", () => {
         if (this.visible) {
           this.start();

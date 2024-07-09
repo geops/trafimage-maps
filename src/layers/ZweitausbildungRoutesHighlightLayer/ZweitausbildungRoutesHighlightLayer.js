@@ -82,7 +82,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
        * Remove highlighted line on click on the map.
        * @ignore
        */
-      this.olListenersKeys.push(
+      this.olEventsKeys.push(
         this.map.on("singleclick", () => {
           this.onSelect();
           this.forceRenderList();

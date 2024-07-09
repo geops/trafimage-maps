@@ -27,9 +27,10 @@ class DrawLayer extends VectorLayer {
   getFeatureInfoAtCoordinate(coordinate) {
     // We want popup only for old wkp kml that contains adescription.
     return super.getFeatureInfoAtCoordinate(coordinate).then((featureInfos) => {
-      const features = featureInfos.features.filter((feature) =>
-        feature.get("description"),
-      );
+      const features =
+        featureInfos.features?.filter((feature) =>
+          feature.get("description"),
+        ) || [];
       return { ...featureInfos, features };
     });
   }

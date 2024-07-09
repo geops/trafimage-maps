@@ -88,7 +88,7 @@ class PlatformsLayer extends MapboxStyleLayer {
   attachToMap(map) {
     super.attachToMap(map);
 
-    this.olListenersKeys.push(
+    this.olEventsKeys.push(
       this.on("change:visible", () => {
         this.updateSource();
       }),
@@ -196,7 +196,7 @@ class PlatformsLayer extends MapboxStyleLayer {
 
   // Remove source added by addSources().
   removeSource() {
-    if (!this.mapboxLayer.maplibreMap) {
+    if (!this.mapboxLayer.maplibreMap.style) {
       return;
     }
     const { maplibreMap } = this.mapboxLayer;

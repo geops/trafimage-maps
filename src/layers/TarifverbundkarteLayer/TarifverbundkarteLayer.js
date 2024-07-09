@@ -68,7 +68,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
    */
   attachToMap(map) {
     super.attachToMap(map);
-    this.olListenersKeys.push(
+    this.olEventsKeys.push(
       this.map.on("singleclick", (e) => this.selectZone(e)), // Add click listener
     );
   }
