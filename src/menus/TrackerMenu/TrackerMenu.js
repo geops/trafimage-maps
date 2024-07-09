@@ -11,7 +11,6 @@ function TrackerMenu(props) {
 
   return (
     <FeatureMenu
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       property="useTrackerMenu"
       menuItemProps={{

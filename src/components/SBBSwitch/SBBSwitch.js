@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SBBSwitch(props) {
   const classes = useStyles();
-  // eslint-disable-next-line react/jsx-props-no-spreading
+
   return <Switch classes={classes} {...props} />;
 }
 

@@ -110,24 +110,29 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
    * Fetch features from Cartaro for the list view
    */
   async fetchDvFeatures() {
-    await fetch(
-      `${this.mapboxLayer.url}/data/ch.sbb.direktverbindungen.public.json?key=${this.mapboxLayer.apiKey}`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        this.allFeatures = data["geops.direktverbindungen"].map((line) => {
-          return new Feature({
-            ...line,
-            geometry: new LineString([
-              [line.bbox[0], line.bbox[1]],
-              [line.bbox[2], line.bbox[3]],
-            ]),
-          });
+    try {
+      if (!this.mapboxLayer?.url || !this.mapboxLayer?.apiKey) {
+        // eslint-disable-next-line no-console
+        throw new Error("DirektVerbindungLayer: No url or apiKey defined.");
+      }
+      const response = await fetch(
+        `${this.mapboxLayer.url}/data/ch.sbb.direktverbindungen.public.json?key=${this.mapboxLayer.apiKey}`,
+      );
+      const data = await response.json();
+      this.allFeatures = data["geops.direktverbindungen"].map((line) => {
+        return new Feature({
+          ...line,
+          geometry: new LineString([
+            [line.bbox[0], line.bbox[1]],
+            [line.bbox[2], line.bbox[3]],
+          ]),
         });
-        this.syncFeatures();
-      })
+      });
+      this.syncFeatures();
+    } catch (err) {
       // eslint-disable-next-line no-console
-      .catch((err) => console.error(err));
+      console.error(err);
+    }
   }
 
   /**
@@ -179,21 +184,36 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         }
       });
     });
+
+    this.onChangeVisibleKeys = [];
+    const dvNight = this.get("nightLayer");
+    const dvDay = this.get("dayLayer");
+    const that = this;
+    this.onDayNightChangeVisibleKeys = [dvNight, dvDay].map((layer) => {
+      return layer?.on("change:visible", (evt) => {
+        that.onChangeVisible(evt.target);
+      });
+    });
   }
 
   detachFromMap() {
     super.detachFromMap();
-    unByKey([this.viewChangeListener, this.singleClickKey]);
+    unByKey([
+      this.viewChangeListener,
+      this.singleClickKey,
+      ...(this.onDayNightChangeVisibleKeys || []),
+    ]);
   }
 
   // Updates the IPV mapbox stylelayer visibility according
   // to the current visible WKP layer
   onChangeVisible() {
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap || !this.visible || !this.mapboxLayer.visible) {
+    // WARNING: the getCurrentLayer set the visiblity of the layer.
+    const currentLayer = this.getCurrentLayer();
+    if (!this.mapboxLayer?.mbMap || !this.mapboxLayer?.visible) {
       return;
     }
-    const currentLayer = this.getCurrentLayer();
+    const { mbMap } = this.mapboxLayer;
     const filterRegex = new RegExp(`^ipv_(${currentLayer})$`);
     this.getDvLayers()?.forEach((stylelayer) => {
       mbMap.setLayoutProperty(

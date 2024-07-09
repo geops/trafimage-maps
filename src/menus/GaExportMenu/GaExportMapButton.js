@@ -27,20 +27,22 @@ function GaExportMapButton() {
   const layers = useSelector((state) => state.map.layers);
   const exportableLayers = layers.filter((layer) => layer.get("isExportable"));
   const showButton = useVisibleLayer(exportableLayers);
+
+  if (isMobile || !showButton) {
+    return null;
+  }
+
   return (
-    !isMobile &&
-    showButton && (
-      <>
-        <MapButton
-          onClick={() => setShowMenu(!showMenu)}
-          style={{ padding: 8, color: "#444" }}
-          title={t("Karte als PDF exportieren")}
-        >
-          <BsDownload />
-        </MapButton>
-        {showMenu && <GaExportMenu onClose={() => setShowMenu(false)} />}
-      </>
-    )
+    <>
+      <MapButton
+        onClick={() => setShowMenu(!showMenu)}
+        style={{ padding: 8, color: "#444" }}
+        title={t("Karte als PDF exportieren")}
+      >
+        <BsDownload />
+      </MapButton>
+      {showMenu && <GaExportMenu onClose={() => setShowMenu(false)} />}
+    </>
   );
 }
 

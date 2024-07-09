@@ -368,7 +368,6 @@
   "Detaillierter Datensatz auf": "Detaillierter Datensatz auf",
   "didok": "DIDOK",
   "Die maximal auswählbare dpi hängt von der Browser-Einstellung ab.": "Die maximal auswählbare dpi hängt von der Browser-Einstellung ab.",
-  "Diesen Datensatz als Service einbinden (SBB-intern)": "Diesen Datensatz als Service einbinden (SBB-intern)",
   "Diesen Datensatz einbinden": "Diesen Datensatz beziehen",
   "Direkt erreichbares Ziel auswählen": "Direkt erreichbares Ziel auswählen",
   "Direktverbindungen": "Direktverbindungen",
@@ -648,6 +647,7 @@
   "Zeit": "Zeit",
   "Ziel": "Ziel",
   "Zone": "Zone",
+  "Zu den Trafimage-Datensätzen im SBB Geoportal (SBB-intern)": "Zu den Trafimage-Datensätzen im SBB Geoportal (SBB-intern)",
   "Zugtracker": "Zugtracker",
   "zur Webseite von": "zur Webseite von {{operator}}",
   "Zusätzliche Informationen": "Zusätzliche Informationen"

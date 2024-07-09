@@ -27,22 +27,12 @@ const StyledIconButton = withStyles((theme) => ({
   },
 }))(IconButton);
 
-function MapButton({ children, onClick, ...props }) {
-  return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <StyledIconButton onClick={onClick} {...props}>
-      {children}
-    </StyledIconButton>
-  );
+function MapButton({ children, ...props }) {
+  return <StyledIconButton {...props}>{children}</StyledIconButton>;
 }
 
 MapButton.propTypes = {
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func,
-};
-
-MapButton.defaultProps = {
-  onClick: () => null,
 };
 
 export default MapButton;

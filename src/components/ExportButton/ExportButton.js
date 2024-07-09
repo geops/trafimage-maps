@@ -6,6 +6,7 @@ import { makeStyles } from "@mui/styles";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
 import { ScaleLine } from "ol/control";
 import html2canvas from "html2canvas";
+import Button from "../Button";
 import { ReactComponent as Loader } from "./loader.svg";
 import {
   getMapHd,
@@ -19,41 +20,35 @@ import { trackEvent } from "../../utils/trackingUtils";
 import { SWISS_CENTER } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
-  buttonWrapper: {
-    ...theme.styles.flexCenter,
-    flexGrow: 1,
-    maxWidth: 150,
-  },
   buttonContent: {
     ...theme.styles.flexCenter,
-    border: "none",
-    padding: "0 10px",
-    height: 40,
-    maxHeight: 40,
-    width: "100%",
+    padding: "5px 10px",
+    height: 35,
+    width: 110,
+    minWidth: 110,
     backgroundColor: "#dcdcdc",
     "&:hover": {
       backgroundColor: "#cdcdcd",
     },
+    "&:disabled": {
+      opacity: 0.9,
+    },
   },
-  canvasButton: { ...theme.styles.flexCenter },
 }));
 
-function ExportButton(props) {
-  const {
-    exportFormat,
-    exportScale,
-    exportSize,
-    exportCoordinates,
-    exportZoom,
-    exportExtent,
-    exportCopyright,
-    children,
-    loadingComponent,
-    style,
-    id,
-    scaleLineConfig,
-  } = props;
+function ExportButton({
+  exportFormat,
+  exportScale,
+  exportSize,
+  exportCoordinates,
+  exportZoom,
+  exportExtent,
+  exportCopyright,
+  children,
+  style,
+  id,
+  scaleLineConfig,
+}) {
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
@@ -70,7 +65,11 @@ function ExportButton(props) {
       ...style,
     };
     return isLoading
-      ? React.cloneElement(loadingComponent, { style: styles })
+      ? React.cloneElement(children, {
+          isLoading,
+          style: styles,
+          disabled: true,
+        })
       : React.Children.map(children, (child) => {
           return React.cloneElement(child, { style: styles, id });
         });
@@ -153,40 +152,18 @@ function ExportButton(props) {
   );
 }
 
-function DefaultLoadingComponent({ style = null }) {
+function DefaultChildren({ isLoading = false, ...props }) {
   const classes = useStyles();
   const { t } = useTranslation();
   return (
-    <div className={classes.buttonWrapper} style={style}>
-      <span className={classes.buttonContent}>
-        <Loader />
-        {t("Export läuft...")}
-      </span>
-    </div>
+    <Button {...props} className={classes.buttonContent} disabled={isLoading}>
+      {isLoading && <Loader />}
+      {t(isLoading ? "Export läuft..." : "PDF exportieren")}
+    </Button>
   );
 }
 
-DefaultLoadingComponent.propTypes = {
-  style: PropTypes.object,
-};
-
-function DefaultChildren({ id, style, onClick }) {
-  const classes = useStyles();
-  const { t } = useTranslation();
-  return (
-    <div className={classes.buttonWrapper} style={style}>
-      <button
-        type="button"
-        className={classes.buttonContent}
-        id={id}
-        style={style}
-        onClick={onClick}
-      >
-        {t("PDF exportieren")}
-      </button>
-    </div>
-  );
-}
+DefaultChildren.propTypes = { isLoading: PropTypes.bool };
 
 DefaultChildren.propTypes = {
   style: PropTypes.object,
@@ -203,7 +180,6 @@ ExportButton.propTypes = {
   exportSize: PropTypes.arrayOf(PropTypes.number),
   exportCopyright: PropTypes.bool,
   children: PropTypes.node,
-  loadingComponent: PropTypes.node,
   style: PropTypes.object,
   id: PropTypes.string,
   scaleLineConfig: PropTypes.shape({
@@ -221,7 +197,6 @@ ExportButton.defaultProps = {
   exportCopyright: false,
   children: <DefaultChildren />,
   exportSize: [3370, 2384], // a0
-  loadingComponent: <DefaultLoadingComponent />,
   style: {},
   id: null,
   scaleLineConfig: null,
