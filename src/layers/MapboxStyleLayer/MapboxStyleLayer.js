@@ -28,7 +28,6 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
     }
     super({
       ...options,
-      layersFilter: options.styleLayersFilter,
       isHoverActive: false,
       isClickActive: false,
     });
@@ -53,6 +52,7 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
         }
       }),
     );
+
     this.map
       ?.getTargetElement()
       ?.addEventListener("mouseleave", this.onMouseLeave);
@@ -85,21 +85,14 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
    */
   applyLayoutVisibility(evt) {
     const { visible } = this;
-    const { maplibreMap } = this.mapboxLayer;
-
-    if (!maplibreMap) {
-      return;
-    }
-
-    const style = maplibreMap.getStyle();
+    const style = this.mapboxLayer?.maplibreMap?.getStyle();
 
     if (!style) {
       return;
     }
 
-    if (this.style && visible) {
-      this.mapboxLayer.forceUrl = this.forceUrl;
-      this.mapboxLayer.setStyle(this.style);
+    if (this.style && visible && this.style !== this.mapboxLayer.style) {
+      this.mapboxLayer.style = this.style;
     }
 
     super.applyLayoutVisibility(evt);

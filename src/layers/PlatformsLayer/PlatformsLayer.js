@@ -125,6 +125,15 @@ class PlatformsLayer extends MapboxStyleLayer {
 
     this.platformLayers = this.platformLayers.map((layer) => layer.id);
 
+    if (!this.platformLayers?.length) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        'No metadata general.filter="stop_position" in this style:',
+        maplibreMap?.getStyle()?.name,
+      );
+      this.set("disabled", true);
+    }
+
     this.addSource();
     super.onLoad();
     this.updateSource();

@@ -311,7 +311,7 @@ class Map extends PureComponent {
       t,
       activeTopic,
     } = this.props;
-    console.log(layers);
+
     return (
       <>
         <BasicMap

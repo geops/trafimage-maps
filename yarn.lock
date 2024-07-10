@@ -11444,10 +11444,10 @@ mkdirp@^1.0.3:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mobility-toolbox-js@3.0.0-beta.25:
-  version "3.0.0-beta.25"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-3.0.0-beta.25.tgz#556325ab2b7bec9d59a95fc048cddbf763085f7f"
-  integrity sha512-dc8j1DbAEEQ59oDm0daiG3DJ/PaKwbLuUMB/8JBWYzOKWZ9GbnhPgKmkgOcZF26uG5fzVGd1HAZy7mQZChCt4w==
+mobility-toolbox-js@3.0.0-beta.28:
+  version "3.0.0-beta.28"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-3.0.0-beta.28.tgz#8dac821745b5ceb0a064969a00d42c1361545dc2"
+  integrity sha512-1boEbptYAJnVgKx7LR0OopXnbM9iYhePTwQzwalN7u97eEAF38C2lpp7W3XahuEWwZCxZsnIZUMf6BED24sOAw==
   dependencies:
     "@geoblocks/ol-maplibre-layer" "^1.0.0"
     "@turf/helpers" "7.0.0"

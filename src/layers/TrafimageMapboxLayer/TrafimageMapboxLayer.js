@@ -4,39 +4,38 @@ import {
 } from "mobility-toolbox-js/ol";
 // import { toLonLat } from "ol/proj";
 
-const applyFilters = (mbStyle, filters) => {
-  const newStyle = { ...mbStyle };
-  /* Apply filters, remove style layers */
-  if (mbStyle && filters) {
-    const layers = [];
-    (filters || []).forEach((filter) => {
-      const styleLayers = mbStyle.layers;
-      for (let i = 0; i < styleLayers.length; i += 1) {
-        const style = styleLayers[i];
-        /* filter.include boolean determines if the identified
-         * styleLayers or all others should be removed
-         */
-        const condition = filter.include
-          ? filter.value.test(style[filter.field])
-          : !filter.value.test(style[filter.field]);
-        if (condition) {
-          // mapboxStyle.layers.splice(i, 1);
-          layers.push(mbStyle.layers[i]);
-        }
-      }
-    });
-    newStyle.layers = layers;
-  }
-  return newStyle;
-};
+// const applyFilters = (mbStyle, filters) => {
+//   const newStyle = { ...mbStyle };
+//   /* Apply filters, remove style layers */
+//   if (mbStyle && filters) {
+//     const layers = [];
+//     (filters || []).forEach((filter) => {
+//       const styleLayers = mbStyle.layers;
+//       for (let i = 0; i < styleLayers.length; i += 1) {
+//         const style = styleLayers[i];
+//         /* filter.include boolean determines if the identified
+//          * styleLayers or all others should be removed
+//          */
+//         const condition = filter.include
+//           ? filter.value.test(style[filter.field])
+//           : !filter.value.test(style[filter.field]);
+//         if (condition) {
+//           // mapboxStyle.layers.splice(i, 1);
+//           layers.push(mbStyle.layers[i]);
+//         }
+//       }
+//     });
+//     newStyle.layers = layers;
+//   }
+//   return newStyle;
+// };
 
 class TrafimageMapboxLayer extends MaplibreLayer {
   constructor(options) {
-    console.log(options);
     super({
       ...options,
     });
-    this.filters = options.filters;
+    // this.filters = options.filters;
 
     // TODO don't use process.env here it fails in Schulzug
     // this.stylePrefix = process?.env?.REACT_APP_STYLE_REVIEW_PREFIX || '';
@@ -99,7 +98,6 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     this.apiKey = key;
     this.url = url;
 
-    console.log(url, key, apiKeyName);
     // if (url && url !== this.url) {
     //   this.url = url;
     // }

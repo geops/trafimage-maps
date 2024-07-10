@@ -63,6 +63,7 @@ class StationsLayer extends MapboxStyleLayer {
    */
   onLoad() {
     const { maplibreMap } = this.mapboxLayer;
+
     this.osmPointsLayers = maplibreMap
       .getStyle()
       .layers.filter(
@@ -70,6 +71,15 @@ class StationsLayer extends MapboxStyleLayer {
           metadata && /^stations/.test(metadata["general.filter"]),
       )
       .map((layer) => layer.id);
+
+    if (!this.osmPointsLayers?.length) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        'No metadata general.filter="stations" in this style:',
+        maplibreMap?.getStyle()?.name,
+      );
+      this.set("disabled", true);
+    }
 
     this.addSource();
     super.onLoad();
