@@ -17,7 +17,7 @@ import RailplusLayer from "../../layers/RailplusLayer";
 import PhotoCarusel from "../../components/PhotoCarusel";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 
-function useZoomOnFeature(bbox) {
+function useZoomOnProvider(bbox) {
   const map = useSelector((state) => state.app.map);
   const isMobile = useHasScreenSize();
   useEffect(() => {
@@ -62,7 +62,7 @@ function RailplusPopup({ feature, layer }) {
     bbox,
   } = layer.railplusProviders[feature.get("isb_tu_nummer")] || {};
 
-  useZoomOnFeature(bbox, layer);
+  useZoomOnProvider(bbox);
 
   return (
     <div
