@@ -92,7 +92,7 @@ describe("Share", () => {
     });
 
     test("on twitter button", () => {
-      fireEvent.click(container.querySelector(".ta-twitter-icon"));
+      fireEvent.click(container.querySelector(".ta-x-icon"));
       expect(matomo.trackEvent).toBeCalledWith({
         action: "clickShareTwitter",
         category: "test",
