@@ -108,13 +108,13 @@ describe("Share", () => {
     });
 
     test("on twitter button", () => {
-      fireEvent.click(container.querySelector(".ta-twitter-icon"));
+      fireEvent.click(container.querySelector(".ta-x-icon"));
       expect(matomo.trackEvent).toBeCalledWith({
         action: "clickShareTwitter",
         category: "test",
       });
       expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch(
-        /Auf Twitter teilen/i,
+        /Auf X teilen/i,
       );
     });
   });

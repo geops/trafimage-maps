@@ -127,14 +127,6 @@ const v5 = {
     },
   },
   components: {
-    // MuiTypography: {
-    //   defaultProps: {
-
-    //   },
-    //   styleOverrides: {
-    //     root: { padding: 0, margin: 0 },
-    //   },
-    // },
     MuiCheckbox: {
       defaultProps: {
         icon: <InputIcon />,
@@ -351,10 +343,33 @@ const v5 = {
         transitionDuration: 0,
       },
     },
+    MuiList: {
+      defaultProps: {
+        disablePadding: true,
+      },
+    },
     MuiListItemText: {
       defaultProps: {
         primaryTypographyProps: {
           variant: "body1",
+        },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: 20,
+          color: colors.black,
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "white !important",
+          "&:hover": {
+            backgroundColor: "white !important",
+          },
         },
       },
     },
@@ -364,11 +379,6 @@ const v5 = {
           marginLeft: 0,
           marginRight: 0,
         },
-      },
-    },
-    MuiList: {
-      defaultProps: {
-        disablePadding: true,
       },
     },
     MuiSelect: {
@@ -410,16 +420,6 @@ const v5 = {
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: "#666",
-          },
-        },
-      },
-    },
-    MuiListItem: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "white !important",
-          "&:hover": {
-            backgroundColor: "white !important",
           },
         },
       },

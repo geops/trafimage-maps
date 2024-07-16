@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { TiImage, TiSocialFacebook, TiSocialTwitter } from "react-icons/ti";
+import { TiImage, TiSocialFacebook } from "react-icons/ti";
+import { RiTwitterXLine } from "react-icons/ri";
 import { FaEnvelope } from "react-icons/fa";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
 import { IconButton } from "@mui/material";
@@ -30,15 +31,15 @@ const socialShareConfig = [
   {
     url: "//www.facebook.com/sharer.php?u={url}",
     title: "Auf Facebook teilen",
-    children: <TiSocialFacebook focusable={false} style={{ fontSize: 30 }} />,
+    children: <TiSocialFacebook focusable={false} style={{ fontSize: 28 }} />,
     className: "ta-facebook-icon",
     trackMatomoEventAction: TRACK_SHARE_FB_ACTION,
   },
   {
     url: "//twitter.com/intent/tweet?url={url}",
-    title: "Auf Twitter teilen",
-    children: <TiSocialTwitter focusable={false} style={{ fontSize: 30 }} />,
-    className: "ta-twitter-icon",
+    title: "Auf X teilen",
+    children: <RiTwitterXLine focusable={false} style={{ fontSize: 22 }} />,
+    className: "ta-x-icon",
     trackMatomoEventAction: TRACK_SHARE_TW_ACTION,
   },
 ];

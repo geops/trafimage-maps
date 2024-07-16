@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.7](https://github.com/geops/trafimage-maps/compare/v1.29.6...v1.29.7) (2024-07-16)
+
+### Bug Fixes
+
+- **railplus:** add attributes from Cartaro CMS to railplus popup ([#1178](https://github.com/geops/trafimage-maps/issues/1178)) ([b6ce1d0](https://github.com/geops/trafimage-maps/commit/b6ce1d0f414b03af52a22591aaa4a958219ed7c3))
+- **Share:** replace Twitter icon with X icon, update button titles and translations ([#1181](https://github.com/geops/trafimage-maps/issues/1181)) ([6623f69](https://github.com/geops/trafimage-maps/commit/6623f69104084bc7561ae61bea87ecbaadde1930))
+
 ### [1.29.6](https://github.com/geops/trafimage-maps/compare/v1.29.5...v1.29.6) (2024-07-09)
 
 ### Bug Fixes

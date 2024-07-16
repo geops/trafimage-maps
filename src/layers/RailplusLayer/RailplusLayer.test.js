@@ -12,7 +12,7 @@ describe("RailplusLayer", () => {
 
   describe("on load", () => {
     test("should fetch source info and set the tuInfos variable", async () => {
-      const spy = fetchMock.once(/data\/ch\.railplus\.meterspurbahnen\.json/g, {
+      const spy = fetchMock.once(/data\/ch\.railplus\.betreiberinnen\.json/g, {
         "geops.railplus.tu_info": {
           1: {
             name: "foo",
