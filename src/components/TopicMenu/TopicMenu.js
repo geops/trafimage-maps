@@ -20,6 +20,7 @@ import {
 import Select from "../Select/Select";
 import InfosButton from "../InfosButton";
 import TopicInfosButton from "../TopicInfosButton";
+import { TOPIC_MENU_ITEM_ID_PREFIX } from "../../utils/constants";
 
 const styles = () => ({
   wrapperBaseLayerSelect: {
@@ -182,6 +183,7 @@ class TopicMenu extends PureComponent {
       <div className="wkp-topic-menu">
         <div className="wkp-topic-menu-item-wrapper">
           <div
+            id={`${TOPIC_MENU_ITEM_ID_PREFIX}-${topic.key}`}
             className="wkp-topic-menu-item"
             role="button"
             tabIndex={0}
