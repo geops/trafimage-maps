@@ -61,3 +61,6 @@ export const LS_SIZE_KEY = "tm.max.canvas.size";
 
 // hideInLayerTree values
 export const ONLY_WHEN_NOT_LOGGED_IN = "onlyWhenNotLoggedIn";
+
+// topic menu items
+export const TOPIC_MENU_ITEM_ID_PREFIX = "topic-menu-item";
