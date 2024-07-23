@@ -6,6 +6,7 @@ import Select from "../Select";
 import { setLanguage } from "../../model/app/actions";
 import { ReactComponent as SBBGlobe } from "../../img/sbb/globe_210_large.svg";
 import useHasScreenSize from "../../utils/useHasScreenSize";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const optionsDesktop = [
   { label: "Deutsch", value: "de" },
@@ -62,6 +63,12 @@ function LanguageSelect() {
 
   const onSelectChange = useCallback(
     (opt) => {
+      trackEvent({
+        eventType: "action",
+        componentName: "select menu item",
+        label: opt.target.value,
+        variant: "Sprache wählen",
+      });
       dispatch(setLanguage(opt.target.value));
     },
     [dispatch],
@@ -74,6 +81,7 @@ function LanguageSelect() {
           key={opt.value}
           value={opt.value}
           data-cy={`lang-select-option-${opt.value}`}
+          data-testid={`lang-select-option-${opt.value}`}
         >
           {opt.label}
         </MenuItem>
@@ -86,6 +94,7 @@ function LanguageSelect() {
       <Select
         fullWidth
         data-cy="lang-select"
+        data-testid="lang-select"
         value={inputValue.value}
         renderValue={(opt) => (
           <span className={classes.currentValue}>
