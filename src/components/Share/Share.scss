@@ -1,22 +1,23 @@
 .wkp-share {
   display: flex;
   flex-wrap: wrap;
+  gap: 5px;
   padding: 10px 16px;
 
-
   > div, > button, > a {
+    min-width: 55px;
     height: 30px;
-    padding: 0 12px;
+    padding-top: 0;
+    padding-bottom: 0;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-
-  .ta-facebook-icon {
-    padding: 0 5px;
-  }
+  // .ta-facebook-icon {
+  //   padding: 0 5px;
+  // }
 
   .rs-canvas-save-button {
     padding-top: 2px;

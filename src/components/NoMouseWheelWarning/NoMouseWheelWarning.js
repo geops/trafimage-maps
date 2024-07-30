@@ -19,7 +19,7 @@ function NoMouseWheelWarning() {
         .getInteractions()
         .getArray()
         .find((interaction) => interaction instanceof MouseWheelZoom);
-      mouseWheelZoom.setActive(!embedded);
+      mouseWheelZoom?.setActive(!embedded);
     }
 
     return () => {};

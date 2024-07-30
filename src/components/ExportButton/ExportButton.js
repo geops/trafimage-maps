@@ -16,6 +16,8 @@ import {
   sizesByFormat,
 } from "../../utils/exportUtils";
 import LayerService from "../../utils/LayerService";
+import { trackEvent } from "../../utils/trackingUtils";
+import { SWISS_CENTER } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   buttonContent: {
@@ -32,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
       opacity: 0.9,
     },
   },
-  canvasButton: { ...theme.styles.flexCenter },
 }));
 
 function ExportButton({
@@ -48,7 +49,6 @@ function ExportButton({
   id,
   scaleLineConfig,
 }) {
-  const classes = useStyles();
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
@@ -58,12 +58,35 @@ function ExportButton({
   const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
 
+  const renderChildren = () => {
+    const styles = {
+      pointerEvents: isLoading ? "none" : "auto",
+      opacity: isLoading ? 0.5 : 1,
+      ...style,
+    };
+    return isLoading
+      ? React.cloneElement(children, {
+          isLoading,
+          style: styles,
+          disabled: true,
+        })
+      : React.Children.map(children, (child) => {
+          return React.cloneElement(child, { style: styles, id });
+        });
+  };
+
   return (
     <CanvasSaveButton
       extraData={exportCopyright ? generateExtraData(layers) : null}
       autoDownload={false}
       format="image/jpeg"
       onSaveStart={() => {
+        trackEvent({
+          eventType: "download",
+          componentName: "secondary button",
+          label: t("PDF exportieren"),
+          variant: `PDF export${exportCoordinates?.toString() === [SWISS_CENTER, SWISS_CENTER].toString() ? " - Ganze Schweiz" : ""}`,
+        });
         setLoading(true);
         return getMapHd(
           map,
@@ -124,19 +147,7 @@ function ExportButton({
         setLoading(false);
       }}
     >
-      {React.Children.map(children, (child) => {
-        return React.cloneElement(child, {
-          id,
-          title: t("Karte als PDF exportieren"),
-          className: classes.canvasButton,
-          style: {
-            pointerEvents: isLoading ? "none" : "auto",
-            opacity: isLoading ? 0.3 : 1,
-            ...style,
-          },
-          isLoading,
-        });
-      })}
+      {renderChildren()}
     </CanvasSaveButton>
   );
 }
@@ -153,6 +164,12 @@ function DefaultChildren({ isLoading = false, ...props }) {
 }
 
 DefaultChildren.propTypes = { isLoading: PropTypes.bool };
+
+DefaultChildren.propTypes = {
+  style: PropTypes.object,
+  id: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
 ExportButton.propTypes = {
   exportFormat: PropTypes.string,

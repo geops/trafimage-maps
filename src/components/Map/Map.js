@@ -20,6 +20,7 @@ import NoDragPanWarning from "../NoDragPanWarning";
 import NoMouseWheelWarning from "../NoMouseWheelWarning";
 import getFeatureInfoAtCoordinate from "../../utils/getFeatureInfoAtCoordinate";
 import getQueryableLayers from "../../utils/getQueryableLayers";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -113,6 +114,7 @@ class Map extends PureComponent {
       zoom,
       dispatchHtmlEvent,
       dispatchUpdateDrawEditlink,
+      t,
     } = this.props;
     const newResolution = evt.map.getView().getResolution();
     const newZoom = evt.map.getView().getZoom();
@@ -121,6 +123,12 @@ class Map extends PureComponent {
     if (zoom !== newZoom) {
       dispatchSetZoom(newZoom);
       dispatchUpdateDrawEditlink();
+      trackEvent({
+        eventType: "action",
+        eventName: undefined,
+        label: zoom <= newZoom ? t("Hineinzoomen") : t("Rauszoomen"),
+        variant: zoom <= newZoom ? "ZoomIn" : "ZoomOut",
+      });
     }
 
     if (resolution !== newResolution) {

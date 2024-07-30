@@ -17,7 +17,7 @@ exports[`Header match snapshots 1`] = `
       </span>
     </div>
     <div class="makeStyles-wrapper-1 makeStyles-wrapper-5">
-      <div data-testid=" "
+      <div data-testid="lang-select"
            data-cy="lang-select"
            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth makeStyles-select-4 css-itsl15-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
       >
