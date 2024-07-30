@@ -8,6 +8,7 @@ function useTrackTopic(topicKey) {
   const { i18n } = useTranslation();
   useEffect(() => {
     const env = getTrackingEnv();
+    const isIframe = window !== window.parent;
     if (env && topicKey) {
       window.digitalDataLayer = window.digitalDataLayer || [];
       window.digitalDataLayer.push({
@@ -21,6 +22,7 @@ function useTrackTopic(topicKey) {
             destinationURL: window.location.href,
             destinationURI: window.location.pathname,
             referringURL: prevUrl || document.referrer,
+            parentLocation: isIframe ? document.referrer : undefined,
             sysEnv: env === "prod" ? "production" : "integration",
             language: i18n.language,
           },
