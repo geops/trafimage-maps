@@ -12,13 +12,10 @@ function useTrackTopic(topicKey) {
     if (env && topicKey) {
       window.digitalDataLayer = window.digitalDataLayer || [];
       window.digitalDataLayer.push({
-        pageInstanceID:
-          env === "prod"
-            ? "TODO: prod pageInstanceID"
-            : "TODO: stag pageInstanceID",
+        pageInstanceID: env === "prod" ? "584988" : "584988", // For now the prod and stag IDs are the same
         page: {
           pageInfo: {
-            topic: topicKey,
+            pageName: topicKey,
             destinationURL: window.location.href,
             destinationURI: window.location.pathname,
             referringURL: prevUrl || document.referrer,
