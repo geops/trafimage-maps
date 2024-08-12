@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.29.10](https://github.com/geops/trafimage-maps/compare/v1.29.9...v1.29.10) (2024-08-12)
 
+- update maplibre, fixes label parethesis bug
+
 ### [1.29.9](https://github.com/geops/trafimage-maps/compare/v1.29.8...v1.29.9) (2024-08-12)
 
 ### Bug Fixes
