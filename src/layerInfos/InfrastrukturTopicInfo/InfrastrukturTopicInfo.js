@@ -8,7 +8,7 @@ const comps = {
         Die Karte der Normalspur- und Schmalspur-Infrastrukturbetreiberinnen
         zeigt die komplette Schweizer Eisenbahninfrastruktur inkl. den
         streckenbezogenen Betriebspunkten. In der Karte kann zwischen der
-        Infrastruktur der SBB inkl. Tochtergesellschaften und der Infrasturktur
+        Infrastruktur der SBB inkl. Tochtergesellschaften und der Infrastruktur
         der übrigen Eisenbahnunternehmen unterschieden werden. Das
         Kartenmaterial dient in erster Linie bei SBB-internen Kartenthemen als
         Hintergrundkarte.
