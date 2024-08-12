@@ -70,6 +70,7 @@ function RailplusPopup({ feature, layer }) {
         display: "flex",
         flexDirection: "column",
         gap: 20,
+        marginBottom: 50,
       }}
     >
       {logo && (

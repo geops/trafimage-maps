@@ -15,6 +15,8 @@ const useStyles = makeStyles(() => {
   return {
     wrapper: {
       padding: 15,
+      maxHeight: "calc(100vh - 80px)",
+      overflow: "auto",
     },
     listHeader: {
       paddingLeft: (props) => (props.isMobile ? 0 : 15),
