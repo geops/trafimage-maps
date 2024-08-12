@@ -13,11 +13,6 @@ import CloseButton from "../../components/CloseButton";
 
 const useStyles = makeStyles(() => {
   return {
-    wrapper: {
-      padding: 15,
-      maxHeight: "calc(100vh - 80px)",
-      overflow: "auto",
-    },
     listHeader: {
       paddingLeft: (props) => (props.isMobile ? 0 : 15),
       display: "flex",
@@ -64,7 +59,13 @@ function RailplusMenu() {
         </Box>
       }
       body={
-        <div className={classes.wrapper}>
+        <div
+          style={{
+            padding: 15,
+            maxHeight: isMobile ? undefined : "calc(100vh - 80px)",
+            overflow: isMobile ? undefined : "auto",
+          }}
+        >
           <RailplusPopup feature={feature} layer={layer} />
         </div>
       }
