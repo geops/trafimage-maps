@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.10](https://github.com/geops/trafimage-maps/compare/v1.29.9...v1.29.10) (2024-08-12)
+
+- update maplibre, fixes label parethesis bug
+
+### [1.29.9](https://github.com/geops/trafimage-maps/compare/v1.29.8...v1.29.9) (2024-08-12)
+
+### Bug Fixes
+
+- **railplus:** add overflow and max-hight to railplus popup to fix scroll ([#1184](https://github.com/geops/trafimage-maps/issues/1184)) ([eec9fe3](https://github.com/geops/trafimage-maps/commit/eec9fe3261eaa099abdb182b1a7ea9469c0545f9))
+
 ### [1.29.8](https://github.com/geops/trafimage-maps/compare/v1.29.7...v1.29.8) (2024-08-02)
 
 ### Bug Fixes
