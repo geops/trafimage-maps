@@ -19,7 +19,7 @@ function useTrackTopic(topicKey) {
             destinationURL: window.location.href,
             destinationURI: window.location.pathname,
             referringURL: prevUrl || document.referrer,
-            parentLocation: isIframe ? document.referrer : undefined,
+            parentLocation: isIframe ? document.referrer : "",
             sysEnv: env === "prod" ? "production" : "integration",
             language: i18n.language,
           },
