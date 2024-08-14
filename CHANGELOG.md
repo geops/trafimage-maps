@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.11](https://github.com/geops/trafimage-maps/compare/v1.29.10...v1.29.11) (2024-08-14)
+
+### Bug Fixes
+
+- **eisenbahninfrastruktur:** increase maxZoom for topics with visible rail project labels ([#1185](https://github.com/geops/trafimage-maps/issues/1185)) ([1a1af3e](https://github.com/geops/trafimage-maps/commit/1a1af3ea58d1b8ad5f761e3c649ad2e268efce93))
+
 ### [1.29.10](https://github.com/geops/trafimage-maps/compare/v1.29.9...v1.29.10) (2024-08-12)
 
 - update maplibre, fixes label parethesis bug
