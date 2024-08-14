@@ -6,7 +6,7 @@ export function getTrackingEnv() {
   if (hostname === "maps.trafimage.ch") {
     return "prod";
   }
-  return "stag";
+  return null;
 }
 
 export function getTrackingLaunchScriptSrc() {
