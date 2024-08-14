@@ -159,7 +159,7 @@ export const betriebsregionen = {
 export const regionenkartePublic = {
   name: "ch.sbb.regionenkarte.public",
   key: "ch.sbb.regionenkarte.public",
-  maxZoom: 13,
+  maxZoom: 14,
   elements: {
     ...defaultElements,
     popup: true,
@@ -211,7 +211,7 @@ export const zweitausbildung = {
 export const netzentwicklung = {
   name: "ch.sbb.netzentwicklung",
   key: "ch.sbb.netzentwicklung",
-  maxZoom: 13,
+  maxZoom: 14,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
   layers: netzentwicklungLayers,
   projection: "EPSG:3857",
@@ -222,7 +222,7 @@ export const netzentwicklung = {
 export const beleuchtungsstaerken = {
   name: "ch.sbb.beleuchtungsstaerken",
   key: "ch.sbb.beleuchtungsstaerken",
-  maxZoom: 13,
+  maxZoom: 14,
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: beleuchtungLayers,
   projection: "EPSG:3857",
