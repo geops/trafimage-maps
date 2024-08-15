@@ -62,4 +62,9 @@
   .rt-tracker-control {
     padding: 15px 10px 0;
   }
+
+  .rt-route-schedule .rt-route-body .rt-route-station.rt-passed .rt-route-delay span {
+    display: block;
+    opacity: 0.7;
+  }
 }

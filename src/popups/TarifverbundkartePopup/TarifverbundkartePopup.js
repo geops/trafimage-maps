@@ -56,16 +56,18 @@ function TarifverbundkartePopup({ feature, layer }) {
           <Typography variant="h4">
             <b>{t(`Tarifverbunde in ${feature.get("name")}`)}</b>
           </Typography>
-          {verbunde.map((v) => {
-            return (
-              <TarifverbundPartner
-                iconSize={12}
-                key={v.code}
-                color={`#${v.colour}`}
-                label={<Link href={v.url}>{v.name}</Link>}
-              />
-            );
-          })}
+          {verbunde
+            .filter((v) => !!(v.url && v.name && v.colour))
+            .map((v) => {
+              return (
+                <TarifverbundPartner
+                  iconSize={12}
+                  key={v.code}
+                  color={`#${v.colour}`}
+                  label={<Link href={v.url}>{v.name}</Link>}
+                />
+              );
+            })}
           {zPass?.tarifverbund_urls && (
             <TarifverbundPartner
               iconSize={12}
