@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.12](https://github.com/geops/trafimage-maps/compare/v1.29.11...v1.29.12) (2024-08-15)
+
+### Bug Fixes
+
+- **TrackerMenu:** round delays to minutes, display historic delays ([#1186](https://github.com/geops/trafimage-maps/issues/1186)) ([1f4a0c5](https://github.com/geops/trafimage-maps/commit/1f4a0c519f04ddd0eb387186a7533712c825c14a))
+
 ### [1.29.11](https://github.com/geops/trafimage-maps/compare/v1.29.10...v1.29.11) (2024-08-14)
 
 ### Bug Fixes
