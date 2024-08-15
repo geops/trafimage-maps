@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => {
 
 function TarifverbundPartner({ color, label, iconSize, style, children }) {
   const classes = useStyles({ iconSize });
-
   return (
     <div
       className={classes.partner}
