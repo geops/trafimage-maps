@@ -64,8 +64,10 @@ function TarifverbundkartePopup({ feature, layer }) {
                   iconSize={12}
                   key={v.code}
                   color={`#${v.colour}`}
-                  label={<Link href={v.url}>{v.name}</Link>}
-                />
+                  label={`${v.name}`}
+                >
+                  <Link href={v.url}>{v.name}</Link>
+                </TarifverbundPartner>
               );
             })}
           {zPass?.tarifverbund_urls && (
@@ -75,8 +77,10 @@ function TarifverbundkartePopup({ feature, layer }) {
                 background:
                   "repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)",
               }}
-              label={<Link href={zPass?.tarifverbund_urls}>Z-Pass</Link>}
-            />
+              label="Z-Pass"
+            >
+              <Link href={zPass?.tarifverbund_urls}>Z-Pass</Link>
+            </TarifverbundPartner>
           )}
           <br />
         </>
