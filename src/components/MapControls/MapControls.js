@@ -137,11 +137,23 @@ function MapControls({
   }, [dispatch, map, zoomSlider]);
 
   useEffect(() => {
+    const onZoomSliderRefUpdate = () => {
+      dispatch(setZoomType("slider"));
+    };
     if (zoomSliderRef) {
-      zoomSliderRef?.firstChild?.addEventListener("mousedown", () => {
-        dispatch(setZoomType("slider"));
-      });
+      zoomSliderRef?.firstChild?.addEventListener(
+        "mousedown",
+        onZoomSliderRefUpdate,
+      );
     }
+    return () => {
+      if (zoomSliderRef) {
+        zoomSliderRef?.firstChild?.removeEventListener(
+          "mousedown",
+          onZoomSliderRefUpdate,
+        );
+      }
+    };
   }, [dispatch, zoomSliderRef]);
 
   return (
