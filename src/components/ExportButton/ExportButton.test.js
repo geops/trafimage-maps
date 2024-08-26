@@ -41,7 +41,7 @@ describe("ExportButton", () => {
     });
   });
 
-  test("should add Ganze Schweiz to tracking event when exportCoordinates is [SWISS_CENTER, SWISS_CENTER]", () => {
+  test("should trigger tracking event", () => {
     const exportCoordinates = [SWISS_CENTER, SWISS_CENTER];
     // Ignore errors, because test case is about tracking event
     jest.spyOn(console, "error");
@@ -57,7 +57,7 @@ describe("ExportButton", () => {
     );
     fireEvent.click(getByRole("button"));
     expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch(
-      /Ganze Schweiz/i,
+      /PDF export/i,
     );
   });
 });

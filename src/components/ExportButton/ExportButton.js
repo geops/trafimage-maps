@@ -17,7 +17,6 @@ import {
 } from "../../utils/exportUtils";
 import LayerService from "../../utils/LayerService";
 import { trackEvent } from "../../utils/trackingUtils";
-import { SWISS_CENTER } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   buttonContent: {
@@ -88,7 +87,7 @@ function ExportButton({
           componentName: "secondary button",
           label: t("PDF exportieren"),
           location: t(topic?.name, { lng: "de" }),
-          variant: `PDF export${exportCoordinates?.toString() === [SWISS_CENTER, SWISS_CENTER].toString() ? " - Ganze Schweiz" : ""}`,
+          variant: "PDF export",
           value:
             getExportFileName?.(t, exportFormat, i18n.language) ||
             `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`,
