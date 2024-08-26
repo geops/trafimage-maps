@@ -11,6 +11,7 @@ function InfosButton({ selectedInfo, className }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
 
   const isSelected = useMemo(() => {
     return selectedForInfos === selectedInfo;
@@ -32,8 +33,9 @@ function InfosButton({ selectedInfo, className }) {
       onClick={(evt) => {
         trackEvent({
           eventType: "action",
-          componentName: "icon button",
+          componentName: "info button",
           label: t(selectedInfo.key),
+          location: t(activeTopic?.name, { lng: "de" }),
           variant: selectedInfo?.get ? "Layer" : "Topic", // We test the get method for layer or topic, see LayerInfosDialog.js
         });
         dispatch(setSelectedForInfos(isSelected ? null : selectedInfo));

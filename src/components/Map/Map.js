@@ -3,13 +3,19 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { touchOnly } from "ol/events/condition";
+import { always, touchOnly } from "ol/events/condition";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
 import OLMap from "ol/Map";
 import BasicMap from "react-spatial/components/BasicMap";
+import { MouseWheelZoom } from "ol/interaction";
 import MapAccessibility from "../MapAccessibility";
-import { setResolution, setCenter, setZoom } from "../../model/map/actions";
+import {
+  setResolution,
+  setCenter,
+  setZoom,
+  setZoomType,
+} from "../../model/map/actions";
 import {
   setFeatureInfo,
   setSearchOpen,
@@ -38,6 +44,7 @@ const propTypes = {
   showPopups: PropTypes.bool,
   maxZoom: PropTypes.number,
   minZoom: PropTypes.number,
+  zoomType: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
@@ -46,6 +53,7 @@ const propTypes = {
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchOpen: PropTypes.func.isRequired,
   dispatchUpdateDrawEditlink: PropTypes.func.isRequired,
+  dispatchSetZoomType: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -87,11 +95,23 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const { map, dispatchHtmlEvent } = this.props;
+    const { map, dispatchHtmlEvent, dispatchSetZoomType } = this.props;
     this.onPointerMoveRef = map.on("pointermove", (e) => this.onPointerMove(e));
     this.onSingleClickRef = map.on("singleclick", (e) => this.onSingleClick(e));
     dispatchHtmlEvent(new CustomEvent("load"));
     map?.updateSize();
+    const mapInteractions = map.getInteractions();
+    mapInteractions.insertAt(
+      0,
+      new MouseWheelZoom({
+        condition: (evt) => {
+          if (evt.type === "wheel") {
+            dispatchSetZoomType("scroll");
+          }
+          return always(evt);
+        },
+      }),
+    );
   }
 
   componentDidUpdate() {
@@ -112,8 +132,11 @@ class Map extends PureComponent {
       dispatchSetResolution,
       dispatchSetZoom,
       zoom,
+      zoomType,
       dispatchHtmlEvent,
       dispatchUpdateDrawEditlink,
+      dispatchSetZoomType,
+      activeTopic,
       t,
     } = this.props;
     const newResolution = evt.map.getView().getResolution();
@@ -123,12 +146,17 @@ class Map extends PureComponent {
     if (zoom !== newZoom) {
       dispatchSetZoom(newZoom);
       dispatchUpdateDrawEditlink();
-      trackEvent({
-        eventType: "action",
-        eventName: undefined,
-        label: zoom <= newZoom ? t("Hineinzoomen") : t("Rauszoomen"),
-        variant: zoom <= newZoom ? "ZoomIn" : "ZoomOut",
-      });
+      if (zoomType) {
+        trackEvent({
+          eventType: "action",
+          eventName: zoomType === "scroll" ? "scroll" : "click",
+          componentName: zoomType,
+          label: zoom < newZoom ? t("Hineinzoomen") : t("Rauszoomen"),
+          location: t(activeTopic?.name, { lng: "de" }),
+          variant: zoom < newZoom ? "ZoomIn" : "ZoomOut",
+        });
+        dispatchSetZoomType(null);
+      }
     }
 
     if (resolution !== newResolution) {
@@ -363,6 +391,7 @@ const mapStateToProps = (state) => ({
   minZoom: state.map.minZoom,
   showPopups: state.app.showPopups,
   activeTopic: state.app.activeTopic,
+  zoomType: state.map.zoomType,
 });
 
 const mapDispatchToProps = {
@@ -372,6 +401,7 @@ const mapDispatchToProps = {
   dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetSearchOpen: setSearchOpen,
   dispatchUpdateDrawEditlink: updateDrawEditLink,
+  dispatchSetZoomType: setZoomType,
 };
 
 export default compose(

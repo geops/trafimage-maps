@@ -52,23 +52,26 @@ const replaceParams = (url, language, appBaseUrl) => {
 };
 
 function handleTracking(
-  matomoAction,
+  topic,
   matomoCategory,
   matomoTrackFunc,
   title,
   t,
   action = "action",
   variant,
+  value,
 ) {
   matomoTrackFunc({
-    category: matomoAction,
+    category: topic?.key,
     action: matomoCategory,
   });
   trackEvent({
     eventType: action,
-    componentName: "icon button",
+    componentName: "share button",
     label: t(title),
-    variant: variant || title,
+    location: t(topic?.name, { lng: "de" }),
+    variant: variant || t(title, { lng: "de" }),
+    value,
   });
 }
 
@@ -95,11 +98,12 @@ function ShareLink({
       tabIndex={0}
       onClick={() => {
         handleTracking(
-          activeTopic.key,
+          activeTopic,
           trackMatomoEventAction,
           trackMatomoEvent,
           title,
           t,
+          undefined,
         );
       }}
       data-testid={`wkp-share-${title.replace(/\s+/g, "-").toLowerCase()}`}
@@ -132,11 +136,12 @@ function Share() {
         buttonProps={{
           onClick: () => {
             handleTracking(
-              activeTopic?.key,
+              activeTopic,
               TRACK_SHARE_PERMALINK_ACTION,
               trackMatomoEvent,
               "Permalink erstellen",
               t,
+              undefined,
             );
           },
         }}
@@ -147,13 +152,14 @@ function Share() {
         extraData={generateExtraData(layers)}
         onSaveStart={(mapp) => {
           handleTracking(
-            activeTopic?.key,
+            activeTopic,
             TRACK_SHARE_DL_ACTION,
             trackMatomoEvent,
             "Karte als Bild speichern",
             t,
             "download",
             "PNG export",
+            `${window.document.title.replace(/ /g, "_").toLowerCase()}.png`,
           );
           return Promise.resolve(mapp);
         }}

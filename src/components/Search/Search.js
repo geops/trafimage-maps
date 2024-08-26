@@ -21,6 +21,7 @@ function Search() {
   const map = useSelector((state) => state.app.map);
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const searchService = useSelector((state) => state.app.searchService);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const isMobile = useHasScreenSize();
   const searchContainerRef = useRef();
   const { t } = useTranslation();
@@ -74,6 +75,7 @@ function Search() {
               componentName: "search result",
               label: searchService.value(suggestion),
               variant: suggestion.section,
+              location: t(activeTopic?.name, { lng: "de" }),
               eventName: e.type,
             });
             dispatch(setFeatureInfo());
@@ -190,8 +192,9 @@ function Search() {
                   onClick={() => {
                     trackEvent({
                       eventType: "action",
-                      componentName: "search input",
+                      componentName: "search button",
                       label: t("Suche starten"),
+                      location: t(activeTopic?.name, { lng: "de" }),
                       variant: "Suche starten",
                     });
 

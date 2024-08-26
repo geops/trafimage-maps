@@ -31,6 +31,7 @@ function FitExtent() {
   const classes = useStyles();
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   return (
     <MapButton
       className={`wkp-fit-extent ${classes.fitExtent}`}
@@ -39,8 +40,9 @@ function FitExtent() {
       onClick={() => {
         trackEvent({
           eventType: "action",
-          componentName: "icon button",
+          componentName: "maps control button",
           label: t("Ganze Schweiz"),
+          location: t(activeTopic?.name, { lng: "de" }),
           variant: "Ganze Schweiz",
         });
       }}

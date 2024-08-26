@@ -57,6 +57,7 @@ function ExportButton({
   );
   const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
+  const { exportConfig } = topic || {};
 
   const renderChildren = () => {
     const styles = {
@@ -81,11 +82,16 @@ function ExportButton({
       autoDownload={false}
       format="image/jpeg"
       onSaveStart={() => {
+        const { getExportFileName } = exportConfig || {};
         trackEvent({
           eventType: "download",
           componentName: "secondary button",
           label: t("PDF exportieren"),
+          location: t(topic?.name, { lng: "de" }),
           variant: `PDF export${exportCoordinates?.toString() === [SWISS_CENTER, SWISS_CENTER].toString() ? " - Ganze Schweiz" : ""}`,
+          value:
+            getExportFileName?.(t, exportFormat, i18n.language) ||
+            `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`,
         });
         setLoading(true);
         return getMapHd(
@@ -108,7 +114,6 @@ function ExportButton({
         let imageUrl;
         let fileName;
 
-        const { exportConfig } = topic;
         if (exportConfig) {
           const { getTemplateValues, getOverlayImageUrl, getExportFileName } =
             exportConfig;

@@ -230,7 +230,8 @@ function TopicElements({ history }) {
                   eventType: "action",
                   componentName: "layer switch button",
                   label: t(layer.key),
-                  variant: "Layer Switch",
+                  location: t(activeTopic.name, { lng: "de" }),
+                  variant: t(layer.name || layer.key, { lng: "de" }),
                 });
               }
             }}

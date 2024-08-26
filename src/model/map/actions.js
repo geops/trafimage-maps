@@ -6,6 +6,7 @@ export const SET_ZOOM = "SET_ZOOM";
 export const SET_MAX_EXTENT = "SET_MAX_EXTENT";
 export const SET_MAX_ZOOM = "SET_MAX_ZOOM";
 export const SET_MIN_ZOOM = "SET_MIN_ZOOM";
+export const SET_ZOOM_TYPE = "SET_ZOOM_TYPE";
 
 export const setLayers = (data) => ({ type: SET_LAYERS, data });
 
@@ -20,3 +21,5 @@ export const setMaxExtent = (data) => ({ type: SET_MAX_EXTENT, data });
 export const setMaxZoom = (data) => ({ type: SET_MAX_ZOOM, data });
 
 export const setMinZoom = (data) => ({ type: SET_MIN_ZOOM, data });
+
+export const setZoomType = (data) => ({ type: SET_ZOOM_TYPE, data });

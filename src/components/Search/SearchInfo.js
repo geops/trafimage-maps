@@ -97,18 +97,20 @@ function SearchInfo({ anchorEl }) {
   const classes = useStyles({ screenWidth });
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const searchInfoOpen = useSelector((state) => state.app.searchInfoOpen);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
 
   const togglePopup = useCallback(() => {
     if (!searchInfoOpen) {
       trackEvent({
         eventType: "action",
-        componentName: "icon button",
+        componentName: "search info button",
         label: t("Suche-Info"),
+        location: t(activeTopic?.name, { lng: "de" }),
         variant: "Suche-Info",
       });
     }
     dispatch(setSearchInfoOpen(!searchInfoOpen));
-  }, [dispatch, searchInfoOpen, t]);
+  }, [dispatch, searchInfoOpen, activeTopic, t]);
 
   useEffect(() => {
     // Ensure the popup is always closed on mount

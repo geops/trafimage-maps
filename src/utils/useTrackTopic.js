@@ -9,7 +9,11 @@ function useTrackTopic(topicKey) {
   useEffect(() => {
     const env = getTrackingEnv();
     const isIframe = window !== window.parent;
-    if (env && topicKey) {
+    const trackTopicPending = !window.digitalDataLayer?.find(
+      (evt) => "pageInstanceID" in evt,
+    );
+
+    if (trackTopicPending && env && topicKey && i18n.language && topicKey) {
       window.digitalDataLayer = window.digitalDataLayer || [];
       window.digitalDataLayer.push({
         pageInstanceID: env === "prod" ? "584988" : "584988", // For now the prod and stag IDs are the same

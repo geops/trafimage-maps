@@ -20,6 +20,7 @@ import {
 import Select from "../Select/Select";
 import InfosButton from "../InfosButton";
 import TopicInfosButton from "../TopicInfosButton";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const styles = () => ({
   wrapperBaseLayerSelect: {
@@ -74,9 +75,16 @@ class TopicMenu extends PureComponent {
   }
 
   onTopicClick(topic) {
-    const { activeTopic, dispatchSetActiveTopic, dispatchSetFeatureInfo } =
+    const { activeTopic, dispatchSetActiveTopic, dispatchSetFeatureInfo, t } =
       this.props;
     const { isCollapsed } = this.state;
+
+    trackEvent({
+      eventType: "action",
+      componentName: "radio button",
+      location: t(activeTopic.name, { lng: "de" }),
+      variant: t(topic.key, { lng: "de" }),
+    });
 
     if (topic.key === activeTopic.key) {
       this.setState({ isCollapsed: !isCollapsed });

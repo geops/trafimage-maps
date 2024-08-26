@@ -40,6 +40,7 @@ function Geolocation() {
   const classes = useStyles();
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
   const dispatch = useDispatch();
   const isGeolocating = useSelector((state) => state.app.isGeolocating);
@@ -87,8 +88,9 @@ function Geolocation() {
     }
     trackEvent({
       eventType: "action",
-      componentName: "icon button",
+      componentName: "maps control button",
       label: t("Lokalisieren"),
+      location: t(activeTopic?.name, { lng: "de" }),
       variant: "lokalisieren",
     });
     dispatch(setGeolocating(true));
@@ -112,7 +114,7 @@ function Geolocation() {
     } else {
       window.addEventListener("deviceorientation", deviceOrientationListener);
     }
-  }, [deviceOrientationListener, dispatch, isGeolocating, t]);
+  }, [deviceOrientationListener, dispatch, isGeolocating, activeTopic, t]);
 
   const styleFunction = useCallback(
     (feature) => {
