@@ -92,7 +92,7 @@ function Geolocation() {
         componentName: "maps control button",
         label: t("Lokalisieren"),
         location: t(activeTopic?.name, { lng: "de" }),
-        variant: "lokalisieren",
+        variant: t("Lokalisieren", { lng: "de" }),
       },
       activeTopic,
     );
