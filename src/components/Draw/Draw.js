@@ -84,6 +84,7 @@ function Draw() {
                   label: t("Zeichnung bearbeiten"),
                   variant: "Zeichnung bearbeiten",
                 }),
+                activeTopic,
               );
             }}
           />

@@ -79,12 +79,15 @@ class TopicMenu extends PureComponent {
       this.props;
     const { isCollapsed } = this.state;
 
-    trackEvent({
-      eventType: "action",
-      componentName: "radio button",
-      location: t(activeTopic.name, { lng: "de" }),
-      variant: t(topic.key, { lng: "de" }),
-    });
+    trackEvent(
+      {
+        eventType: "action",
+        componentName: "radio button",
+        location: t(activeTopic.name, { lng: "de" }),
+        variant: t(topic.key, { lng: "de" }),
+      },
+      activeTopic,
+    );
 
     if (topic.key === activeTopic.key) {
       this.setState({ isCollapsed: !isCollapsed });

@@ -20,12 +20,11 @@ export function getTrackingLaunchScriptSrc() {
   return null;
 }
 
-export function trackEvent({
-  componentName,
-  componentPosition = 1,
-  ...eventInfo
-}) {
-  if (!getTrackingEnv()) {
+export function trackEvent(
+  { componentName, componentPosition = 1, ...eventInfo },
+  topic,
+) {
+  if (!getTrackingEnv() || topic?.noTracking) {
     return;
   }
   window.digitalDataLayer = window.digitalDataLayer || [];

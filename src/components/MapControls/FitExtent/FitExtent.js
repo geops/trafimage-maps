@@ -38,13 +38,16 @@ function FitExtent() {
       data-testid="map-controls-fit-extent"
       tabIndex={-1}
       onClick={() => {
-        trackEvent({
-          eventType: "action",
-          componentName: "maps control button",
-          label: t("Ganze Schweiz"),
-          location: t(activeTopic?.name, { lng: "de" }),
-          variant: "Ganze Schweiz",
-        });
+        trackEvent(
+          {
+            eventType: "action",
+            componentName: "maps control button",
+            label: t("Ganze Schweiz"),
+            location: t(activeTopic?.name, { lng: "de" }),
+            variant: "Ganze Schweiz",
+          },
+          activeTopic,
+        );
       }}
     >
       <RsFitExtent

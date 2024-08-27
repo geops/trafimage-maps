@@ -469,6 +469,7 @@ export const railPlus = {
   },
   minZoom: 7,
   maxZoom: 13,
+  noTracking: true,
 };
 
 export const messwagen = {

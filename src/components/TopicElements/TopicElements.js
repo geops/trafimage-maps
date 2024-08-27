@@ -165,7 +165,7 @@ function TopicElements({ history }) {
     [dispatch],
   );
 
-  useTrackTopic(activeTopic?.key);
+  useTrackTopic(activeTopic);
 
   if (!activeTopic) {
     return null;
@@ -226,13 +226,16 @@ function TopicElements({ history }) {
             t={t}
             onLayerButtonClick={(e, layer) => {
               if (layer) {
-                trackEvent({
-                  eventType: "action",
-                  componentName: "layer switch button",
-                  label: t(layer.key),
-                  location: t(activeTopic.name, { lng: "de" }),
-                  variant: t(layer.name || layer.key, { lng: "de" }),
-                });
+                trackEvent(
+                  {
+                    eventType: "action",
+                    componentName: "layer switch button",
+                    label: t(layer.key),
+                    location: t(activeTopic.name, { lng: "de" }),
+                    variant: t(layer.name || layer.key, { lng: "de" }),
+                  },
+                  activeTopic,
+                );
               }
             }}
           />

@@ -50,14 +50,14 @@ function ExportButton({
   trackingEventOptions = {},
 }) {
   const map = useSelector((state) => state.app.map);
-  const topic = useSelector((state) => state.app.activeTopic);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
   const exportPrintOptions = useSelector(
     (state) => state.app.exportPrintOptions,
   );
   const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
-  const { exportConfig } = topic || {};
+  const { exportConfig } = activeTopic || {};
 
   const renderChildren = () => {
     const styles = {
@@ -83,17 +83,22 @@ function ExportButton({
       format="image/jpeg"
       onSaveStart={() => {
         const { getExportFileName } = exportConfig || {};
-        trackEvent({
-          eventType: "download",
-          componentName: "secondary button",
-          label: t("PDF exportieren"),
-          location: t(topic?.name, { lng: "de" }),
-          variant: "PDF export",
-          value:
-            getExportFileName?.(t, exportFormat, i18n.language) ||
-            `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`,
-          ...trackingEventOptions,
-        });
+        if (trackingEventOptions) {
+          trackEvent(
+            {
+              eventType: "download",
+              componentName: "secondary button",
+              label: t("PDF exportieren"),
+              location: t(activeTopic?.name, { lng: "de" }),
+              variant: "PDF export",
+              value:
+                getExportFileName?.(t, exportFormat, i18n.language) ||
+                `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`,
+              ...trackingEventOptions,
+            },
+            activeTopic,
+          );
+        }
         setLoading(true);
         return getMapHd(
           map,

@@ -150,14 +150,17 @@ class Map extends PureComponent {
         const isZoomingIn = zoom < newZoom;
         let label = isZoomingIn ? t("Hineinzoomen") : t("Rauszoomen");
         if (zoomType === "slider") label = undefined;
-        trackEvent({
-          eventType: "action",
-          eventName: zoomType === "scroll" ? "scroll" : "click",
-          componentName: zoomType,
-          label,
-          location: t(activeTopic?.name, { lng: "de" }),
-          variant: isZoomingIn ? "ZoomIn" : "ZoomOut",
-        });
+        trackEvent(
+          {
+            eventType: "action",
+            eventName: zoomType === "scroll" ? "scroll" : "click",
+            componentName: zoomType,
+            label,
+            location: t(activeTopic?.name, { lng: "de" }),
+            variant: isZoomingIn ? "ZoomIn" : "ZoomOut",
+          },
+          activeTopic,
+        );
         dispatchSetZoomType(null);
       }
     }

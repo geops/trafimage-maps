@@ -2,6 +2,7 @@ import React, { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MenuItem } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
 import Select from "../Select";
 import { setLanguage } from "../../model/app/actions";
 import { ReactComponent as SBBGlobe } from "../../img/sbb/globe_210_large.svg";
@@ -52,6 +53,8 @@ const useStyles = makeStyles((theme) => ({
 
 function LanguageSelect() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const language = useSelector((state) => state.app.language);
   const isMobileWidth = useHasScreenSize();
   const classes = useStyles({ isMobileWidth });
@@ -63,15 +66,19 @@ function LanguageSelect() {
 
   const onSelectChange = useCallback(
     (opt) => {
-      trackEvent({
-        eventType: "action",
-        componentName: "select menu item",
-        label: opt.target.value,
-        variant: "Sprache wählen",
-      });
+      trackEvent(
+        {
+          eventType: "action",
+          componentName: "select menu item",
+          label: opt.target.value,
+          location: t(activeTopic?.name, { lng: "de" }),
+          variant: "Sprache wählen",
+        },
+        activeTopic,
+      );
       dispatch(setLanguage(opt.target.value));
     },
-    [dispatch],
+    [dispatch, t, activeTopic],
   );
 
   const langOptions = useMemo(() => {

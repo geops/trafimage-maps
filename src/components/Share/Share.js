@@ -65,14 +65,17 @@ function handleTracking(
     category: topic?.key,
     action: matomoCategory,
   });
-  trackEvent({
-    eventType: action,
-    componentName: "share button",
-    label: t(title),
-    location: t(topic?.name, { lng: "de" }),
-    variant: variant || t(title, { lng: "de" }),
-    value,
-  });
+  trackEvent(
+    {
+      eventType: action,
+      componentName: "share button",
+      label: t(title),
+      location: t(topic?.name, { lng: "de" }),
+      variant: variant || t(title, { lng: "de" }),
+      value,
+    },
+    topic,
+  );
 }
 
 function ShareLink({

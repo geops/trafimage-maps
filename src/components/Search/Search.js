@@ -70,14 +70,17 @@ function Search() {
           }
           onSuggestionSelected={(e, thing) => {
             const { suggestion } = thing;
-            trackEvent({
-              eventType: "action",
-              componentName: "search result",
-              label: searchService.value(suggestion),
-              variant: suggestion.section,
-              location: t(activeTopic?.name, { lng: "de" }),
-              eventName: e.type,
-            });
+            trackEvent(
+              {
+                eventType: "action",
+                componentName: "search result",
+                label: searchService.value(suggestion),
+                variant: suggestion.section,
+                location: t(activeTopic?.name, { lng: "de" }),
+                eventName: e.type,
+              },
+              activeTopic,
+            );
             dispatch(setFeatureInfo());
             searchService.select(
               suggestion,
@@ -129,13 +132,16 @@ function Search() {
             onKeyUp: (e) => {
               const { key } = e;
               if (key === "Enter") {
-                trackEvent({
-                  eventType: "action",
-                  componentName: "search input",
-                  label: t("Suche starten"),
-                  variant: "Suche starten",
-                  eventName: e.type,
-                });
+                trackEvent(
+                  {
+                    eventType: "action",
+                    componentName: "search input",
+                    label: t("Suche starten"),
+                    variant: "Suche starten",
+                    eventName: e.type,
+                  },
+                  activeTopic,
+                );
                 const filtered = suggestions.filter((s) => s.items.length > 0);
                 if (filtered.length > 0) {
                   const { items, section } = filtered[0];
@@ -190,13 +196,16 @@ function Search() {
                   title={t("Suche starten")}
                   className="wkp-search-button wkp-search-button-submit"
                   onClick={() => {
-                    trackEvent({
-                      eventType: "action",
-                      componentName: "search button",
-                      label: t("Suche starten"),
-                      location: t(activeTopic?.name, { lng: "de" }),
-                      variant: "Suche starten",
-                    });
+                    trackEvent(
+                      {
+                        eventType: "action",
+                        componentName: "search button",
+                        label: t("Suche starten"),
+                        location: t(activeTopic?.name, { lng: "de" }),
+                        variant: "Suche starten",
+                      },
+                      activeTopic,
+                    );
 
                     if (!value) {
                       // Hide the search input on small screen

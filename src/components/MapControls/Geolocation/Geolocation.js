@@ -86,13 +86,16 @@ function Geolocation() {
       );
       return;
     }
-    trackEvent({
-      eventType: "action",
-      componentName: "maps control button",
-      label: t("Lokalisieren"),
-      location: t(activeTopic?.name, { lng: "de" }),
-      variant: "lokalisieren",
-    });
+    trackEvent(
+      {
+        eventType: "action",
+        componentName: "maps control button",
+        label: t("Lokalisieren"),
+        location: t(activeTopic?.name, { lng: "de" }),
+        variant: "lokalisieren",
+      },
+      activeTopic,
+    );
     dispatch(setGeolocating(true));
     if ("ondeviceorientationabsolute" in window) {
       window.addEventListener(

@@ -31,13 +31,16 @@ function InfosButton({ selectedInfo, className }) {
       className={classNam}
       title={t("Layerinformationen anzeigen", { layer: t(selectedInfo.key) })}
       onClick={(evt) => {
-        trackEvent({
-          eventType: "action",
-          componentName: "info button",
-          label: t(selectedInfo.key),
-          location: t(activeTopic?.name, { lng: "de" }),
-          variant: selectedInfo?.get ? "Layer" : "Topic", // We test the get method for layer or topic, see LayerInfosDialog.js
-        });
+        trackEvent(
+          {
+            eventType: "action",
+            componentName: "info button",
+            label: t(selectedInfo.key),
+            location: t(activeTopic?.name, { lng: "de" }),
+            variant: selectedInfo?.get ? "Layer" : "Topic", // We test the get method for layer or topic, see LayerInfosDialog.js
+          },
+          activeTopic,
+        );
         dispatch(setSelectedForInfos(isSelected ? null : selectedInfo));
         evt.stopPropagation();
       }}

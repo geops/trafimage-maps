@@ -1,25 +1,29 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { getTrackingEnv } from "./trackingUtils";
 
 let prevUrl;
 
-function useTrackTopic(topicKey) {
+function useTrackTopic() {
   const { i18n } = useTranslation();
+  const activeTopic = useSelector((state) => state.app.activeTopic);
+
   useEffect(() => {
+    if (!activeTopic || activeTopic?.noTracking) return;
     const env = getTrackingEnv();
     const isIframe = window !== window.parent;
     const trackTopicPending = !window.digitalDataLayer?.find(
       (evt) => "pageInstanceID" in evt,
     );
 
-    if (trackTopicPending && env && topicKey && i18n.language && topicKey) {
+    if (trackTopicPending && env && i18n.language && activeTopic.key) {
       window.digitalDataLayer = window.digitalDataLayer || [];
       window.digitalDataLayer.push({
         pageInstanceID: env === "prod" ? "584988" : "584988", // For now the prod and stag IDs are the same
         page: {
           pageInfo: {
-            pageName: topicKey,
+            pageName: activeTopic.key,
             destinationURL: window.location.href,
             destinationURI: window.location.pathname,
             referringURL: prevUrl || document.referrer,
@@ -35,7 +39,7 @@ function useTrackTopic(topicKey) {
       });
       prevUrl = window.location.href;
     }
-  }, [i18n.language, topicKey]);
+  }, [i18n.language, activeTopic]);
 }
 
 export default useTrackTopic;

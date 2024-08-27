@@ -101,13 +101,16 @@ function SearchInfo({ anchorEl }) {
 
   const togglePopup = useCallback(() => {
     if (!searchInfoOpen) {
-      trackEvent({
-        eventType: "action",
-        componentName: "search info button",
-        label: t("Suche-Info"),
-        location: t(activeTopic?.name, { lng: "de" }),
-        variant: "Suche-Info",
-      });
+      trackEvent(
+        {
+          eventType: "action",
+          componentName: "search info button",
+          label: t("Suche-Info"),
+          location: t(activeTopic?.name, { lng: "de" }),
+          variant: "Suche-Info",
+        },
+        activeTopic,
+      );
     }
     dispatch(setSearchInfoOpen(!searchInfoOpen));
   }, [dispatch, searchInfoOpen, activeTopic, t]);

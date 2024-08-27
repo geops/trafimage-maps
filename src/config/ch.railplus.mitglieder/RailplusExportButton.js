@@ -30,7 +30,7 @@ function RailplusExportButton() {
       exportZoom={9.85}
       exportExtent={null}
       exportCoordinates={[center, center]}
-      trackingEventOptions={{ componentName: "maps control button" }}
+      trackingEventOptions={null}
     >
       <BtnCmpt />
     </ExportButton>
