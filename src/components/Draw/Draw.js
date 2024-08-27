@@ -39,6 +39,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const getTrackEventOptions = (activeTopic, t, opts) => ({
+  eventType: "action",
+  componentName: "edit button",
+  label: t("Neue Zeichnung"),
+  location: t(activeTopic?.name, { lng: "de" }),
+  variant: "Neue Zeichnung",
+  ...opts,
+});
+
 function Draw() {
   const classes = useStyles();
   const { t } = useTranslation();
@@ -61,12 +70,7 @@ function Draw() {
                 category: activeTopic?.key,
                 action: TRACK_NEW_DRAW_ACTION,
               });
-              trackEvent({
-                eventType: "action",
-                componentName: "secondary button",
-                label: t("Neue Zeichnung"),
-                variant: "Neue Zeichnung",
-              });
+              trackEvent(getTrackEventOptions(activeTopic, t));
             }}
           >
             <PencilAdd focusable={false} />
@@ -75,12 +79,12 @@ function Draw() {
             disabled={!drawIds}
             title={t("Zeichnung bearbeiten")}
             onClick={() => {
-              trackEvent({
-                eventType: "action",
-                componentName: "edit button",
-                label: t("Zeichnung bearbeiten"),
-                variant: "Zeichnung bearbeiten",
-              });
+              trackEvent(
+                getTrackEventOptions(activeTopic, t, {
+                  label: t("Zeichnung bearbeiten"),
+                  variant: "Zeichnung bearbeiten",
+                }),
+              );
             }}
           />
           <IconButton
