@@ -77,7 +77,7 @@ function Draw() {
             onClick={() => {
               trackEvent({
                 eventType: "action",
-                componentName: "secondary button",
+                componentName: "edit button",
                 label: t("Zeichnung bearbeiten"),
                 variant: "Zeichnung bearbeiten",
               });
