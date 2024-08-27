@@ -36,17 +36,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ExportButton({
-  exportFormat,
-  exportScale,
-  exportSize,
-  exportCoordinates,
-  exportZoom,
-  exportExtent,
-  exportCopyright,
-  children,
-  style,
-  id,
-  scaleLineConfig,
+  exportFormat = "a0",
+  exportScale = 1, // High res
+  exportSize = [3370, 2384], // a0
+  exportCoordinates = null,
+  exportZoom = null, // 10,
+  exportExtent = [620000, 5741000, 1200000, 6058000],
+  exportCopyright = false,
+  children = <DefaultChildren />,
+  style = {},
+  id = null,
+  scaleLineConfig = null,
+  trackingEventOptions = {},
 }) {
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
@@ -91,6 +92,7 @@ function ExportButton({
           value:
             getExportFileName?.(t, exportFormat, i18n.language) ||
             `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`,
+          ...trackingEventOptions,
         });
         setLoading(true);
         return getMapHd(
@@ -190,20 +192,16 @@ ExportButton.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
   }),
-};
-
-ExportButton.defaultProps = {
-  exportFormat: "a0",
-  exportScale: 1, // High res,
-  exportCoordinates: null,
-  exportZoom: null, // 10,
-  exportExtent: [620000, 5741000, 1200000, 6058000],
-  exportCopyright: false,
-  children: <DefaultChildren />,
-  exportSize: [3370, 2384], // a0
-  style: {},
-  id: null,
-  scaleLineConfig: null,
+  trackingEventOptions: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string,
+    label: PropTypes.string,
+    variant: PropTypes.string,
+    value: PropTypes.string,
+    eventType: PropTypes.string,
+    location: PropTypes.string,
+    componentName: PropTypes.string,
+  }),
 };
 
 export default React.memo(ExportButton);
