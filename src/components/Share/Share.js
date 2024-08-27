@@ -103,7 +103,6 @@ function ShareLink({
           trackMatomoEvent,
           title,
           t,
-          undefined,
         );
       }}
       data-testid={`wkp-share-${title.replace(/\s+/g, "-").toLowerCase()}`}
@@ -141,7 +140,6 @@ function Share() {
               trackMatomoEvent,
               "Permalink erstellen",
               t,
-              undefined,
             );
           },
         }}
