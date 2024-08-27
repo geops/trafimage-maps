@@ -147,13 +147,16 @@ class Map extends PureComponent {
       dispatchSetZoom(newZoom);
       dispatchUpdateDrawEditlink();
       if (zoomType) {
+        const isZoomingIn = zoom < newZoom;
+        let label = isZoomingIn ? t("Hineinzoomen") : t("Rauszoomen");
+        if (zoomType === "slider") label = undefined;
         trackEvent({
           eventType: "action",
           eventName: zoomType === "scroll" ? "scroll" : "click",
           componentName: zoomType,
-          label: zoom < newZoom ? t("Hineinzoomen") : t("Rauszoomen"),
+          label,
           location: t(activeTopic?.name, { lng: "de" }),
-          variant: zoom < newZoom ? "ZoomIn" : "ZoomOut",
+          variant: isZoomingIn ? "ZoomIn" : "ZoomOut",
         });
         dispatchSetZoomType(null);
       }
