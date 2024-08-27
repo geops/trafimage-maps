@@ -70,7 +70,7 @@ describe("Share", () => {
         category: "test",
       });
       expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch(
-        /Permalink erstellen/i,
+        /Permalink generieren/i,
       );
     });
 

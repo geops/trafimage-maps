@@ -138,7 +138,7 @@ function Share() {
               activeTopic,
               TRACK_SHARE_PERMALINK_ACTION,
               trackMatomoEvent,
-              "Permalink erstellen",
+              "Permalink generieren",
               t,
             );
           },
