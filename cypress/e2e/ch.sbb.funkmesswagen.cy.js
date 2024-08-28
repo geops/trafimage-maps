@@ -16,7 +16,7 @@ describe("Funkmesswagen topic", () => {
     // search
     cy.get(".wkp-search").should("exist");
     // telephoneInfos
-    cy.get(".wkp-tel-infos").should("exist");
+    cy.get('[data-testid="wkp-tel-infos"]').should("exist");
     // menu
     cy.get(".wkp-topics-menu").should("exist");
     // baseLayerSwitcher
