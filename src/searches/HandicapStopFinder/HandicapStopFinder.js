@@ -23,7 +23,7 @@ class HandicapStopFinder extends Search {
     const { signal } = this.abortController;
 
     return fetch(
-      `${this.stopsUrl}/?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
+      `${this.stopsUrl}/?&q=${encodeURIComponent(value)}&key=${this.apiKey}&limit=50`,
       {
         signal,
       },
