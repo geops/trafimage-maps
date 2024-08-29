@@ -1,19 +1,43 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { Box } from "@mui/material";
 
 function TopicTelephoneInfos() {
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
 
-  const { name } = activeTopic;
-
   return (
-    <div className="wkp-tel-infos" tabIndex={0} role="button">
-      {t("telephone_information", {
-        name: t(name),
+    <Box
+      sx={(theme) => ({
+        position: "absolute",
+        top: 110,
+        left: "50%",
+        transform: "translate(-50%, 0)",
+        zIndex: 1,
+        height: 0,
+        backgroundColor: "white",
+        overflow: "hidden",
+        [theme.breakpoints.down("lg")]: {
+          top: 65,
+        },
+        ".tm-barrier-free &": {
+          "&:focus": {
+            padding: 1.25, // themeSpacing (10px)
+            border: "2px solid #666",
+            height: "auto",
+          },
+        },
       })}
-    </div>
+      data-testid="wkp-tel-infos"
+      className="wkp-tel-infos"
+      tabIndex={0}
+      role="button"
+    >
+      {t("telephone_information", {
+        name: t(activeTopic?.name),
+      })}
+    </Box>
   );
 }
 
