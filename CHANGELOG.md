@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.13](https://github.com/geops/trafimage-maps/compare/v1.29.12...v1.29.13) (2024-08-29)
+
+### Bug Fixes
+
+- **handicap:** increase stop search results to 50, add further info to results ([#1187](https://github.com/geops/trafimage-maps/issues/1187)) ([6b1900a](https://github.com/geops/trafimage-maps/commit/6b1900a6447641b232cc2772fa7ce94932c76bff))
+- **telephone info:** add translations, use MUI component ([#1188](https://github.com/geops/trafimage-maps/issues/1188)) ([bb1d643](https://github.com/geops/trafimage-maps/commit/bb1d643a110a32db8020bf4cf50795dacb5fe03b))
+
 ### [1.29.12](https://github.com/geops/trafimage-maps/compare/v1.29.11...v1.29.12) (2024-08-15)
 
 ### Bug Fixes
