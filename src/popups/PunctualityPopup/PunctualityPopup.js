@@ -59,7 +59,7 @@ function PunctualityPopup({ feature, layer }) {
           timeInMs = 0;
         }
         const h = Math.floor(timeInMs / 3600000);
-        const m = (isArrival ? Math.round : Math.floor)(
+        const m = (isArrival ? Math.ceil : Math.floor)(
           (timeInMs % 3600000) / 60000,
         );
 
