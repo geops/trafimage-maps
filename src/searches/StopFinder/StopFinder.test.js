@@ -1,54 +1,65 @@
+import { render } from "@testing-library/react";
 import StopFinder from "./StopFinder";
 
 describe("StopFinder", () => {
   describe("#render()", () => {
     test("renders only the name", () => {
       const stopFinder = new StopFinder();
-      const rendered = stopFinder.render({ properties: { name: "name" } });
-      expect(rendered.props.children[0].props.children).toEqual("name");
-      expect(rendered.props.children[1]).toEqual(null);
+      const { getByText } = render(
+        stopFinder.render({ properties: { name: "name" } }),
+      );
+      expect(getByText("name")).toBeDefined();
     });
 
     test("renders the name and the municipality", () => {
       const stopFinder = new StopFinder();
-      const { children } = stopFinder.render({
-        properties: { name: "name", municipality_name: "foo" },
-      }).props;
-      expect(children[0].props.children).toEqual("name");
-      expect(children[1].props.children).toEqual("foo");
+      const { getByText } = render(
+        stopFinder.render({
+          properties: { name: "name", municipality_name: "foo" },
+        }),
+      );
+      expect(getByText("name")).toBeDefined();
+      expect(getByText("foo")).toBeDefined();
     });
 
     test("renders the name and the country code", () => {
       const stopFinder = new StopFinder();
-      const { children } = stopFinder.render({
-        properties: { name: "name", country_code: "bar" },
-      }).props;
-      expect(children[0].props.children).toEqual("name");
-      expect(children[1].props.children).toEqual("bar");
+      const { getByText } = render(
+        stopFinder.render({
+          properties: { name: "name", country_code: "bar" },
+        }),
+      );
+      expect(getByText("name")).toBeDefined();
+      expect(getByText("bar")).toBeDefined();
     });
 
     test("renders the name and the municipality and the country code", () => {
       const stopFinder = new StopFinder();
-      const { children } = stopFinder.render({
-        properties: {
-          name: "name",
-          municipality_name: "foo",
-          country_code: "bar",
-        },
-      }).props;
-      expect(children[0].props.children).toEqual("name");
-      expect(children[1].props.children).toEqual("foo (bar)");
+      const { getByText } = render(
+        stopFinder.render({
+          properties: {
+            name: "name",
+            municipality_name: "foo",
+            country_code: "bar",
+          },
+        }),
+      );
+      expect(getByText("name")).toBeDefined();
+      expect(getByText("foo (bar)")).toBeDefined();
     });
 
     test("renders the international vehicle registration code instead of the ISO country code", () => {
       const stopFinder = new StopFinder();
-      const { children } = stopFinder.render({
-        properties: {
-          name: "name",
-          country_code: "DE",
-        },
-      }).props;
-      expect(children[1].props.children).toBe("D");
+      const { getByText } = render(
+        stopFinder.render({
+          properties: {
+            name: "name",
+            country_code: "DE",
+          },
+        }),
+      );
+      expect(getByText("name")).toBeDefined();
+      expect(getByText("D")).toBeDefined();
     });
   });
 });

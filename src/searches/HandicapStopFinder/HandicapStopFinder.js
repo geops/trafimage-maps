@@ -1,9 +1,9 @@
 import React from "react";
-import { Typography } from "@mui/material";
 import { fromLonLat } from "ol/proj";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import Search from "../Search";
 import { HANDICAP_SOURCE } from "../../utils/constants";
+import StopSearchResult from "../../components/StopSearchResult";
 
 class HandicapStopFinder extends Search {
   constructor() {
@@ -23,7 +23,7 @@ class HandicapStopFinder extends Search {
     const { signal } = this.abortController;
 
     return fetch(
-      `${this.stopsUrl}/?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
+      `${this.stopsUrl}/?&q=${encodeURIComponent(value)}&key=${this.apiKey}&limit=50`,
       {
         signal,
       },
@@ -38,11 +38,7 @@ class HandicapStopFinder extends Search {
   }
 
   render(item) {
-    return (
-      <div className="wkp-search-suggestion">
-        <Typography>{item.properties.name}</Typography>
-      </div>
-    );
+    return <StopSearchResult properties={item?.properties} />;
   }
 
   // eslint-disable-next-line class-methods-use-this
