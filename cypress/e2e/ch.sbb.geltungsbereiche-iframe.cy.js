@@ -13,7 +13,7 @@ describe("Geltungsbereiche iframe topic", () => {
     // search
     cy.get(".wkp-search").should("not.exist");
     // telephoneInfos
-    cy.get(".wkp-tel-infos").should("not.exist");
+    cy.get('[data-testid="wkp-tel-infos"]').should("not.exist");
     // menu
     cy.get(".wkp-topics-menu").should("not.exist");
     // baseLayerSwitcher

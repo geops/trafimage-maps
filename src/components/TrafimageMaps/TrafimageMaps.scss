@@ -259,10 +259,6 @@
       }
     }
 
-    .wkp-tel-infos {
-      top: 65px;
-    }
-
     /* topics menu component is enabled */
     &.menu .wkp-menu-wrapper {
       top: 55px;
@@ -375,6 +371,7 @@
       /* Multiline overflow ellipsis */
       display: -webkit-box;
       -webkit-line-clamp: 3;
+      line-clamp: 3;
       -webkit-box-orient: vertical;
     }
   }
