@@ -137,8 +137,8 @@ function Search() {
                     eventType: "action",
                     componentName: "search input",
                     label: t("Suche starten"),
+                    location: t(activeTopic?.name, { lng: "de" }),
                     variant: "Suche starten",
-                    eventName: e.type,
                   },
                   activeTopic,
                 );

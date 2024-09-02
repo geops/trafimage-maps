@@ -153,7 +153,6 @@ class Map extends PureComponent {
         trackEvent(
           {
             eventType: "action",
-            eventName: zoomType === "scroll" ? "scroll" : "click",
             componentName: zoomType,
             label,
             location: t(activeTopic?.name, { lng: "de" }),

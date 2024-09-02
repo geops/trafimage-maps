@@ -78,7 +78,7 @@ function LanguageSelect() {
       );
       dispatch(setLanguage(opt.target.value));
     },
-    [dispatch, t, activeTopic],
+    [t, activeTopic, dispatch],
   );
 
   const langOptions = useMemo(() => {

@@ -165,7 +165,7 @@ function TopicElements({ history }) {
     [dispatch],
   );
 
-  useTrackTopic(activeTopic);
+  useTrackTopic();
 
   if (!activeTopic) {
     return null;

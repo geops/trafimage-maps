@@ -13,11 +13,8 @@ function useTrackTopic() {
     if (!activeTopic || activeTopic?.noTracking) return;
     const env = getTrackingEnv();
     const isIframe = window !== window.parent;
-    const trackTopicPending = !window.digitalDataLayer?.find(
-      (evt) => "pageInstanceID" in evt,
-    );
 
-    if (trackTopicPending && env && i18n.language && activeTopic.key) {
+    if (env && i18n.language && activeTopic.key) {
       window.digitalDataLayer = window.digitalDataLayer || [];
       window.digitalDataLayer.push({
         pageInstanceID: env === "prod" ? "584988" : "584988", // For now the prod and stag IDs are the same
