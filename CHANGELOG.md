@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.14](https://github.com/geops/trafimage-maps/compare/v1.29.13...v1.29.14) (2024-08-30)
+
+### Bug Fixes
+
+- ceil the arrival delay and floor the departure delay ([#1189](https://github.com/geops/trafimage-maps/issues/1189)) ([189ae7b](https://github.com/geops/trafimage-maps/commit/189ae7b05225b2c2aa232dfdcd72056c6b47ef33))
+
 ### [1.29.13](https://github.com/geops/trafimage-maps/compare/v1.29.12...v1.29.13) (2024-08-29)
 
 ### Bug Fixes
