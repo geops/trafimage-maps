@@ -6,7 +6,7 @@ export function getTrackingEnv() {
   if (hostname === "maps.trafimage.ch") {
     return "prod";
   }
-  return null;
+  return "stag";
 }
 
 export function getTrackingLaunchScriptSrc() {
@@ -19,6 +19,36 @@ export function getTrackingLaunchScriptSrc() {
   }
   return null;
 }
+
+let prevUrl;
+
+export const trackTopic = (activeTopic, language) => {
+  const env = getTrackingEnv();
+  const isIframe = window !== window.parent;
+
+  if (env && activeTopic?.key) {
+    window.digitalDataLayer = window.digitalDataLayer || [];
+    window.digitalDataLayer.push({
+      pageInstanceID: env === "prod" ? "584988" : "584988", // For now the prod and stag IDs are the same
+      page: {
+        pageInfo: {
+          pageName: activeTopic.key,
+          destinationURL: window.location.href,
+          destinationURI: window.location.pathname,
+          referringURL: prevUrl || document.referrer,
+          parentLocation: isIframe ? document.referrer : "",
+          sysEnv: env === "prod" ? "production" : "integration",
+          language,
+        },
+        category: { primaryCategory: "maps.trafimage.ch" },
+      },
+    });
+    window.digitalDataLayer.push({
+      event: { eventInfo: { eventName: "page data layer ready" } },
+    });
+    prevUrl = window.location.href;
+  }
+};
 
 export function trackEvent(
   { componentName, componentPosition = 1, ...eventInfo },

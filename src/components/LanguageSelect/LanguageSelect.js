@@ -7,7 +7,7 @@ import Select from "../Select";
 import { setLanguage } from "../../model/app/actions";
 import { ReactComponent as SBBGlobe } from "../../img/sbb/globe_210_large.svg";
 import useHasScreenSize from "../../utils/useHasScreenSize";
-import { trackEvent } from "../../utils/trackingUtils";
+import { trackEvent, trackTopic } from "../../utils/trackingUtils";
 
 const optionsDesktop = [
   { label: "Deutsch", value: "de" },
@@ -66,6 +66,7 @@ function LanguageSelect() {
 
   const onSelectChange = useCallback(
     (opt) => {
+      trackTopic(activeTopic, opt.target.value);
       trackEvent(
         {
           eventType: "action",

@@ -23,6 +23,7 @@ import {
 import SearchService from "../Search/SearchService";
 import TopicElements from "../TopicElements";
 import { redirect, redirectToLogin } from "../../utils/redirectHelper";
+import { trackTopic } from "../../utils/trackingUtils";
 
 const propTypes = {
   history: PropTypes.shape({
@@ -122,6 +123,7 @@ class TopicLoader extends PureComponent {
       permissionInfos !== prevProps.permissionInfos
     ) {
       this.loadTopics(prevProps);
+      trackTopic(activeTopic, language);
     } else if (
       activeTopic?.key !== prevProps.activeTopic?.key ||
       (activeTopic &&
