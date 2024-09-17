@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.1](https://github.com/geops/trafimage-maps/compare/v1.30.0...v1.30.1) (2024-09-17)
+
+### Bug Fixes
+
+- **tracking:** update tracking script URLs ([#1190](https://github.com/geops/trafimage-maps/issues/1190)) ([059abc4](https://github.com/geops/trafimage-maps/commit/059abc4c0ea08798f027e25b10251c70eb7d2065))
+
 ## [1.30.0](https://github.com/geops/trafimage-maps/compare/v1.29.14...v1.30.0) (2024-09-17)
 
 ### Features
