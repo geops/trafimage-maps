@@ -12,10 +12,10 @@ export function getTrackingEnv() {
 export function getTrackingLaunchScriptSrc() {
   const env = getTrackingEnv();
   if (env === "stag") {
-    return "https://assets.adobedtm.com/15ff638fdec4/4c38131c34e1/launch-796133f166e5-development.min.js";
+    return "https://assets.adobedtm.com/15ff638fdec4/97b4268d6157/launch-27b9efc6a00a-development.min.js";
   }
   if (env === "prod") {
-    return "https://assets.adobedtm.com/15ff638fdec4/4c38131c34e1/launch-02c7e7b710c9.min.js";
+    return "https://assets.adobedtm.com/15ff638fdec4/97b4268d6157/launch-6d0c92e1ddbe.min.js";
   }
   return null;
 }
