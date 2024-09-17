@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function TarifverbundPartner({ color, label, iconSize, style }) {
+function TarifverbundPartner({ color, label, iconSize, style, children }) {
   const classes = useStyles({ iconSize });
   return (
     <div
@@ -35,14 +35,15 @@ function TarifverbundPartner({ color, label, iconSize, style }) {
         }
         data-testid={`tarifverbund-partner-${label}-color`}
       />
-      {label}
+      {children || label}
     </div>
   );
 }
 
 TarifverbundPartner.propTypes = {
   color: PropTypes.string,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  label: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   style: PropTypes.shape(),
   iconSize: PropTypes.number,
 };
@@ -50,6 +51,7 @@ TarifverbundPartner.propTypes = {
 TarifverbundPartner.defaultProps = {
   color: null,
   style: null,
+  children: null,
   iconSize: 15,
 };
 

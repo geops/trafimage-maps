@@ -18,6 +18,7 @@ import {
   TRACK_SHARE_TW_ACTION,
 } from "../../utils/constants";
 import { generateExtraData } from "../../utils/exportUtils";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const socialShareConfig = [
   {
@@ -25,21 +26,21 @@ const socialShareConfig = [
     title: "Per Email versenden",
     children: <FaEnvelope focusable={false} style={{ fontSize: 23 }} />,
     className: "ta-mail-icon",
-    trackEventAction: TRACK_SHARE_MAIL_ACTION,
+    trackMatomoEventAction: TRACK_SHARE_MAIL_ACTION,
   },
   {
     url: "//www.facebook.com/sharer.php?u={url}",
     title: "Auf Facebook teilen",
     children: <TiSocialFacebook focusable={false} style={{ fontSize: 28 }} />,
     className: "ta-facebook-icon",
-    trackEventAction: TRACK_SHARE_FB_ACTION,
+    trackMatomoEventAction: TRACK_SHARE_FB_ACTION,
   },
   {
     url: "//twitter.com/intent/tweet?url={url}",
     title: "Auf X teilen",
     children: <RiTwitterXLine focusable={false} style={{ fontSize: 22 }} />,
     className: "ta-x-icon",
-    trackEventAction: TRACK_SHARE_TW_ACTION,
+    trackMatomoEventAction: TRACK_SHARE_TW_ACTION,
   },
 ];
 
@@ -50,26 +51,64 @@ const replaceParams = (url, language, appBaseUrl) => {
     .replace("{appBaseUrl}", appBaseUrl);
 };
 
-function ShareLink({ url, title, trackEventAction, children, ...props }) {
+function handleTracking(
+  topic,
+  matomoCategory,
+  matomoTrackFunc,
+  title,
+  t,
+  action = "action",
+  variant,
+  value,
+) {
+  matomoTrackFunc({
+    category: topic?.key,
+    action: matomoCategory,
+  });
+  trackEvent(
+    {
+      eventType: action,
+      componentName: "share button",
+      label: t(title),
+      location: t(topic?.name, { lng: "de" }),
+      variant: variant || t(title, { lng: "de" }),
+      value,
+    },
+    topic,
+  );
+}
+
+function ShareLink({
+  url,
+  title,
+  children,
+  className,
+  trackMatomoEventAction,
+  ...props
+}) {
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const language = useSelector((state) => state.app.language);
   const { t } = useTranslation();
-  const { trackEvent } = useMatomo();
+  const { trackEvent: trackMatomoEvent } = useMatomo();
+
   return (
     <IconButton
+      className={className}
       href={replaceParams(url, language, appBaseUrl)}
       title={t(title)}
       target="_blank"
       tabIndex={0}
       onClick={() => {
-        if (trackEventAction) {
-          trackEvent({
-            category: activeTopic?.key,
-            action: trackEventAction,
-          });
-        }
+        handleTracking(
+          activeTopic,
+          trackMatomoEventAction,
+          trackMatomoEvent,
+          title,
+          t,
+        );
       }}
+      data-testid={`wkp-share-${title.replace(/\s+/g, "-").toLowerCase()}`}
       {...props}
     >
       {children}
@@ -78,10 +117,12 @@ function ShareLink({ url, title, trackEventAction, children, ...props }) {
 }
 
 ShareLink.propTypes = {
+  className: PropTypes.string,
   url: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   trackEventAction: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  trackMatomoEventAction: PropTypes.string,
 };
 
 function Share() {
@@ -89,17 +130,20 @@ function Share() {
   const layers = useSelector((state) => state.map.layers);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const { t } = useTranslation();
-  const { trackEvent } = useMatomo();
+  const { trackEvent: trackMatomoEvent } = useMatomo();
 
   return (
     <div className="wkp-share">
       <SharePermalinkButton
         buttonProps={{
           onClick: () => {
-            trackEvent({
-              category: activeTopic?.key,
-              action: TRACK_SHARE_PERMALINK_ACTION,
-            });
+            handleTracking(
+              activeTopic,
+              TRACK_SHARE_PERMALINK_ACTION,
+              trackMatomoEvent,
+              "Permalink generieren",
+              t,
+            );
           },
         }}
       />
@@ -108,10 +152,16 @@ function Share() {
         map={map}
         extraData={generateExtraData(layers)}
         onSaveStart={(mapp) => {
-          trackEvent({
-            category: activeTopic?.key,
-            action: TRACK_SHARE_DL_ACTION,
-          });
+          handleTracking(
+            activeTopic,
+            TRACK_SHARE_DL_ACTION,
+            trackMatomoEvent,
+            "Karte als Bild speichern",
+            t,
+            "download",
+            "PNG export",
+            `${window.document.title.replace(/ /g, "_").toLowerCase()}.png`,
+          );
           return Promise.resolve(mapp);
         }}
       >

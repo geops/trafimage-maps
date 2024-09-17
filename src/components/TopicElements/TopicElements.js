@@ -24,6 +24,7 @@ import TopicTelephoneInfos from "../TopicTelephoneInfos";
 import TopicsMenu from "../TopicsMenu";
 import Overlay from "../Overlay";
 import { ReactComponent as ChevronLeft } from "../../img/chevronLeft.svg";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const defaultElements = {
   header: false,
@@ -220,6 +221,20 @@ function TopicElements({ history }) {
             layerImages={baseLayerImages}
             closeButtonImage={<ChevronLeft />}
             t={t}
+            onLayerButtonClick={(e, layer) => {
+              if (layer) {
+                trackEvent(
+                  {
+                    eventType: "action",
+                    componentName: "layer switch button",
+                    label: t(layer.key),
+                    location: t(activeTopic.name, { lng: "de" }),
+                    variant: t(layer.name || layer.key, { lng: "de" }),
+                  },
+                  activeTopic,
+                );
+              }
+            }}
           />
         )}
         <Menu>

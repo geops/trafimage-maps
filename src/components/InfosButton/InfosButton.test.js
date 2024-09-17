@@ -10,6 +10,12 @@ import { setSelectedForInfos } from "../../model/app/actions";
 
 describe("InfosButton", () => {
   let store;
+  delete global.window.location;
+  global.window = Object.create(window);
+  global.window.location = { hostname: "wkp-dev.foo" };
+  beforeEach(() => {
+    window.digitalDataLayer = [];
+  });
 
   test("renders not selected info button  ", () => {
     const info = { key: "foo" };
@@ -84,5 +90,35 @@ describe("InfosButton", () => {
     expect(container.querySelector("button").className).not.toMatch(
       "wkp-selected",
     );
+  });
+
+  test("track click event on topic info button", async () => {
+    const user = userEvent.setup();
+    const info = { key: "foo" };
+    store = getStore();
+    store.dispatch(setSelectedForInfos(info));
+    const { container } = render(
+      <Provider store={store}>
+        <InfosButton selectedInfo={info} />
+      </Provider>,
+    );
+    await user.click(container.querySelector("button"));
+    expect(window.digitalDataLayer[0].event.eventInfo.label).toMatch("foo");
+    expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch("Topic");
+  });
+
+  test("track click event on layer info button", async () => {
+    const user = userEvent.setup();
+    const info = { key: "bar", get: () => {} };
+    store = getStore();
+    store.dispatch(setSelectedForInfos(info));
+    const { container } = render(
+      <Provider store={store}>
+        <InfosButton selectedInfo={info} />
+      </Provider>,
+    );
+    await user.click(container.querySelector("button"));
+    expect(window.digitalDataLayer[0].event.eventInfo.label).toMatch("bar");
+    expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch("Layer");
   });
 });

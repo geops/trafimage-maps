@@ -10,6 +10,7 @@ import {
   SET_MAX_EXTENT,
   SET_MAX_ZOOM,
   SET_MIN_ZOOM,
+  SET_ZOOM_TYPE,
 } from "./actions";
 
 const highlightLayer = new VectorLayer({
@@ -64,6 +65,11 @@ export default function app(state = initialState, action) {
       return {
         ...state,
         zoom: action.data,
+      };
+    case SET_ZOOM_TYPE:
+      return {
+        ...state,
+        zoomType: action.data,
       };
     case SET_MAX_EXTENT:
       if (!action.data) {

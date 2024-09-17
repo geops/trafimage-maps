@@ -443,6 +443,7 @@ export const railPlus = {
     menu: false,
   },
   key: "ch.railplus.mitglieder",
+  name: "ch.railplus.mitglieder",
   layers: railPlusLayers,
   only: true,
   hideInLayerTree: true,
@@ -468,6 +469,7 @@ export const railPlus = {
   },
   minZoom: 7,
   maxZoom: 13,
+  noTracking: true,
 };
 
 export const messwagen = {

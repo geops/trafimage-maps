@@ -23,6 +23,7 @@ import {
 import SearchService from "../Search/SearchService";
 import TopicElements from "../TopicElements";
 import { redirect, redirectToLogin } from "../../utils/redirectHelper";
+import { trackTopic } from "../../utils/trackingUtils";
 
 const propTypes = {
   history: PropTypes.shape({
@@ -109,7 +110,6 @@ class TopicLoader extends PureComponent {
       layers,
       language,
     } = this.props;
-
     // Sometimes the array object is different but the content is the same as before.
     const areTopicsReallyUpdated =
       topics?.map((t) => `${t.key}`).join() !==
@@ -123,6 +123,7 @@ class TopicLoader extends PureComponent {
       permissionInfos !== prevProps.permissionInfos
     ) {
       this.loadTopics(prevProps);
+      trackTopic(activeTopic, language);
     } else if (
       activeTopic?.key !== prevProps.activeTopic?.key ||
       (activeTopic &&

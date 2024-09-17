@@ -41,7 +41,7 @@ function ExportResolutionSelect({ options, className }) {
   if (!exportPrintOptions || !value) return null;
 
   return (
-    <FormControl fullWidth className={className}>
+    <FormControl className={className}>
       <InputLabel className={classes.label}>{t("Format")}</InputLabel>
       <Select
         id="pdf-format-select-label"
