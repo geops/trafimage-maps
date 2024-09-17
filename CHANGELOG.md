@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.30.0](https://github.com/geops/trafimage-maps/compare/v1.29.14...v1.30.0) (2024-09-17)
+
+### Features
+
+- **tracking:** add SBB tracking for topics and component events ([#1177](https://github.com/geops/trafimage-maps/issues/1177)) ([0de52e2](https://github.com/geops/trafimage-maps/commit/0de52e247ab0f8e6998c35247ff705e1a8fc4ccd))
+
+### Bug Fixes
+
+- remove use of polyfill.io ([cb5a8d7](https://github.com/geops/trafimage-maps/commit/cb5a8d7be843344474134ce911f30d3c814d1052))
+
 ### [1.29.14](https://github.com/geops/trafimage-maps/compare/v1.29.13...v1.29.14) (2024-08-30)
 
 ### Bug Fixes
