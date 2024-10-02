@@ -25,7 +25,7 @@ function RailplusExportButton() {
     <ExportButton
       id={RAILPLUS_EXPORTBTN_ID}
       exportFormat="a0"
-      exportScale={2}
+      exportScale={3}
       exportSize={[3370, 2384]}
       exportZoom={9.85}
       exportExtent={null}
