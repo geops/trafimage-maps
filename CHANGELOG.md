@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.2](https://github.com/geops/trafimage-maps/compare/v1.30.1...v1.30.2) (2024-10-02)
+
+### Bug Fixes
+
+- **RailplusExportButton:** increase export quality ([3ec4256](https://github.com/geops/trafimage-maps/commit/3ec4256ace358cdbdb0a7417911d5de2776a5034))
+
 ### [1.30.1](https://github.com/geops/trafimage-maps/compare/v1.30.0...v1.30.1) (2024-09-17)
 
 ### Bug Fixes
