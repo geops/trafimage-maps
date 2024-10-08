@@ -3,7 +3,10 @@ export function getTrackingEnv() {
   if (hostname?.includes("dev") || hostname?.includes("stag")) {
     return "stag";
   }
-  if (hostname === "maps.trafimage.ch" || hostname === "trafimage-maps.sbb.ch") {
+  if (
+    hostname === "maps.trafimage.ch" ||
+    hostname === "trafimage-maps.sbb.ch"
+  ) {
     return "prod";
   }
   return null;
