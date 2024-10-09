@@ -19,7 +19,21 @@ const comps = {
         Schweiz <br />
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
+      </p>
+
+      <p>
+        <b>
+          Betrieb, Wartung und Weiterentwicklung der Trafimage-Anwendungen,
+          Datenintegration.
+        </b>
+        <br />
+        geOps AG
+        <br />
+        Solothurnerstrasse 235
+        <br />
+        CH-4600 Olten
+        <br />
+        <a href="http://www.geops.ch">www.geops.ch</a>
         <br />
       </p>
 
@@ -37,83 +51,9 @@ const comps = {
       </p>
 
       <p>
-        <b>
-          IT-Koordination, Daten öffentlicher Verkehr, Webkarten, Betrieb
-          Geodateninfrastruktur.
-        </b>
-        <br />
-        geOps AG
-        <br />
-        Solothurnerstrasse 235
-        <br />
-        CH-4600 Olten
-        <br />
-        <a href="http://www.geops.ch">www.geops.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>CAAD und Workspace Bahnhofpläne.</b>
-        <br />
-        multipol
-        <br />
-        Luegislandstrasse 105
-        <br />
-        CH-8051 Zürich
-        <br />
-        <a href="http://www.multipol.ch">www.multipol.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>Datenbereitstellung.</b>
-        <br />
-        Bundesamt für Landestopografie swisstopo
-        <br />
-        KOGIS (Koordination, Geoinformation und Services)
-        <br />
-        Seftigenstrasse 264
-        <br />
-        CH-3084 Wabern
-        <br />
-        <a href="http://www.geo.admin.ch">www.geo.admin.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>Verantwortlich für die Inhalte der Webkarten:</b>
-      </p>
-
-      <p>
-        <b className="ng-binding">öV-Netzkarte Schweiz.</b>
-        <br />
-        Fachbus Trafimage, Daniel Hofstetter,{" "}
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">Bauprojekte Bahninfrastruktur.</b>
-        <br />
-        Kommunikation SBB Infrastruktur,{" "}
-        <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
-          Kommunikation-Infrastruktur@sbb.ch
-        </a>
-      </p>
-      <p>
-        <b className="ng-binding">Eisenbahninfrastruktur Schweiz.</b>
-        <br />
-        Fachbus Trafimage, Daniel Hofstetter,{" "}
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">Koordinatoren Bahnnahes Bauen.</b>
-        <br />
-        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,{" "}
-        <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">Tarifverbundkarte.</b>
-        <br />
-        SBB Personenverkehr – Marketing – Konzeption Regional/International
+        <b>Verantwortlich für die Inhalte der Webkarten:</b> Die Zuständigkeit
+        und der Kontakt für die einzelnen Kartenthemen wird unter dem Info-„i“
+        zum jeweiligen Thema angegeben (Menu ausklappen).
       </p>
     </div>
   ),
@@ -136,7 +76,21 @@ const comps = {
         <br />
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
-        <a href="mailto:trafimage@cff.ch">trafimage@cff.ch</a>
+      </p>
+
+      <p>
+        <b>
+          Exploitation, maintenance et développement des applications Trafimage,
+          intégration des données.
+        </b>
+        <br />
+        geOps AG
+        <br />
+        Solothurnerstrasse 235
+        <br />
+        CH-4600 Olten
+        <br />
+        <a href="http://www.geops.ch">www.geops.ch</a>
         <br />
       </p>
 
@@ -154,87 +108,9 @@ const comps = {
       </p>
 
       <p>
-        <b>
-          Coordination IT, données du transports publics, cartes virtuelles,
-          exploitation de leur infrastructure.
-        </b>
-        <br />
-        geOps AG
-        <br />
-        Solothurnerstrasse 235
-        <br />
-        CH-4600 Olten
-        <br />
-        <a href="http://www.geops.ch">www.geops.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>CAD et Workspace aux plans de gare.</b>
-        <br />
-        multipol
-        <br />
-        Luegislandstrasse 105
-        <br />
-        CH-8051 Zürich
-        <br />
-        <a href="http://www.multipol.ch">www.multipol.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>Mise à disposition des données.</b>
-        <br />
-        Office fédéral de topographie (swisstopo)
-        <br />
-        COSIG (Coordination, Services et Informations géographiques)
-        <br />
-        Seftigenstrasse 264
-        <br />
-        CH-3084 Wabern
-        <br />
-        <a href="http://www.geo.admin.ch">www.geo.admin.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>Responsables des contenus des cartes Web:</b>
-      </p>
-
-      <p>
-        <b className="ng-binding">Carte du réseau des TP suisses.</b>
-        <br />
-        Fachbus Trafimage, Daniel Hofstetter,{" "}
-        <a href="mailto:trafimage@cff.ch">trafimage@cff.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">
-          Projet de construction de l&apos;infrastructure ferroviaire.
-        </b>
-        <br />
-        Communication CFF Infrastructure,{" "}
-        <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
-          Kommunikation-Infrastruktur@sbb.ch
-        </a>
-      </p>
-      <p>
-        <b className="ng-binding">Infrastructure ferroviaire suisse.</b>
-        <br />
-        Fachbus Trafimage, Daniel Hofstetter,{" "}
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">
-          Coordinateurs travaux à proximité des voies.
-        </b>
-        <br />
-        CFF Infrastructure, Installations &amp; Technologie, Surveillance,{" "}
-        <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">Carte des Communautés tarifaires.</b>
-        <br />
-        CFF Voyageurs – Marketing – Conception régional/international
+        <b>Responsables des contenus des cartes Web:</b> La compétence et le
+        contact pour chaque thème de la carte sont indiqués sous le « i »
+        d&apos;information du thème en question (déplier le menu).
       </p>
     </div>
   ),
@@ -257,7 +133,21 @@ const comps = {
         <br />
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
+      </p>
+
+      <p>
+        <b>
+          Operation, maintenance and further development of the Trafimage
+          applications, data integration.
+        </b>
+        <br />
+        geOps AG
+        <br />
+        Solothurnerstrasse 235
+        <br />
+        CH-4600 Olten
+        <br />
+        <a href="http://www.geops.ch">www.geops.ch</a>
         <br />
       </p>
 
@@ -275,87 +165,9 @@ const comps = {
       </p>
 
       <p>
-        <b>
-          IT Coordination, data of public transport, web maps, operation of the
-          geodata infrastructure.
-        </b>
-        <br />
-        geOps AG
-        <br />
-        Solothurnerstrasse 235
-        <br />
-        CH-4600 Olten
-        <br />
-        <a href="http://www.geops.ch">www.geops.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>CAAD and Workspace station plans.</b>
-        <br />
-        multipol
-        <br />
-        Luegislandstrasse 105
-        <br />
-        CH-8051 Zürich
-        <br />
-        <a href="http://www.multipol.ch">www.multipol.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>Data provision.</b>
-        <br />
-        Federal Office of Topography (swisstopo)
-        <br />
-        KOGIS (Coordination, geographical information and services)
-        <br />
-        Seftigenstrasse 264
-        <br />
-        CH-3084 Wabern
-        <br />
-        <a href="http://www.geo.admin.ch">www.geo.admin.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>Responsibility for the content of the web maps:</b>
-      </p>
-
-      <p>
-        <b className="ng-binding">Swiss public transport network map.</b>
-        <br />
-        Trafimage System Manager Daniel Hofstetter,{" "}
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">
-          Railway infrastructure construction projects.
-        </b>
-        <br />
-        Communications at SBB Infrastructure,{" "}
-        <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
-          Kommunikation-Infrastruktur@sbb.ch
-        </a>
-      </p>
-      <p>
-        <b className="ng-binding">Railway infrastructure in Switzerland.</b>
-        <br />
-        Fachbus Trafimage, Daniel Hofstetter,{" "}
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">
-          Coordinators for construction work near railways.
-        </b>
-        <br />
-        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,{" "}
-        <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">Fare networks map.</b>
-        <br />
-        SBB Passenger Traffic – Marketing – Conception regional/international
+        <b>Responsibility for the content of the web maps:</b> The
+        responsibility and contact for the individual map topics is indicated
+        under the info ‘i’ for the respective topic (expand menu).
       </p>
     </div>
   ),
@@ -378,7 +190,21 @@ const comps = {
         <br />
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
-        <a href="mailto:trafimage@ffs.ch">trafimage@ffs.ch</a>
+      </p>
+
+      <p>
+        <b>
+          Gestione, manutenzione e ulteriore sviluppo delle applicazioni
+          Trafimage, integrazione dei dati.
+        </b>
+        <br />
+        geOps AG
+        <br />
+        Solothurnerstrasse 235
+        <br />
+        CH-4600 Olten
+        <br />
+        <a href="http://www.geops.ch">www.geops.ch</a>
         <br />
       </p>
 
@@ -396,89 +222,9 @@ const comps = {
       </p>
 
       <p>
-        <b>
-          Coordinamento IT, dati sul trasporto pubblico, cartine web, gestione
-          dell&apos;infrastruttura geodati.
-        </b>
-        <br />
-        geOps AG
-        <br />
-        Solothurnerstrasse 235
-        <br />
-        CH-4600 Olten
-        <br />
-        <a href="http://www.geops.ch">www.geops.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>CAAD e Workspace piani delle stazioni.</b>
-        <br />
-        multipol
-        <br />
-        Luegislandstrasse 105
-        <br />
-        CH-8051 Zürich
-        <br />
-        <a href="http://www.multipol.ch">www.multipol.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>Diffusione dati.</b>
-        <br />
-        Ufficio federale di topografia swisstopo
-        <br />
-        COSIG (Coordinazione, Servizi e Informazioni Geografiche)
-        <br />
-        Seftigenstrasse 264
-        <br />
-        CH-3084 Wabern
-        <br />
-        <a href="http://www.geo.admin.ch">www.geo.admin.ch</a>
-        <br />
-      </p>
-
-      <p>
-        <b>Responsabilità per i contenuti delle cartine:</b>
-      </p>
-
-      <p>
-        <b className="ng-binding">
-          Carta di rete dei trasporti pubblici svizzeri.
-        </b>
-        <br />
-        Fachbus Trafimage, Daniel Hofstetter,{" "}
-        <a href="mailto:trafimage@ffs.ch">trafimage@ffs.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">
-          Progetti di costruzione dell&apos;infrastruttura ferroviaria.
-        </b>
-        <br />
-        Comunicazione FFS Infrastruttura,{" "}
-        <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
-          Kommunikation-Infrastruktur@sbb.ch
-        </a>
-      </p>
-      <p>
-        <b className="ng-binding">Infrastruttura ferroviaria Svizzera.</b>
-        <br />
-        Fachbus Trafimage, Daniel Hofstetter,{" "}
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">
-          Coordinatori Costruzioni in prossimità della ferrovia.
-        </b>
-        <br />
-        FFS Infrastruttura, Impianti&amp;Tecnologia, Sorveglianza,{" "}
-        <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
-      </p>
-      <p>
-        <b className="ng-binding">Carta delle comunità tariffarie.</b>
-        <br />
-        FFS Viaggiatori – Marketing – Concezione regionale/internazionale
+        <b>Responsabilità per i contenuti delle cartine:</b> La responsabilità e
+        i contatti per i singoli argomenti della mappa sono indicati sotto la
+        “i” del rispettivo argomento (menu di espansione).
       </p>
     </div>
   ),
