@@ -24,16 +24,14 @@ const comps = {
         die zuletzt besuchte Seite, der verwendete Browser, Datum, Uhrzeit etc.
         gespeichert und mit Matomo («
         <a href="http://matomo.org/">Matomo</a>
+        ») und Piano («
+        <a href="https://www.piano.io/">Piano</a>
         ») anonymisiert ausgewertet.
       </p>
       Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um
       Informationen für den internen Gebrauch gemäss &quot;R K 400.16
       Informationsklassifizierung.&quot; und &quot;R K 040.1 Konzernweisung
-      Datenschutz. &quot; (siehe{" "}
-      <a href="http://intranet.sbb.ch/de/Themen/Sicherheit/Alle/IT-Security/Seiten/Klassifikation.aspx">
-        SBB-Intranet
-      </a>
-      ).
+      Datenschutz. &quot;.
       <p />
       <p>
         <b>Erscheinungsbild von Trafimage.</b>
@@ -59,15 +57,15 @@ const comps = {
         Karten und Pläne bzw. Ausschnitte davon und Informationen für private
         Zwecke herunterzuladen, abzuspeichern, auszudrucken oder auf andere
         Weise zu vervielfältigen sofern weder der Copyrightvermerke &quot;©
-        SBB/CFF/FSS, Geodaten: © OpenStreetMap contributors, © swisstopo
-        (5704003351) &quot; noch andere gesetzlich geschützte Bezeichnungen
-        entfernt werden. Sämtliche Eigentums- bzw. Nutzungsrechte verbleiben bei
-        der SBB (Kartenbild) und bei der swisstopo (Kartengrundlagen). Sie
-        können diese Zustimmung jederzeit widerrufen. Jegliche weitere Nutzung
-        (vollständig oder teilweise), Übermittlung (elektronisch oder mit
-        anderen Mitteln), Modifikation, Verknüpfung oder Benutzung der in den
-        Websites enthaltenen Geobasisdaten ist nur mit vorheriger schriftlicher
-        Einwilligung von SBB und swisstopo gestattet.
+        SBB/CFF/FSS, Geodaten: © OpenStreetMap contributors, © swisstopo&quot;
+        noch andere gesetzlich geschützte Bezeichnungen entfernt werden.
+        Sämtliche Eigentums- bzw. Nutzungsrechte verbleiben bei der SBB
+        (Kartenbild) und bei der swisstopo (Kartengrundlagen). Sie können diese
+        Zustimmung jederzeit widerrufen. Jegliche weitere Nutzung (vollständig
+        oder teilweise), Übermittlung (elektronisch oder mit anderen Mitteln),
+        Modifikation, Verknüpfung oder Benutzung der in den Websites enthaltenen
+        Geobasisdaten ist nur mit vorheriger schriftlicher Einwilligung von SBB
+        und swisstopo gestattet.
       </p>
       <p>
         <b>Copyright swisstopo.</b>
@@ -144,6 +142,8 @@ const comps = {
         page visitée, le logiciel de navigation utilisé, la date, l’heure, etc.
         et les exploite sous forme anonymisée avec Matomo («
         <a href="http://matomo.org/">Matomo</a>
+        ») et Piano («
+        <a href="https://www.piano.io/">Piano</a>
         »).
       </p>
       <p />
@@ -171,14 +171,14 @@ const comps = {
         reproduire sous toute autre forme, certaines cartes et plans et/ou des
         extraits ainsi que des informations, à condition de ne supprimer ni des
         mentions de copyright «© CFF/géodonnées: © OpenStreetMap contributors,
-        © swisstopo (5704003351)» ni d’autres désignations légalement
-        protégées. Les CFF conservent tous les droits de propriété ou bien
-        d’utilisation (carte-image), de même que swisstopo (bases des cartes).
-        Cette autorisation peut être révoquée à tout moment. Toute autre
-        utilisation (en totalité ou en partie), transmission (par voie
-        électronique ou avec d’autres moyens), modification, mise en lien ou
-        utilisation des géodonnées de base nécessite l’autorisation préalable
-        expresse des CFF et de swisstopo.
+        © swisstopo» ni d’autres désignations légalement protégées. Les CFF
+        conservent tous les droits de propriété ou bien d’utilisation
+        (carte-image), de même que swisstopo (bases des cartes). Cette
+        autorisation peut être révoquée à tout moment. Toute autre utilisation
+        (en totalité ou en partie), transmission (par voie électronique ou avec
+        d’autres moyens), modification, mise en lien ou utilisation des
+        géodonnées de base nécessite l’autorisation préalable expresse des CFF
+        et de swisstopo.
       </p>
       <p>
         <b>Copyright swisstopo.</b>
@@ -255,6 +255,8 @@ const comps = {
         last visited, the browser used, the date, the time, etc. and analyses it
         in an anonymised form using Matomo («
         <a href="http://matomo.org/">Matomo</a>
+        ») and Piano («
+        <a href="https://www.piano.io/">Piano</a>
         »).
       </p>
       <p />
@@ -281,10 +283,10 @@ const comps = {
         Individual maps and plans, or excerpts thereof, and information may be
         downloaded, saved, printed or copied by other methods for private use
         provided that none of the copyright symbols &quot;© SBB / Geodaten: ©
-        OpenStreetMap contributors, © swisstopo (5704003351)&quot; or other
-        legally protected names are removed. All property rights and rights of
-        use respectively shall remain with SBB (map images) and swisstopo (basic
-        map data), which can revoke their consent at any time. None of the basic
+        OpenStreetMap contributors, © swisstopo&quot; or other legally
+        protected names are removed. All property rights and rights of use
+        respectively shall remain with SBB (map images) and swisstopo (basic map
+        data), which can revoke their consent at any time. None of the basic
         geographical data contained on the websites may be reproduced
         (completely or in part), transmitted (electronically or by other means),
         modified, linked or used without the prior written consent of SBB and
@@ -359,6 +361,8 @@ const comps = {
         data, l’ora, ecc. vengono salvati e analizzati in modo anonimo con
         Matomo («
         <a href="http://matomo.org/">Matomo</a>
+        ») e Piano («
+        <a href="https://www.piano.io/">Piano</a>
         »).
       </p>
       <p />
@@ -384,15 +388,15 @@ const comps = {
         privato è permesso scaricare, salvare, stampare o riprodurre in altro
         modo singole cartine e singoli piani o parte di essi e le relative
         informazioni, a condizione che non siano rimosse le indicazioni circa la
-        fonte «© FFS / Geodati: © OpenStreetMap contributors, © swisstopo
-        (5704003351)» né altre indicazioni tutelate per legge. Tutti i diritti
-        d&apos;autore rispettivamente di utilizzo rimangono alle FFS (immagine
-        cartografica) e a swisstopo (dati cartografici), che possono in
-        qualsiasi momento revocare il proprio assenso all&apos;utilizzo.
-        Qualsiasi ulteriore utilizzo (completo o parziale), trasmissione
-        (elettronica o con altri mezzi), modifica, collegamento o impiego dei
-        geodati di base contenuti nelle pagine web sono consentiti solo previo
-        consenso scritto da parte di FFS e swisstopo.
+        fonte «© FFS / Geodati: © OpenStreetMap contributors, © swisstopo» né
+        altre indicazioni tutelate per legge. Tutti i diritti d&apos;autore
+        rispettivamente di utilizzo rimangono alle FFS (immagine cartografica) e
+        a swisstopo (dati cartografici), che possono in qualsiasi momento
+        revocare il proprio assenso all&apos;utilizzo. Qualsiasi ulteriore
+        utilizzo (completo o parziale), trasmissione (elettronica o con altri
+        mezzi), modifica, collegamento o impiego dei geodati di base contenuti
+        nelle pagine web sono consentiti solo previo consenso scritto da parte
+        di FFS e swisstopo.
       </p>
       min-height: 16px;
       <p>
