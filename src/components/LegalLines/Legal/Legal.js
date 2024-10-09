@@ -31,7 +31,7 @@ const comps = {
       Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um
       Informationen für den internen Gebrauch gemäss &quot;R K 400.16
       Informationsklassifizierung.&quot; und &quot;R K 040.1 Konzernweisung
-      Datenschutz. &quot;.
+      Datenschutz.&quot;.
       <p />
       <p>
         <b>Erscheinungsbild von Trafimage.</b>
