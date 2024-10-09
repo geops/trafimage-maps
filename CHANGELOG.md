@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.3](https://github.com/geops/trafimage-maps/compare/v1.30.2...v1.30.3) (2024-10-09)
+
+### Bug Fixes
+
+- **tracking:** add missing trafimage-maps.sbb.ch domain to tracking ([#1192](https://github.com/geops/trafimage-maps/issues/1192)) ([9ab03b3](https://github.com/geops/trafimage-maps/commit/9ab03b32e418e21f3afd7104d89255af93fdcf7b))
+
 ### [1.30.2](https://github.com/geops/trafimage-maps/compare/v1.30.1...v1.30.2) (2024-10-02)
 
 ### Bug Fixes
