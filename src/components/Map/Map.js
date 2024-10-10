@@ -72,26 +72,6 @@ const defaultProps = {
 };
 
 class Map extends PureComponent {
-  /**
-   * Compare 2 feature info objects and return true
-   * if they are the same.
-   * @private
-   */
-  static isSameFeatureInfo(first, second) {
-    if (first.length !== second.length) {
-      return false;
-    }
-
-    const firstFeatures = first.map((f) => f.features).flat();
-    const secondFeatures = second.map((s) => s.features).flat();
-
-    if (firstFeatures.length !== secondFeatures.length) {
-      return false;
-    }
-
-    return firstFeatures.every((f, i) => secondFeatures[i] === f);
-  }
-
   componentDidMount() {
     const { map, dispatchHtmlEvent, dispatchSetZoomType } = this.props;
     this.onPointerMoveRef = map.on("pointermove", (e) => this.onPointerMove(e));
