@@ -32,7 +32,6 @@ const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
 
   // mapStateToProps
-  featureInfo: PropTypes.arrayOf(PropTypes.shape()),
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
   maxExtent: PropTypes.arrayOf(PropTypes.number),
@@ -61,7 +60,6 @@ const propTypes = {
 const defaultProps = {
   // mapStateToProps
   center: [925472, 5920000],
-  featureInfo: [],
   layers: [],
   extent: undefined,
   maxExtent: undefined,
@@ -181,13 +179,7 @@ class Map extends PureComponent {
 
   onPointerMove(evt) {
     const { map, coordinate } = evt;
-    const {
-      layers,
-      featureInfo,
-      dispatchSetFeatureInfo,
-      showPopups,
-      activeTopic,
-    } = this.props;
+    const { layers, showPopups, activeTopic } = this.props;
 
     if (document.activeElement !== map.getTargetElement()) {
       map.getTargetElement().focus();
@@ -217,7 +209,7 @@ class Map extends PureComponent {
         ({ layer }) => !layer.get("priorityFeatureInfo"),
       );
 
-      let infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
+      const infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
 
       // Show the hover style if the layer has the method.
       infos.forEach(({ layer, features }) => {
@@ -231,42 +223,6 @@ class Map extends PureComponent {
       )
         ? "pointer"
         : "auto";
-
-      const shouldNotSetInfoOnHover =
-        featureInfo.length &&
-        featureInfo.every(({ layer }) =>
-          layer.get("disableSetFeatureInfoOnHover"),
-        );
-
-      const clickInfoOpen =
-        featureInfo.length &&
-        featureInfo.every(({ layer }) => {
-          return layer.get("popupComponent") && !layer.get("showPopupOnHover");
-        });
-
-      // don't continue if there's a popup that was opened by click
-      if (!clickInfoOpen && !shouldNotSetInfoOnHover) {
-        infos = infos
-          .filter(
-            ({ layer }) =>
-              layer.get("showPopupOnHover") && layer.get("popupComponent"),
-          )
-          .map((info) => {
-            /* Apply showPopupOnHover function if defined to further filter features */
-            const showPopupOnHover = info.layer.get("showPopupOnHover");
-            if (typeof showPopupOnHover === "function") {
-              return {
-                ...info,
-                features: info.layer.get("showPopupOnHover")(info.features),
-              };
-            }
-            return info;
-          });
-
-        if (!Map.isSameFeatureInfo(featureInfo, infos)) {
-          dispatchSetFeatureInfo(infos);
-        }
-      }
     });
   }
 
@@ -313,8 +269,7 @@ class Map extends PureComponent {
           .reverse()
           .filter(({ layer }) => {
             return (
-              (layer.get("popupComponent") && !layer.get("showPopupOnHover")) ||
-              activeTopic.enableFeatureClick
+              layer.get("popupComponent") || activeTopic.enableFeatureClick
             );
           });
 
@@ -385,7 +340,6 @@ Map.propTypes = propTypes;
 Map.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => ({
-  featureInfo: state.app.featureInfo,
   layers: state.map.layers,
   center: state.map.center,
   extent: state.map.extent,
