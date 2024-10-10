@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.4](https://github.com/geops/trafimage-maps/compare/v1.30.3...v1.30.4) (2024-10-10)
+
+### Bug Fixes
+
+- **Regionenkarte:** prevent line search highlight from disappearing onPointerMove ([#1194](https://github.com/geops/trafimage-maps/issues/1194)) ([c7e6962](https://github.com/geops/trafimage-maps/commit/c7e69625d604b60b57f92dfc4521435ed821e225))
+
 ### [1.30.3](https://github.com/geops/trafimage-maps/compare/v1.30.2...v1.30.3) (2024-10-09)
 
 ### Bug Fixes
