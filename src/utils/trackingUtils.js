@@ -30,7 +30,7 @@ export const trackTopic = (activeTopic, language) => {
   const isIframe = window !== window.parent;
 
   if (env && activeTopic?.key && !activeTopic.noTracking) {
-    const parentLocation = !isIframe
+    const parentLocation = isIframe
       ? window.location.ancestorOrigins?.[0] || document.referrer
       : "";
 
