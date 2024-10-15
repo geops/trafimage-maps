@@ -15,9 +15,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    CH-3072
+    CH-3072 Ostermundingen
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
@@ -92,9 +90,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    CH-3072
+    CH-3072 Ostermundingen
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
@@ -169,9 +165,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    CH-3072
+    CH-3072 Ostermundingen
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
@@ -246,9 +240,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    CH-3072
+    CH-3072 Ostermundingen
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch

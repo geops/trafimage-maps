@@ -14,10 +14,10 @@ const comps = {
         <br />
         Fachbus Trafimage
         <br />
-        Poststrasse 6<br />
-        3072 Ostermundingen
+        Poststrasse 6
         <br />
-        CH-3072 <br />
+        CH-3072 Ostermundingen
+        <br />
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
       </p>
@@ -70,10 +70,9 @@ const comps = {
         <br />
         Fachbus Trafimage
         <br />
-        Poststrasse 6<br />
-        3072 Ostermundingen
+        Poststrasse 6
         <br />
-        CH-3072
+        CH-3072 Ostermundingen
         <br />
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
@@ -128,10 +127,9 @@ const comps = {
         <br />
         Fachbus Trafimage
         <br />
-        Poststrasse 6<br />
-        3072 Ostermundingen
+        Poststrasse 6
         <br />
-        CH-3072
+        CH-3072 Ostermundingen
         <br />
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
@@ -186,10 +184,9 @@ const comps = {
         <br />
         Fachbus Trafimage
         <br />
-        Poststrasse 6<br />
-        3072 Ostermundingen
+        Poststrasse 6
         <br />
-        CH-3072
+        CH-3072 Ostermundingen
         <br />
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
