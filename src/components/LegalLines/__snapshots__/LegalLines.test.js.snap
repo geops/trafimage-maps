@@ -94,7 +94,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
     <br>
     3072 Ostermundingen
     <br>
-    Switzerland
+    CH-3072
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
@@ -171,7 +171,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
     <br>
     3072 Ostermundingen
     <br>
-    Suisse
+    CH-3072
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
@@ -248,7 +248,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
     <br>
     3072 Ostermundingen
     <br>
-    Svizzera
+    CH-3072
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
