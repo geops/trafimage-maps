@@ -467,7 +467,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     </a>
     und
     <a href="https://www.piano.io/">
-      Piano
+      Piano Analytics
     </a>
     anonymisiert ausgewertet.
   </p>
@@ -562,7 +562,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     </a>
     and
     <a href="https://www.piano.io/">
-      Piano
+      Piano Analytics
     </a>
     .
   </p>
@@ -654,7 +654,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1
     </a>
     et
     <a href="https://www.piano.io/">
-      Piano
+      Piano Analytics
     </a>
     .
   </p>
@@ -735,7 +735,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
     </a>
     e
     <a href="https://www.piano.io/">
-      Piano
+      Piano Analytics
     </a>
     .
   </p>

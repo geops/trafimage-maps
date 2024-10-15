@@ -23,7 +23,8 @@ const comps = {
         auf maps.trafimage.ch unpersönliche Nutzungsdaten wie Ihre IP-Adresse,
         die zuletzt besuchte Seite, der verwendete Browser, Datum, Uhrzeit etc.
         gespeichert und mit <a href="http://matomo.org/">Matomo</a> und{" "}
-        <a href="https://www.piano.io/">Piano</a> anonymisiert ausgewertet.
+        <a href="https://www.piano.io/">Piano Analytics</a> anonymisiert
+        ausgewertet.
       </p>
       Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um
       Informationen für den internen Gebrauch gemäss &quot;R K 400.16
@@ -139,7 +140,7 @@ const comps = {
         page visitée, le logiciel de navigation utilisé, la date, l’heure, etc.
         et les exploite sous forme anonymisée avec{" "}
         <a href="http://matomo.org/">Matomo</a> et{" "}
-        <a href="https://www.piano.io/">Piano</a>.
+        <a href="https://www.piano.io/">Piano Analytics</a>.
       </p>
       <p />
       <p>
@@ -249,7 +250,7 @@ const comps = {
         stores non-personal usage data such as your IP address, the page you
         last visited, the browser used, the date, the time, etc. and analyses it
         in an anonymised form using <a href="http://matomo.org/">Matomo</a> and{" "}
-        <a href="https://www.piano.io/">Piano</a>.
+        <a href="https://www.piano.io/">Piano Analytics</a>.
       </p>
       <p />
       <p>
@@ -352,7 +353,7 @@ const comps = {
         gli indirizzi IP, l’ultima pagina visitata, il browser utilizzato, la
         data, l’ora, ecc. vengono salvati e analizzati in modo anonimo con{" "}
         <a href="http://matomo.org/">Matomo</a> e{" "}
-        <a href="https://www.piano.io/">Piano</a>.
+        <a href="https://www.piano.io/">Piano Analytics</a>.
       </p>
       <p />
       <p>
