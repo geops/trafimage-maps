@@ -494,7 +494,7 @@ const topics = {
     direktverbindungen,
     direktverbindungenIframe,
     zweitausbildung,
-    bauprojekte,
+    // bauprojekte,
     handicap,
     tarifverbundkarte,
     infrastruktur,
