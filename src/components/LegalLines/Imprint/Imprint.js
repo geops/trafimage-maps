@@ -17,7 +17,7 @@ const comps = {
         Poststrasse 6<br />
         3072 Ostermundingen
         <br />
-        Schweiz <br />
+        CH-3072 <br />
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
       </p>

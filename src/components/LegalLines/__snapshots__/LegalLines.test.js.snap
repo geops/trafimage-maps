@@ -17,7 +17,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
     <br>
     3072 Ostermundingen
     <br>
-    Schweiz
+    CH-3072
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
@@ -448,8 +448,6 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
     Es gelten die
     <a href="http://www.sbb.ch/meta/rechtlicher-hinweis.html">
       rechtlichen Hinweise
@@ -471,15 +469,12 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     </a>
     anonymisiert ausgewertet.
   </p>
-  Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um Informationen für den internen Gebrauch gemäss "R K 400.16 Informationsklassifizierung." und "R K 040.1 Konzernweisung Datenschutz.".
   <p>
   </p>
   <p>
     <b>
       Erscheinungsbild von Trafimage.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     Das Erscheinungsbild von Trafimage (Bildaufbau und Bildgestaltung) ist ein fester Bestandteil des Auftritts der SBB und ist urheberrechtlich geschützt. Die auf den Websites von Trafimage enthaltenen Karten und Pläne inklusive den dazugehörenden Informationen werden ausschliesslich für den privaten Gebrauch sowie zu Informationszwecken bereit gestellt.
@@ -490,16 +485,12 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
     Für die Geobasisdaten (z.B. Luftbilder, Relief, Landeskarten) gelten die Bestimmungen von swisstopo und OpenStreetMap. Es ist gestattet, einzelne Karten und Pläne bzw. Ausschnitte davon und Informationen für private Zwecke herunterzuladen, abzuspeichern, auszudrucken oder auf andere Weise zu vervielfältigen sofern weder der Copyrightvermerke "© SBB/CFF/FSS, Geodaten: © OpenStreetMap contributors, © swisstopo" noch andere gesetzlich geschützte Bezeichnungen entfernt werden. Sämtliche Eigentums- bzw. Nutzungsrechte verbleiben bei der SBB (Kartenbild) und bei der swisstopo (Kartengrundlagen). Sie können diese Zustimmung jederzeit widerrufen. Jegliche weitere Nutzung (vollständig oder teilweise), Übermittlung (elektronisch oder mit anderen Mitteln), Modifikation, Verknüpfung oder Benutzung der in den Websites enthaltenen Geobasisdaten ist nur mit vorheriger schriftlicher Einwilligung von SBB und swisstopo gestattet.
   </p>
   <p>
     <b>
       Copyright swisstopo.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     Die in dieser Internet-Plattform integrierten Geobasisdaten sind Eigentum der Schweizerischen Eidgenossenschaft. Die Daten sind urheberrechtlich durch das Bundesgesetz über Geoinformation (SR 510.62) geschützt. Sofern nichts anderes vermerkt ist, handelt es sich um Daten des Bundesamtes für Landestopografie (swisstopo) und es gelten die Bestimmungen der Geoinformationsverordnung (SR 510.620) und die Verordnung des VBS über die Gebühren des Bundesamtes für Landestopografie (SR 510.620.2).
@@ -510,16 +501,12 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
     Liegt ein Vertragsverhältnis zwischen swisstopo und dem Nutzer eines Dienstes vor, so haftet swisstopo nur für Schäden, die sie grobfahrlässig oder vorsätzlich verursacht hat und im Verantwortungsbereich von swisstopo liegen. swisstopo haftet nicht für entgangenen Gewinn, Datenverluste oder sonstige indirekte Schäden, die namentlich durch Fehlinformationen oder technische Störungen entstanden sind. swisstopo übernimmt keine Verantwortung für Fehler, die nicht in Ihrem Verantwortungsbereich liegen.
   </p>
   <p>
     <b>
       Daten der SBB und ihrer Partner.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     Alle anderen Daten sind Eigentum der SBB oder ihrer Partner.
@@ -541,8 +528,6 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     <b>
       Legal information and data protection.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     SBB's
@@ -567,13 +552,9 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     .
   </p>
   <p>
-  </p>
-  <p>
     <b>
       Corporate identity of Trafimage.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     The corporate identity of Trafimage (structure and design) forms an integral part of SBB's image and is protected by copyright. The maps and plans contained on the websites of Trafimage, including the related information, are supplied solely for private use and for information purposes.
@@ -584,16 +565,12 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
     The provisions of swisstopo and OpenStreetMap and apply to basic geographical data (e.g. aerial photographs, relief data, national maps). Individual maps and plans, or excerpts thereof, and information may be downloaded, saved, printed or copied by other methods for private use provided that none of the copyright symbols "© SBB / Geodaten: © OpenStreetMap contributors, © swisstopo" or other legally protected names are removed. All property rights and rights of use respectively shall remain with SBB (map images) and swisstopo (basic map data), which can revoke their consent at any time. None of the basic geographical data contained on the websites may be reproduced (completely or in part), transmitted (electronically or by other means), modified, linked or used without the prior written consent of SBB and swisstopo.
   </p>
   <p>
     <b>
       Copyright of swisstopo.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     The basic geographical data integrated into this Internet platform is the property of the Swiss Confederation. The data is copyright protected by the Swiss Federal Law on Geoinformation (SR 510.62). Unless otherwise indicated, data is provided by the Federal Office of Topography (swisstopo) and is subject to the provisions of the Geoinformation Ordinance (SR 510.620) and the ordinance of the Federal Department of Defence, Civil Protection and Sport on fees and charges of the Federal Office of Topography (SR 510.620.2).
@@ -604,16 +581,12 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
     If a contractual relationship between swisstopo and the user of a service exists, swisstopo shall only be liable for damage it has caused by gross negligence or deliberate intent which lies within the scope of its responsibility. swisstopo shall not be liable for loss of earnings, data loss or other indirect damage due in particular to incorrect information or technical malfunctions. swisstopo assumes no responsibility for errors that do not lie within its area of responsibility.
   </p>
   <p>
     <b>
       Data belonging to SBB and its partners.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     All other data is the property of SBB or its partners.
@@ -657,8 +630,6 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1
       Piano Analytics
     </a>
     .
-  </p>
-  <p>
   </p>
   <p>
     <b>
@@ -740,8 +711,6 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
     .
   </p>
   <p>
-  </p>
-  <p>
     <b>
       Brand Trafimage.
     </b>
@@ -757,7 +726,6 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
   <p>
     Per i geodati di base (p. es. immagini aeree, rilievi, carte topografiche) valgono le norme di swisstopo ed OpenStreetMap. A titolo privato è permesso scaricare, salvare, stampare o riprodurre in altro modo singole cartine e singoli piani o parte di essi e le relative informazioni, a condizione che non siano rimosse le indicazioni circa la fonte «© FFS / Geodati: © OpenStreetMap contributors, © swisstopo» né altre indicazioni tutelate per legge. Tutti i diritti d'autore rispettivamente di utilizzo rimangono alle FFS (immagine cartografica) e a swisstopo (dati cartografici), che possono in qualsiasi momento revocare il proprio assenso all'utilizzo. Qualsiasi ulteriore utilizzo (completo o parziale), trasmissione (elettronica o con altri mezzi), modifica, collegamento o impiego dei geodati di base contenuti nelle pagine web sono consentiti solo previo consenso scritto da parte di FFS e swisstopo.
   </p>
-  min-height: 16px;
   <p>
     <b>
       Copyright swisstopo.

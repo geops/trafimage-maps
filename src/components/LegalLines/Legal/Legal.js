@@ -6,7 +6,6 @@ const comps = {
       <p>
         <b>Rechtlicher Hinweis und Datenschutz.</b>
       </p>
-      <p />
       <p>
         Es gelten die{" "}
         <a href="http://www.sbb.ch/meta/rechtlicher-hinweis.html">
@@ -26,15 +25,10 @@ const comps = {
         <a href="https://www.piano.io/">Piano Analytics</a> anonymisiert
         ausgewertet.
       </p>
-      Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um
-      Informationen für den internen Gebrauch gemäss &quot;R K 400.16
-      Informationsklassifizierung.&quot; und &quot;R K 040.1 Konzernweisung
-      Datenschutz.&quot;.
       <p />
       <p>
         <b>Erscheinungsbild von Trafimage.</b>
       </p>
-      <p />
       <p>
         Das Erscheinungsbild von Trafimage (Bildaufbau und Bildgestaltung) ist
         ein fester Bestandteil des Auftritts der SBB und ist urheberrechtlich
@@ -48,7 +42,6 @@ const comps = {
           OpenStreetMap.
         </b>
       </p>
-      <p />
       <p>
         Für die Geobasisdaten (z.B. Luftbilder, Relief, Landeskarten) gelten die
         Bestimmungen von swisstopo und OpenStreetMap. Es ist gestattet, einzelne
@@ -68,7 +61,6 @@ const comps = {
       <p>
         <b>Copyright swisstopo.</b>
       </p>
-      <p />
       <p>
         Die in dieser Internet-Plattform integrierten Geobasisdaten sind
         Eigentum der Schweizerischen Eidgenossenschaft. Die Daten sind
@@ -82,7 +74,6 @@ const comps = {
       <p>
         <b>Haftung von swisstopo.</b>
       </p>
-      <p />
       <p>
         Liegt ein Vertragsverhältnis zwischen swisstopo und dem Nutzer eines
         Dienstes vor, so haftet swisstopo nur für Schäden, die sie
@@ -96,7 +87,6 @@ const comps = {
       <p>
         <b>Daten der SBB und ihrer Partner.</b>
       </p>
-      <p />
       <p>Alle anderen Daten sind Eigentum der SBB oder ihrer Partner.</p>
       <p>
         <b>Zeichnung.</b>
@@ -142,7 +132,6 @@ const comps = {
         <a href="http://matomo.org/">Matomo</a> et{" "}
         <a href="https://www.piano.io/">Piano Analytics</a>.
       </p>
-      <p />
       <p>
         <b>Image de Trafimage.</b>
       </p>
@@ -233,7 +222,6 @@ const comps = {
       <p>
         <b>Legal information and data protection.</b>
       </p>
-      <p />
       <p>
         SBB&apos;s{" "}
         <a href="http://www.sbb.ch/en/meta/legal-information.html">
@@ -252,11 +240,9 @@ const comps = {
         in an anonymised form using <a href="http://matomo.org/">Matomo</a> and{" "}
         <a href="https://www.piano.io/">Piano Analytics</a>.
       </p>
-      <p />
       <p>
         <b>Corporate identity of Trafimage.</b>
       </p>
-      <p />
       <p>
         The corporate identity of Trafimage (structure and design) forms an
         integral part of SBB&apos;s image and is protected by copyright. The
@@ -269,7 +255,6 @@ const comps = {
           Use of Trafimage map images and swisstopo and OpenStreetMap map data.
         </b>
       </p>
-      <p />
       <p>
         The provisions of swisstopo and OpenStreetMap and apply to basic
         geographical data (e.g. aerial photographs, relief data, national maps).
@@ -288,7 +273,6 @@ const comps = {
       <p>
         <b>Copyright of swisstopo.</b>
       </p>
-      <p />
       <p>
         The basic geographical data integrated into this Internet platform is
         the property of the Swiss Confederation. The data is copyright protected
@@ -302,7 +286,6 @@ const comps = {
       <p>
         <b>Liability on the part of swisstopo.</b>
       </p>
-      <p />
       <p>
         If a contractual relationship between swisstopo and the user of a
         service exists, swisstopo shall only be liable for damage it has caused
@@ -316,7 +299,6 @@ const comps = {
       <p>
         <b>Data belonging to SBB and its partners.</b>
       </p>
-      <p />
       <p>All other data is the property of SBB or its partners.</p>
       <p>
         <b>Draw.</b>
@@ -355,7 +337,6 @@ const comps = {
         <a href="http://matomo.org/">Matomo</a> e{" "}
         <a href="https://www.piano.io/">Piano Analytics</a>.
       </p>
-      <p />
       <p>
         <b>Brand Trafimage.</b>
       </p>
@@ -388,7 +369,6 @@ const comps = {
         nelle pagine web sono consentiti solo previo consenso scritto da parte
         di FFS e swisstopo.
       </p>
-      min-height: 16px;
       <p>
         <b>Copyright swisstopo.</b>
       </p>
