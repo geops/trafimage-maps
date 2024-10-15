@@ -65,7 +65,6 @@ export const regionenkartePublicSegment = new Layer({
       },
       properties: {
         hideInLegend: true,
-        showPopupOnHover: true,
         popupComponent: "RegionenkarteIntersectionPopup",
         isQueryable: true,
       },

@@ -30,6 +30,10 @@ export const trackTopic = (activeTopic, language) => {
   const isIframe = window !== window.parent;
 
   if (env && activeTopic?.key && !activeTopic.noTracking) {
+    const parentLocation = isIframe
+      ? window.location.ancestorOrigins?.[0] || document.referrer
+      : "";
+
     window.digitalDataLayer = window.digitalDataLayer || [];
     window.digitalDataLayer.push({
       pageInstanceID: env === "prod" ? "584988" : "584988", // For now the prod and stag IDs are the same
@@ -39,7 +43,7 @@ export const trackTopic = (activeTopic, language) => {
           destinationURL: window.location.href,
           destinationURI: window.location.pathname,
           referringURL: prevUrl || document.referrer,
-          parentLocation: isIframe ? document.referrer : "",
+          parentLocation,
           sysEnv: env === "prod" ? "production" : "integration",
           language,
         },
