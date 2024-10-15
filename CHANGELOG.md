@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.5](https://github.com/geops/trafimage-maps/compare/v1.30.4...v1.30.5) (2024-10-15)
+
+### Bug Fixes
+
+- **tracking:** use window.location.ancestorOrigins to track parent location ([#1195](https://github.com/geops/trafimage-maps/issues/1195)) ([f7526b3](https://github.com/geops/trafimage-maps/commit/f7526b33155c2824b4cdd7838bb01f2e255718f5))
+
 ### [1.30.4](https://github.com/geops/trafimage-maps/compare/v1.30.3...v1.30.4) (2024-10-10)
 
 ### Bug Fixes
