@@ -1,4 +1,5 @@
 import React from "react";
+import { FaInfoCircle } from "react-icons/fa";
 
 const comps = {
   de: (
@@ -52,8 +53,8 @@ const comps = {
 
       <p>
         <b>Verantwortlich für die Inhalte der Webkarten:</b> Die Zuständigkeit
-        und der Kontakt für die einzelnen Kartenthemen wird unter dem Info-„i“
-        zum jeweiligen Thema angegeben (Menu ausklappen).
+        und Kontaktangabe für die einzelnen Kartenthemen sind im Info-Pop-up{" "}
+        <FaInfoCircle /> in der entsprechenden Menüzeile aufgeführt.
       </p>
     </div>
   ),
@@ -108,9 +109,10 @@ const comps = {
       </p>
 
       <p>
-        <b>Responsables des contenus des cartes Web:</b> La compétence et le
-        contact pour chaque thème de la carte sont indiqués sous le « i »
-        d&apos;information du thème en question (déplier le menu).
+        <b>Responsables des contenus des cartes Web:</b> La compétence et les
+        coordonnées de contact pour chaque thème de la carte sont indiquées dans
+        le pop-up d&apos;information <FaInfoCircle /> dans la ligne de menu
+        correspondante.
       </p>
     </div>
   ),
@@ -166,8 +168,9 @@ const comps = {
 
       <p>
         <b>Responsibility for the content of the web maps:</b> The
-        responsibility and contact for the individual map topics is indicated
-        under the info ‘i’ for the respective topic (expand menu).
+        responsibility and contact details for the individual map topics are
+        listed in the info pop-up <FaInfoCircle /> in the corresponding menu
+        bar.
       </p>
     </div>
   ),
@@ -223,8 +226,9 @@ const comps = {
 
       <p>
         <b>Responsabilità per i contenuti delle cartine:</b> La responsabilità e
-        i contatti per i singoli argomenti della mappa sono indicati sotto la
-        “i” del rispettivo argomento (menu di espansione).
+        i dettagli di contatto per i singoli argomenti della mappa sono elencati
+        nel pop-up delle informazioni <FaInfoCircle /> nella barra dei menu
+        corrispondente.
       </p>
     </div>
   ),

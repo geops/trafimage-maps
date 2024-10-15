@@ -22,11 +22,8 @@ const comps = {
         In Abweichung zu den allgemeinen Datenschutzbestimmungen der SBB werden
         auf maps.trafimage.ch unpersönliche Nutzungsdaten wie Ihre IP-Adresse,
         die zuletzt besuchte Seite, der verwendete Browser, Datum, Uhrzeit etc.
-        gespeichert und mit Matomo («
-        <a href="http://matomo.org/">Matomo</a>
-        ») und Piano («
-        <a href="https://www.piano.io/">Piano</a>
-        ») anonymisiert ausgewertet.
+        gespeichert und mit <a href="http://matomo.org/">Matomo</a> und{" "}
+        <a href="https://www.piano.io/">Piano</a> anonymisiert ausgewertet.
       </p>
       Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um
       Informationen für den internen Gebrauch gemäss &quot;R K 400.16
@@ -140,11 +137,9 @@ const comps = {
         protection des données, maps.trafimage.ch enregistre des données
         d’utilisation non personnelles telles que votre adresse IP, la dernière
         page visitée, le logiciel de navigation utilisé, la date, l’heure, etc.
-        et les exploite sous forme anonymisée avec Matomo («
-        <a href="http://matomo.org/">Matomo</a>
-        ») et Piano («
-        <a href="https://www.piano.io/">Piano</a>
-        »).
+        et les exploite sous forme anonymisée avec{" "}
+        <a href="http://matomo.org/">Matomo</a> et{" "}
+        <a href="https://www.piano.io/">Piano</a>.
       </p>
       <p />
       <p>
@@ -253,11 +248,8 @@ const comps = {
         Contrary to SBB’s general data protection provisions, maps.trafimage.ch
         stores non-personal usage data such as your IP address, the page you
         last visited, the browser used, the date, the time, etc. and analyses it
-        in an anonymised form using Matomo («
-        <a href="http://matomo.org/">Matomo</a>
-        ») and Piano («
-        <a href="https://www.piano.io/">Piano</a>
-        »).
+        in an anonymised form using <a href="http://matomo.org/">Matomo</a> and{" "}
+        <a href="https://www.piano.io/">Piano</a>.
       </p>
       <p />
       <p>
@@ -358,12 +350,9 @@ const comps = {
         In deroga alle disposizioni generali in materia di protezione dei dati
         delle FFS, su maps.trafimage.ch i dati di utilizzo non personali come
         gli indirizzi IP, l’ultima pagina visitata, il browser utilizzato, la
-        data, l’ora, ecc. vengono salvati e analizzati in modo anonimo con
-        Matomo («
-        <a href="http://matomo.org/">Matomo</a>
-        ») e Piano («
-        <a href="https://www.piano.io/">Piano</a>
-        »).
+        data, l’ora, ecc. vengono salvati e analizzati in modo anonimo con{" "}
+        <a href="http://matomo.org/">Matomo</a> e{" "}
+        <a href="https://www.piano.io/">Piano</a>.
       </p>
       <p />
       <p>

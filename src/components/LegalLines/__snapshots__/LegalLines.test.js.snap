@@ -60,7 +60,19 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
     <b>
       Verantwortlich für die Inhalte der Webkarten:
     </b>
-    Die Zuständigkeit und der Kontakt für die einzelnen Kartenthemen wird unter dem Info-„i“ zum jeweiligen Thema angegeben (Menu ausklappen).
+    Die Zuständigkeit und Kontaktangabe für die einzelnen Kartenthemen sind im Info-Pop-up
+    <svg stroke="currentColor"
+         fill="currentColor"
+         stroke-width="0"
+         viewbox="0 0 512 512"
+         height="1em"
+         width="1em"
+         xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z">
+      </path>
+    </svg>
+    in der entsprechenden Menüzeile aufgeführt.
   </p>
 </div>
 `;
@@ -125,7 +137,19 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
     <b>
       Responsibility for the content of the web maps:
     </b>
-    The responsibility and contact for the individual map topics is indicated under the info ‘i’ for the respective topic (expand menu).
+    The responsibility and contact details for the individual map topics are listed in the info pop-up
+    <svg stroke="currentColor"
+         fill="currentColor"
+         stroke-width="0"
+         viewbox="0 0 512 512"
+         height="1em"
+         width="1em"
+         xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z">
+      </path>
+    </svg>
+    in the corresponding menu bar.
   </p>
 </div>
 `;
@@ -190,7 +214,19 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
     <b>
       Responsables des contenus des cartes Web:
     </b>
-    La compétence et le contact pour chaque thème de la carte sont indiqués sous le « i » d'information du thème en question (déplier le menu).
+    La compétence et les coordonnées de contact pour chaque thème de la carte sont indiquées dans le pop-up d'information
+    <svg stroke="currentColor"
+         fill="currentColor"
+         stroke-width="0"
+         viewbox="0 0 512 512"
+         height="1em"
+         width="1em"
+         xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z">
+      </path>
+    </svg>
+    dans la ligne de menu correspondante.
   </p>
 </div>
 `;
@@ -255,7 +291,19 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
     <b>
       Responsabilità per i contenuti delle cartine:
     </b>
-    La responsabilità e i contatti per i singoli argomenti della mappa sono indicati sotto la “i” del rispettivo argomento (menu di espansione).
+    La responsabilità e i dettagli di contatto per i singoli argomenti della mappa sono elencati nel pop-up delle informazioni
+    <svg stroke="currentColor"
+         fill="currentColor"
+         stroke-width="0"
+         viewbox="0 0 512 512"
+         height="1em"
+         width="1em"
+         xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z">
+      </path>
+    </svg>
+    nella barra dei menu corrispondente.
   </p>
 </div>
 `;
@@ -413,15 +461,15 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     der SBB.
   </p>
   <p>
-    In Abweichung zu den allgemeinen Datenschutzbestimmungen der SBB werden auf maps.trafimage.ch unpersönliche Nutzungsdaten wie Ihre IP-Adresse, die zuletzt besuchte Seite, der verwendete Browser, Datum, Uhrzeit etc. gespeichert und mit Matomo («
+    In Abweichung zu den allgemeinen Datenschutzbestimmungen der SBB werden auf maps.trafimage.ch unpersönliche Nutzungsdaten wie Ihre IP-Adresse, die zuletzt besuchte Seite, der verwendete Browser, Datum, Uhrzeit etc. gespeichert und mit
     <a href="http://matomo.org/">
       Matomo
     </a>
-    ») und Piano («
+    und
     <a href="https://www.piano.io/">
       Piano
     </a>
-    ») anonymisiert ausgewertet.
+    anonymisiert ausgewertet.
   </p>
   Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um Informationen für den internen Gebrauch gemäss "R K 400.16 Informationsklassifizierung." und "R K 040.1 Konzernweisung Datenschutz.".
   <p>
@@ -508,15 +556,15 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     apply.
   </p>
   <p>
-    Contrary to SBB’s general data protection provisions, maps.trafimage.ch stores non-personal usage data such as your IP address, the page you last visited, the browser used, the date, the time, etc. and analyses it in an anonymised form using Matomo («
+    Contrary to SBB’s general data protection provisions, maps.trafimage.ch stores non-personal usage data such as your IP address, the page you last visited, the browser used, the date, the time, etc. and analyses it in an anonymised form using
     <a href="http://matomo.org/">
       Matomo
     </a>
-    ») and Piano («
+    and
     <a href="https://www.piano.io/">
       Piano
     </a>
-    »).
+    .
   </p>
   <p>
   </p>
@@ -600,15 +648,15 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1
     des CFF s’appliquent.
   </p>
   <p>
-    En dérogation aux dispositions générales des CFF en matière de protection des données, maps.trafimage.ch enregistre des données d’utilisation non personnelles telles que votre adresse IP, la dernière page visitée, le logiciel de navigation utilisé, la date, l’heure, etc. et les exploite sous forme anonymisée avec Matomo («
+    En dérogation aux dispositions générales des CFF en matière de protection des données, maps.trafimage.ch enregistre des données d’utilisation non personnelles telles que votre adresse IP, la dernière page visitée, le logiciel de navigation utilisé, la date, l’heure, etc. et les exploite sous forme anonymisée avec
     <a href="http://matomo.org/">
       Matomo
     </a>
-    ») et Piano («
+    et
     <a href="https://www.piano.io/">
       Piano
     </a>
-    »).
+    .
   </p>
   <p>
   </p>
@@ -681,15 +729,15 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
     </a>
   </p>
   <p>
-    In deroga alle disposizioni generali in materia di protezione dei dati delle FFS, su maps.trafimage.ch i dati di utilizzo non personali come gli indirizzi IP, l’ultima pagina visitata, il browser utilizzato, la data, l’ora, ecc. vengono salvati e analizzati in modo anonimo con Matomo («
+    In deroga alle disposizioni generali in materia di protezione dei dati delle FFS, su maps.trafimage.ch i dati di utilizzo non personali come gli indirizzi IP, l’ultima pagina visitata, il browser utilizzato, la data, l’ora, ecc. vengono salvati e analizzati in modo anonimo con
     <a href="http://matomo.org/">
       Matomo
     </a>
-    ») e Piano («
+    e
     <a href="https://www.piano.io/">
       Piano
     </a>
-    »).
+    .
   </p>
   <p>
   </p>
