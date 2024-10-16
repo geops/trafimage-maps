@@ -316,9 +316,7 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=de 1`] =
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Schweiz
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
@@ -349,9 +347,7 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=en 1`] =
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Switzerland
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
@@ -382,9 +378,7 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=fr 1`] =
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Suisse
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
@@ -415,9 +409,7 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=it 1`] =
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Svizzera
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
@@ -761,9 +753,7 @@ exports[`LegalLines uses default  properties 1`] = `
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Schweiz
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
