@@ -23,6 +23,8 @@ const comps = {
       <p>
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
+        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
+        <br />
       </p>
     </div>
   ),
@@ -47,6 +49,8 @@ const comps = {
       </p>
       <p>
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
+        <br />
+        <a href="mailto:trafimage@cff.ch">trafimage@cff.ch</a>
         <br />
       </p>
     </div>
@@ -73,6 +77,8 @@ const comps = {
       <p>
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
+        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
+        <br />
       </p>
     </div>
   ),
@@ -96,6 +102,8 @@ const comps = {
       </p>
       <p>
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
+        <br />
+        <a href="mailto:trafimage@ffs.ch">trafimage@ffs.ch</a>
         <br />
       </p>
     </div>
