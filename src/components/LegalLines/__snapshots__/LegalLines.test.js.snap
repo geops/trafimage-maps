@@ -323,10 +323,6 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=de 1`] =
       www.trafimage.ch
     </a>
     <br>
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
-    </a>
-    <br>
   </p>
 </div>
 `;
@@ -352,10 +348,6 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=en 1`] =
   <p>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
-    </a>
-    <br>
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
     </a>
     <br>
   </p>
@@ -385,10 +377,6 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=fr 1`] =
       www.trafimage.ch
     </a>
     <br>
-    <a href="mailto:trafimage@cff.ch">
-      trafimage@cff.ch
-    </a>
-    <br>
   </p>
 </div>
 `;
@@ -414,10 +402,6 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=it 1`] =
   <p>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
-    </a>
-    <br>
-    <a href="mailto:trafimage@ffs.ch">
-      trafimage@ffs.ch
     </a>
     <br>
   </p>
@@ -758,10 +742,6 @@ exports[`LegalLines uses default  properties 1`] = `
   <p>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
-    </a>
-    <br>
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
     </a>
     <br>
   </p>
