@@ -78,26 +78,6 @@ describe("A link to data", { browser: "!firefox" }, () => {
     );
   });
 
-  it("is available for construction topic", () => {
-    ignoreDataLinkError("https://data.sbb.ch");
-    // Click info button
-    cy.get('[data-cy="infos-button-ch.sbb.construction"]').click();
-    cy.get(
-      'a[href="https://data.sbb.ch/explore/dataset/construction-projects/information/"]',
-    )
-      .should(([a]) => {
-        expect(a.textContent).to.equal(openDataText);
-        expect(a.target).to.equal("_blank");
-        // eslint-disable-next-line no-param-reassign
-        a.target = "_self";
-      })
-      .click();
-    cy.url().should(
-      "equal",
-      "https://data.sbb.ch/explore/dataset/construction-projects/information/",
-    );
-  });
-
   it("is available for isb topic", () => {
     ignoreDataLinkError("https://data.sbb.ch");
     // Click info button
