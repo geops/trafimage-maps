@@ -5,6 +5,9 @@ import MapButton from "../../components/MapButton";
 import ExportButton from "../../components/ExportButton";
 import { ReactComponent as Loader } from "../../img/loader.svg";
 import { RAILPLUS_EXPORTBTN_ID } from "../../utils/constants";
+import { sizesByFormat } from "../../utils/exportUtils";
+
+const format = "a0";
 
 function BtnCmpt({ isLoading, ...props }) {
   return (
@@ -24,9 +27,9 @@ function RailplusExportButton() {
   return (
     <ExportButton
       id={RAILPLUS_EXPORTBTN_ID}
-      exportFormat="a0"
+      exportFormat={format}
       exportScale={3}
-      exportSize={[3370, 2384]}
+      exportSize={sizesByFormat[format]}
       exportZoom={9.85}
       exportExtent={null}
       exportCoordinates={[center, center]}
