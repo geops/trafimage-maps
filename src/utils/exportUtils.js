@@ -338,7 +338,7 @@ export const exportPdf = async (
   const doc = new JsPDF({
     orientation: "landscape",
     unit: "pt",
-    format: exportFormat,
+    format: exportSize,
   });
 
   // Add map image
