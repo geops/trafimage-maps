@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import IconButton from "@mui/material/IconButton";
 import { ReactComponent as Pencil } from "../../img/pencil.svg";
 
-function DrawButton({ children = null, onClick = () => null, ...buttonProps }) {
+function DrawButton({ children, onClick, ...buttonProps }) {
   const mapsetUrl = useSelector((state) => state.app.mapsetUrl);
   const { t } = useTranslation();
 
@@ -15,7 +15,7 @@ function DrawButton({ children = null, onClick = () => null, ...buttonProps }) {
       size="medium"
       /* We use a function instead of href to be able to get the proper window.location value. */
       onClick={() => {
-        onClick();
+        onClick?.();
         // window.open is esaier to test.
         window.open(
           `${mapsetUrl}?parent=${encodeURIComponent(window.location)}`,

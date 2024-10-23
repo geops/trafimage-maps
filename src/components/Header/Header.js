@@ -10,7 +10,7 @@ const propTypes = {
   loginUrl: PropTypes.string,
 };
 
-function Header({ loginUrl = undefined }) {
+function Header({ loginUrl }) {
   return (
     <div className="wkp-header">
       <div className="wkp-header-right">

@@ -71,9 +71,7 @@ const comps = {
   ),
 };
 
-function PassagierFrequenzenLayerInfo({
-  properties: layer = { get: () => {} },
-}) {
+function PassagierFrequenzenLayerInfo({ properties: layer }) {
   const { i18n, t } = useTranslation();
   const statisticsLink = useMemo(() => {
     const { language: lang } = i18n;

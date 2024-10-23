@@ -14,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function DrawPermalinkButton({ buttonProps = {} }) {
+function DrawPermalinkButton({ buttonProps }) {
   const classes = useStyles();
   const drawIds = useSelector((state) => state.app.drawIds);
   const { t } = useTranslation();
 
   return (
-    <PermalinkButton buttonProps={buttonProps}>
+    <PermalinkButton buttonProps={buttonProps || {}}>
       {/* We use a function to be able to get the proper window.location value. */}
       {(locationHref) => {
         return (

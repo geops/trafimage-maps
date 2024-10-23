@@ -131,16 +131,18 @@ const propTypes = {
   }),
 };
 
+const defaultResizableProps = {
+  defaultSize: { height: 200 },
+  onResize: () => {},
+  snap: null,
+};
+
 function Overlay({
   elements,
   children = null,
   disablePortal = true,
   transitionDuration = undefined,
-  ResizableProps = {
-    defaultSize: { height: 200 },
-    onResize: () => {},
-    snap: null,
-  },
+  ResizableProps = defaultResizableProps,
 }) {
   const classes = useStyles();
   const resizeRef = useRef(null);

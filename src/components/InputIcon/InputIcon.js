@@ -33,11 +33,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function InputIcon({
-  checked = false,
-  type = "checkbox",
-  "data-cy": dataCy = undefined,
-}) {
+function InputIcon({ checked = false, type = "checkbox", "data-cy": dataCy }) {
   const classes = useStyles();
   const theme = useTheme();
   return (

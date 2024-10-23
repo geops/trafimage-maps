@@ -11,7 +11,7 @@ const propTypes = {
   popupAnchor: PropTypes.instanceOf(Element),
 };
 
-function SearchToggle({ popupAnchor = null, children = null }) {
+function SearchToggle({ popupAnchor, children }) {
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const { t } = useTranslation();
   const dispatch = useDispatch();

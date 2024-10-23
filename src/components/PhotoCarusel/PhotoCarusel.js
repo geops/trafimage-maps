@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PhotoCarusel({
-  photos = [],
+  photos,
   initialPhotoIndex = 0,
   onImageClick = null,
   onIncrement = null,
@@ -116,7 +116,7 @@ function PhotoCarusel({
     setCurrentPhotoIndex(initialPhotoIndex || 0);
   }, [photos, initialPhotoIndex]);
 
-  if (!photos || photos.length === 0) {
+  if (!photos || photos?.length === 0) {
     return null;
   }
 

@@ -16,7 +16,7 @@ const propTypes = {
  * Generic menu use to display feature info.
  * See TrackerMenu for an example of use.
  */
-function FeatureMenu({ property = "useMenu", menuItemProps = {} }) {
+function FeatureMenu({ property = "useMenu", menuItemProps }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const menuOpen = useSelector((state) => state.app.menuOpen);
@@ -73,7 +73,7 @@ function FeatureMenu({ property = "useMenu", menuItemProps = {} }) {
       onClose={() => {
         dispatch(setFeatureInfo());
       }}
-      {...menuItemProps}
+      {...(menuItemProps || {})}
     >
       <FeatureInformation featureInfo={filtered} />
     </MenuItem>

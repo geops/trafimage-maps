@@ -33,9 +33,10 @@ const useStyles = makeStyles(() => {
  *  This component fits the official design of SBB,
  *  see https://angular.app.sbb.ch/angular/components/select/examples
  */
-function Select({ MenuProps = {}, ...props }) {
+function Select({ MenuProps, ...props }) {
+  const muiMenuProps = MenuProps || {};
   const classes = useStyles();
-  const isAnchorTop = MenuProps?.anchorOrigin?.vertical === "top";
+  const isAnchorTop = muiMenuProps?.anchorOrigin?.vertical === "top";
 
   let classesMenu = {
     paper: classes.paperAnchorBottom,
@@ -61,10 +62,10 @@ function Select({ MenuProps = {}, ...props }) {
           vertical: "bottom",
           horizontal: "center",
         },
-        ...MenuProps,
+        ...muiMenuProps,
         classes: {
           ...classesMenu,
-          ...(MenuProps?.classes || {}),
+          ...(muiMenuProps?.classes || {}),
         },
       }}
     />

@@ -86,7 +86,7 @@ const propTypes = {
   anchorEl: PropTypes.instanceOf(Element),
 };
 
-function SearchInfo({ anchorEl = null }) {
+function SearchInfo({ anchorEl }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const screenWidth = useSelector((state) => state.app.screenWidth);

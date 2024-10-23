@@ -12,12 +12,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function DataLink({
-  children = null,
-  layer = null,
-  href = null,
-  fullWidth = true,
-}) {
+function DataLink({ children, layer, href, fullWidth = true }) {
   const { t } = useTranslation();
   const classes = useStyles();
 

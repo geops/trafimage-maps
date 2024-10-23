@@ -6,7 +6,7 @@ import { ReactComponent as SBBUser } from "../../img/sbb/user_92_large.svg";
 
 import "./Login.scss";
 
-function Login({ loginUrl = null }) {
+function Login({ loginUrl }) {
   const { t } = useTranslation();
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const language = useSelector((state) => state.app.language);

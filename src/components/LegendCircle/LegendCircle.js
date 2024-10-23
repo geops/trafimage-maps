@@ -20,7 +20,7 @@ function LegendCircle({
   radius = 8,
   borderColor = "black",
   borderWidth = 0,
-  children = null,
+  children,
 }) {
   const classes = useStyles({
     fillColor,

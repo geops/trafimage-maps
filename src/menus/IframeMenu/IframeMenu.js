@@ -96,7 +96,7 @@ function IframeMenu({
   body = null,
   hide = false,
   title = null,
-  ResizableProps = {},
+  ResizableProps,
 }) {
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
