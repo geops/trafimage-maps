@@ -8,30 +8,30 @@ const linkMapset = (
 );
 const descr = {
   de: (
-    <>
+    <div>
       Bei diesem Layer handelt es sich um eine in {linkMapset} erstellte
       Zeichnung. Der Layer bleibt beim Wechsel des Kartenthemas erhalten.
-    </>
+    </div>
   ),
   fr: (
-    <>
+    <div>
       Cette couche a été créée dans {linkMapset}. La couche est conservé lorsque
       le thème de la carte est modifié.
-    </>
+    </div>
   ),
 
   en: (
-    <>
+    <div>
       This layer has been created in {linkMapset}. The layer is retained when
       the map theme is changed.
-    </>
+    </div>
   ),
 
   it: (
-    <>
+    <div>
       Questo strato è stato creato in {linkMapset}. Lo strato è mantenuto quando
       il tema della mappa viene modificato.
-    </>
+    </div>
   ),
 };
 
