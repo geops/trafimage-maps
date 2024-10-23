@@ -33,8 +33,7 @@ const useStyles = makeStyles(() => {
  *  This component fits the official design of SBB,
  *  see https://angular.app.sbb.ch/angular/components/select/examples
  */
-function Select(props) {
-  const { MenuProps } = props;
+function Select({ MenuProps = {}, ...props }) {
   const classes = useStyles();
   const isAnchorTop = MenuProps?.anchorOrigin?.vertical === "top";
 
@@ -80,10 +79,6 @@ Select.propTypes = {
       horizontal: propTypes.oneOf(["left", "right"]),
     }),
   }),
-};
-
-Select.defaultProps = {
-  MenuProps: {},
 };
 
 export default Select;

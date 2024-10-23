@@ -71,7 +71,9 @@ const comps = {
   ),
 };
 
-function PassagierFrequenzenLayerInfo({ properties: layer }) {
+function PassagierFrequenzenLayerInfo({
+  properties: layer = { get: () => {} },
+}) {
   const { i18n, t } = useTranslation();
   const statisticsLink = useMemo(() => {
     const { language: lang } = i18n;
@@ -97,9 +99,6 @@ function PassagierFrequenzenLayerInfo({ properties: layer }) {
 
 PassagierFrequenzenLayerInfo.propTypes = {
   properties: PropTypes.instanceOf(Layer),
-};
-PassagierFrequenzenLayerInfo.defaultProps = {
-  properties: { get: () => {} },
 };
 
 export default React.memo(PassagierFrequenzenLayerInfo);

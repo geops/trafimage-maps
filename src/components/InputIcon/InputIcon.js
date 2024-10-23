@@ -33,7 +33,11 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function InputIcon({ checked, type, "data-cy": dataCy }) {
+function InputIcon({
+  checked = false,
+  type = "checkbox",
+  "data-cy": dataCy = undefined,
+}) {
   const classes = useStyles();
   const theme = useTheme();
   return (
@@ -68,11 +72,6 @@ InputIcon.propTypes = {
   checked: PropTypes.bool,
   type: PropTypes.oneOf(["checkbox", "radio"]),
   "data-cy": PropTypes.string,
-};
-InputIcon.defaultProps = {
-  checked: false,
-  type: "checkbox",
-  "data-cy": undefined,
 };
 
 export default InputIcon;

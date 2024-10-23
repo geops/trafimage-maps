@@ -56,11 +56,7 @@ const propTypes = {
   }),
 };
 
-const defaultProps = {
-  history: null,
-};
-
-function TopicElements({ history }) {
+function TopicElements({ history = null }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
@@ -259,6 +255,5 @@ function TopicElements({ history }) {
 }
 
 TopicElements.propTypes = propTypes;
-TopicElements.defaultProps = defaultProps;
 
 export default React.memo(TopicElements);

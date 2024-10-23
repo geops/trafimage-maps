@@ -131,23 +131,16 @@ const propTypes = {
   }),
 };
 
-const defaultProps = {
-  children: null,
-  disablePortal: true,
-  transitionDuration: undefined,
-  ResizableProps: {
+function Overlay({
+  elements,
+  children = null,
+  disablePortal = true,
+  transitionDuration = undefined,
+  ResizableProps = {
     defaultSize: { height: 200 },
     onResize: () => {},
     snap: null,
   },
-};
-
-function Overlay({
-  elements,
-  children,
-  disablePortal,
-  transitionDuration,
-  ResizableProps,
 }) {
   const classes = useStyles();
   const resizeRef = useRef(null);
@@ -299,6 +292,5 @@ function Overlay({
 }
 
 Overlay.propTypes = propTypes;
-Overlay.defaultProps = defaultProps;
 
 export default Overlay;

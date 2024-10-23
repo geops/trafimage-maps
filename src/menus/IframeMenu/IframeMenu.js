@@ -91,7 +91,13 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function IframeMenu({ header, body, hide, title, ResizableProps }) {
+function IframeMenu({
+  header = null,
+  body = null,
+  hide = false,
+  title = null,
+  ResizableProps = {},
+}) {
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const displayMenu = useSelector((state) => state.app.displayMenu);
@@ -194,14 +200,6 @@ IframeMenu.propTypes = {
     }),
     onResize: PropTypes.func,
   }),
-};
-
-IframeMenu.defaultProps = {
-  header: null,
-  body: null,
-  hide: false,
-  title: null,
-  ResizableProps: {},
 };
 
 export default IframeMenu;

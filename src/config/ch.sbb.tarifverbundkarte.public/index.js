@@ -23,6 +23,7 @@ export const tarifverbundkarteLayer = new TarifverbundkarteLayer({
     hideInLegend: true,
     useOverlay: true,
     popupComponent: "TarifverbundkartePopup",
+    maxExtent: [599266.3018, 5672238.995, 1232164.896, 6132695.6534],
   },
 });
 export default [tarifverbundkarteDataLayer, tarifverbundkarteLayer];

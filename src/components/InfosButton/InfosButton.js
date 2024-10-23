@@ -7,7 +7,7 @@ import { IconButton } from "@mui/material";
 import { setSelectedForInfos } from "../../model/app/actions";
 import { trackEvent } from "../../utils/trackingUtils";
 
-function InfosButton({ selectedInfo, className }) {
+function InfosButton({ selectedInfo, className = "wkp-info-bt" }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
@@ -55,10 +55,6 @@ InfosButton.propTypes = {
   // A topic or a layer
   selectedInfo: PropTypes.object.isRequired,
   className: PropTypes.string,
-};
-
-InfosButton.defaultProps = {
-  className: "wkp-info-bt",
 };
 
 export default React.memo(InfosButton);

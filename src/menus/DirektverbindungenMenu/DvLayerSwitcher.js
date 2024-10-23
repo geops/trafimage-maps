@@ -63,7 +63,7 @@ DvSwitcherLabel.propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-function DvLayerSwitcher({ onToggle, row }) {
+function DvLayerSwitcher({ onToggle = () => {}, row = false }) {
   const { t } = useTranslation();
   const [revision, forceRender] = useState();
   const dispatch = useDispatch();
@@ -157,11 +157,6 @@ function DvLayerSwitcher({ onToggle, row }) {
 DvLayerSwitcher.propTypes = {
   onToggle: PropTypes.func,
   row: PropTypes.bool,
-};
-
-DvLayerSwitcher.defaultProps = {
-  onToggle: () => {},
-  row: false,
 };
 
 export default DvLayerSwitcher;

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import IconButton from "@mui/material/IconButton";
 import { ReactComponent as Pencil } from "../../img/pencil.svg";
 
-function DrawButton({ children, onClick, ...buttonProps }) {
+function DrawButton({ children = null, onClick = () => null, ...buttonProps }) {
   const mapsetUrl = useSelector((state) => state.app.mapsetUrl);
   const { t } = useTranslation();
 
@@ -32,11 +32,6 @@ function DrawButton({ children, onClick, ...buttonProps }) {
 DrawButton.propTypes = {
   children: PropTypes.element,
   onClick: PropTypes.func,
-};
-
-DrawButton.defaultProps = {
-  children: null,
-  onClick: () => null,
 };
 
 export default React.memo(DrawButton);

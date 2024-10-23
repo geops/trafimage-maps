@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function DrawPermalinkButton({ buttonProps }) {
+function DrawPermalinkButton({ buttonProps = {} }) {
   const classes = useStyles();
   const drawIds = useSelector((state) => state.app.drawIds);
   const { t } = useTranslation();
@@ -61,10 +61,6 @@ function DrawPermalinkButton({ buttonProps }) {
 
 DrawPermalinkButton.propTypes = {
   buttonProps: PropTypes.object,
-};
-
-DrawPermalinkButton.defaultProps = {
-  buttonProps: {},
 };
 
 export default React.memo(DrawPermalinkButton);

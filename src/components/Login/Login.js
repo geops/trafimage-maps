@@ -6,7 +6,7 @@ import { ReactComponent as SBBUser } from "../../img/sbb/user_92_large.svg";
 
 import "./Login.scss";
 
-function Login({ loginUrl }) {
+function Login({ loginUrl = null }) {
   const { t } = useTranslation();
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const language = useSelector((state) => state.app.language);
@@ -43,10 +43,6 @@ function Login({ loginUrl }) {
 
 Login.propTypes = {
   loginUrl: PropTypes.string,
-};
-
-Login.defaultProps = {
-  loginUrl: null,
 };
 
 export default React.memo(Login);

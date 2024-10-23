@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Link should match snapshot. 1`] = `
-<a class="wkp-link "
+<a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways wkp-link  css-1xylxj1-MuiTypography-root-MuiLink-root"
    href="https://geops.de/"
    rel="noopener noreferrer"
    target="_blank"

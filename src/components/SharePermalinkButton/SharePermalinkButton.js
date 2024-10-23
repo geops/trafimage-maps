@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SharePermalinkButton({ buttonProps }) {
+function SharePermalinkButton({ buttonProps = {} }) {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -37,10 +37,6 @@ function SharePermalinkButton({ buttonProps }) {
 
 SharePermalinkButton.propTypes = {
   buttonProps: PropTypes.object,
-};
-
-SharePermalinkButton.defaultProps = {
-  buttonProps: {},
 };
 
 export default React.memo(SharePermalinkButton);

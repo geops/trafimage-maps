@@ -10,11 +10,7 @@ const propTypes = {
   loginUrl: PropTypes.string,
 };
 
-const defaultProps = {
-  loginUrl: undefined,
-};
-
-function Header({ loginUrl }) {
+function Header({ loginUrl = undefined }) {
   return (
     <div className="wkp-header">
       <div className="wkp-header-right">
@@ -29,6 +25,5 @@ function Header({ loginUrl }) {
 }
 
 Header.propTypes = propTypes;
-Header.defaultProps = defaultProps;
 
 export default React.memo(Header);

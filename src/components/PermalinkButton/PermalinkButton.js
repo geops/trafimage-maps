@@ -18,7 +18,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function PermalinkButton({ buttonProps, children, popoverProps }) {
+function PermalinkButton({
+  buttonProps = {},
+  children = null,
+  popoverProps = {},
+}) {
   const classes = useStyles();
 
   const { t } = useTranslation();
@@ -91,12 +95,6 @@ PermalinkButton.propTypes = {
   buttonProps: PropTypes.object,
   popoverProps: PropTypes.object,
   children: PropTypes.func,
-};
-
-PermalinkButton.defaultProps = {
-  buttonProps: {},
-  popoverProps: {},
-  children: null,
 };
 
 export default React.memo(PermalinkButton);

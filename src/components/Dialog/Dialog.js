@@ -117,27 +117,17 @@ const propTypes = {
   classes: PropTypes.object,
 };
 
-const defaultProps = {
-  title: null,
-  body: null,
-  // footer: null,
-  isModal: false,
-  className: null,
-  onClose: null,
-  classes: {},
-};
-
 function Dialog(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const {
-    body,
-    title,
+    body = null,
+    title = null,
     name,
-    isModal,
-    className,
-    onClose,
-    classes: classesProp,
+    isModal = false,
+    className = null,
+    onClose = null,
+    classes: classesProp = {},
   } = props;
   const [dialogNode, setDialogNode] = useState(null);
   const classes = useStyles({ isModal });
@@ -245,6 +235,5 @@ function Dialog(props) {
 }
 
 Dialog.propTypes = propTypes;
-Dialog.defaultProps = defaultProps;
 
 export default Dialog;

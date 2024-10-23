@@ -12,19 +12,12 @@ const propTypes = {
   selectedForInfos: PropTypes.object,
 };
 
-const defaultProps = {
-  style: undefined,
-  isDraggable: true,
-  selectedForInfos: null,
-};
-
 export const NAME = "infoDialog";
 
-function LayerInfosDialog(props) {
+function LayerInfosDialog({ style, isDraggable, selectedForInfos, ...props }) {
   const language = useSelector((state) => state.app.language);
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const { t } = useTranslation();
-  const { style, isDraggable, selectedForInfos } = props;
   if (!selectedForInfos) {
     return null;
   }
@@ -109,6 +102,5 @@ function LayerInfosDialog(props) {
 }
 
 LayerInfosDialog.propTypes = propTypes;
-LayerInfosDialog.defaultProps = defaultProps;
 
 export default LayerInfosDialog;

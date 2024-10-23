@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function Geolocate({ onClick, color, className }) {
+function Geolocate({ onClick = () => {}, color = "currentColor", className }) {
   const classes = useStyles({ color });
   return (
     <svg
@@ -41,12 +41,6 @@ Geolocate.propTypes = {
   onClick: PropTypes.func,
   color: PropTypes.string,
   className: PropTypes.string,
-};
-
-Geolocate.defaultProps = {
-  onClick: () => {},
-  color: "currentColor",
-  className: undefined,
 };
 
 export default Geolocate;

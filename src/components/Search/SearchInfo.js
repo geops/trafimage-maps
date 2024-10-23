@@ -86,11 +86,7 @@ const propTypes = {
   anchorEl: PropTypes.instanceOf(Element),
 };
 
-const defaultProps = {
-  anchorEl: null,
-};
-
-function SearchInfo({ anchorEl }) {
+function SearchInfo({ anchorEl = null }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const screenWidth = useSelector((state) => state.app.screenWidth);
@@ -320,6 +316,5 @@ function SearchInfo({ anchorEl }) {
 }
 
 SearchInfo.propTypes = propTypes;
-SearchInfo.defaultProps = defaultProps;
 
 export default SearchInfo;
