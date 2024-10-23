@@ -7,8 +7,6 @@ const propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const defaultProps = {};
-
 function InfoFPWTopicInfo({ language, t }) {
   const desc = {
     de: (
@@ -45,6 +43,5 @@ function InfoFPWTopicInfo({ language, t }) {
 }
 
 InfoFPWTopicInfo.propTypes = propTypes;
-InfoFPWTopicInfo.defaultProps = defaultProps;
 
 export default withTranslation()(InfoFPWTopicInfo);

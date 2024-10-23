@@ -143,12 +143,6 @@ EnergiePopupSubtitle.propTypes = {
   label: PropTypes.string,
 };
 
-EnergiePopupSubtitle.defaultProps = {
-  kategorie: undefined,
-  unterkategorie: undefined,
-  label: undefined,
-};
-
 function InterventionPersonCard({ person, segments }) {
   const { t } = useTranslation();
   const classes = useStyles();

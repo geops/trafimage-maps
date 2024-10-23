@@ -11,11 +11,6 @@ const propTypes = {
   popupAnchor: PropTypes.instanceOf(Element),
 };
 
-const defaultProps = {
-  children: null,
-  popupAnchor: null,
-};
-
 function SearchToggle({ popupAnchor, children }) {
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const { t } = useTranslation();
@@ -43,6 +38,5 @@ function SearchToggle({ popupAnchor, children }) {
 }
 
 SearchToggle.propTypes = propTypes;
-SearchToggle.defaultProps = defaultProps;
 
 export default SearchToggle;

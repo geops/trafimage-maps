@@ -13,7 +13,7 @@ const useStylesPhoto = makeStyles((theme) => ({
   },
 }));
 
-function Photo({ src }) {
+function Photo({ src = "" }) {
   const { t } = useTranslation();
   const classes = useStylesPhoto();
   const [loading, setLoading] = useState(true);
@@ -38,10 +38,6 @@ function Photo({ src }) {
 
 Photo.propTypes = {
   src: PropTypes.string,
-};
-
-Photo.defaultProps = {
-  src: "",
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -94,18 +90,16 @@ const useStyles = makeStyles((theme) => ({
 
 function PhotoCarusel({
   photos,
-  initialPhotoIndex,
-  onImageClick,
-  onIncrement,
-  onDecrement,
+  initialPhotoIndex = 0,
+  onImageClick = null,
+  onIncrement = null,
+  onDecrement = null,
 }) {
   const { t } = useTranslation();
   const isSmallScreen = useHasScreenSize(["xs", "s"]);
   const [imageHover, setImageHover] = useState(false);
   const classes = useStyles({ imageHover });
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(
-    initialPhotoIndex || 0,
-  );
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(initialPhotoIndex);
   const incrementPhotoIndex = useCallback(() => {
     setCurrentPhotoIndex(currentPhotoIndex + 1);
     if (onIncrement) {
@@ -122,7 +116,7 @@ function PhotoCarusel({
     setCurrentPhotoIndex(initialPhotoIndex || 0);
   }, [photos, initialPhotoIndex]);
 
-  if (!photos || photos.length === 0) {
+  if (!photos || photos?.length === 0) {
     return null;
   }
 
@@ -183,14 +177,6 @@ PhotoCarusel.propTypes = {
   onImageClick: PropTypes.func,
   onIncrement: PropTypes.func,
   onDecrement: PropTypes.func,
-};
-
-PhotoCarusel.defaultProps = {
-  photos: [],
-  initialPhotoIndex: null,
-  onImageClick: null,
-  onIncrement: null,
-  onDecrement: null,
 };
 
 export default PhotoCarusel;

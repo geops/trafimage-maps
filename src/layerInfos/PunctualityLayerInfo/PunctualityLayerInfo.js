@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
-import { withTranslation } from "react-i18next";
+import { useTranslation, withTranslation } from "react-i18next";
 
 const useStyles = makeStyles(() => ({
   legendWrapper: {
@@ -36,9 +36,8 @@ const propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const defaultProps = {};
-
-function PunctualityLayerInfo({ language, t }) {
+function PunctualityLayerInfo() {
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
   const delays = [
     {
@@ -179,10 +178,9 @@ function PunctualityLayerInfo({ language, t }) {
     ),
   };
 
-  return comps[language];
+  return comps[i18n.language];
 }
 
 PunctualityLayerInfo.propTypes = propTypes;
-PunctualityLayerInfo.defaultProps = defaultProps;
 
 export default withTranslation()(PunctualityLayerInfo);

@@ -9,7 +9,7 @@ import Button from "../Button";
 import { ReactComponent as MenuOpenImg } from "../../img/sbb/040_hamburgermenu_102_36.svg";
 import { ReactComponent as MenuClosedImg } from "../../img/sbb/040_schliessen_104_36.svg";
 
-function TopicsMenuHeader({ isOpen, onToggle }) {
+function TopicsMenuHeader({ isOpen = false, onToggle }) {
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
   const [forceRender, setForceRender] = useState(1);
@@ -48,7 +48,7 @@ function TopicsMenuHeader({ isOpen, onToggle }) {
       aria-expanded={isOpen}
       tabIndex={0}
       title={t("Menü")}
-      onClick={() => onToggle()}
+      onClick={() => onToggle?.()}
     >
       <div className="wkp-menu-header-mobile">
         <div className="wkp-menu-header-toggler">
@@ -84,11 +84,6 @@ function TopicsMenuHeader({ isOpen, onToggle }) {
 TopicsMenuHeader.propTypes = {
   onToggle: PropTypes.func,
   isOpen: PropTypes.bool,
-};
-
-TopicsMenuHeader.defaultProps = {
-  isOpen: false,
-  onToggle: () => {},
 };
 
 export default React.memo(TopicsMenuHeader);

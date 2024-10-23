@@ -39,7 +39,7 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
     <p>
       <span>
       </span>
-      <a class="wkp-link "
+      <a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways wkp-link  css-w4uivt-MuiTypography-root-MuiLink-root"
          href="http://www.test.ch"
          rel="noopener noreferrer"
          target="_blank"
@@ -68,7 +68,7 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
     <p>
       <span>
       </span>
-      <a class="wkp-link "
+      <a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways wkp-link  css-w4uivt-MuiTypography-root-MuiLink-root"
          href="http://www.geops.ch"
          rel="noopener noreferrer"
          target="_blank"

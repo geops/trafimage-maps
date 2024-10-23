@@ -98,8 +98,5 @@ function PassagierFrequenzenLayerInfo({ properties: layer }) {
 PassagierFrequenzenLayerInfo.propTypes = {
   properties: PropTypes.instanceOf(Layer),
 };
-PassagierFrequenzenLayerInfo.defaultProps = {
-  properties: { get: () => {} },
-};
 
 export default React.memo(PassagierFrequenzenLayerInfo);

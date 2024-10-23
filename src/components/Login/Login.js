@@ -45,8 +45,4 @@ Login.propTypes = {
   loginUrl: PropTypes.string,
 };
 
-Login.defaultProps = {
-  loginUrl: null,
-};
-
 export default React.memo(Login);

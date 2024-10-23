@@ -45,7 +45,7 @@ const options = [...optionsA3, ...optionsA4].filter((opt) =>
   /^(2|3)$/.test(opt.quality),
 );
 
-function GaExportMenu({ onClose }) {
+function GaExportMenu({ onClose = null }) {
   const { i18n, t } = useTranslation();
   const classesBody = useStylesBody();
   const classesDialog = useStylesDialog();
@@ -148,6 +148,5 @@ function GaExportMenu({ onClose }) {
 }
 
 GaExportMenu.propTypes = { onClose: PropTypes.func };
-GaExportMenu.defaultProps = { onClose: null };
 
 export default GaExportMenu;

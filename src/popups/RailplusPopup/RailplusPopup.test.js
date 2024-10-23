@@ -4,7 +4,7 @@ import { Feature, Map, View } from "ol";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material";
 import { MatomoProvider } from "@jonkoops/matomo-tracker-react";
-import { Layer } from "mobility-toolbox-js/ol";
+import RailplusLayer from "../../layers/RailplusLayer";
 import theme from "../../themes/default";
 import RailplusPopup from "./RailplusPopup";
 
@@ -15,7 +15,7 @@ describe("RailplusPopup", () => {
   const feature33 = new Feature({
     isb_tu_nummer: 33,
   });
-  const layer = new Layer();
+  const layer = new RailplusLayer();
   layer.railplusProviders = {
     1: {
       long_name: "Foooooooo",

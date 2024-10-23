@@ -6,8 +6,6 @@ const propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const defaultProps = {};
-
 function NetzkarteTopicInfo({ t }) {
   return (
     <div>
@@ -27,6 +25,5 @@ function NetzkarteTopicInfo({ t }) {
 }
 
 NetzkarteTopicInfo.propTypes = propTypes;
-NetzkarteTopicInfo.defaultProps = defaultProps;
 
 export default withTranslation()(NetzkarteTopicInfo);

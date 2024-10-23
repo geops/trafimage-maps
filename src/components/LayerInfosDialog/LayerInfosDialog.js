@@ -8,23 +8,15 @@ import DataLink from "../DataLink/DataLink";
 
 const propTypes = {
   style: PropTypes.object,
-  isDraggable: PropTypes.bool,
   selectedForInfos: PropTypes.object,
-};
-
-const defaultProps = {
-  style: undefined,
-  isDraggable: true,
-  selectedForInfos: null,
 };
 
 export const NAME = "infoDialog";
 
-function LayerInfosDialog(props) {
+function LayerInfosDialog({ style, selectedForInfos, ...props }) {
   const language = useSelector((state) => state.app.language);
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const { t } = useTranslation();
-  const { style, isDraggable, selectedForInfos } = props;
   if (!selectedForInfos) {
     return null;
   }
@@ -91,7 +83,6 @@ function LayerInfosDialog(props) {
 
   return (
     <Dialog
-      isDraggable={isDraggable}
       cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={
@@ -109,6 +100,5 @@ function LayerInfosDialog(props) {
 }
 
 LayerInfosDialog.propTypes = propTypes;
-LayerInfosDialog.defaultProps = defaultProps;
 
 export default LayerInfosDialog;

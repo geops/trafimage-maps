@@ -86,11 +86,7 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature),
 };
 
-const defaultProps = {
-  feature: null,
-};
-
-function DvLineInfo({ feature, layer }) {
+function DvLineInfo({ feature = null, layer }) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
@@ -195,7 +191,6 @@ function DvLineInfo({ feature, layer }) {
   );
 }
 
-DvLineInfo.defaultProps = defaultProps;
 DvLineInfo.propTypes = propTypes;
 
 export default DvLineInfo;

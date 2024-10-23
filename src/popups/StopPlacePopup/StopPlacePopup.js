@@ -173,11 +173,13 @@ const getPassengetInformation = (value, t) => {
 };
 
 const getNote = (value, language, t) => {
-  if (!value) return null;
+  const text = getNoteTranslation(value, language);
+  if (!text) return null;
+
   return (
     <fieldset key="note" data-testid="stopplace-note">
       <legend>{t("Hinweise zur Haltestelle")}</legend>
-      {getNoteTranslation(value, language)}
+      {text}
     </fieldset>
   );
 };
@@ -239,7 +241,7 @@ function StopPlacePopup({ feature }) {
   }, [data?.prmInformation, i18n.language, t]);
 
   if (loading) {
-    return <div>Loading ...</div>;
+    return <div>{t("Laden...")}</div>;
   }
 
   return <div className={classes.popup}>{popupContent}</div>;

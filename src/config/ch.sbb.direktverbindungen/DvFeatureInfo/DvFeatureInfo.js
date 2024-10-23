@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function DvFeatureInfo({ filterByType }) {
+function DvFeatureInfo({ filterByType = false }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
   const embedded = useSelector((state) => state.app.embedded);
@@ -300,10 +300,6 @@ function DvFeatureInfo({ filterByType }) {
 
 DvFeatureInfo.propTypes = {
   filterByType: PropTypes.bool,
-};
-
-DvFeatureInfo.defaultProps = {
-  filterByType: false,
 };
 
 export default DvFeatureInfo;

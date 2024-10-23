@@ -10,8 +10,6 @@ const propTypes = {
   staticFilesUrl: PropTypes.string.isRequired,
 };
 
-const defaultProps = {};
-
 function ConstructionLayerInfo({ t, properties, staticFilesUrl }) {
   const config = properties.get("construction");
   const filename = `${config.art}_${config.ort}`.replace(
@@ -32,6 +30,5 @@ function ConstructionLayerInfo({ t, properties, staticFilesUrl }) {
 }
 
 ConstructionLayerInfo.propTypes = propTypes;
-ConstructionLayerInfo.defaultProps = defaultProps;
 
 export default withTranslation()(ConstructionLayerInfo);

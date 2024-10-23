@@ -7,7 +7,6 @@ import DrawLayerInfo from "./DrawLayerInfo";
 import HandicapTopicInfo from "./HandicapTopicInfo";
 import HandicapLayerInfo from "./HandicapLayerInfo";
 import InfrastrukturTopicInfo from "./InfrastrukturTopicInfo";
-import InterventionTopicInfo from "./InterventionTopicInfo";
 import IsbTopicInfo from "./IsbTopicInfo";
 import PassagierFrequenzenLayerInfo from "./PassagierFrequenzenLayerInfo";
 import PunctualityLayerInfo from "./PunctualityLayerInfo";
@@ -48,7 +47,6 @@ export { default as DrawLayerInfo } from "./DrawLayerInfo";
 export { default as HandicapTopicInfo } from "./HandicapTopicInfo";
 export { default as HandicapLayerInfo } from "./HandicapLayerInfo";
 export { default as InfrastrukturTopicInfo } from "./InfrastrukturTopicInfo";
-export { default as InterventionTopicInfo } from "./InterventionTopicInfo";
 export { default as PassagierFrequenzenLayerInfo } from "./PassagierFrequenzenLayerInfo";
 export { default as PunctualityLayerInfo } from "./PunctualityLayerInfo";
 export { default as RegionenkartePublicTopicInfo } from "./RegionenkartePublicTopicInfo";
@@ -88,7 +86,6 @@ export default {
   DrawLayerInfo,
   HandicapTopicInfo,
   HandicapLayerInfo,
-  InterventionTopicInfo,
   InfrastrukturTopicInfo,
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,

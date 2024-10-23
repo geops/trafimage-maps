@@ -194,11 +194,11 @@ export const getLegends = (
 
 // eslint-disable-next-line react/prop-types
 function GeltungsbereicheLegend({
-  mot,
-  valid,
-  background,
-  lineDashArray50,
-  lineDashArray25,
+  mot = null,
+  valid = null,
+  background = false,
+  lineDashArray50 = defaultDashArray,
+  lineDashArray25 = defaultDashArray,
 }) {
   const legend = getLegends(lineDashArray50, lineDashArray25)
     .find(({ mots }) => {
@@ -251,14 +251,6 @@ GeltungsbereicheLegend.propTypes = {
   background: PropTypes.bool,
   lineDashArray50: PropTypes.arrayOf(PropTypes.number),
   lineDashArray25: PropTypes.arrayOf(PropTypes.number),
-};
-
-GeltungsbereicheLegend.defaultProps = {
-  mot: null,
-  valid: null,
-  background: false,
-  lineDashArray50: [1, 7],
-  lineDashArray25: [1, 7],
 };
 
 export default GeltungsbereicheLegend;

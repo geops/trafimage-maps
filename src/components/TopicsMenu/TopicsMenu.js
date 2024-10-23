@@ -26,13 +26,11 @@ const propTypes = {
   ]),
 };
 
-const defaultProps = {
-  children: null,
-  menuHeight: null,
-  bodyElementRef: null,
-};
-
-function TopicsMenu({ children, menuHeight, bodyElementRef }) {
+function TopicsMenu({
+  children = null,
+  menuHeight = null,
+  bodyElementRef = null,
+}) {
   const permissionInfos = useSelector((state) => state.app.permissionInfos);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const layers = useSelector((state) => state.map.layers || []);
@@ -105,6 +103,5 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
 }
 
 TopicsMenu.propTypes = propTypes;
-TopicsMenu.defaultProps = defaultProps;
 
 export default React.memo(withResizing(TopicsMenu));

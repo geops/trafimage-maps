@@ -19,7 +19,13 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function TarifverbundPartner({ color, label, iconSize, style, children }) {
+function TarifverbundPartner({
+  color = null,
+  label,
+  iconSize = 15,
+  style = null,
+  children = null,
+}) {
   const classes = useStyles({ iconSize });
   return (
     <div
@@ -46,13 +52,6 @@ TarifverbundPartner.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   style: PropTypes.shape(),
   iconSize: PropTypes.number,
-};
-
-TarifverbundPartner.defaultProps = {
-  color: null,
-  style: null,
-  children: null,
-  iconSize: 15,
 };
 
 export default TarifverbundPartner;

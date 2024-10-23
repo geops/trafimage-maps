@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
 
 function LegendCircle({
   fillColor,
-  radius,
-  borderColor,
-  borderWidth,
+  radius = 8,
+  borderColor = "black",
+  borderWidth = 0,
   children,
 }) {
   const classes = useStyles({
@@ -37,13 +37,6 @@ LegendCircle.propTypes = {
   borderColor: PropTypes.string,
   borderWidth: PropTypes.number,
   children: PropTypes.node,
-};
-
-LegendCircle.defaultProps = {
-  radius: 8,
-  borderColor: "black",
-  borderWidth: 0,
-  children: null,
 };
 
 export default LegendCircle;
