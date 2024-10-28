@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.6](https://github.com/geops/trafimage-maps/compare/v1.30.5...v1.30.6) (2024-10-28)
+
+### Bug Fixes
+
+- **bauprojekte:** hide topic ([#1193](https://github.com/geops/trafimage-maps/issues/1193)) ([890442d](https://github.com/geops/trafimage-maps/commit/890442d110e626b9824312bb9e73f10ca9f42cb0))
+
+- **imprint & legal:** update imprint and legal lines content ([#1193](https://github.com/geops/trafimage-maps/issues/1193)) ([890442d](https://github.com/geops/trafimage-maps/commit/890442d110e626b9824312bb9e73f10ca9f42cb0))
+
 ### [1.30.5](https://github.com/geops/trafimage-maps/compare/v1.30.4...v1.30.5) (2024-10-15)
 
 ### Bug Fixes
