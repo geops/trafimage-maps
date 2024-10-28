@@ -48,12 +48,12 @@ const comps = {
         Karten und Pläne bzw. Ausschnitte davon und Informationen für private
         Zwecke herunterzuladen, abzuspeichern, auszudrucken oder auf andere
         Weise zu vervielfältigen sofern weder der Copyrightvermerke &quot;©
-        SBB/CFF/FSS, Geodaten: © OpenStreetMap contributors, © swisstopo&quot;
-        noch andere gesetzlich geschützte Bezeichnungen entfernt werden.
-        Sämtliche Eigentums- bzw. Nutzungsrechte verbleiben bei der SBB
-        (Kartenbild) und bei der swisstopo (Kartengrundlagen). Sie können diese
-        Zustimmung jederzeit widerrufen. Jegliche weitere Nutzung (vollständig
-        oder teilweise), Übermittlung (elektronisch oder mit anderen Mitteln),
+        SBB/CFF/FSS, Geodaten: © OpenStreetMap, © swisstopo&quot; noch andere
+        gesetzlich geschützte Bezeichnungen entfernt werden. Sämtliche
+        Eigentums- bzw. Nutzungsrechte verbleiben bei der SBB (Kartenbild) und
+        bei der swisstopo (Kartengrundlagen). Sie können diese Zustimmung
+        jederzeit widerrufen. Jegliche weitere Nutzung (vollständig oder
+        teilweise), Übermittlung (elektronisch oder mit anderen Mitteln),
         Modifikation, Verknüpfung oder Benutzung der in den Websites enthaltenen
         Geobasisdaten ist nur mit vorheriger schriftlicher Einwilligung von SBB
         und swisstopo gestattet.
@@ -155,8 +155,8 @@ const comps = {
         Il est permis de télécharger, d’enregistrer, d‘imprimer, ou de
         reproduire sous toute autre forme, certaines cartes et plans et/ou des
         extraits ainsi que des informations, à condition de ne supprimer ni des
-        mentions de copyright «© CFF/géodonnées: © OpenStreetMap contributors,
-        © swisstopo» ni d’autres désignations légalement protégées. Les CFF
+        mentions de copyright «© CFF/géodonnées: © OpenStreetMap, ©
+        swisstopo» ni d’autres désignations légalement protégées. Les CFF
         conservent tous les droits de propriété ou bien d’utilisation
         (carte-image), de même que swisstopo (bases des cartes). Cette
         autorisation peut être révoquée à tout moment. Toute autre utilisation
@@ -261,14 +261,13 @@ const comps = {
         Individual maps and plans, or excerpts thereof, and information may be
         downloaded, saved, printed or copied by other methods for private use
         provided that none of the copyright symbols &quot;© SBB / Geodaten: ©
-        OpenStreetMap contributors, © swisstopo&quot; or other legally
-        protected names are removed. All property rights and rights of use
-        respectively shall remain with SBB (map images) and swisstopo (basic map
-        data), which can revoke their consent at any time. None of the basic
-        geographical data contained on the websites may be reproduced
-        (completely or in part), transmitted (electronically or by other means),
-        modified, linked or used without the prior written consent of SBB and
-        swisstopo.
+        OpenStreetMap, © swisstopo&quot; or other legally protected names are
+        removed. All property rights and rights of use respectively shall remain
+        with SBB (map images) and swisstopo (basic map data), which can revoke
+        their consent at any time. None of the basic geographical data contained
+        on the websites may be reproduced (completely or in part), transmitted
+        (electronically or by other means), modified, linked or used without the
+        prior written consent of SBB and swisstopo.
       </p>
       <p>
         <b>Copyright of swisstopo.</b>
@@ -359,8 +358,8 @@ const comps = {
         privato è permesso scaricare, salvare, stampare o riprodurre in altro
         modo singole cartine e singoli piani o parte di essi e le relative
         informazioni, a condizione che non siano rimosse le indicazioni circa la
-        fonte «© FFS / Geodati: © OpenStreetMap contributors, © swisstopo» né
-        altre indicazioni tutelate per legge. Tutti i diritti d&apos;autore
+        fonte «© FFS / Geodati: © OpenStreetMap, © swisstopo» né altre
+        indicazioni tutelate per legge. Tutti i diritti d&apos;autore
         rispettivamente di utilizzo rimangono alle FFS (immagine cartografica) e
         a swisstopo (dati cartografici), che possono in qualsiasi momento
         revocare il proprio assenso all&apos;utilizzo. Qualsiasi ulteriore
