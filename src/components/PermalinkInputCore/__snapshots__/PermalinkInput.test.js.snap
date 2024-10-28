@@ -8,11 +8,10 @@ exports[`PermalinkInput matches snapshot 1`] = `
          class="tm-permalink-input"
          value
   >
-  <div role="button"
-       tabindex="0"
-       class="tm-permalink-bt"
-       title
-       aria-label
+  <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium tm-permalink-bt css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+          tabindex="0"
+          type="button"
+          title
   >
     <svg stroke="currentColor"
          fill="currentColor"
@@ -30,6 +29,8 @@ exports[`PermalinkInput matches snapshot 1`] = `
       <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z">
       </path>
     </svg>
-  </div>
+    <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root">
+    </span>
+  </button>
 </div>
 `;

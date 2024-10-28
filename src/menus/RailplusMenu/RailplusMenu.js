@@ -7,15 +7,12 @@ import { useTranslation } from "react-i18next";
 import IframeMenu from "../IframeMenu";
 import { RailplusPopup } from "../../popups";
 import { setFeatureInfo } from "../../model/app/actions";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 import usePanCenterFeature from "../../utils/usePanCenterFeature";
 import CloseButton from "../../components/CloseButton";
 
 const useStyles = makeStyles(() => {
   return {
-    wrapper: {
-      padding: 15,
-    },
     listHeader: {
       paddingLeft: (props) => (props.isMobile ? 0 : 15),
       display: "flex",
@@ -30,7 +27,7 @@ const useStyles = makeStyles(() => {
 function RailplusMenu() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const classes = useStyles({ isMobile });
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const feature = featureInfo[0]?.features[0];
@@ -62,7 +59,13 @@ function RailplusMenu() {
         </Box>
       }
       body={
-        <div className={classes.wrapper}>
+        <div
+          style={{
+            padding: 15,
+            maxHeight: isMobile ? undefined : "calc(100vh - 80px)",
+            overflow: isMobile ? undefined : "auto",
+          }}
+        >
           <RailplusPopup feature={feature} layer={layer} />
         </div>
       }

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { DV_KEY } from "../../../utils/constants";
-import useIsMobile from "../../../utils/useIsMobile";
+import useHasScreenSize from "../../../utils/useHasScreenSize";
 import { setFeatureInfo } from "../../../model/app/actions";
 import CloseButton from "../../../components/CloseButton";
 
@@ -37,7 +37,7 @@ export const DvFeatureInfoTitleString = () => {
 function DvFeatureInfoTitle() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const layers = useSelector((state) => state.map.layers);
   const dvMainLayer = useMemo(
     () => layers.find((l) => l.key === `${DV_KEY}.main`),

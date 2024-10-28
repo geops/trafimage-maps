@@ -14,7 +14,7 @@ describe("permalink", () => {
         // search
         cy.get(".wkp-search").should("exist");
         // telephoneInfos
-        cy.get(".wkp-tel-infos").should("exist");
+        cy.get('[data-testid="wkp-tel-infos"]').should("exist");
         // menu
         cy.get(".wkp-topics-menu").should("exist");
         // baseLayerSwitcher
@@ -73,7 +73,7 @@ describe("permalink", () => {
         cy.visit("/?disabled=header");
         cy.get(".tm-trafimage-maps").should("exist");
         cy.get(".wkp-header").should("not.exist");
-        cy.get(".wkp-tel-infos").should("not.exist");
+        cy.get('[data-testid="wkp-tel-infos"]').should("not.exist");
       });
 
       it("should hide topics menu", () => {
@@ -149,7 +149,7 @@ describe("permalink", () => {
         cy.visit("/?disabled=header,footer");
         cy.get(".tm-trafimage-maps").should("exist");
         cy.get(".wkp-header").should("not.exist");
-        cy.get(".wkp-tel-infos").should("not.exist");
+        cy.get('[data-testid="wkp-tel-infos"]').should("not.exist");
         cy.get(".wkp-footer").should("not.exist");
       });
     });

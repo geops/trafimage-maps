@@ -23,6 +23,7 @@ import {
 import SearchService from "../Search/SearchService";
 import TopicElements from "../TopicElements";
 import { redirect, redirectToLogin } from "../../utils/redirectHelper";
+import { trackTopic } from "../../utils/trackingUtils";
 
 const propTypes = {
   history: PropTypes.shape({
@@ -109,7 +110,6 @@ class TopicLoader extends PureComponent {
       layers,
       language,
     } = this.props;
-
     // Sometimes the array object is different but the content is the same as before.
     const areTopicsReallyUpdated =
       topics?.map((t) => `${t.key}`).join() !==
@@ -123,6 +123,7 @@ class TopicLoader extends PureComponent {
       permissionInfos !== prevProps.permissionInfos
     ) {
       this.loadTopics(prevProps);
+      trackTopic(activeTopic, language);
     } else if (
       activeTopic?.key !== prevProps.activeTopic?.key ||
       (activeTopic &&
@@ -281,11 +282,14 @@ class TopicLoader extends PureComponent {
       We set minZoom and maxZoom: 
       - We get min/max values for each visible layer and then select the min for maxZoom and max for minZoom
     */
-    const visibleLayersMaxZoom = visibleLayers.reduce(
-      (maxZooms, layer) =>
-        layer.get("maxZoom") ? [...maxZooms, layer.get("maxZoom")] : maxZooms,
-      [],
-    );
+    const visibleLayersMaxZoom = visibleLayers.reduce((maxZooms, layer) => {
+      const maxZoom = layer.get("maxZoom");
+      // View Options does not like Infinity or -Infinity
+      if (maxZoom && maxZoom !== Infinity && maxZoom !== -Infinity) {
+        return [...maxZooms, maxZoom];
+      }
+      return maxZooms;
+    }, []);
 
     if (visibleLayersMaxZoom.length) {
       dispatchSetMaxZoom(Math.min(...visibleLayersMaxZoom));
@@ -293,11 +297,14 @@ class TopicLoader extends PureComponent {
       dispatchSetMaxZoom(activeTopic?.maxZoom);
     }
 
-    const visibleLayersMinZoom = visibleLayers.reduce(
-      (minZooms, layer) =>
-        layer.get("minZoom") ? [...minZooms, layer.get("minZoom")] : minZooms,
-      [],
-    );
+    const visibleLayersMinZoom = visibleLayers.reduce((minZooms, layer) => {
+      const minZoom = layer.get("minZoom");
+      // View Options does not like Infinity or -Infinity
+      if (minZoom && minZoom !== Infinity && minZoom !== -Infinity) {
+        return [...minZooms, minZoom];
+      }
+      return minZooms;
+    }, []);
 
     if (visibleLayersMinZoom.length) {
       dispatchSetMinZoom(Math.max(...visibleLayersMinZoom));

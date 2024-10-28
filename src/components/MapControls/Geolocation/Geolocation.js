@@ -9,6 +9,7 @@ import Geolocate from "../../../img/Geolocate";
 import geolocateMarkerWithDirection from "../../../img/geolocate_marker_direction.svg";
 import geolocateMarker from "../../../img/geolocate_marker.svg";
 import { setGeolocating } from "../../../model/app/actions";
+import { trackEvent } from "../../../utils/trackingUtils";
 
 const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
@@ -39,6 +40,7 @@ function Geolocation() {
   const classes = useStyles();
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
   const dispatch = useDispatch();
   const isGeolocating = useSelector((state) => state.app.isGeolocating);
@@ -84,6 +86,16 @@ function Geolocation() {
       );
       return;
     }
+    trackEvent(
+      {
+        eventType: "action",
+        componentName: "maps control button",
+        label: t("Lokalisieren"),
+        location: t(activeTopic?.name, { lng: "de" }),
+        variant: t("Lokalisieren", { lng: "de" }),
+      },
+      activeTopic,
+    );
     dispatch(setGeolocating(true));
     if ("ondeviceorientationabsolute" in window) {
       window.addEventListener(
@@ -105,7 +117,7 @@ function Geolocation() {
     } else {
       window.addEventListener("deviceorientation", deviceOrientationListener);
     }
-  }, [deviceOrientationListener, dispatch, isGeolocating]);
+  }, [deviceOrientationListener, dispatch, isGeolocating, activeTopic, t]);
 
   const styleFunction = useCallback(
     (feature) => {

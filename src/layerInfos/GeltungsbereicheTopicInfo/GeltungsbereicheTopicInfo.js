@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import DataLink from "../../components/DataLink";
 
 const comps = {
   de: (
@@ -62,8 +63,18 @@ const comps = {
 };
 
 function GeltungsbereicheTopicInfo() {
-  const { i18n } = useTranslation();
-  return <div>{comps[i18n.language]}</div>;
+  const { i18n, t } = useTranslation();
+  return (
+    <div>
+      {comps[i18n.language]}
+      <hr />
+      <p>
+        <DataLink href="https://geo.sbb.ch/portal/home/group.html?id=4778f8efa0ad41a6829f0094339158e2#overview">
+          {t("Zu den Trafimage-Datensätzen im SBB Geoportal (SBB-intern)")}
+        </DataLink>
+      </p>
+    </div>
+  );
 }
 
 export default GeltungsbereicheTopicInfo;

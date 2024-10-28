@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo } from "react";
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Zoom from "react-spatial/components/Zoom";
 import { ZoomSlider } from "ol/control";
 import { unByKey } from "ol/Observable";
@@ -12,7 +13,8 @@ import MenuToggler from "./MenuToggler";
 import useOverlayWidth from "../../utils/useOverlayWidth";
 import { ReactComponent as ZoomOut } from "../../img/minus.svg";
 import { ReactComponent as ZoomIn } from "../../img/plus.svg";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
+import { setZoomType } from "../../model/map/actions";
 
 const propTypes = {
   geolocation: PropTypes.bool,
@@ -93,22 +95,21 @@ function MapControls({
   fitExtent,
   children,
 }) {
+  const dispatch = useDispatch();
   const overlayWidth = useOverlayWidth();
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const screenHeight = useSelector((state) => state.app.screenHeight);
   const isSmallHeight = useMemo(() => {
     return ["xs", "s"].includes(screenHeight);
   }, [screenHeight]);
-  const useSmallHeader = useMemo(() => {
-    return ["xs", "s", "m"].includes(screenWidth);
-  }, [screenWidth]);
-  const isMobile = useIsMobile();
+  const hasSmallHeader = useHasScreenSize(["xs", "s", "m"]);
+  const isMobile = useHasScreenSize();
   const classes = useStyles({
     overlayWidth: isMobile ? 0 : overlayWidth,
-    margin: useSmallHeader || isSmallHeight ? 10 : 15,
+    margin: hasSmallHeader || isSmallHeight ? 10 : 15,
   });
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
+  const [zoomSliderRef, setZoomSliderRef] = useState(null);
 
   useEffect(() => {
     let key = null;
@@ -121,17 +122,39 @@ function MapControls({
           .find((ctrl) => ctrl instanceof ZoomSlider);
         if (control) {
           // Force reinitialization of the control
-          // eslint-disable-next-line no-underscore-dangle
           control.sliderInitialized_ = false;
+          setZoomSliderRef(control.target_);
+        } else {
+          setZoomSliderRef(null);
         }
       });
     }
     return () => {
       if (map && key) {
-        unByKey(key);
+        unByKey([key]);
       }
     };
-  }, [map, zoomSlider]);
+  }, [dispatch, map, zoomSlider]);
+
+  useEffect(() => {
+    const onZoomSliderRefUpdate = () => {
+      dispatch(setZoomType("slider"));
+    };
+    if (zoomSliderRef) {
+      zoomSliderRef?.firstChild?.addEventListener(
+        "mousedown",
+        onZoomSliderRefUpdate,
+      );
+    }
+    return () => {
+      if (zoomSliderRef) {
+        zoomSliderRef?.firstChild?.removeEventListener(
+          "mousedown",
+          onZoomSliderRefUpdate,
+        );
+      }
+    };
+  }, [dispatch, zoomSliderRef]);
 
   return (
     <div
@@ -147,6 +170,12 @@ function MapControls({
         titles={{
           zoomIn: t("Hineinzoomen"),
           zoomOut: t("Rauszoomen"),
+        }}
+        onZoomInButtonClick={() => {
+          dispatch(setZoomType("maps control button"));
+        }}
+        onZoomOutButtonClick={() => {
+          dispatch(setZoomType("maps control button"));
         }}
       />
       {geolocation && <Geolocation />}

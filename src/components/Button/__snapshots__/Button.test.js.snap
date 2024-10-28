@@ -5,7 +5,6 @@ exports[`Button should match snapshot. 1`] = `
      tabindex="0"
      class="tm-zoom in"
      title="Zoom in"
-     aria-label="Zoom in"
 >
   +
 </div>

@@ -1,9 +1,7 @@
 import React from "react";
 import "./proj4";
 import tarifverbundkarteLegend from "../img/tarifverbund_legend.url.svg";
-import railplusLegendDe from "../img/railplus_legend_de.url.svg";
-import railplusLegendFr from "../img/railplus_legend_fr.url.svg";
-import railplusLegendIt from "../img/railplus_legend_it.url.svg";
+import railplusLegend from "../img/railplus_legend.svg";
 import energieLegendPub from "../img/energie_legend_pub.url.svg";
 import railPlusLayers from "./ch.railplus.mitglieder";
 import netzkarteLayers, {
@@ -45,7 +43,7 @@ import {
 } from "../utils/constants";
 import DvMenu from "../menus/DirektverbindungenMenu/DvMenu";
 import DvListButton from "./ch.sbb.direktverbindungen/DvListButton";
-import applPermalinkVisiblity from "../utils/applyPermalinkVisibility";
+import applyPermalinkVisiblity from "../utils/applyPermalinkVisibility";
 import RailplusMenu from "../menus/RailplusMenu";
 import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
 import GaExportMapButton from "../menus/GaExportMenu/GaExportMapButton";
@@ -161,7 +159,7 @@ export const betriebsregionen = {
 export const regionenkartePublic = {
   name: "ch.sbb.regionenkarte.public",
   key: "ch.sbb.regionenkarte.public",
-  maxZoom: 13,
+  maxZoom: 14,
   elements: {
     ...defaultElements,
     popup: true,
@@ -213,7 +211,7 @@ export const zweitausbildung = {
 export const netzentwicklung = {
   name: "ch.sbb.netzentwicklung",
   key: "ch.sbb.netzentwicklung",
-  maxZoom: 13,
+  maxZoom: 14,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
   layers: netzentwicklungLayers,
   projection: "EPSG:3857",
@@ -224,7 +222,7 @@ export const netzentwicklung = {
 export const beleuchtungsstaerken = {
   name: "ch.sbb.beleuchtungsstaerken",
   key: "ch.sbb.beleuchtungsstaerken",
-  maxZoom: 13,
+  maxZoom: 14,
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: beleuchtungLayers,
   projection: "EPSG:3857",
@@ -369,6 +367,7 @@ export const sts = {
     footer: false,
     menu: false,
     menuToggler: true,
+    baseLayerSwitcher: false,
   },
   layers: stsLayers,
   only: true,
@@ -444,6 +443,7 @@ export const railPlus = {
     menu: false,
   },
   key: "ch.railplus.mitglieder",
+  name: "ch.railplus.mitglieder",
   layers: railPlusLayers,
   only: true,
   hideInLayerTree: true,
@@ -463,21 +463,13 @@ export const railPlus = {
       publishedAt: "12/2023",
       year: "2023",
     }),
-    getOverlayImageUrl: (lang) => {
-      switch (lang) {
-        case "fr":
-          return railplusLegendFr;
-        case "it":
-          return railplusLegendIt;
-        default:
-          return railplusLegendDe;
-      }
-    },
-    getExportFileName: (t) =>
-      `RAILplus ${t("Streckennetz")} ${new Date().toISOString().slice(0, 10)}`,
+    getOverlayImageUrl: () => railplusLegend,
+    getExportFileName: () =>
+      `RAILplus Streckennetz-Carte du réseau-Carta della rete  ${new Date().toISOString().slice(0, 10)}`,
   },
   minZoom: 7,
   maxZoom: 13,
+  noTracking: true,
 };
 
 export const messwagen = {
@@ -486,7 +478,6 @@ export const messwagen = {
   layers: messwagenLayers,
   elements: {
     ...defaultElements,
-    overlay: false,
     drawMenu: false,
   },
   hideInLayerTree: ONLY_WHEN_NOT_LOGGED_IN,
@@ -503,7 +494,6 @@ const topics = {
     direktverbindungen,
     direktverbindungenIframe,
     zweitausbildung,
-    bauprojekte,
     handicap,
     tarifverbundkarte,
     infrastruktur,
@@ -523,7 +513,7 @@ const topics = {
 };
 
 topics.wkp.forEach((topic) => {
-  applPermalinkVisiblity(
+  applyPermalinkVisiblity(
     topic.layers,
     (pathname) => pathname?.indexOf(`/${topic.key}`) !== -1,
   );

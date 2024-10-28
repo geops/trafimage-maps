@@ -2,6 +2,170 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.7](https://github.com/geops/trafimage-maps/compare/v1.30.6...v1.30.7) (2024-10-28)
+
+### Bug Fixes
+
+- **bauprojekte:** hide topic ([#1200](https://github.com/geops/trafimage-maps/issues/1200)) ([c6a9153](https://github.com/geops/trafimage-maps/commit/c6a9153d8c4d00c2662d9a0575017372d7680676))
+
+### [1.30.6](https://github.com/geops/trafimage-maps/compare/v1.30.5...v1.30.6) (2024-10-28)
+
+### Bug Fixes
+
+- **imprint & legal:** update imprint and legal lines content ([#1193](https://github.com/geops/trafimage-maps/issues/1193)) ([890442d](https://github.com/geops/trafimage-maps/commit/890442d110e626b9824312bb9e73f10ca9f42cb0))
+
+### [1.30.5](https://github.com/geops/trafimage-maps/compare/v1.30.4...v1.30.5) (2024-10-15)
+
+### Bug Fixes
+
+- **tracking:** use window.location.ancestorOrigins to track parent location ([#1195](https://github.com/geops/trafimage-maps/issues/1195)) ([f7526b3](https://github.com/geops/trafimage-maps/commit/f7526b33155c2824b4cdd7838bb01f2e255718f5))
+
+### [1.30.4](https://github.com/geops/trafimage-maps/compare/v1.30.3...v1.30.4) (2024-10-10)
+
+### Bug Fixes
+
+- **Regionenkarte:** prevent line search highlight from disappearing onPointerMove ([#1194](https://github.com/geops/trafimage-maps/issues/1194)) ([c7e6962](https://github.com/geops/trafimage-maps/commit/c7e69625d604b60b57f92dfc4521435ed821e225))
+
+### [1.30.3](https://github.com/geops/trafimage-maps/compare/v1.30.2...v1.30.3) (2024-10-09)
+
+### Bug Fixes
+
+- **tracking:** add missing trafimage-maps.sbb.ch domain to tracking ([#1192](https://github.com/geops/trafimage-maps/issues/1192)) ([9ab03b3](https://github.com/geops/trafimage-maps/commit/9ab03b32e418e21f3afd7104d89255af93fdcf7b))
+
+### [1.30.2](https://github.com/geops/trafimage-maps/compare/v1.30.1...v1.30.2) (2024-10-02)
+
+### Bug Fixes
+
+- **RailplusExportButton:** increase export quality ([3ec4256](https://github.com/geops/trafimage-maps/commit/3ec4256ace358cdbdb0a7417911d5de2776a5034))
+
+### [1.30.1](https://github.com/geops/trafimage-maps/compare/v1.30.0...v1.30.1) (2024-09-17)
+
+### Bug Fixes
+
+- **tracking:** update tracking script URLs ([#1190](https://github.com/geops/trafimage-maps/issues/1190)) ([059abc4](https://github.com/geops/trafimage-maps/commit/059abc4c0ea08798f027e25b10251c70eb7d2065))
+
+## [1.30.0](https://github.com/geops/trafimage-maps/compare/v1.29.14...v1.30.0) (2024-09-17)
+
+### Features
+
+- **tracking:** add SBB tracking for topics and component events ([#1177](https://github.com/geops/trafimage-maps/issues/1177)) ([0de52e2](https://github.com/geops/trafimage-maps/commit/0de52e247ab0f8e6998c35247ff705e1a8fc4ccd))
+
+### Bug Fixes
+
+- remove use of polyfill.io ([cb5a8d7](https://github.com/geops/trafimage-maps/commit/cb5a8d7be843344474134ce911f30d3c814d1052))
+
+### [1.29.14](https://github.com/geops/trafimage-maps/compare/v1.29.13...v1.29.14) (2024-08-30)
+
+### Bug Fixes
+
+- ceil the arrival delay and floor the departure delay ([#1189](https://github.com/geops/trafimage-maps/issues/1189)) ([189ae7b](https://github.com/geops/trafimage-maps/commit/189ae7b05225b2c2aa232dfdcd72056c6b47ef33))
+
+### [1.29.13](https://github.com/geops/trafimage-maps/compare/v1.29.12...v1.29.13) (2024-08-29)
+
+### Bug Fixes
+
+- **handicap:** increase stop search results to 50, add further info to results ([#1187](https://github.com/geops/trafimage-maps/issues/1187)) ([6b1900a](https://github.com/geops/trafimage-maps/commit/6b1900a6447641b232cc2772fa7ce94932c76bff))
+- **telephone info:** add translations, use MUI component ([#1188](https://github.com/geops/trafimage-maps/issues/1188)) ([bb1d643](https://github.com/geops/trafimage-maps/commit/bb1d643a110a32db8020bf4cf50795dacb5fe03b))
+
+### [1.29.12](https://github.com/geops/trafimage-maps/compare/v1.29.11...v1.29.12) (2024-08-15)
+
+### Bug Fixes
+
+- **TrackerMenu:** round delays to minutes, display historic delays ([#1186](https://github.com/geops/trafimage-maps/issues/1186)) ([1f4a0c5](https://github.com/geops/trafimage-maps/commit/1f4a0c519f04ddd0eb387186a7533712c825c14a))
+
+### [1.29.11](https://github.com/geops/trafimage-maps/compare/v1.29.10...v1.29.11) (2024-08-14)
+
+### Bug Fixes
+
+- **eisenbahninfrastruktur:** increase maxZoom for topics with visible rail project labels ([#1185](https://github.com/geops/trafimage-maps/issues/1185)) ([1a1af3e](https://github.com/geops/trafimage-maps/commit/1a1af3ea58d1b8ad5f761e3c649ad2e268efce93))
+
+### [1.29.10](https://github.com/geops/trafimage-maps/compare/v1.29.9...v1.29.10) (2024-08-12)
+
+- update maplibre, fixes label parethesis bug
+
+### [1.29.9](https://github.com/geops/trafimage-maps/compare/v1.29.8...v1.29.9) (2024-08-12)
+
+### Bug Fixes
+
+- **railplus:** add overflow and max-hight to railplus popup to fix scroll ([#1184](https://github.com/geops/trafimage-maps/issues/1184)) ([eec9fe3](https://github.com/geops/trafimage-maps/commit/eec9fe3261eaa099abdb182b1a7ea9469c0545f9))
+
+### [1.29.8](https://github.com/geops/trafimage-maps/compare/v1.29.7...v1.29.8) (2024-08-02)
+
+### Bug Fixes
+
+- typo ([8f765a9](https://github.com/geops/trafimage-maps/commit/8f765a9cb9283f97787bd632d2466a94fcc0b036))
+- update url in handicap topic ([b1fd9ff](https://github.com/geops/trafimage-maps/commit/b1fd9ffe3160f6841a16ae7759f146cc96f76d3b))
+
+### [1.29.7](https://github.com/geops/trafimage-maps/compare/v1.29.6...v1.29.7) (2024-07-16)
+
+### Bug Fixes
+
+- **railplus:** add attributes from Cartaro CMS to railplus popup ([#1178](https://github.com/geops/trafimage-maps/issues/1178)) ([b6ce1d0](https://github.com/geops/trafimage-maps/commit/b6ce1d0f414b03af52a22591aaa4a958219ed7c3))
+- **Share:** replace Twitter icon with X icon, update button titles and translations ([#1181](https://github.com/geops/trafimage-maps/issues/1181)) ([6623f69](https://github.com/geops/trafimage-maps/commit/6623f69104084bc7561ae61bea87ecbaadde1930))
+
+### [1.29.6](https://github.com/geops/trafimage-maps/compare/v1.29.5...v1.29.6) (2024-07-09)
+
+### Bug Fixes
+
+- **zweitausbildung:** disolve clusters on high zoom levels ([#1180](https://github.com/geops/trafimage-maps/issues/1180)) ([66acecf](https://github.com/geops/trafimage-maps/commit/66acecfd039259655002699bf5d18b88d809f969))
+
+### [1.29.5](https://github.com/geops/trafimage-maps/compare/v1.29.3...v1.29.5) (2024-07-03)
+
+### Bug Fixes
+
+- **DataLink:** replace text and url of SBB geoportal link ([#1179](https://github.com/geops/trafimage-maps/issues/1179)) ([7ca3c10](https://github.com/geops/trafimage-maps/commit/7ca3c10555656671edfcfea8d9838a6dea4d530f))
+- **direktverbindung:** display the main layer when day or night layer become visible ([#1176](https://github.com/geops/trafimage-maps/issues/1176)) ([fae81ff](https://github.com/geops/trafimage-maps/commit/fae81ff2fb227d4740484c8335e3466bfb2ab455))
+
+### [1.29.4](https://github.com/geops/trafimage-maps/compare/v1.29.3...v1.29.4) (2024-07-02)
+
+### Bug Fixes
+
+- **direktverbindung:** display the main layer when day or night layer become visible ([a529b37](https://github.com/geops/trafimage-maps/commit/a529b37fb38dd0941c39918ef5fa21685341836b))
+
+### [1.29.3](https://github.com/geops/trafimage-maps/compare/v1.29.2...v1.29.3) (2024-06-04)
+
+### Bug Fixes
+
+- **geltungsbereiche:** update Automatisches Ticketing LayerInfo footer text ([#1175](https://github.com/geops/trafimage-maps/issues/1175)) ([28c46c9](https://github.com/geops/trafimage-maps/commit/28c46c9e62150938130e63003e5bddedeb4c50d4))
+- **railplus:** replace PDF legends with single multilanguage legend ([#1174](https://github.com/geops/trafimage-maps/issues/1174)) ([49ec737](https://github.com/geops/trafimage-maps/commit/49ec7378208801d1f88400d639cc8e7043437913))
+- **STS:** fix swtich between STS validity and STS direktverbindungen ([#1166](https://github.com/geops/trafimage-maps/issues/1166)) ([3268e45](https://github.com/geops/trafimage-maps/commit/3268e45a799d61eabcc8edd002ee89f76458c030))
+- use the genralization level provided by the config ([f9ce5ce](https://github.com/geops/trafimage-maps/commit/f9ce5ce4db0008422bf404b6795f487c1280ccb5))
+
+### [1.29.2](https://github.com/geops/trafimage-maps/compare/v1.29.1...v1.29.2) (2024-05-28)
+
+### Bug Fixes
+
+- **passagierfrequenzen:** correct typo in italian layer name ([#1173](https://github.com/geops/trafimage-maps/issues/1173)) ([6f50629](https://github.com/geops/trafimage-maps/commit/6f50629dd7d29f496ddd82050406307e90fb4445))
+
+### [1.29.1](https://github.com/geops/trafimage-maps/compare/v1.29.0...v1.29.1) (2024-05-16)
+
+### Bug Fixes
+
+- **netzentwicklung:** change info text ([#1172](https://github.com/geops/trafimage-maps/issues/1172)) ([a6d2026](https://github.com/geops/trafimage-maps/commit/a6d20265dfa3a1ab8d8e4f6688aa767c91ad6b51))
+
+## [1.29.0](https://github.com/geops/trafimage-maps/compare/v1.28.16...v1.29.0) (2024-05-13)
+
+### Features
+
+- **funkmesswagen:** add photo layer for Funkmesswagen topic ([#1163](https://github.com/geops/trafimage-maps/issues/1163)) ([8440193](https://github.com/geops/trafimage-maps/commit/844019374a8367a26b8b1b10894f544ed3040843))
+
+### Bug Fixes
+
+- **datalinks:** add datalink service for ISB, Tarifverbund, Geltungsbereiche, Energie ([#1171](https://github.com/geops/trafimage-maps/issues/1171)) ([788f881](https://github.com/geops/trafimage-maps/commit/788f881b5818b3ffe04fb0d1940b5555d1d95c72))
+
+### [1.28.16](https://github.com/geops/trafimage-maps/compare/v1.28.15...v1.28.16) (2024-05-08)
+
+### Bug Fixes
+
+- **isb:** rename Berner Oberland Bahnen AG to Berner Oberland Bahnen ([#1170](https://github.com/geops/trafimage-maps/issues/1170)) ([57e452f](https://github.com/geops/trafimage-maps/commit/57e452fa3c7e3051c1035a35333760b3356430e4))
+
+### [1.28.15](https://github.com/geops/trafimage-maps/compare/v1.28.14...v1.28.15) (2024-05-02)
+
+### Bug Fixes
+
+- **handicap:** add partially handicap conform layer, add translations and layer info ([f8dcdab](https://github.com/geops/trafimage-maps/commit/f8dcdabb1b0f32aca7dadad926f479b2480e36dd))
+- request new data only when previous request has ended and add a request timeout ([#1169](https://github.com/geops/trafimage-maps/issues/1169)) ([060e382](https://github.com/geops/trafimage-maps/commit/060e3824aa67ebcbc54ca51d58e83d1db01f22e0))
+
 ### [1.28.14](https://github.com/geops/trafimage-maps/compare/v1.28.13...v1.28.14) (2024-04-18)
 
 ### Bug Fixes

@@ -15,10 +15,10 @@ import {
   ClickAwayListener,
   Typography,
 } from "@mui/material";
-import { FaTimes } from "react-icons/fa";
 import { ReactComponent as QuestionIcon } from "../../img/circleQuestionMark.svg";
 import { setSearchInfoOpen } from "../../model/app/actions";
 import CloseButton from "../CloseButton";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -97,10 +97,23 @@ function SearchInfo({ anchorEl }) {
   const classes = useStyles({ screenWidth });
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const searchInfoOpen = useSelector((state) => state.app.searchInfoOpen);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
 
   const togglePopup = useCallback(() => {
+    if (!searchInfoOpen) {
+      trackEvent(
+        {
+          eventType: "action",
+          componentName: "search info button",
+          label: t("Suche-Info"),
+          location: t(activeTopic?.name, { lng: "de" }),
+          variant: "Suche-Info",
+        },
+        activeTopic,
+      );
+    }
     dispatch(setSearchInfoOpen(!searchInfoOpen));
-  }, [dispatch, searchInfoOpen]);
+  }, [dispatch, searchInfoOpen, activeTopic, t]);
 
   useEffect(() => {
     // Ensure the popup is always closed on mount
@@ -151,9 +164,7 @@ function SearchInfo({ anchorEl }) {
                       <CloseButton
                         onClick={togglePopup}
                         className={classes.closeBtn}
-                      >
-                        <FaTimes />
-                      </CloseButton>
+                      />
                     </div>
                     <List
                       dense

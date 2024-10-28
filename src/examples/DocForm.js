@@ -267,7 +267,6 @@ function DocForm({
 
                               onChange(url.toString());
                             }}
-                            // eslint-disable-next-line react/jsx-props-no-spreading
                             {...(props || {})}
                           />
                         )}
@@ -290,7 +289,6 @@ function DocForm({
 
                                     onChange(url.toString());
                                   }}
-                                  // eslint-disable-next-line react/jsx-props-no-spreading
                                   {...(props || {})}
                                 />
                               }

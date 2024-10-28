@@ -78,7 +78,6 @@ function FeatureMenu({ property, menuItemProps }) {
       onClose={() => {
         dispatch(setFeatureInfo());
       }}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...menuItemProps}
     >
       <FeatureInformation featureInfo={filtered} />

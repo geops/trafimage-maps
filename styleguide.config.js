@@ -38,18 +38,18 @@ module.exports = {
     },
     {
       name: "Examples",
-      href: "#/Examples/HTML%20%26%20Vanilla%20JS/Construction",
+      href: "#/Examples/HTML%20%26%20Vanilla%20JS/Direct%20Connections",
       sectionDepth: 2,
       sections: [
         {
           name: "HTML & Vanilla JS",
-          href: "#/Examples/HTML%20%26%20Vanilla%20JS/Construction",
+          href: "#/Examples/HTML%20%26%20Vanilla%20JS/Direct%20Connections",
           sections: [
-            {
-              name: "Construction",
-              content: "src/examples/Construction/README.md",
-              exampleMode: "hide",
-            },
+            // {
+            //   name: "Construction",
+            //   content: "src/examples/Construction/README.md",
+            //   exampleMode: "hide",
+            // },
             {
               name: "Direct Connections",
               content: "src/examples/DirektVerbindung/README.md",

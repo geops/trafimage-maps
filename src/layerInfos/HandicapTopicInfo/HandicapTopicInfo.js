@@ -61,7 +61,7 @@ function HandicapTopicInfo() {
       {comps[i18n.language]}
       <hr />
       <p>
-        <DataLink href=" https://opentransportdata.swiss/de/dataset/prm_data" />
+        <DataLink href="https://opentransportdata.swiss/de/cookbook/accessibility/" />
       </p>
     </div>
   );

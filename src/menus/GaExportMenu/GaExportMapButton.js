@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { unByKey } from "ol/Observable";
 import MapButton from "../../components/MapButton";
 import GaExportMenu from "./GaExportMenu";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useVisibleLayer = (layers) => {
   const [visible, setVisible] = useState(false);
@@ -21,26 +21,28 @@ const useVisibleLayer = (layers) => {
 };
 
 function GaExportMapButton() {
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const { t } = useTranslation();
   const [showMenu, setShowMenu] = useState(false);
   const layers = useSelector((state) => state.map.layers);
   const exportableLayers = layers.filter((layer) => layer.get("isExportable"));
   const showButton = useVisibleLayer(exportableLayers);
+
+  if (isMobile || !showButton) {
+    return null;
+  }
+
   return (
-    !isMobile &&
-    showButton && (
-      <>
-        <MapButton
-          onClick={() => setShowMenu(!showMenu)}
-          style={{ padding: 8, color: "#444" }}
-          title={t("Karte als PDF exportieren")}
-        >
-          <BsDownload />
-        </MapButton>
-        {showMenu && <GaExportMenu onClose={() => setShowMenu(false)} />}
-      </>
-    )
+    <>
+      <MapButton
+        onClick={() => setShowMenu(!showMenu)}
+        style={{ padding: 8, color: "#444" }}
+        title={t("Karte als PDF exportieren")}
+      >
+        <BsDownload />
+      </MapButton>
+      {showMenu && <GaExportMenu onClose={() => setShowMenu(false)} />}
+    </>
   );
 }
 

@@ -3,6 +3,7 @@
 import getIsMobileDevice from "./getIsMobileDevice";
 
 export const SWISS_EXTENT = [656409.5, 5740863.4, 1200512.3, 6077033.16];
+export const SWISS_CENTER = [903000, 5899500];
 
 export const DRAW_PARAM = "draw.id";
 export const DRAW_REDIRECT_PARAM = "draw.redirect";

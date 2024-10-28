@@ -6,6 +6,7 @@ import { makeStyles } from "@mui/styles";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
 import { ScaleLine } from "ol/control";
 import html2canvas from "html2canvas";
+import Button from "../Button";
 import { ReactComponent as Loader } from "./loader.svg";
 import {
   getMapHd,
@@ -15,65 +16,89 @@ import {
   sizesByFormat,
 } from "../../utils/exportUtils";
 import LayerService from "../../utils/LayerService";
+import { trackEvent } from "../../utils/trackingUtils";
 
-const flexCenter = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   buttonContent: {
-    ...flexCenter,
+    ...theme.styles.flexCenter,
     padding: "5px 10px",
     height: 35,
     width: 110,
+    minWidth: 110,
     backgroundColor: "#dcdcdc",
     "&:hover": {
       backgroundColor: "#cdcdcd",
     },
+    "&:disabled": {
+      opacity: 0.9,
+    },
   },
-  canvasButton: { ...flexCenter },
 }));
 
 function ExportButton({
-  exportFormat,
-  exportScale,
-  exportSize,
-  exportCoordinates,
-  exportZoom,
-  exportExtent,
-  exportCopyright,
-  children,
-  loadingComponent,
-  style,
-  id,
-  scaleLineConfig,
+  exportFormat = "a0",
+  exportScale = 1, // High res
+  exportSize = [3370, 2384], // a0
+  exportCoordinates = null,
+  exportZoom = null, // 10,
+  exportExtent = [620000, 5741000, 1200000, 6058000],
+  exportCopyright = false,
+  children = <DefaultChildren />,
+  style = {},
+  id = null,
+  scaleLineConfig = null,
+  trackingEventOptions = {},
 }) {
-  const classes = useStyles();
   const map = useSelector((state) => state.app.map);
-  const topic = useSelector((state) => state.app.activeTopic);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
   const exportPrintOptions = useSelector(
     (state) => state.app.exportPrintOptions,
   );
   const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
+  const { exportConfig } = activeTopic || {};
+
+  const renderChildren = () => {
+    const styles = {
+      pointerEvents: isLoading ? "none" : "auto",
+      opacity: isLoading ? 0.5 : 1,
+      ...style,
+    };
+    return isLoading
+      ? React.cloneElement(children, {
+          isLoading,
+          style: styles,
+          disabled: true,
+        })
+      : React.Children.map(children, (child) => {
+          return React.cloneElement(child, { style: styles, id });
+        });
+  };
 
   return (
     <CanvasSaveButton
-      id={id}
-      title={t("Karte als PDF exportieren")}
-      className={classes.canvasButton}
-      style={{
-        pointerEvents: isLoading ? "none" : "auto",
-        opacity: isLoading ? 0.3 : 1,
-        ...style,
-      }}
       extraData={exportCopyright ? generateExtraData(layers) : null}
       autoDownload={false}
       format="image/jpeg"
       onSaveStart={() => {
+        const { getExportFileName } = exportConfig || {};
+        if (trackingEventOptions) {
+          trackEvent(
+            {
+              eventType: "download",
+              componentName: "secondary button",
+              label: t("PDF exportieren"),
+              location: t(activeTopic?.name, { lng: "de" }),
+              variant: "PDF export",
+              value:
+                getExportFileName?.(t, exportFormat, i18n.language) ||
+                `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`,
+              ...trackingEventOptions,
+            },
+            activeTopic,
+          );
+        }
         setLoading(true);
         return getMapHd(
           map,
@@ -95,7 +120,6 @@ function ExportButton({
         let imageUrl;
         let fileName;
 
-        const { exportConfig } = topic;
         if (exportConfig) {
           const { getTemplateValues, getOverlayImageUrl, getExportFileName } =
             exportConfig;
@@ -134,27 +158,29 @@ function ExportButton({
         setLoading(false);
       }}
     >
-      {isLoading ? loadingComponent : children}
+      {renderChildren()}
     </CanvasSaveButton>
   );
 }
 
-function DefaultLoadingComponent() {
+function DefaultChildren({ isLoading = false, ...props }) {
   const classes = useStyles();
   const { t } = useTranslation();
   return (
-    <span className={classes.buttonContent}>
-      <Loader />
-      {t("Export läuft...")}
-    </span>
+    <Button {...props} className={classes.buttonContent} disabled={isLoading}>
+      {isLoading && <Loader />}
+      {t(isLoading ? "Export läuft..." : "PDF exportieren")}
+    </Button>
   );
 }
 
-function DefaultChildren() {
-  const classes = useStyles();
-  const { t } = useTranslation();
-  return <span className={classes.buttonContent}>{t("PDF exportieren")}</span>;
-}
+DefaultChildren.propTypes = { isLoading: PropTypes.bool };
+
+DefaultChildren.propTypes = {
+  style: PropTypes.object,
+  id: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
 ExportButton.propTypes = {
   exportFormat: PropTypes.string,
@@ -165,28 +191,22 @@ ExportButton.propTypes = {
   exportSize: PropTypes.arrayOf(PropTypes.number),
   exportCopyright: PropTypes.bool,
   children: PropTypes.node,
-  loadingComponent: PropTypes.node,
   style: PropTypes.object,
   id: PropTypes.string,
   scaleLineConfig: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
   }),
-};
-
-ExportButton.defaultProps = {
-  exportFormat: "a0",
-  exportScale: 1, // High res,
-  exportCoordinates: null,
-  exportZoom: null, // 10,
-  exportExtent: [620000, 5741000, 1200000, 6058000],
-  exportCopyright: false,
-  children: <DefaultChildren />,
-  exportSize: [3370, 2384], // a0
-  loadingComponent: <DefaultLoadingComponent />,
-  style: {},
-  id: null,
-  scaleLineConfig: null,
+  trackingEventOptions: PropTypes.shape({
+    category: PropTypes.string,
+    action: PropTypes.string,
+    label: PropTypes.string,
+    variant: PropTypes.string,
+    value: PropTypes.string,
+    eventType: PropTypes.string,
+    location: PropTypes.string,
+    componentName: PropTypes.string,
+  }),
 };
 
 export default React.memo(ExportButton);

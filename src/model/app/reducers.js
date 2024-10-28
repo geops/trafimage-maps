@@ -60,6 +60,7 @@ import { LS_SIZE_KEY } from "../../utils/constants";
 const dftlInteractions = defaultInteractions({
   altShiftDragRotate: false,
   pinchRotate: false,
+  mouseWheelZoom: false,
 });
 
 // It's important to put it before PinchZoom otherwise the pointerdown is stopped by the PinchZoom.

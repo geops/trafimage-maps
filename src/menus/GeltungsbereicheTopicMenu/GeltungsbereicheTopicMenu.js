@@ -87,7 +87,7 @@ function GeltungsbereicheTopicMenu() {
   const tmMapsEl = document.getElementsByClassName("tm-trafimage-maps")[0];
   const isEmbedded = tmMapsEl && window.innerWidth !== tmMapsEl?.offsetWidth;
   const classes = useStyles();
-  const [value, setValue] = useState();
+  const [value, setValue] = useState(null);
 
   useEffect(() => {
     dispatch(setDialogPosition({ x: 425, y: 17 }));

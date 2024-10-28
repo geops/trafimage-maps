@@ -54,7 +54,6 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
         value=""
         selected={!!anchorEl}
         className={classes.button}
-        // eslint-disable-next-line react/jsx-props-no-spreading
         {...buttonProps}
         onClick={handleClick}
         title={t("Permalink generieren")}

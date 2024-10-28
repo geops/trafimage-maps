@@ -53,6 +53,38 @@ function PunctualityPopup({ feature, layer }) {
     <RouteSchedule
       trackerLayer={layer}
       lineInfos={lineInfos}
+      getDelayString={(milliseconds, isArrival) => {
+        let timeInMs = milliseconds;
+        if (timeInMs < 0) {
+          timeInMs = 0;
+        }
+        const h = Math.floor(timeInMs / 3600000);
+        const m = (isArrival ? Math.ceil : Math.floor)(
+          (timeInMs % 3600000) / 60000,
+        );
+
+        if (h === 0 && m === 0) {
+          return "+0m";
+        }
+        if (h === 0) {
+          return `+${m}m`;
+        }
+        return `+${h}h${m}m`;
+      }}
+      renderArrivalDelay={(delay, stop, getDelayString, getDelayColor) => {
+        return (
+          <span style={{ color: getDelayColor?.(delay, stop) || "inherit" }}>
+            {`${getDelayString?.(delay, true) || ""}`}
+          </span>
+        );
+      }}
+      renderDepartureDelay={(delay, stop, getDelayString, getDelayColor) => {
+        return (
+          <span style={{ color: getDelayColor?.(delay, stop) || "inherit" }}>
+            {`${getDelayString?.(delay, false) || ""}`}
+          </span>
+        );
+      }}
       onStationClick={(station) => {
         if (station.coordinate) {
           map.getView().animate({

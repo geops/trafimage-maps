@@ -5,11 +5,13 @@ import PropTypes from "prop-types";
 import { FaInfoCircle } from "react-icons/fa";
 import { IconButton } from "@mui/material";
 import { setSelectedForInfos } from "../../model/app/actions";
+import { trackEvent } from "../../utils/trackingUtils";
 
 function InfosButton({ selectedInfo, className }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
 
   const isSelected = useMemo(() => {
     return selectedForInfos === selectedInfo;
@@ -29,6 +31,16 @@ function InfosButton({ selectedInfo, className }) {
       className={classNam}
       title={t("Layerinformationen anzeigen", { layer: t(selectedInfo.key) })}
       onClick={(evt) => {
+        trackEvent(
+          {
+            eventType: "action",
+            componentName: "info button",
+            label: t(selectedInfo.key),
+            location: t(activeTopic?.name, { lng: "de" }),
+            variant: selectedInfo?.get ? "Layer" : "Topic", // We test the get method for layer or topic, see LayerInfosDialog.js
+          },
+          activeTopic,
+        );
         dispatch(setSelectedForInfos(isSelected ? null : selectedInfo));
         evt.stopPropagation();
       }}

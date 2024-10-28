@@ -22,7 +22,7 @@ function MenuItemHeader({ className, title, icon, isOpen, onToggle }) {
   return (
     <Button
       className={`${className}${isOpen ? " open" : ""}`}
-      ariaExpanded={isOpen}
+      aria-expanded={isOpen}
       onClick={() => onToggle()}
     >
       {icon && <div className="wkp-menu-item-header-icon">{icon}</div>}

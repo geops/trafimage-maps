@@ -1,10 +1,4 @@
-import React, {
-  useMemo,
-  useRef,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { useRef, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Drawer } from "@mui/material";
@@ -14,7 +8,7 @@ import FeatureInformation from "../FeatureInformation";
 import { setFeatureInfo, setOverlayElement } from "../../model/app/actions";
 import usePrevious from "../../utils/usePrevious";
 import { OVERLAY_MIN_HEIGHT } from "../../utils/constants";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles((theme) => ({
   drawerRoot: {
@@ -106,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
   resizeResetButton: {
     width: "calc(100% - 50px)",
     height: 55,
-    zIndex: 10000,
+    zIndex: 1000,
     border: "none",
     background: "transparent",
   },
@@ -156,16 +150,12 @@ function Overlay({
   ResizableProps,
 }) {
   const classes = useStyles();
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const resizeRef = useRef(null);
   const [isSnapSmooth, setSnapSmooth] = useState(false);
   const [node, setNode] = useState(null);
   const { defaultSize } = ResizableProps;
-  const isMobile = useIsMobile();
-
-  const isSmallerThanMd = useMemo(() => {
-    return ["xs", "s", "m"].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useHasScreenSize();
+  const isSmallerThanMd = useHasScreenSize(["xs", "s", "m"]);
 
   const resetOverlayHeight = useCallback(() => {
     if (resizeRef?.current) {
@@ -295,7 +285,6 @@ function Overlay({
                 </>
               ),
             }}
-            // eslint-disable-next-line react/jsx-props-no-spreading
             {...ResizableProps}
             snap={null} // We do the snap manually
           >

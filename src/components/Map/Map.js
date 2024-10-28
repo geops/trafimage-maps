@@ -3,13 +3,19 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { touchOnly } from "ol/events/condition";
+import { always, touchOnly } from "ol/events/condition";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
 import OLMap from "ol/Map";
 import BasicMap from "react-spatial/components/BasicMap";
+import { MouseWheelZoom } from "ol/interaction";
 import MapAccessibility from "../MapAccessibility";
-import { setResolution, setCenter, setZoom } from "../../model/map/actions";
+import {
+  setResolution,
+  setCenter,
+  setZoom,
+  setZoomType,
+} from "../../model/map/actions";
 import {
   setFeatureInfo,
   setSearchOpen,
@@ -20,12 +26,12 @@ import NoDragPanWarning from "../NoDragPanWarning";
 import NoMouseWheelWarning from "../NoMouseWheelWarning";
 import getFeatureInfoAtCoordinate from "../../utils/getFeatureInfoAtCoordinate";
 import getQueryableLayers from "../../utils/getQueryableLayers";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
 
   // mapStateToProps
-  featureInfo: PropTypes.arrayOf(PropTypes.shape()),
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
   maxExtent: PropTypes.arrayOf(PropTypes.number),
@@ -37,6 +43,7 @@ const propTypes = {
   showPopups: PropTypes.bool,
   maxZoom: PropTypes.number,
   minZoom: PropTypes.number,
+  zoomType: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
@@ -45,6 +52,7 @@ const propTypes = {
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchOpen: PropTypes.func.isRequired,
   dispatchUpdateDrawEditlink: PropTypes.func.isRequired,
+  dispatchSetZoomType: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -52,7 +60,6 @@ const propTypes = {
 const defaultProps = {
   // mapStateToProps
   center: [925472, 5920000],
-  featureInfo: [],
   layers: [],
   extent: undefined,
   maxExtent: undefined,
@@ -65,32 +72,24 @@ const defaultProps = {
 };
 
 class Map extends PureComponent {
-  /**
-   * Compare 2 feature info objects and return true
-   * if they are the same.
-   * @private
-   */
-  static isSameFeatureInfo(first, second) {
-    if (first.length !== second.length) {
-      return false;
-    }
-
-    const firstFeatures = first.map((f) => f.features).flat();
-    const secondFeatures = second.map((s) => s.features).flat();
-
-    if (firstFeatures.length !== secondFeatures.length) {
-      return false;
-    }
-
-    return firstFeatures.every((f, i) => secondFeatures[i] === f);
-  }
-
   componentDidMount() {
-    const { map, dispatchHtmlEvent } = this.props;
+    const { map, dispatchHtmlEvent, dispatchSetZoomType } = this.props;
     this.onPointerMoveRef = map.on("pointermove", (e) => this.onPointerMove(e));
     this.onSingleClickRef = map.on("singleclick", (e) => this.onSingleClick(e));
     dispatchHtmlEvent(new CustomEvent("load"));
     map?.updateSize();
+    const mapInteractions = map.getInteractions();
+    mapInteractions.insertAt(
+      0,
+      new MouseWheelZoom({
+        condition: (evt) => {
+          if (evt.type === "wheel") {
+            dispatchSetZoomType("scroll");
+          }
+          return always(evt);
+        },
+      }),
+    );
   }
 
   componentDidUpdate() {
@@ -111,8 +110,12 @@ class Map extends PureComponent {
       dispatchSetResolution,
       dispatchSetZoom,
       zoom,
+      zoomType,
       dispatchHtmlEvent,
       dispatchUpdateDrawEditlink,
+      dispatchSetZoomType,
+      activeTopic,
+      t,
     } = this.props;
     const newResolution = evt.map.getView().getResolution();
     const newZoom = evt.map.getView().getZoom();
@@ -121,6 +124,22 @@ class Map extends PureComponent {
     if (zoom !== newZoom) {
       dispatchSetZoom(newZoom);
       dispatchUpdateDrawEditlink();
+      if (zoomType) {
+        const isZoomingIn = zoom < newZoom;
+        let label = isZoomingIn ? t("Hineinzoomen") : t("Rauszoomen");
+        if (zoomType === "slider") label = undefined;
+        trackEvent(
+          {
+            eventType: "action",
+            componentName: zoomType,
+            label,
+            location: t(activeTopic?.name, { lng: "de" }),
+            variant: isZoomingIn ? "ZoomIn" : "ZoomOut",
+          },
+          activeTopic,
+        );
+        dispatchSetZoomType(null);
+      }
     }
 
     if (resolution !== newResolution) {
@@ -140,13 +159,7 @@ class Map extends PureComponent {
 
   onPointerMove(evt) {
     const { map, coordinate } = evt;
-    const {
-      layers,
-      featureInfo,
-      dispatchSetFeatureInfo,
-      showPopups,
-      activeTopic,
-    } = this.props;
+    const { layers, showPopups, activeTopic } = this.props;
 
     if (document.activeElement !== map.getTargetElement()) {
       map.getTargetElement().focus();
@@ -176,7 +189,7 @@ class Map extends PureComponent {
         ({ layer }) => !layer.get("priorityFeatureInfo"),
       );
 
-      let infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
+      const infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
 
       // Show the hover style if the layer has the method.
       infos.forEach(({ layer, features }) => {
@@ -190,42 +203,6 @@ class Map extends PureComponent {
       )
         ? "pointer"
         : "auto";
-
-      const shouldNotSetInfoOnHover =
-        featureInfo.length &&
-        featureInfo.every(({ layer }) =>
-          layer.get("disableSetFeatureInfoOnHover"),
-        );
-
-      const clickInfoOpen =
-        featureInfo.length &&
-        featureInfo.every(({ layer }) => {
-          return layer.get("popupComponent") && !layer.get("showPopupOnHover");
-        });
-
-      // don't continue if there's a popup that was opened by click
-      if (!clickInfoOpen && !shouldNotSetInfoOnHover) {
-        infos = infos
-          .filter(
-            ({ layer }) =>
-              layer.get("showPopupOnHover") && layer.get("popupComponent"),
-          )
-          .map((info) => {
-            /* Apply showPopupOnHover function if defined to further filter features */
-            const showPopupOnHover = info.layer.get("showPopupOnHover");
-            if (typeof showPopupOnHover === "function") {
-              return {
-                ...info,
-                features: info.layer.get("showPopupOnHover")(info.features),
-              };
-            }
-            return info;
-          });
-
-        if (!Map.isSameFeatureInfo(featureInfo, infos)) {
-          dispatchSetFeatureInfo(infos);
-        }
-      }
     });
   }
 
@@ -272,8 +249,7 @@ class Map extends PureComponent {
           .reverse()
           .filter(({ layer }) => {
             return (
-              (layer.get("popupComponent") && !layer.get("showPopupOnHover")) ||
-              activeTopic.enableFeatureClick
+              layer.get("popupComponent") || activeTopic.enableFeatureClick
             );
           });
 
@@ -344,7 +320,6 @@ Map.propTypes = propTypes;
 Map.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => ({
-  featureInfo: state.app.featureInfo,
   layers: state.map.layers,
   center: state.map.center,
   extent: state.map.extent,
@@ -355,6 +330,7 @@ const mapStateToProps = (state) => ({
   minZoom: state.map.minZoom,
   showPopups: state.app.showPopups,
   activeTopic: state.app.activeTopic,
+  zoomType: state.map.zoomType,
 });
 
 const mapDispatchToProps = {
@@ -364,6 +340,7 @@ const mapDispatchToProps = {
   dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetSearchOpen: setSearchOpen,
   dispatchUpdateDrawEditlink: updateDrawEditLink,
+  dispatchSetZoomType: setZoomType,
 };
 
 export default compose(

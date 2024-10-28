@@ -9,6 +9,9 @@ import Share from ".";
 
 describe("Share", () => {
   let store;
+  delete global.window.location;
+  global.window = Object.create(window);
+  global.window.location = { hostname: "wkp-dev.foo" };
   beforeEach(() => {
     store = global.global.mockStore({
       map: {},
@@ -33,7 +36,8 @@ describe("Share", () => {
         </ThemeProvider>
       </MatomoProvider>,
     );
-    expect(container.querySelectorAll("button").length).toBe(1);
+    expect(container.querySelectorAll("button").length).toBe(2);
+    expect(container.querySelectorAll("a").length).toBe(3);
   });
 
   describe("should send track event on click", () => {
@@ -56,6 +60,7 @@ describe("Share", () => {
         </MatomoProvider>,
       );
       container = wrapper.container;
+      window.digitalDataLayer = [];
     });
 
     test("on permalink button", () => {
@@ -64,14 +69,20 @@ describe("Share", () => {
         action: "clickSharePermalink",
         category: "test",
       });
+      expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch(
+        /Permalink generieren/i,
+      );
     });
 
     test("on mail button", () => {
-      fireEvent.click(container.querySelector(".ta-mail-icon a"));
+      fireEvent.click(container.querySelector(".ta-mail-icon"));
       expect(matomo.trackEvent).toBeCalledWith({
         action: "clickShareMail",
         category: "test",
       });
+      expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch(
+        /Per Email versenden/i,
+      );
     });
 
     test("on download button", () => {
@@ -80,22 +91,31 @@ describe("Share", () => {
         action: "clickShareDownload",
         category: "test",
       });
+      expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch(
+        /PNG export/i,
+      );
     });
 
     test("on facebook button", () => {
-      fireEvent.click(container.querySelector(".ta-facebook-icon a"));
+      fireEvent.click(container.querySelector(".ta-facebook-icon"));
       expect(matomo.trackEvent).toBeCalledWith({
         action: "clickShareFacebook",
         category: "test",
       });
+      expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch(
+        /Auf Facebook teilen/i,
+      );
     });
 
     test("on twitter button", () => {
-      fireEvent.click(container.querySelector(".ta-twitter-icon a"));
+      fireEvent.click(container.querySelector(".ta-x-icon"));
       expect(matomo.trackEvent).toBeCalledWith({
         action: "clickShareTwitter",
         category: "test",
       });
+      expect(window.digitalDataLayer[0].event.eventInfo.variant).toMatch(
+        /Auf X teilen/i,
+      );
     });
   });
 });

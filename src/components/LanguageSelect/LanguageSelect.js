@@ -2,10 +2,12 @@ import React, { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MenuItem } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
 import Select from "../Select";
 import { setLanguage } from "../../model/app/actions";
 import { ReactComponent as SBBGlobe } from "../../img/sbb/globe_210_large.svg";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
+import { trackEvent, trackTopic } from "../../utils/trackingUtils";
 
 const optionsDesktop = [
   { label: "Deutsch", value: "de" },
@@ -51,8 +53,10 @@ const useStyles = makeStyles((theme) => ({
 
 function LanguageSelect() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const language = useSelector((state) => state.app.language);
-  const isMobileWidth = useIsMobile();
+  const isMobileWidth = useHasScreenSize();
   const classes = useStyles({ isMobileWidth });
   const options = isMobileWidth ? optionsMobile : optionsDesktop;
   const inputValue = useMemo(
@@ -62,9 +66,20 @@ function LanguageSelect() {
 
   const onSelectChange = useCallback(
     (opt) => {
+      trackTopic(activeTopic, opt.target.value);
+      trackEvent(
+        {
+          eventType: "action",
+          componentName: "select menu item",
+          label: opt.target.value,
+          location: t(activeTopic?.name, { lng: "de" }),
+          variant: "Sprache wählen",
+        },
+        activeTopic,
+      );
       dispatch(setLanguage(opt.target.value));
     },
-    [dispatch],
+    [t, activeTopic, dispatch],
   );
 
   const langOptions = useMemo(() => {
@@ -74,6 +89,7 @@ function LanguageSelect() {
           key={opt.value}
           value={opt.value}
           data-cy={`lang-select-option-${opt.value}`}
+          data-testid={`lang-select-option-${opt.value}`}
         >
           {opt.label}
         </MenuItem>
@@ -86,6 +102,7 @@ function LanguageSelect() {
       <Select
         fullWidth
         data-cy="lang-select"
+        data-testid="lang-select"
         value={inputValue.value}
         renderValue={(opt) => (
           <span className={classes.currentValue}>

@@ -56,16 +56,20 @@ function TarifverbundkartePopup({ feature, layer }) {
           <Typography variant="h4">
             <b>{t(`Tarifverbunde in ${feature.get("name")}`)}</b>
           </Typography>
-          {verbunde.map((v) => {
-            return (
-              <TarifverbundPartner
-                iconSize={12}
-                key={v.code}
-                color={`#${v.colour}`}
-                label={<Link href={v.url}>{v.name}</Link>}
-              />
-            );
-          })}
+          {verbunde
+            .filter((v) => !!(v.url && v.name && v.colour))
+            .map((v) => {
+              return (
+                <TarifverbundPartner
+                  iconSize={12}
+                  key={v.code}
+                  color={`#${v.colour}`}
+                  label={`${v.name}`}
+                >
+                  <Link href={v.url}>{v.name}</Link>
+                </TarifverbundPartner>
+              );
+            })}
           {zPass?.tarifverbund_urls && (
             <TarifverbundPartner
               iconSize={12}
@@ -73,8 +77,10 @@ function TarifverbundkartePopup({ feature, layer }) {
                 background:
                   "repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)",
               }}
-              label={<Link href={zPass?.tarifverbund_urls}>Z-Pass</Link>}
-            />
+              label="Z-Pass"
+            >
+              <Link href={zPass?.tarifverbund_urls}>Z-Pass</Link>
+            </TarifverbundPartner>
           )}
           <br />
         </>

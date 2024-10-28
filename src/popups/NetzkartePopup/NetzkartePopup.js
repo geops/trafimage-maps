@@ -180,7 +180,14 @@ function NetzkartePopup({ feature, coordinate }) {
     <DeparturePopup feature={feature} coordinate={coordinate}>
       <CloseButton
         size="small"
-        style={{ position: "absolute", top: 0, right: 0, padding: "4px 0px" }}
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          padding: "4px 0px",
+          height: 25,
+          width: 25,
+        }}
         onClick={() => {
           setShowDepartures(false);
         }}

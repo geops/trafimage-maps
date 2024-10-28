@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
       },
     },
 
-    "& div[role='button']": {
+    "& button": {
       width: 30,
       height: "100%",
       flexShrink: 0,
@@ -34,6 +34,7 @@ const useStyles = makeStyles(() => ({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      padding: 7,
     },
   },
 }));
@@ -41,13 +42,7 @@ const useStyles = makeStyles(() => ({
 function PermalinkInput(props) {
   const classes = useStyles();
 
-  return (
-    <UIPermalinkInput
-      className={classes.input}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    />
-  );
+  return <UIPermalinkInput className={classes.input} {...props} />;
 }
 
 export default React.memo(PermalinkInput);
