@@ -504,7 +504,6 @@ const topics = {
     direktverbindungen,
     direktverbindungenIframe,
     zweitausbildung,
-    bauprojekte,
     handicap,
     tarifverbundkarte,
     infrastruktur,
