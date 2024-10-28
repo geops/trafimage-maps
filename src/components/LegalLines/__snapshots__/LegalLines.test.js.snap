@@ -15,16 +15,26 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Schweiz
+    CH-3072 Ostermundingen
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
     </a>
     <br>
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
+  </p>
+  <p>
+    <b>
+      Betrieb, Wartung und Weiterentwicklung der Trafimage-Anwendungen, Datenintegration.
+    </b>
+    <br>
+    geOps AG
+    <br>
+    Solothurnerstrasse 235
+    <br>
+    CH-4600 Olten
+    <br>
+    <a href="http://www.geops.ch">
+      www.geops.ch
     </a>
     <br>
   </p>
@@ -46,105 +56,21 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
   </p>
   <p>
     <b>
-      IT-Koordination, Daten öffentlicher Verkehr, Webkarten, Betrieb Geodateninfrastruktur.
-    </b>
-    <br>
-    geOps AG
-    <br>
-    Solothurnerstrasse 235
-    <br>
-    CH-4600 Olten
-    <br>
-    <a href="http://www.geops.ch">
-      www.geops.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
-      CAAD und Workspace Bahnhofpläne.
-    </b>
-    <br>
-    multipol
-    <br>
-    Luegislandstrasse 105
-    <br>
-    CH-8051 Zürich
-    <br>
-    <a href="http://www.multipol.ch">
-      www.multipol.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
-      Datenbereitstellung.
-    </b>
-    <br>
-    Bundesamt für Landestopografie swisstopo
-    <br>
-    KOGIS (Koordination, Geoinformation und Services)
-    <br>
-    Seftigenstrasse 264
-    <br>
-    CH-3084 Wabern
-    <br>
-    <a href="http://www.geo.admin.ch">
-      www.geo.admin.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
       Verantwortlich für die Inhalte der Webkarten:
     </b>
-  </p>
-  <p>
-    <b class="ng-binding">
-      öV-Netzkarte Schweiz.
-    </b>
-    <br>
-    Fachbus Trafimage, Daniel Hofstetter,
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Bauprojekte Bahninfrastruktur.
-    </b>
-    <br>
-    Kommunikation SBB Infrastruktur,
-    <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
-      Kommunikation-Infrastruktur@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Eisenbahninfrastruktur Schweiz.
-    </b>
-    <br>
-    Fachbus Trafimage, Daniel Hofstetter,
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Koordinatoren Bahnnahes Bauen.
-    </b>
-    <br>
-    SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,
-    <a href="mailto:ueberwachung@sbb.ch">
-      ueberwachung@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Tarifverbundkarte.
-    </b>
-    <br>
-    SBB Personenverkehr – Marketing – Konzeption Regional/International
+    Die Zuständigkeit und Kontaktangabe für die einzelnen Kartenthemen sind im Info-Pop-up
+    <svg stroke="currentColor"
+         fill="currentColor"
+         stroke-width="0"
+         viewbox="0 0 512 512"
+         height="1em"
+         width="1em"
+         xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z">
+      </path>
+    </svg>
+    in der entsprechenden Menüzeile aufgeführt.
   </p>
 </div>
 `;
@@ -164,16 +90,26 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Switzerland
+    CH-3072 Ostermundingen
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
     </a>
     <br>
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
+  </p>
+  <p>
+    <b>
+      Operation, maintenance and further development of the Trafimage applications, data integration.
+    </b>
+    <br>
+    geOps AG
+    <br>
+    Solothurnerstrasse 235
+    <br>
+    CH-4600 Olten
+    <br>
+    <a href="http://www.geops.ch">
+      www.geops.ch
     </a>
     <br>
   </p>
@@ -195,105 +131,21 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
   </p>
   <p>
     <b>
-      IT Coordination, data of public transport, web maps, operation of the geodata infrastructure.
-    </b>
-    <br>
-    geOps AG
-    <br>
-    Solothurnerstrasse 235
-    <br>
-    CH-4600 Olten
-    <br>
-    <a href="http://www.geops.ch">
-      www.geops.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
-      CAAD and Workspace station plans.
-    </b>
-    <br>
-    multipol
-    <br>
-    Luegislandstrasse 105
-    <br>
-    CH-8051 Zürich
-    <br>
-    <a href="http://www.multipol.ch">
-      www.multipol.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
-      Data provision.
-    </b>
-    <br>
-    Federal Office of Topography (swisstopo)
-    <br>
-    KOGIS (Coordination, geographical information and services)
-    <br>
-    Seftigenstrasse 264
-    <br>
-    CH-3084 Wabern
-    <br>
-    <a href="http://www.geo.admin.ch">
-      www.geo.admin.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
       Responsibility for the content of the web maps:
     </b>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Swiss public transport network map.
-    </b>
-    <br>
-    Trafimage System Manager Daniel Hofstetter,
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Railway infrastructure construction projects.
-    </b>
-    <br>
-    Communications at SBB Infrastructure,
-    <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
-      Kommunikation-Infrastruktur@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Railway infrastructure in Switzerland.
-    </b>
-    <br>
-    Fachbus Trafimage, Daniel Hofstetter,
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Coordinators for construction work near railways.
-    </b>
-    <br>
-    SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,
-    <a href="mailto:ueberwachung@sbb.ch">
-      ueberwachung@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Fare networks map.
-    </b>
-    <br>
-    SBB Passenger Traffic – Marketing – Conception regional/international
+    The responsibility and contact details for the individual map topics are listed in the info pop-up
+    <svg stroke="currentColor"
+         fill="currentColor"
+         stroke-width="0"
+         viewbox="0 0 512 512"
+         height="1em"
+         width="1em"
+         xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z">
+      </path>
+    </svg>
+    in the corresponding menu bar.
   </p>
 </div>
 `;
@@ -313,16 +165,26 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Suisse
+    CH-3072 Ostermundingen
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
     </a>
     <br>
-    <a href="mailto:trafimage@cff.ch">
-      trafimage@cff.ch
+  </p>
+  <p>
+    <b>
+      Exploitation, maintenance et développement des applications Trafimage, intégration des données.
+    </b>
+    <br>
+    geOps AG
+    <br>
+    Solothurnerstrasse 235
+    <br>
+    CH-4600 Olten
+    <br>
+    <a href="http://www.geops.ch">
+      www.geops.ch
     </a>
     <br>
   </p>
@@ -344,105 +206,21 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
   </p>
   <p>
     <b>
-      Coordination IT, données du transports publics, cartes virtuelles, exploitation de leur infrastructure.
-    </b>
-    <br>
-    geOps AG
-    <br>
-    Solothurnerstrasse 235
-    <br>
-    CH-4600 Olten
-    <br>
-    <a href="http://www.geops.ch">
-      www.geops.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
-      CAD et Workspace aux plans de gare.
-    </b>
-    <br>
-    multipol
-    <br>
-    Luegislandstrasse 105
-    <br>
-    CH-8051 Zürich
-    <br>
-    <a href="http://www.multipol.ch">
-      www.multipol.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
-      Mise à disposition des données.
-    </b>
-    <br>
-    Office fédéral de topographie (swisstopo)
-    <br>
-    COSIG (Coordination, Services et Informations géographiques)
-    <br>
-    Seftigenstrasse 264
-    <br>
-    CH-3084 Wabern
-    <br>
-    <a href="http://www.geo.admin.ch">
-      www.geo.admin.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
       Responsables des contenus des cartes Web:
     </b>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Carte du réseau des TP suisses.
-    </b>
-    <br>
-    Fachbus Trafimage, Daniel Hofstetter,
-    <a href="mailto:trafimage@cff.ch">
-      trafimage@cff.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Projet de construction de l'infrastructure ferroviaire.
-    </b>
-    <br>
-    Communication CFF Infrastructure,
-    <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
-      Kommunikation-Infrastruktur@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Infrastructure ferroviaire suisse.
-    </b>
-    <br>
-    Fachbus Trafimage, Daniel Hofstetter,
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Coordinateurs travaux à proximité des voies.
-    </b>
-    <br>
-    CFF Infrastructure, Installations &amp; Technologie, Surveillance,
-    <a href="mailto:ueberwachung@sbb.ch">
-      ueberwachung@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Carte des Communautés tarifaires.
-    </b>
-    <br>
-    CFF Voyageurs – Marketing – Conception régional/international
+    La compétence et les coordonnées de contact pour chaque thème de la carte sont indiquées dans le pop-up d'information
+    <svg stroke="currentColor"
+         fill="currentColor"
+         stroke-width="0"
+         viewbox="0 0 512 512"
+         height="1em"
+         width="1em"
+         xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z">
+      </path>
+    </svg>
+    dans la ligne de menu correspondante.
   </p>
 </div>
 `;
@@ -462,16 +240,26 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Svizzera
+    CH-3072 Ostermundingen
     <br>
     <a href="http://www.trafimage.ch">
       www.trafimage.ch
     </a>
     <br>
-    <a href="mailto:trafimage@ffs.ch">
-      trafimage@ffs.ch
+  </p>
+  <p>
+    <b>
+      Gestione, manutenzione e ulteriore sviluppo delle applicazioni Trafimage, integrazione dei dati.
+    </b>
+    <br>
+    geOps AG
+    <br>
+    Solothurnerstrasse 235
+    <br>
+    CH-4600 Olten
+    <br>
+    <a href="http://www.geops.ch">
+      www.geops.ch
     </a>
     <br>
   </p>
@@ -493,105 +281,21 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
   </p>
   <p>
     <b>
-      Coordinamento IT, dati sul trasporto pubblico, cartine web, gestione dell'infrastruttura geodati.
-    </b>
-    <br>
-    geOps AG
-    <br>
-    Solothurnerstrasse 235
-    <br>
-    CH-4600 Olten
-    <br>
-    <a href="http://www.geops.ch">
-      www.geops.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
-      CAAD e Workspace piani delle stazioni.
-    </b>
-    <br>
-    multipol
-    <br>
-    Luegislandstrasse 105
-    <br>
-    CH-8051 Zürich
-    <br>
-    <a href="http://www.multipol.ch">
-      www.multipol.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
-      Diffusione dati.
-    </b>
-    <br>
-    Ufficio federale di topografia swisstopo
-    <br>
-    COSIG (Coordinazione, Servizi e Informazioni Geografiche)
-    <br>
-    Seftigenstrasse 264
-    <br>
-    CH-3084 Wabern
-    <br>
-    <a href="http://www.geo.admin.ch">
-      www.geo.admin.ch
-    </a>
-    <br>
-  </p>
-  <p>
-    <b>
       Responsabilità per i contenuti delle cartine:
     </b>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Carta di rete dei trasporti pubblici svizzeri.
-    </b>
-    <br>
-    Fachbus Trafimage, Daniel Hofstetter,
-    <a href="mailto:trafimage@ffs.ch">
-      trafimage@ffs.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Progetti di costruzione dell'infrastruttura ferroviaria.
-    </b>
-    <br>
-    Comunicazione FFS Infrastruttura,
-    <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
-      Kommunikation-Infrastruktur@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Infrastruttura ferroviaria Svizzera.
-    </b>
-    <br>
-    Fachbus Trafimage, Daniel Hofstetter,
-    <a href="mailto:trafimage@sbb.ch">
-      trafimage@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Coordinatori Costruzioni in prossimità della ferrovia.
-    </b>
-    <br>
-    FFS Infrastruttura, Impianti&amp;Tecnologia, Sorveglianza,
-    <a href="mailto:ueberwachung@sbb.ch">
-      ueberwachung@sbb.ch
-    </a>
-  </p>
-  <p>
-    <b class="ng-binding">
-      Carta delle comunità tariffarie.
-    </b>
-    <br>
-    FFS Viaggiatori – Marketing – Concezione regionale/internazionale
+    La responsabilità e i dettagli di contatto per i singoli argomenti della mappa sono elencati nel pop-up delle informazioni
+    <svg stroke="currentColor"
+         fill="currentColor"
+         stroke-width="0"
+         viewbox="0 0 512 512"
+         height="1em"
+         width="1em"
+         xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z">
+      </path>
+    </svg>
+    nella barra dei menu corrispondente.
   </p>
 </div>
 `;
@@ -612,9 +316,7 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=de 1`] =
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Schweiz
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
@@ -645,9 +347,7 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=en 1`] =
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Switzerland
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
@@ -678,9 +378,7 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=fr 1`] =
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Suisse
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
@@ -711,9 +409,7 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=it 1`] =
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Svizzera
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
@@ -736,8 +432,6 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
     Es gelten die
     <a href="http://www.sbb.ch/meta/rechtlicher-hinweis.html">
       rechtlichen Hinweise
@@ -749,25 +443,22 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     der SBB.
   </p>
   <p>
-    In Abweichung zu den allgemeinen Datenschutzbestimmungen der SBB werden auf maps.trafimage.ch unpersönliche Nutzungsdaten wie Ihre IP-Adresse, die zuletzt besuchte Seite, der verwendete Browser, Datum, Uhrzeit etc. gespeichert und mit Matomo («
+    In Abweichung zu den allgemeinen Datenschutzbestimmungen der SBB werden auf maps.trafimage.ch unpersönliche Nutzungsdaten wie Ihre IP-Adresse, die zuletzt besuchte Seite, der verwendete Browser, Datum, Uhrzeit etc. gespeichert und mit
     <a href="http://matomo.org/">
       Matomo
     </a>
-    ») anonymisiert ausgewertet.
+    und
+    <a href="https://www.piano.io/">
+      Piano Analytics
+    </a>
+    anonymisiert ausgewertet.
   </p>
-  Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um Informationen für den internen Gebrauch gemäss "R K 400.16 Informationsklassifizierung." und "R K 040.1 Konzernweisung Datenschutz. " (siehe
-  <a href="http://intranet.sbb.ch/de/Themen/Sicherheit/Alle/IT-Security/Seiten/Klassifikation.aspx">
-    SBB-Intranet
-  </a>
-  ).
   <p>
   </p>
   <p>
     <b>
       Erscheinungsbild von Trafimage.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     Das Erscheinungsbild von Trafimage (Bildaufbau und Bildgestaltung) ist ein fester Bestandteil des Auftritts der SBB und ist urheberrechtlich geschützt. Die auf den Websites von Trafimage enthaltenen Karten und Pläne inklusive den dazugehörenden Informationen werden ausschliesslich für den privaten Gebrauch sowie zu Informationszwecken bereit gestellt.
@@ -778,16 +469,12 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
-    Für die Geobasisdaten (z.B. Luftbilder, Relief, Landeskarten) gelten die Bestimmungen von swisstopo und OpenStreetMap. Es ist gestattet, einzelne Karten und Pläne bzw. Ausschnitte davon und Informationen für private Zwecke herunterzuladen, abzuspeichern, auszudrucken oder auf andere Weise zu vervielfältigen sofern weder der Copyrightvermerke "© SBB/CFF/FSS, Geodaten: © OpenStreetMap contributors, © swisstopo (5704003351) " noch andere gesetzlich geschützte Bezeichnungen entfernt werden. Sämtliche Eigentums- bzw. Nutzungsrechte verbleiben bei der SBB (Kartenbild) und bei der swisstopo (Kartengrundlagen). Sie können diese Zustimmung jederzeit widerrufen. Jegliche weitere Nutzung (vollständig oder teilweise), Übermittlung (elektronisch oder mit anderen Mitteln), Modifikation, Verknüpfung oder Benutzung der in den Websites enthaltenen Geobasisdaten ist nur mit vorheriger schriftlicher Einwilligung von SBB und swisstopo gestattet.
+    Für die Geobasisdaten (z.B. Luftbilder, Relief, Landeskarten) gelten die Bestimmungen von swisstopo und OpenStreetMap. Es ist gestattet, einzelne Karten und Pläne bzw. Ausschnitte davon und Informationen für private Zwecke herunterzuladen, abzuspeichern, auszudrucken oder auf andere Weise zu vervielfältigen sofern weder der Copyrightvermerke "© SBB/CFF/FSS, Geodaten: © OpenStreetMap, © swisstopo" noch andere gesetzlich geschützte Bezeichnungen entfernt werden. Sämtliche Eigentums- bzw. Nutzungsrechte verbleiben bei der SBB (Kartenbild) und bei der swisstopo (Kartengrundlagen). Sie können diese Zustimmung jederzeit widerrufen. Jegliche weitere Nutzung (vollständig oder teilweise), Übermittlung (elektronisch oder mit anderen Mitteln), Modifikation, Verknüpfung oder Benutzung der in den Websites enthaltenen Geobasisdaten ist nur mit vorheriger schriftlicher Einwilligung von SBB und swisstopo gestattet.
   </p>
   <p>
     <b>
       Copyright swisstopo.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     Die in dieser Internet-Plattform integrierten Geobasisdaten sind Eigentum der Schweizerischen Eidgenossenschaft. Die Daten sind urheberrechtlich durch das Bundesgesetz über Geoinformation (SR 510.62) geschützt. Sofern nichts anderes vermerkt ist, handelt es sich um Daten des Bundesamtes für Landestopografie (swisstopo) und es gelten die Bestimmungen der Geoinformationsverordnung (SR 510.620) und die Verordnung des VBS über die Gebühren des Bundesamtes für Landestopografie (SR 510.620.2).
@@ -798,16 +485,12 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
     Liegt ein Vertragsverhältnis zwischen swisstopo und dem Nutzer eines Dienstes vor, so haftet swisstopo nur für Schäden, die sie grobfahrlässig oder vorsätzlich verursacht hat und im Verantwortungsbereich von swisstopo liegen. swisstopo haftet nicht für entgangenen Gewinn, Datenverluste oder sonstige indirekte Schäden, die namentlich durch Fehlinformationen oder technische Störungen entstanden sind. swisstopo übernimmt keine Verantwortung für Fehler, die nicht in Ihrem Verantwortungsbereich liegen.
   </p>
   <p>
     <b>
       Daten der SBB und ihrer Partner.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     Alle anderen Daten sind Eigentum der SBB oder ihrer Partner.
@@ -831,8 +514,6 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
     SBB's
     <a href="http://www.sbb.ch/en/meta/legal-information.html">
       legal information
@@ -844,20 +525,20 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     apply.
   </p>
   <p>
-    Contrary to SBB’s general data protection provisions, maps.trafimage.ch stores non-personal usage data such as your IP address, the page you last visited, the browser used, the date, the time, etc. and analyses it in an anonymised form using Matomo («
+    Contrary to SBB’s general data protection provisions, maps.trafimage.ch stores non-personal usage data such as your IP address, the page you last visited, the browser used, the date, the time, etc. and analyses it in an anonymised form using
     <a href="http://matomo.org/">
       Matomo
     </a>
-    »).
-  </p>
-  <p>
+    and
+    <a href="https://www.piano.io/">
+      Piano Analytics
+    </a>
+    .
   </p>
   <p>
     <b>
       Corporate identity of Trafimage.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     The corporate identity of Trafimage (structure and design) forms an integral part of SBB's image and is protected by copyright. The maps and plans contained on the websites of Trafimage, including the related information, are supplied solely for private use and for information purposes.
@@ -868,16 +549,12 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
-    The provisions of swisstopo and OpenStreetMap and apply to basic geographical data (e.g. aerial photographs, relief data, national maps). Individual maps and plans, or excerpts thereof, and information may be downloaded, saved, printed or copied by other methods for private use provided that none of the copyright symbols "© SBB / Geodaten: © OpenStreetMap contributors, © swisstopo (5704003351)" or other legally protected names are removed. All property rights and rights of use respectively shall remain with SBB (map images) and swisstopo (basic map data), which can revoke their consent at any time. None of the basic geographical data contained on the websites may be reproduced (completely or in part), transmitted (electronically or by other means), modified, linked or used without the prior written consent of SBB and swisstopo.
+    The provisions of swisstopo and OpenStreetMap and apply to basic geographical data (e.g. aerial photographs, relief data, national maps). Individual maps and plans, or excerpts thereof, and information may be downloaded, saved, printed or copied by other methods for private use provided that none of the copyright symbols "© SBB / Geodaten: © OpenStreetMap, © swisstopo" or other legally protected names are removed. All property rights and rights of use respectively shall remain with SBB (map images) and swisstopo (basic map data), which can revoke their consent at any time. None of the basic geographical data contained on the websites may be reproduced (completely or in part), transmitted (electronically or by other means), modified, linked or used without the prior written consent of SBB and swisstopo.
   </p>
   <p>
     <b>
       Copyright of swisstopo.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     The basic geographical data integrated into this Internet platform is the property of the Swiss Confederation. The data is copyright protected by the Swiss Federal Law on Geoinformation (SR 510.62). Unless otherwise indicated, data is provided by the Federal Office of Topography (swisstopo) and is subject to the provisions of the Geoinformation Ordinance (SR 510.620) and the ordinance of the Federal Department of Defence, Civil Protection and Sport on fees and charges of the Federal Office of Topography (SR 510.620.2).
@@ -888,16 +565,12 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
     </b>
   </p>
   <p>
-  </p>
-  <p>
     If a contractual relationship between swisstopo and the user of a service exists, swisstopo shall only be liable for damage it has caused by gross negligence or deliberate intent which lies within the scope of its responsibility. swisstopo shall not be liable for loss of earnings, data loss or other indirect damage due in particular to incorrect information or technical malfunctions. swisstopo assumes no responsibility for errors that do not lie within its area of responsibility.
   </p>
   <p>
     <b>
       Data belonging to SBB and its partners.
     </b>
-  </p>
-  <p>
   </p>
   <p>
     All other data is the property of SBB or its partners.
@@ -932,13 +605,15 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1
     des CFF s’appliquent.
   </p>
   <p>
-    En dérogation aux dispositions générales des CFF en matière de protection des données, maps.trafimage.ch enregistre des données d’utilisation non personnelles telles que votre adresse IP, la dernière page visitée, le logiciel de navigation utilisé, la date, l’heure, etc. et les exploite sous forme anonymisée avec Matomo («
+    En dérogation aux dispositions générales des CFF en matière de protection des données, maps.trafimage.ch enregistre des données d’utilisation non personnelles telles que votre adresse IP, la dernière page visitée, le logiciel de navigation utilisé, la date, l’heure, etc. et les exploite sous forme anonymisée avec
     <a href="http://matomo.org/">
       Matomo
     </a>
-    »).
-  </p>
-  <p>
+    et
+    <a href="https://www.piano.io/">
+      Piano Analytics
+    </a>
+    .
   </p>
   <p>
     <b>
@@ -954,7 +629,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1
     </b>
   </p>
   <p>
-    Pour les géodonnées de base (vues aériennes, relief, cartes nationales), ce sont les dispositions de swisstopo et OpenStreetMap qui s’appliquent. Il est permis de télécharger, d’enregistrer, d‘imprimer, ou de reproduire sous toute autre forme, certaines cartes et plans et/ou des extraits ainsi que des informations, à condition de ne supprimer ni des mentions de copyright «© CFF/géodonnées: © OpenStreetMap contributors, © swisstopo (5704003351)» ni d’autres désignations légalement protégées. Les CFF conservent tous les droits de propriété ou bien d’utilisation (carte-image), de même que swisstopo (bases des cartes). Cette autorisation peut être révoquée à tout moment. Toute autre utilisation (en totalité ou en partie), transmission (par voie électronique ou avec d’autres moyens), modification, mise en lien ou utilisation des géodonnées de base nécessite l’autorisation préalable expresse des CFF et de swisstopo.
+    Pour les géodonnées de base (vues aériennes, relief, cartes nationales), ce sont les dispositions de swisstopo et OpenStreetMap qui s’appliquent. Il est permis de télécharger, d’enregistrer, d‘imprimer, ou de reproduire sous toute autre forme, certaines cartes et plans et/ou des extraits ainsi que des informations, à condition de ne supprimer ni des mentions de copyright «© CFF/géodonnées: © OpenStreetMap, © swisstopo» ni d’autres désignations légalement protégées. Les CFF conservent tous les droits de propriété ou bien d’utilisation (carte-image), de même que swisstopo (bases des cartes). Cette autorisation peut être révoquée à tout moment. Toute autre utilisation (en totalité ou en partie), transmission (par voie électronique ou avec d’autres moyens), modification, mise en lien ou utilisation des géodonnées de base nécessite l’autorisation préalable expresse des CFF et de swisstopo.
   </p>
   <p>
     <b>
@@ -1009,13 +684,15 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
     </a>
   </p>
   <p>
-    In deroga alle disposizioni generali in materia di protezione dei dati delle FFS, su maps.trafimage.ch i dati di utilizzo non personali come gli indirizzi IP, l’ultima pagina visitata, il browser utilizzato, la data, l’ora, ecc. vengono salvati e analizzati in modo anonimo con Matomo («
+    In deroga alle disposizioni generali in materia di protezione dei dati delle FFS, su maps.trafimage.ch i dati di utilizzo non personali come gli indirizzi IP, l’ultima pagina visitata, il browser utilizzato, la data, l’ora, ecc. vengono salvati e analizzati in modo anonimo con
     <a href="http://matomo.org/">
       Matomo
     </a>
-    »).
-  </p>
-  <p>
+    e
+    <a href="https://www.piano.io/">
+      Piano Analytics
+    </a>
+    .
   </p>
   <p>
     <b>
@@ -1031,9 +708,8 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
     </b>
   </p>
   <p>
-    Per i geodati di base (p. es. immagini aeree, rilievi, carte topografiche) valgono le norme di swisstopo ed OpenStreetMap. A titolo privato è permesso scaricare, salvare, stampare o riprodurre in altro modo singole cartine e singoli piani o parte di essi e le relative informazioni, a condizione che non siano rimosse le indicazioni circa la fonte «© FFS / Geodati: © OpenStreetMap contributors, © swisstopo (5704003351)» né altre indicazioni tutelate per legge. Tutti i diritti d'autore rispettivamente di utilizzo rimangono alle FFS (immagine cartografica) e a swisstopo (dati cartografici), che possono in qualsiasi momento revocare il proprio assenso all'utilizzo. Qualsiasi ulteriore utilizzo (completo o parziale), trasmissione (elettronica o con altri mezzi), modifica, collegamento o impiego dei geodati di base contenuti nelle pagine web sono consentiti solo previo consenso scritto da parte di FFS e swisstopo.
+    Per i geodati di base (p. es. immagini aeree, rilievi, carte topografiche) valgono le norme di swisstopo ed OpenStreetMap. A titolo privato è permesso scaricare, salvare, stampare o riprodurre in altro modo singole cartine e singoli piani o parte di essi e le relative informazioni, a condizione che non siano rimosse le indicazioni circa la fonte «© FFS / Geodati: © OpenStreetMap, © swisstopo» né altre indicazioni tutelate per legge. Tutti i diritti d'autore rispettivamente di utilizzo rimangono alle FFS (immagine cartografica) e a swisstopo (dati cartografici), che possono in qualsiasi momento revocare il proprio assenso all'utilizzo. Qualsiasi ulteriore utilizzo (completo o parziale), trasmissione (elettronica o con altri mezzi), modifica, collegamento o impiego dei geodati di base contenuti nelle pagine web sono consentiti solo previo consenso scritto da parte di FFS e swisstopo.
   </p>
-  min-height: 16px;
   <p>
     <b>
       Copyright swisstopo.
@@ -1077,9 +753,7 @@ exports[`LegalLines uses default  properties 1`] = `
     <br>
     Poststrasse 6
     <br>
-    3072 Ostermundingen
-    <br>
-    Schweiz
+    CH-3072 Ostermundingen
   </p>
   <p>
     <a href="http://www.trafimage.ch">
