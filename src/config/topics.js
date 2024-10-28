@@ -85,7 +85,6 @@ export const netzkarte = {
   projection: "EPSG:3857",
   layerInfoComponent: "NetzkarteTopicInfo",
   searches: defaultSearches,
-  minZoom: 7,
 };
 
 export const handicap = {
@@ -143,7 +142,6 @@ export const infrastruktur = {
   projection: "EPSG:3857",
   layerInfoComponent: "InfrastrukturTopicInfo",
   searches: defaultSearches,
-  minZoom: 7,
 };
 
 export const betriebsregionen = {
