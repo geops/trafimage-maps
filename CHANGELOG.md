@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.8](https://github.com/geops/trafimage-maps/compare/v1.30.7...v1.30.8) (2024-10-30)
+
+### Bug Fixes
+
+- **min/max zoom:** add minimum zoom to most topics, remove default props from function components ([#1198](https://github.com/geops/trafimage-maps/issues/1198)) ([794ef67](https://github.com/geops/trafimage-maps/commit/794ef67f88870532a30e21e989965d929eaec698))
+
 ### [1.30.7](https://github.com/geops/trafimage-maps/compare/v1.30.6...v1.30.7) (2024-10-28)
 
 ### Bug Fixes
