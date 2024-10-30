@@ -86,10 +86,6 @@ const propTypes = {
   anchorEl: PropTypes.instanceOf(Element),
 };
 
-const defaultProps = {
-  anchorEl: null,
-};
-
 function SearchInfo({ anchorEl }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -320,6 +316,5 @@ function SearchInfo({ anchorEl }) {
 }
 
 SearchInfo.propTypes = propTypes;
-SearchInfo.defaultProps = defaultProps;
 
 export default SearchInfo;

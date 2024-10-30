@@ -42,11 +42,14 @@ const propTypes = {
   teaser: PropTypes.bool,
 };
 
-const defaultProps = {
-  teaser: false,
-};
-
-function DvLineTitle({ feature, layer, isNightTrain, title, active, teaser }) {
+function DvLineTitle({
+  feature,
+  layer,
+  isNightTrain,
+  title,
+  active,
+  teaser = false,
+}) {
   const classes = useStyles();
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
@@ -117,6 +120,5 @@ function DvLineTitle({ feature, layer, isNightTrain, title, active, teaser }) {
 }
 
 DvLineTitle.propTypes = propTypes;
-DvLineTitle.defaultProps = defaultProps;
 
 export default DvLineTitle;
