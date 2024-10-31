@@ -19,11 +19,7 @@ const propTypes = {
   layer: PropTypes.instanceOf(AusbauLayer),
 };
 
-const defaultProps = {
-  layer: null,
-};
-
-function AusbauFilters({ layer }) {
+function AusbauFilters({ layer = null }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const [value, setValue] = useState((layer && layer.filter.value) || "");
@@ -65,6 +61,5 @@ function AusbauFilters({ layer }) {
 }
 
 AusbauFilters.propTypes = propTypes;
-AusbauFilters.defaultProps = defaultProps;
 
 export default AusbauFilters;

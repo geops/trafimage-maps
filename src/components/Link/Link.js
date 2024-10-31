@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link as MuiLink } from "@mui/material";
 import { ReactComponent as LinkIcon } from "./Link.svg";
-
-import "./Link.scss";
 
 const propTypes = {
   href: PropTypes.string.isRequired,
@@ -10,25 +9,32 @@ const propTypes = {
   className: PropTypes.string,
 };
 
-const defaultProps = {
-  className: "",
-};
-
-function Link({ href, children, className }) {
+function Link({ href, children, className = "" }) {
   return (
-    <a
+    <MuiLink
       className={`wkp-link ${className}`}
       href={href}
       rel="noopener noreferrer"
       target="_blank"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        textDecoration: "none !important",
+        "& span": {
+          textOverflow: "ellipsis",
+          maxWidth: 380,
+          overflow: "hidden",
+          display: "inline-block",
+        },
+        "& svg": { minHeight: 16, minWidth: 16, marginLeft: "5px" },
+      }}
     >
       <span>{children}</span>
       <LinkIcon />
-    </a>
+    </MuiLink>
   );
 }
 
 Link.propTypes = propTypes;
-Link.defaultProps = defaultProps;
 
 export default Link;

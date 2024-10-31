@@ -20,7 +20,7 @@ function DrawPermalinkButton({ buttonProps }) {
   const { t } = useTranslation();
 
   return (
-    <PermalinkButton buttonProps={buttonProps}>
+    <PermalinkButton buttonProps={buttonProps || {}}>
       {/* We use a function to be able to get the proper window.location value. */}
       {(locationHref) => {
         return (
@@ -61,10 +61,6 @@ function DrawPermalinkButton({ buttonProps }) {
 
 DrawPermalinkButton.propTypes = {
   buttonProps: PropTypes.object,
-};
-
-DrawPermalinkButton.defaultProps = {
-  buttonProps: {},
 };
 
 export default React.memo(DrawPermalinkButton);

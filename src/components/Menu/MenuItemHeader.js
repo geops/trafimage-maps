@@ -12,13 +12,13 @@ const propTypes = {
   isOpen: PropTypes.bool,
 };
 
-const defaultProps = {
-  className: "wkp-menu-item-header",
-  isOpen: false,
-  icon: null,
-};
-
-function MenuItemHeader({ className, title, icon, isOpen, onToggle }) {
+function MenuItemHeader({
+  className = "wkp-menu-item-header",
+  title,
+  icon = null,
+  isOpen = false,
+  onToggle,
+}) {
   return (
     <Button
       className={`${className}${isOpen ? " open" : ""}`}
@@ -35,6 +35,5 @@ function MenuItemHeader({ className, title, icon, isOpen, onToggle }) {
 }
 
 MenuItemHeader.propTypes = propTypes;
-MenuItemHeader.defaultProps = defaultProps;
 
 export default React.memo(MenuItemHeader);

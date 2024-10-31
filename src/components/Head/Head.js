@@ -11,7 +11,7 @@ const trackingScriptSrc = getTrackingLaunchScriptSrc();
 /**
  * This component adds a script tag in the HTML head for SBB consent management.
  */
-function Head({ topics, displayConsent, domainConsentId }) {
+function Head({ topics, displayConsent = false, domainConsentId }) {
   const language = useSelector((state) => state.app.language);
   const dispatch = useDispatch();
 
@@ -73,12 +73,6 @@ Head.propTypes = {
   ),
   displayConsent: PropTypes.bool,
   domainConsentId: PropTypes.string,
-};
-
-Head.defaultProps = {
-  topics: [],
-  displayConsent: false,
-  domainConsentId: null,
 };
 
 export default React.memo(Head);

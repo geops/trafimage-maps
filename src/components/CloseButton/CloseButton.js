@@ -26,6 +26,4 @@ CloseButton.propTypes = {
   children: PropTypes.node,
 };
 
-CloseButton.defaultProps = { children: undefined };
-
 export default CloseButton;

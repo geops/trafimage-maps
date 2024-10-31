@@ -101,6 +101,7 @@ export const handicap = {
   searches: {
     Stationen: handicapStopFinder,
   },
+  minZoom: 7,
 };
 
 export const netzkarteStelen = {
@@ -125,6 +126,7 @@ export const bauprojekte = {
   projection: "EPSG:3857",
   layerInfoComponent: "ConstructionTopicInfo",
   searches: defaultSearches,
+  minZoom: 7,
 };
 
 export const infrastruktur = {
@@ -168,6 +170,7 @@ export const regionenkartePublic = {
   layers: regionenkarteLayers,
   layerInfoComponent: "RegionenkartePublicTopicInfo",
   searches: defaultSearches,
+  minZoom: 7,
 };
 
 export const tarifverbundkarte = {
@@ -176,6 +179,7 @@ export const tarifverbundkarte = {
   layerInfoComponent: "TarifverbundkarteTopicInfo",
   layers: tarifverbundkarteLayers,
   maxZoom: 12,
+  minZoom: 7,
   exportConfig: {
     getTemplateValues: () => ({
       publisher: "tobias.hauser@sbb.ch",
@@ -206,6 +210,7 @@ export const zweitausbildung = {
   projection: "EPSG:3857",
   layerInfoComponent: "ZweitausbildungTopicInfo",
   searches: defaultSearches,
+  minZoom: 7,
 };
 
 export const netzentwicklung = {
@@ -217,6 +222,7 @@ export const netzentwicklung = {
   projection: "EPSG:3857",
   layerInfoComponent: "NetzentwicklungTopicInfo",
   searches: defaultSearches,
+  minZoom: 7,
 };
 
 export const beleuchtungsstaerken = {
@@ -228,6 +234,7 @@ export const beleuchtungsstaerken = {
   projection: "EPSG:3857",
   layerInfoComponent: "BeleuchtungTopicInfo",
   searches: defaultSearches,
+  minZoom: 7,
 };
 
 export const energiePublic = {
@@ -256,6 +263,7 @@ export const energiePublic = {
   projection: "EPSG:3857",
   layerInfoComponent: "EnergiePublicTopicInfo",
   searches: defaultSearches,
+  minZoom: 7,
 };
 
 export const isb = {
@@ -271,6 +279,7 @@ export const isb = {
   projection: "EPSG:3857",
   layerInfoComponent: "IsbTopicInfo",
   searches: defaultSearches,
+  minZoom: 7,
 };
 
 const sandbox = {
@@ -299,6 +308,7 @@ export const geltungsbereicheMvp = {
     shareMenu: true,
   },
   maxZoom: 14,
+  minZoom: 7,
   layers: geltungsbereicheMvpLayers,
   projection: "EPSG:3857",
   layerInfoComponent: "GeltungsbereicheTopicInfo",
