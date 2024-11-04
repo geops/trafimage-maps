@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.9](https://github.com/geops/trafimage-maps/compare/v1.30.8...v1.30.9) (2024-11-04)
+
+### Bug Fixes
+
+- **handicap:** add partially conform layer for handicap ([#1168](https://github.com/geops/trafimage-maps/issues/1168)) ([d642b78](https://github.com/geops/trafimage-maps/commit/d642b78a97168efb859c1e05e902a95d8e726658))
+
 ### [1.30.8](https://github.com/geops/trafimage-maps/compare/v1.30.7...v1.30.8) (2024-10-30)
 
 ### Bug Fixes
