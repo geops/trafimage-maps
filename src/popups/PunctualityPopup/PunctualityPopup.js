@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Feature from "ol/Feature";
 import RouteSchedule from "react-spatial/components/RouteSchedule";
 import TralisLayer from "../../layers/TralisLayer";
+import getDelayText from "../../utils/getDelayString";
 
 function PunctualityPopup({ feature, layer }) {
   const dispatch = useDispatch();
@@ -53,24 +54,7 @@ function PunctualityPopup({ feature, layer }) {
     <RouteSchedule
       trackerLayer={layer}
       lineInfos={lineInfos}
-      getDelayString={(milliseconds, isArrival) => {
-        let timeInMs = milliseconds;
-        if (timeInMs < 0) {
-          timeInMs = 0;
-        }
-        const h = Math.floor(timeInMs / 3600000);
-        const m = (isArrival ? Math.ceil : Math.floor)(
-          (timeInMs % 3600000) / 60000,
-        );
-
-        if (h === 0 && m === 0) {
-          return "+0m";
-        }
-        if (h === 0) {
-          return `+${m}m`;
-        }
-        return `+${h}h${m}m`;
-      }}
+      getDelayString={getDelayText}
       renderArrivalDelay={(delay, stop, getDelayString, getDelayColor) => {
         return (
           <span style={{ color: getDelayColor?.(delay, stop) || "inherit" }}>
