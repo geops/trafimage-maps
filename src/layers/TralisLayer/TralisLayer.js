@@ -58,6 +58,11 @@ const getDelayText = (delayInMs, cancelled) => {
     return String.fromCodePoint(0x00d7);
   }
 
+  // no realtime or realtime is broken
+  if (delayInMs === null) {
+    return null;
+  }
+
   // Same function used by the RouteSchedule component
   return getDelayString(delayInMs, true);
 };
