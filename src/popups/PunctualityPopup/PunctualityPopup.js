@@ -61,7 +61,7 @@ function PunctualityPopup({ feature, layer }) {
         // In some edge cases when arrival and departure time are in the
         // same minute and delay too, we need to display the departure
         // delay instead of the arrival delay to make sure the arrival
-        // time + ceilled delay is not greater than the departure time +
+        // time + ceiled delay is not greater than the departure time +
         // floored delay.
         // see TRAFWART-1702
         if (
