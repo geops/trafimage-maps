@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Feature from "ol/Feature";
 import RouteSchedule from "react-spatial/components/RouteSchedule";
 import TralisLayer from "../../layers/TralisLayer";
-import getDelayText from "../../utils/getDelayString";
+import getDelayText, { getDelaySecure } from "../../utils/getDelayString";
 
 function PunctualityPopup({ feature, layer }) {
   const dispatch = useDispatch();
@@ -56,9 +56,29 @@ function PunctualityPopup({ feature, layer }) {
       lineInfos={lineInfos}
       getDelayString={getDelayText}
       renderArrivalDelay={(delay, stop, getDelayString, getDelayColor) => {
+        let delayToDisplay = delay;
+
+        // In some edge cases when arrival and departure time are in the
+        // same minute and delay too, we need to display the departure
+        // delay instead of the arrival delay to make sure the arrival
+        // time + ceilled delay is not greater than the departure time +
+        // floored delay.
+        // see TRAFWART-1702
+        if (
+          getDelaySecure(stop.departureDelay) +
+            stop.departureTime -
+            (getDelaySecure(delay) + stop.arrivalTime) <
+          60000
+        ) {
+          delayToDisplay = getDelaySecure(stop.departureDelay);
+        }
         return (
-          <span style={{ color: getDelayColor?.(delay, stop) || "inherit" }}>
-            {`${getDelayString?.(delay, true) || ""}`}
+          <span
+            style={{
+              color: getDelayColor?.(delayToDisplay, stop) || "inherit",
+            }}
+          >
+            {`${getDelayString?.(delayToDisplay, true) || ""}`}
           </span>
         );
       }}
