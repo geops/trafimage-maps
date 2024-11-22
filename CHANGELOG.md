@@ -6,10 +6,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- fix italian translations ([caa6b63](https://github.com/geops/trafimage-maps/commit/caa6b63fe9cbdbffc5ff293f94d9076b475794fb))
-- fix italian translations ([76cba16](https://github.com/geops/trafimage-maps/commit/76cba1659d632d7c5b178c1392e416741a9a1753))
-- fix italian translations ([af32c43](https://github.com/geops/trafimage-maps/commit/af32c436c9601f184a0136a1ff2d57710fa813a3))
-- fix transaltions ([ac50a82](https://github.com/geops/trafimage-maps/commit/ac50a82d8072146be6f1fd298a04a2f3da7a2e48))
+- fix italian translations ([caa6b63](https://github.com/geops/trafimage-maps/commit/caa6b63fe9cbdbffc5ff293f94d9076b475794fb)) ([76cba16](https://github.com/geops/trafimage-maps/commit/76cba1659d632d7c5b178c1392e416741a9a1753)) ([af32c43](https://github.com/geops/trafimage-maps/commit/af32c436c9601f184a0136a1ff2d57710fa813a3)) ([ac50a82](https://github.com/geops/trafimage-maps/commit/ac50a82d8072146be6f1fd298a04a2f3da7a2e48))
 - round also the delay value on punctuality layers ([#1202](https://github.com/geops/trafimage-maps/issues/1202)) ([2a74f82](https://github.com/geops/trafimage-maps/commit/2a74f82c52025578bd6d709fe2cf73bb04cfa6e4))
 
 ### [1.30.10](https://github.com/geops/trafimage-maps/compare/v1.30.9...v1.30.10) (2024-11-08)
