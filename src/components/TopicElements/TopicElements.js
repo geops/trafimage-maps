@@ -191,7 +191,7 @@ function TopicElements({ history = null }) {
             />
           )}
         </EventConsumer>
-        {elements.permalink && <Permalink history={history} />}
+        <Permalink history={history} readOnly={!elements.permalink} />
         {elements.search && <Search />}
         {elements.header && <Header loginUrl={loginUrl} />}
         {elements.header && <TopicTelephoneInfos />}

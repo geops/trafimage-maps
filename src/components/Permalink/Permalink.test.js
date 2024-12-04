@@ -1,5 +1,4 @@
-import React from "react";
-import { act } from "react-dom/test-utils";
+import React, { act } from "react";
 
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
@@ -176,5 +175,16 @@ describe("Permalink", () => {
       type: "SET_DRAW_IDS",
     });
     fetchMock.restore();
+  });
+
+  test("shoud not update the permalink.", () => {
+    window.history.pushState({}, undefined, "/?lang=de&tripNumber=150,200,300");
+    render(
+      <Provider store={store}>
+        <Permalink readOnly />
+      </Provider>,
+    );
+
+    expect(window.location.search).toMatch("lang=de&tripNumber=150,200,300");
   });
 });
