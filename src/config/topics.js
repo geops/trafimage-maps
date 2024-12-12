@@ -183,10 +183,10 @@ export const tarifverbundkarte = {
   exportConfig: {
     getTemplateValues: () => ({
       publisher: "tobias.hauser@sbb.ch",
-      publishedAt: "12/2023",
-      dateDe: "10.12.2023",
-      dateFr: "10.12.2023",
-      year: "2023",
+      publishedAt: "12/2024",
+      dateDe: "15.12.2024",
+      dateFr: "15.12.2024",
+      year: "2024",
     }),
     getOverlayImageUrl: () => tarifverbundkarteLegend,
   },
