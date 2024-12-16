@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.12](https://github.com/geops/trafimage-maps/compare/v1.30.12-beta.1...v1.30.12) (2024-12-16)
+
+### Bug Fixes
+
+- disabled=permalink now reads the url parameters but never update them ([#1203](https://github.com/geops/trafimage-maps/issues/1203)) ([3530304](https://github.com/geops/trafimage-maps/commit/353030462a8c5250a4115e62c016422a5766a106))
+- **tarifverbundkarte:** update PDF legend and legend dates ([5ce1c7e](https://github.com/geops/trafimage-maps/commit/5ce1c7ebb279a8bc7957e59713ac403967cc5c35))
+
 ### [1.30.11](https://github.com/geops/trafimage-maps/compare/v1.30.10...v1.30.11) (2024-11-22)
 
 ### Bug Fixes
