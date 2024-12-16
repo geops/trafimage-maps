@@ -33,6 +33,7 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   initialState: PropTypes.shape(),
+  readOnly: PropTypes.bool,
 
   // mapStateToProps
   activeTopic: PropTypes.shape({
@@ -68,6 +69,7 @@ const defaultProps = {
   drawUrl: undefined,
   drawIds: undefined,
   mapsetUrl: undefined,
+  readOnly: false,
 };
 
 const format = new GeoJSON();
@@ -106,6 +108,7 @@ class Permalink extends PureComponent {
       drawUrl,
       drawLayer,
       map,
+      readOnly,
     } = this.props;
 
     const parameters = {
@@ -220,7 +223,9 @@ class Permalink extends PureComponent {
       lon: undefined,
       lat: undefined,
     };
-    this.setState(state);
+    if (!readOnly) {
+      this.setState(state);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -232,9 +237,10 @@ class Permalink extends PureComponent {
       drawIds,
       platformFilter,
       dispatchUpdateDrawEditLink,
+      readOnly,
     } = this.props;
 
-    if (history && activeTopic !== prevProps.activeTopic) {
+    if (!readOnly && history && activeTopic !== prevProps.activeTopic) {
       history.replace(`/${activeTopic.key}${window.location.search}`);
     }
 
@@ -262,6 +268,9 @@ class Permalink extends PureComponent {
       this.updateDrawIds();
     }
 
+    if (readOnly) {
+      return;
+    }
     dispatchUpdateDrawEditLink();
   }
 
@@ -324,7 +333,12 @@ class Permalink extends PureComponent {
   }
 
   updateDrawIds() {
-    const { drawIds } = this.props;
+    const { drawIds, readOnly } = this.props;
+
+    if (readOnly) {
+      return;
+    }
+
     let newState;
 
     // only for wkp draw management
@@ -345,7 +359,12 @@ class Permalink extends PureComponent {
   }
 
   updateDepartures() {
-    const { departuresFilter, platformFilter } = this.props;
+    const { departuresFilter, platformFilter, readOnly } = this.props;
+
+    if (readOnly) {
+      return;
+    }
+
     const state = {
       departures: departuresFilter,
       platform: platformFilter,
@@ -354,15 +373,21 @@ class Permalink extends PureComponent {
   }
 
   updateLanguage() {
-    const { language } = this.props;
+    const { language, readOnly } = this.props;
+    if (readOnly) {
+      return;
+    }
     this.setState({
       lang: language,
     });
   }
 
   render() {
-    const { history, layers, map, activeTopic } = this.props;
+    const { history, layers, map, activeTopic, readOnly } = this.props;
 
+    if (readOnly) {
+      return null;
+    }
     return (
       <RSPermalink
         params={{
