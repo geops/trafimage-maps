@@ -145,7 +145,7 @@ function ExportButton({
           exportFormat,
           canvas,
           exportScale,
-          sizesByFormat[exportFormat].map((v) => v * exportScale),
+          sizesByFormat[exportFormat],
           templateValues,
           imageUrl,
           fileName,
