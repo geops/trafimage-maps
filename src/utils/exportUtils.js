@@ -153,6 +153,7 @@ export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
     center: toLonLat(center),
     container: elt,
     interactive: false,
+    maxCanvasSize: [20000, 20000], // remove 4096 limitation, should be enough for most cases
     preserveDrawingBuffer: true, // very important otherwise you can't export the canvas to png
   });
   mbMap.jumpTo({
