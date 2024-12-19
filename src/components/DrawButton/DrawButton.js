@@ -15,7 +15,7 @@ function DrawButton({ children, onClick, ...buttonProps }) {
       size="medium"
       /* We use a function instead of href to be able to get the proper window.location value. */
       onClick={() => {
-        onClick();
+        onClick?.();
         // window.open is esaier to test.
         window.open(
           `${mapsetUrl}?parent=${encodeURIComponent(window.location)}`,
@@ -32,11 +32,6 @@ function DrawButton({ children, onClick, ...buttonProps }) {
 DrawButton.propTypes = {
   children: PropTypes.element,
   onClick: PropTypes.func,
-};
-
-DrawButton.defaultProps = {
-  children: null,
-  onClick: () => null,
 };
 
 export default React.memo(DrawButton);

@@ -1,0 +1,4 @@
+{
+  "ignoredFiles": ["cypress/*"],
+  "aggressiveCompression": "false"
+}

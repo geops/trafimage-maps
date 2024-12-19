@@ -62,7 +62,7 @@ const translations = {
 function GeltungsbereichePopup({
   feature: features,
   layer: layers,
-  renderValidityFooter,
+  renderValidityFooter = true,
 }) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
@@ -97,7 +97,7 @@ function GeltungsbereichePopup({
     }
   });
 
-  features.forEach((feat) => {
+  (features || []).forEach((feat) => {
     let mot = feat.get("mot");
     if (/^(tram|subway)$/.test(mot)) {
       mot = "rail";
@@ -193,9 +193,6 @@ function GeltungsbereichePopup({
 }
 
 GeltungsbereichePopup.propTypes = propTypes;
-GeltungsbereichePopup.defaultProps = {
-  renderValidityFooter: true,
-};
 
 GeltungsbereichePopup.renderTitle = (feat, layer, t) => {
   return t("ch.sbb.geltungsbereiche");

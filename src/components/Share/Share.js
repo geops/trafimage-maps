@@ -120,7 +120,6 @@ ShareLink.propTypes = {
   className: PropTypes.string,
   url: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  trackEventAction: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   trackMatomoEventAction: PropTypes.string,
 };

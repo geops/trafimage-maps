@@ -6,6 +6,7 @@ import {
   realtimeDelayStyle,
   sortByDelay,
 } from "mobility-toolbox-js/ol";
+import getDelayString from "../../utils/getDelayString";
 
 /**
  * Trajserv value: 'Tram',  'Subway / Metro / S-Bahn',  'Train', 'Bus', 'Ferry', 'Cable Car', 'Gondola', 'Funicular', 'Long distance bus', 'Rail',
@@ -52,6 +53,20 @@ const getRadius = (type, zoom) => {
   }
 };
 
+const getDelayText = (delayInMs, cancelled) => {
+  if (cancelled) {
+    return String.fromCodePoint(0x00d7);
+  }
+
+  // no realtime or realtime is broken
+  if (delayInMs === null) {
+    return null;
+  }
+
+  // Same function used by the RouteSchedule component
+  return getDelayString(delayInMs, true);
+};
+
 class TralisLayer extends RealtimeLayer {
   constructor(options) {
     // You can filter the trains displayed using the following properties:
@@ -83,6 +98,7 @@ class TralisLayer extends RealtimeLayer {
       style: realtimeDelayStyle,
       styleOptions: {
         getRadius,
+        getDelayText,
       },
       sort: sortByDelay,
       fullTrajectoryStyle: fullTrajectoryDelayStyle,

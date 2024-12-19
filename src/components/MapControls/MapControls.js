@@ -24,14 +24,6 @@ const propTypes = {
   children: PropTypes.node,
 };
 
-const defaultProps = {
-  geolocation: true,
-  zoomSlider: true,
-  fitExtent: true,
-  menuToggler: false,
-  children: undefined,
-};
-
 const useStyles = makeStyles((theme) => {
   return {
     mapControls: {
@@ -89,10 +81,10 @@ const useStyles = makeStyles((theme) => {
 });
 
 function MapControls({
-  menuToggler,
-  geolocation,
-  zoomSlider,
-  fitExtent,
+  menuToggler = false,
+  geolocation = true,
+  zoomSlider = true,
+  fitExtent = true,
   children,
 }) {
   const dispatch = useDispatch();
@@ -186,6 +178,5 @@ function MapControls({
 }
 
 MapControls.propTypes = propTypes;
-MapControls.defaultProps = defaultProps;
 
 export default React.memo(MapControls);

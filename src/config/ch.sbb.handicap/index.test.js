@@ -11,7 +11,7 @@ describe("ch.sbb.handicap", () => {
       .map((l) => l.key)
       .join(",");
     expect(permalinkKeys).toBe(
-      "ch.sbb.bahnhofplaene,ch.sbb.bahnhofplaene.interaktiv,ch.sbb.bahnhofplaene.printprodukte,ch.sbb.status_unbekannt,ch.sbb.nichtbarrierfreierbahnhoefe,ch.sbb.barrierfreierbahnhoefe",
+      "ch.sbb.bahnhofplaene,ch.sbb.bahnhofplaene.interaktiv,ch.sbb.bahnhofplaene.printprodukte,ch.sbb.status_unbekannt,ch.sbb.nichtbarrierfreierbahnhoefe,ch.sbb.teilbarrierefreiebahnhoefe,ch.sbb.barrierfreierbahnhoefe",
     );
   });
 });

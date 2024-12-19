@@ -76,22 +76,22 @@ const nichtBarrierefrei = new HandicapLayer({
   },
 });
 
-// const teilBarrierefrei = new HandicapLayer({
-//   name: "ch.sbb.teilbarrierefreiebahnhoefe",
-//   mapboxLayer: handicapDataLayer,
-//   styleLayersFilter: ({ metadata }) => {
-//     return /^symbol.teilbarrierefrei/.test(metadata?.["handicap.filter"]);
-//   },
-//   properties: {
-//     isQueryable: true,
-//     useOverlay: true,
-//     popupComponent: "StopPlacePopup",
-//     highlightPointStyle: handicapHighlightStyleMain,
-//     hasInfos: true,
-//     layerInfoComponent: "HandicapLayerInfo",
-//     color: "#F17E00",
-//   },
-// });
+const teilBarrierefrei = new HandicapLayer({
+  name: "ch.sbb.teilbarrierefreiebahnhoefe",
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ metadata }) => {
+    return /^symbol.teilbarrierefrei/.test(metadata?.["handicap.filter"]);
+  },
+  properties: {
+    isQueryable: true,
+    useOverlay: true,
+    popupComponent: "StopPlacePopup",
+    highlightPointStyle: handicapHighlightStyleMain,
+    hasInfos: true,
+    layerInfoComponent: "HandicapLayerInfo",
+    color: "#F17E00",
+  },
+});
 
 // TODO: We need to wait for ROKAS to add data for this layer.
 // const shuttle = new MapboxStyleLayer({
@@ -231,7 +231,7 @@ export default [
   statusUnbekannt,
   // shuttle,
   nichtBarrierefrei,
-  // teilBarrierefrei,
+  teilBarrierefrei,
   barrierefrei,
   // nichtBarrierefreieBahnhoefe,
   // barrierfreierBahnhoefe,

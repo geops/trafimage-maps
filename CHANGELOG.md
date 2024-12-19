@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.12](https://github.com/geops/trafimage-maps/compare/v1.30.12-beta.1...v1.30.12) (2024-12-16)
+
+### Bug Fixes
+
+- disabled=permalink now reads the url parameters but never update them ([#1203](https://github.com/geops/trafimage-maps/issues/1203)) ([3530304](https://github.com/geops/trafimage-maps/commit/353030462a8c5250a4115e62c016422a5766a106))
+- **tarifverbundkarte:** update PDF legend and legend dates ([5ce1c7e](https://github.com/geops/trafimage-maps/commit/5ce1c7ebb279a8bc7957e59713ac403967cc5c35))
+
+### [1.30.11](https://github.com/geops/trafimage-maps/compare/v1.30.10...v1.30.11) (2024-11-22)
+
+### Bug Fixes
+
+- fix italian translations ([caa6b63](https://github.com/geops/trafimage-maps/commit/caa6b63fe9cbdbffc5ff293f94d9076b475794fb)) ([76cba16](https://github.com/geops/trafimage-maps/commit/76cba1659d632d7c5b178c1392e416741a9a1753)) ([af32c43](https://github.com/geops/trafimage-maps/commit/af32c436c9601f184a0136a1ff2d57710fa813a3)) ([ac50a82](https://github.com/geops/trafimage-maps/commit/ac50a82d8072146be6f1fd298a04a2f3da7a2e48))
+- round also the delay value on punctuality layers ([#1202](https://github.com/geops/trafimage-maps/issues/1202)) ([2a74f82](https://github.com/geops/trafimage-maps/commit/2a74f82c52025578bd6d709fe2cf73bb04cfa6e4))
+
+### [1.30.10](https://github.com/geops/trafimage-maps/compare/v1.30.9...v1.30.10) (2024-11-08)
+
+### Bug Fixes
+
+- update geltungsbereiche datenstand ([#1201](https://github.com/geops/trafimage-maps/issues/1201)) ([2f8c18b](https://github.com/geops/trafimage-maps/commit/2f8c18bcd957dd683f4b7f30e1982c252b41d48f))
+
+### [1.30.9](https://github.com/geops/trafimage-maps/compare/v1.30.8...v1.30.9) (2024-11-04)
+
+### Bug Fixes
+
+- **handicap:** add partially conform layer for handicap ([#1168](https://github.com/geops/trafimage-maps/issues/1168)) ([d642b78](https://github.com/geops/trafimage-maps/commit/d642b78a97168efb859c1e05e902a95d8e726658))
+
+### [1.30.8](https://github.com/geops/trafimage-maps/compare/v1.30.7...v1.30.8) (2024-10-30)
+
+### Bug Fixes
+
+- **min/max zoom:** add minimum zoom to most topics, remove default props from function components ([#1198](https://github.com/geops/trafimage-maps/issues/1198)) ([794ef67](https://github.com/geops/trafimage-maps/commit/794ef67f88870532a30e21e989965d929eaec698))
+
+### [1.30.7](https://github.com/geops/trafimage-maps/compare/v1.30.6...v1.30.7) (2024-10-28)
+
+### Bug Fixes
+
+- **bauprojekte:** hide topic ([#1200](https://github.com/geops/trafimage-maps/issues/1200)) ([c6a9153](https://github.com/geops/trafimage-maps/commit/c6a9153d8c4d00c2662d9a0575017372d7680676))
+
+### [1.30.6](https://github.com/geops/trafimage-maps/compare/v1.30.5...v1.30.6) (2024-10-28)
+
+### Bug Fixes
+
+- **imprint & legal:** update imprint and legal lines content ([#1193](https://github.com/geops/trafimage-maps/issues/1193)) ([890442d](https://github.com/geops/trafimage-maps/commit/890442d110e626b9824312bb9e73f10ca9f42cb0))
+
 ### [1.30.5](https://github.com/geops/trafimage-maps/compare/v1.30.4...v1.30.5) (2024-10-15)
 
 ### Bug Fixes

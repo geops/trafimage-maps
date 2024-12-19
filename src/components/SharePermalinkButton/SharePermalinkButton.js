@@ -17,7 +17,7 @@ function SharePermalinkButton({ buttonProps }) {
   const { t } = useTranslation();
 
   return (
-    <PermalinkButton buttonProps={buttonProps}>
+    <PermalinkButton buttonProps={buttonProps || {}}>
       {/* We use a function to be able to get the proper window.location value. */}
       {(locationHref) => {
         return (
@@ -37,10 +37,6 @@ function SharePermalinkButton({ buttonProps }) {
 
 SharePermalinkButton.propTypes = {
   buttonProps: PropTypes.object,
-};
-
-SharePermalinkButton.defaultProps = {
-  buttonProps: {},
 };
 
 export default React.memo(SharePermalinkButton);

@@ -118,12 +118,12 @@ const warranty = {
 };
 
 function GbLegendValidity({
-  valid,
+  valid = 100,
   legends,
   products,
-  productsRemark,
-  lineDashArray50,
-  lineDashArray25,
+  productsRemark = null,
+  lineDashArray50 = defaultDashArray,
+  lineDashArray25 = defaultDashArray,
   text,
 }) {
   const { t } = useTranslation();
@@ -173,13 +173,6 @@ GbLegendValidity.propTypes = {
   lineDashArray50: PropTypes.arrayOf(PropTypes.number),
   lineDashArray25: PropTypes.arrayOf(PropTypes.number),
   text: PropTypes.string.isRequired,
-};
-
-GbLegendValidity.defaultProps = {
-  valid: 100,
-  productsRemark: null,
-  lineDashArray50: defaultDashArray,
-  lineDashArray25: defaultDashArray,
 };
 
 function GeltungsbereicheLayerInfo({ properties: layer }) {

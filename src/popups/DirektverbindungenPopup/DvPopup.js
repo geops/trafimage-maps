@@ -9,10 +9,6 @@ const useStyles = makeStyles({
   },
 });
 
-const defaultProps = {
-  feature: null,
-};
-
 function DvPopup() {
   const classes = useStyles();
 
@@ -22,8 +18,6 @@ function DvPopup() {
     </div>
   );
 }
-
-DvPopup.defaultProps = defaultProps;
 
 const memoized = React.memo(DvPopup);
 memoized.renderTitle = () => (

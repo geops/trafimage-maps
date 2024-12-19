@@ -56,11 +56,7 @@ const propTypes = {
   }),
 };
 
-const defaultProps = {
-  history: null,
-};
-
-function TopicElements({ history }) {
+function TopicElements({ history = null }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
@@ -195,7 +191,7 @@ function TopicElements({ history }) {
             />
           )}
         </EventConsumer>
-        {elements.permalink && <Permalink history={history} />}
+        <Permalink history={history} readOnly={!elements.permalink} />
         {elements.search && <Search />}
         {elements.header && <Header loginUrl={loginUrl} />}
         {elements.header && <TopicTelephoneInfos />}
@@ -259,6 +255,5 @@ function TopicElements({ history }) {
 }
 
 TopicElements.propTypes = propTypes;
-TopicElements.defaultProps = defaultProps;
 
 export default React.memo(TopicElements);

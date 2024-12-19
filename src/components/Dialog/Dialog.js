@@ -114,33 +114,24 @@ const propTypes = {
   isModal: PropTypes.bool,
   className: PropTypes.string,
   onClose: PropTypes.func,
-  classes: PropTypes.object,
+  classes: PropTypes.objectOf(PropTypes.string),
 };
 
-const defaultProps = {
-  title: null,
-  body: null,
-  // footer: null,
-  isModal: false,
-  className: null,
-  onClose: null,
-  classes: {},
-};
-
-function Dialog(props) {
+function Dialog({
+  body,
+  title,
+  name,
+  isModal = false,
+  className = "",
+  onClose,
+  classes,
+}) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const {
-    body,
-    title,
-    name,
-    isModal,
-    className,
-    onClose,
-    classes: classesProp,
-  } = props;
+  const classesProp = classes || {};
+
   const [dialogNode, setDialogNode] = useState(null);
-  const classes = useStyles({ isModal });
+  const classesDialog = useStyles({ isModal });
   const closeDialog =
     onClose ||
     (() => {
@@ -187,10 +178,10 @@ function Dialog(props) {
       : React.memo(DraggablePaperComponent),
     classes: {
       ...classesProp,
-      root: `${!isSmallScreen ? classes.rootDesktop : ""}${classesProp.root ? ` ${classesProp.root}` : ""}`,
-      scrollPaper: `${classes.scrollPaper}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
-      paper: `${classes.paper} ${className || ""} ${
-        isSmallScreen ? classes.paperMobile : ""
+      root: `${!isSmallScreen ? classesDialog.rootDesktop : ""}${classesProp.root ? ` ${classesProp.root}` : ""}`,
+      scrollPaper: `${classesDialog.scrollPaper}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
+      paper: `${classesDialog.paper} ${className} ${
+        isSmallScreen ? classesDialog.paperMobile : ""
       }${classesProp.paper ? ` ${classesProp.paper}` : ""}`,
     },
   };
@@ -203,8 +194,8 @@ function Dialog(props) {
       PaperComponent,
       classes: {
         ...classesProp,
-        scrollPaper: `${classes.scrollPaperModal}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
-        paper: `${classes.paperModal} ${className || ""}${classesProp.paper ? ` ${classesProp.paper}` : ""}`,
+        scrollPaper: `${classesDialog.scrollPaperModal}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
+        paper: `${classesDialog.paperModal} ${className}${classesProp.paper ? ` ${classesProp.paper}` : ""}`,
       },
     };
   }
@@ -230,11 +221,11 @@ function Dialog(props) {
           size="small"
           title={t("Dialog schließen")}
           onClick={closeDialog}
-          className={classes.closeBtn}
+          className={classesDialog.closeBtn}
         />
         <div
-          className={`${classes.dialogBody} ${
-            isSmallScreen ? classes.dialogBodyMobile : ""
+          className={`${classesDialog.dialogBody} ${
+            isSmallScreen ? classesDialog.dialogBodyMobile : ""
           }`}
         >
           {body}
@@ -245,6 +236,5 @@ function Dialog(props) {
 }
 
 Dialog.propTypes = propTypes;
-Dialog.defaultProps = defaultProps;
 
 export default Dialog;

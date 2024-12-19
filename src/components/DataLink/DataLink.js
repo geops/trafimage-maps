@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function DataLink({ children, layer, href, fullWidth }) {
+function DataLink({ children, layer, href, fullWidth = true }) {
   const { t } = useTranslation();
   const classes = useStyles();
 
@@ -46,13 +46,6 @@ DataLink.propTypes = {
   href: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   fullWidth: PropTypes.bool,
-};
-
-DataLink.defaultProps = {
-  layer: null,
-  href: null,
-  fullWidth: true,
-  children: null,
 };
 
 export default DataLink;

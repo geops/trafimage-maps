@@ -13,8 +13,6 @@ const propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const defaultProps = {};
-
 function BahnhofplanPopup({ feature, language, t }) {
   const iabpUrl = feature.get("url_interactive_plan");
   const a4Url = feature.get("url_a4");
@@ -84,7 +82,6 @@ const mapStateToProps = (state) => ({
 });
 
 BahnhofplanPopup.propTypes = propTypes;
-BahnhofplanPopup.defaultProps = defaultProps;
 
 const composed = compose(
   withTranslation(),

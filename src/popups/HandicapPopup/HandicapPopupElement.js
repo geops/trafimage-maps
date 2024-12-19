@@ -9,10 +9,6 @@ const propTypes = {
   label: PropTypes.string,
 };
 
-const defaultProps = {
-  label: null,
-};
-
 // 012 111 22 333
 const simpleTelTester =
   /([0-9]{2,3}\s?[0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3})/g;
@@ -124,7 +120,7 @@ const renderLinks = (intialText) => {
   return replaced;
 };
 
-function HandicapPopupElement({ properties, propertyName, label }) {
+function HandicapPopupElement({ properties, propertyName, label = null }) {
   const { t } = useTranslation();
 
   if (!properties[propertyName]) {
@@ -175,6 +171,5 @@ function HandicapPopupElement({ properties, propertyName, label }) {
 }
 
 HandicapPopupElement.propTypes = propTypes;
-HandicapPopupElement.defaultProps = defaultProps;
 
 export default React.memo(HandicapPopupElement);

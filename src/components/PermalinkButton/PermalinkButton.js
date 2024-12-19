@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaLink } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
@@ -23,14 +23,13 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
 
   const { t } = useTranslation();
   const ref = useRef();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = useCallback(
     (event) => {
       setAnchorEl(event.currentTarget);
-      if (buttonProps?.onClick) {
-        buttonProps.onClick();
-      }
+      const { onClick } = buttonProps || {};
+      onClick?.();
     },
     [buttonProps],
   );
@@ -42,7 +41,7 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
   const transformOrigin = {
     vertical: "center",
     horizontal: "left",
-    ...(popoverProps.transformOrigin || {}),
+    ...(popoverProps?.transformOrigin || {}),
   };
 
   const arrowClassName = `wkp-arrow-${transformOrigin.vertical}-${transformOrigin.horizontal}`;
@@ -54,7 +53,7 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
         value=""
         selected={!!anchorEl}
         className={classes.button}
-        {...buttonProps}
+        {...(buttonProps || {})}
         onClick={handleClick}
         title={t("Permalink generieren")}
       >
@@ -91,12 +90,6 @@ PermalinkButton.propTypes = {
   buttonProps: PropTypes.object,
   popoverProps: PropTypes.object,
   children: PropTypes.func,
-};
-
-PermalinkButton.defaultProps = {
-  buttonProps: {},
-  popoverProps: {},
-  children: null,
 };
 
 export default React.memo(PermalinkButton);
