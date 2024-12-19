@@ -31,6 +31,10 @@ class TrafimageMapboxLayer extends MaplibreLayer {
   constructor(options) {
     super({
       ...options,
+      mapOptions: {
+        maxCanvasSize: [20000, 20000], // remove 4096 limitations
+        ...(options.mapOptions || {}),
+      },
       styleUrl: { version: 8, sources: {}, layers: [] },
       isHoverActive: false,
       isClickActive: false,
