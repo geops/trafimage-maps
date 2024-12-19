@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.13](https://github.com/geops/trafimage-maps/compare/v1.30.12...v1.30.13) (2024-12-19)
+
+### Bug Fixes
+
+- increase raiplus pdf size ([9eb13ee](https://github.com/geops/trafimage-maps/commit/9eb13ee43cc6c0663a7bee5cb5a58427a0443bf6))
+- **PDF export:** increase the maximum PDF size ([22f4f4f](https://github.com/geops/trafimage-maps/commit/22f4f4ffcc2d058e131d3ca1334e9083d9f0267f))
+- remove maplibre canvas size limitation ([4dd8830](https://github.com/geops/trafimage-maps/commit/4dd8830ca88efcbb3f7bde8457cc164220daecac))
+- remove maplibre canvas size limitation ([70ae0f2](https://github.com/geops/trafimage-maps/commit/70ae0f2ba5552f3b2bb72b5426aeace182fb22db))
+
 ### [1.30.12](https://github.com/geops/trafimage-maps/compare/v1.30.12-beta.1...v1.30.12) (2024-12-16)
 
 ### Bug Fixes
