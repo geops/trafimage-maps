@@ -16,7 +16,6 @@ import ZweitausbildungPoisPopup from "./ZweitausbildungPoisPopup";
 import ZweitausbildungRoutesPopup from "./ZweitausbildungRoutesPopup";
 import TarifverbundkartePopup from "./TarifverbundkartePopup";
 import DrawPopup from "./DrawPopup";
-import NetzentwicklungPopup from "./NetzentwicklungPopup";
 import BeleuchtungsPopup from "./BeleuchtungsPopup";
 import MapsGeoAdminPopup from "./MapsGeoAdminPopup";
 import EnergiePopup from "./EnergiePopup/EnergiePopup";
@@ -48,7 +47,6 @@ export { default as ZweitausbildungPoisPopup } from "./ZweitausbildungPoisPopup"
 export { default as ZweitausbildungRoutesPopup } from "./ZweitausbildungRoutesPopup";
 export { default as TarifverbundkartePopup } from "./TarifverbundkartePopup";
 export { default as DrawPopup } from "./DrawPopup";
-export { default as NetzentwicklungPopup } from "./NetzentwicklungPopup";
 export { default as BeleuchtungsPopup } from "./BeleuchtungsPopup";
 export { default as MapsGeoAdminPopup } from "./MapsGeoAdminPopup";
 export { default as EnergiePopup } from "./EnergiePopup";
@@ -81,7 +79,6 @@ export default {
   RegionenkarteSegmentPopup,
   RegionenkarteIntersectionPopup,
   DrawPopup,
-  NetzentwicklungPopup,
   BeleuchtungsPopup,
   MapsGeoAdminPopup,
   EnergiePopup,

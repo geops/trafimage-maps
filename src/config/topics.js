@@ -19,7 +19,6 @@ import infrastrukturLayers, {
 import energieLayers from "./ch.sbb.energie";
 import tarifverbundkarteLayers from "./ch.sbb.tarifverbundkarte.public";
 import regionenkarteLayers from "./ch.sbb.regionenkarte.public";
-import netzentwicklungLayers from "./ch.sbb.netzentwicklung";
 import beleuchtungLayers from "./ch.sbb.beleuchtungsstaerken";
 import isbLayers from "./ch.sbb.isb";
 import sandboxLayers from "./ch.sbb.netzkarte.sandbox";
@@ -209,18 +208,6 @@ export const zweitausbildung = {
   layers: zweitausbildungLayers,
   projection: "EPSG:3857",
   layerInfoComponent: "ZweitausbildungTopicInfo",
-  searches: defaultSearches,
-  minZoom: 7,
-};
-
-export const netzentwicklung = {
-  name: "ch.sbb.netzentwicklung",
-  key: "ch.sbb.netzentwicklung",
-  maxZoom: 14,
-  elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
-  layers: netzentwicklungLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "NetzentwicklungTopicInfo",
   searches: defaultSearches,
   minZoom: 7,
 };
@@ -509,7 +496,6 @@ const topics = {
     infrastruktur,
     isb,
     regionenkartePublic,
-    netzentwicklung,
     beleuchtungsstaerken,
     geltungsbereicheIframe,
     sts,

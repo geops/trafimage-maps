@@ -18,8 +18,6 @@ import ZweitausbildungRoutesSubLayerInfo from "./ZweitausbildungRoutesSubLayerIn
 import ZweitausbildungSubLayerInfo from "./ZweitausbildungSubLayerInfo";
 import ZweitausbildungTopicInfo from "./ZweitausbildungTopicInfo";
 import RegionenkartePublicLayerInfo from "./RegionenkartePublicLayerInfo";
-import NetzentwicklungTopicInfo from "./NetzentwicklungTopicInfo";
-import NetzentwicklungLayerInfo from "./NetzentwicklungLayerInfo";
 import BeleuchtungTopicInfo from "./BeleuchtungTopicInfo";
 import BeleuchtungLayerInfo from "./BeleuchtungLayerInfo";
 import MapsGeoAdminLayerInfo from "./MapsGeoAdminLayerInfo";
@@ -57,8 +55,6 @@ export { default as ZweitausbildungRoutesSubLayerInfo } from "./ZweitausbildungR
 export { default as ZweitausbildungSubLayerInfo } from "./ZweitausbildungSubLayerInfo";
 export { default as ZweitausbildungTopicInfo } from "./ZweitausbildungTopicInfo";
 export { default as RegionenkartePublicLayerInfo } from "./RegionenkartePublicLayerInfo";
-export { default as NetzentwicklungTopicInfo } from "./NetzentwicklungTopicInfo";
-export { default as NetzentwicklungLayerInfo } from "./NetzentwicklungLayerInfo";
 export { default as BeleuchtungTopicInfo } from "./BeleuchtungTopicInfo";
 export { default as BeleuchtungLayerInfo } from "./BeleuchtungLayerInfo";
 export { default as MapsGeoAdminLayerInfo } from "./MapsGeoAdminLayerInfo";
@@ -97,8 +93,6 @@ export default {
   ZweitausbildungRoutesSubLayerInfo,
   ZweitausbildungSubLayerInfo,
   ZweitausbildungTopicInfo,
-  NetzentwicklungTopicInfo,
-  NetzentwicklungLayerInfo,
   BeleuchtungTopicInfo,
   BeleuchtungLayerInfo,
   MapsGeoAdminLayerInfo,
