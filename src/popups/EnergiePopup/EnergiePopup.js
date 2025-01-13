@@ -221,6 +221,16 @@ function EnergiePopup({ feature }) {
     [feature],
   );
 
+  const adresse = useMemo(
+    () =>
+      feature.getGeometry().getType() === "Point"
+        ? feature.get("adresse")
+        : null,
+    [feature],
+  );
+
+  // const adresse = "Schachenstrasse 2a\n6020 Emmenbrücke";
+
   // Asset management
   const anlageBetreuer = useMemo(
     () =>
@@ -318,6 +328,11 @@ function EnergiePopup({ feature }) {
           )}
           {description}
         </Typography>
+        {adresse && (
+          <div data-testid="energie-address">
+            <Typography>{adresse}</Typography>
+          </div>
+        )}
       </>
     );
   }, [
@@ -328,11 +343,12 @@ function EnergiePopup({ feature }) {
     trassennummer,
     losNr,
     description,
+    adresse,
   ]);
 
   return (
     <div>
-      {permissionInfos?.user && activeTopic.permission === "sbb" ? (
+      {!(permissionInfos?.user && activeTopic.permission === "sbb") ? (
         <>
           <Tabs
             value={TABS.indexOf(tab)}
