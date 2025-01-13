@@ -220,7 +220,6 @@ function EnergiePopup({ feature }) {
         : feature.get("bezeichnung"),
     [feature],
   );
-
   const adresse = feature.get("adresse");
 
   // Asset management
