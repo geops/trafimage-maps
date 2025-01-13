@@ -221,15 +221,7 @@ function EnergiePopup({ feature }) {
     [feature],
   );
 
-  const adresse = useMemo(
-    () =>
-      feature.getGeometry().getType() === "Point"
-        ? feature.get("adresse")
-        : null,
-    [feature],
-  );
-
-  // const adresse = "Schachenstrasse 2a\n6020 Emmenbrücke";
+  const adresse = feature.get("adresse");
 
   // Asset management
   const anlageBetreuer = useMemo(
