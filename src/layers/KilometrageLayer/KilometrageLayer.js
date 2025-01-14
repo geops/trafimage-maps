@@ -65,9 +65,9 @@ class KilometrageLayer extends MapboxStyleLayer {
             coordinate,
           };
         })
-        .catch(() => {
+        .catch((error) => {
           // eslint-disable-next-line no-console
-          console.error("Kilometrage request needs CORS to work properly");
+          console.error("Could not fetch kilometrage data", error);
           return { features: [], layer: this, coordinate };
         });
     });
