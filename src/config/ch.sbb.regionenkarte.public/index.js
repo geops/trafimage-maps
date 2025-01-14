@@ -1,7 +1,7 @@
 import { Layer } from "mobility-toolbox-js/ol";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
-import { kilometrageLayer } from "../ch.sbb.infrastruktur";
+import { KilometrageLayer } from "../../layers";
 import RegionenkarteLayer from "../../layers/RegionenkarteLayer";
 
 export const anlagenverantwortliche = new TrafimageMapboxLayer({
@@ -109,6 +109,10 @@ export const regionenkarteOverlayGroup = new Layer({
       },
     }),
   ],
+});
+
+const kilometrageLayer = new KilometrageLayer({
+  mapboxLayer: anlagenverantwortliche,
 });
 
 export default [

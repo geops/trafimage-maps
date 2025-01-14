@@ -1,4 +1,5 @@
-import { Layer } from "mobility-toolbox-js/ol";
+/* eslint-disable class-methods-use-this */
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
 import { Feature } from "ol";
 
 /**
@@ -8,40 +9,77 @@ import { Feature } from "ol";
  * @class
  * @param {Object} [options] Layer options.
  */
-class KilometrageLayer extends Layer {
+class KilometrageLayer extends MapboxStyleLayer {
+  constructor(options = {}) {
+    super({
+      name: "ch.sbb.kilometrage",
+      key: "ch.sbb.kilometrage",
+      queryRenderedLayersFilter: ({ type, source }) =>
+        type === "line" && source === "base",
+      visible: true,
+      ...options,
+      properties: {
+        isQueryable: true,
+        hideInLegend: true,
+        featureInfoEventTypes: ["singleclick"],
+        useOverlay: false,
+        popupComponent: "KilometragePopup",
+        ...(options || {}).properties,
+      },
+    });
+  }
+
   getFeatureInfoAtCoordinate(coordinate) {
-    const layer = this;
-    // radius = 5 pixel * mapResolution
-    return fetch(
-      `${
-        this.cartaroUrl
-      }lines/kilometration/?coord=${coordinate.toString()}&radius=${
-        5 * this.map.getView().getResolution()
-      }`,
-    )
-      .then((data) => data.json())
-      .then((data) => {
-        if (data.error || data.detail || !data.line_number) {
-          return { features: [], layer, coordinate };
-        }
+    return super.getFeatureInfoAtCoordinate(coordinate).then((info) => {
+      const { features } = info;
 
-        const feature = new Feature(data);
-        return {
-          features: [feature],
-          layer,
-          coordinate,
-        };
-      })
-      .catch(() => {
-        // eslint-disable-next-line no-console
-        console.error("Kilometrage request needs CORS to work properly");
-        return { features: [], layer, coordinate };
-      });
+      const lines = features.reduce(
+        (all, current) =>
+          current.get("line_number")
+            ? [...all, current.get("line_number")]
+            : all,
+        [],
+      );
+      const generalization = features
+        .find((feat) => feat.get("line_number"))
+        ?.get("generalization_level");
+
+      return fetch(
+        `${this.searchUrl}/search/measure?coords=${coordinate}&generalization_level=${generalization}&lines=${lines.toString()}`,
+      )
+        .then((data) => data.json())
+        .then((data) => {
+          if (data.error || data.detail) {
+            return { features: [], layer: this, coordinate };
+          }
+
+          const kilometrageFeatures = Array.from(
+            new Set(data.map((obj) => JSON.stringify(obj))),
+          )
+            .map((str) => JSON.parse(str))
+            .map((i) => new Feature(i));
+
+          return {
+            features: kilometrageFeatures,
+            layer: this,
+            coordinate,
+          };
+        })
+        .catch(() => {
+          // eslint-disable-next-line no-console
+          console.error("Kilometrage request needs CORS to work properly");
+          return { features: [], layer: this, coordinate };
+        });
+    });
   }
 
-  setCartaroUrl(cartaroUrl) {
-    this.cartaroUrl = cartaroUrl;
+  setSearchUrl(searchUrl) {
+    this.searchUrl = searchUrl;
   }
+
+  highlight() {} // Omit highlight
+
+  select() {} // Omit select
 }
 
 export default KilometrageLayer;

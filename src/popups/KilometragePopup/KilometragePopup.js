@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
 
 function KilometragePopup({ feature, t }) {
   const classes = useStyles();
-  const { line_number: lineNumber, kilometration } = feature.getProperties();
+  const { line: lineNumber, km: kilometration } = feature.getProperties();
   return (
     <div className={classes.root}>
       <div>{`${t("DfA Linien Nr.")}: ${lineNumber}`}</div>
