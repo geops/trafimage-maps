@@ -33,13 +33,12 @@ class KilometrageLayer extends MapboxStyleLayer {
     return super.getFeatureInfoAtCoordinate(coordinate).then((info) => {
       const { features } = info;
 
-      const lines = features.reduce(
-        (all, current) =>
-          current.get("line_number")
-            ? [...all, current.get("line_number")]
-            : all,
-        [],
-      );
+      const lines = features.reduce((all, current) => {
+        const lineNumber = current.get("line_number");
+        return lineNumber && !all.includes(lineNumber)
+          ? [...all, lineNumber]
+          : all;
+      }, []);
       const generalization = features
         .find((feat) => feat.get("line_number"))
         ?.get("generalization_level");
@@ -52,13 +51,7 @@ class KilometrageLayer extends MapboxStyleLayer {
           if (data.error || data.detail) {
             return { features: [], layer: this, coordinate };
           }
-
-          const kilometrageFeatures = Array.from(
-            new Set(data.map((obj) => JSON.stringify(obj))),
-          )
-            .map((str) => JSON.parse(str))
-            .map((i) => new Feature(i));
-
+          const kilometrageFeatures = data.map((i) => new Feature(i));
           return {
             features: kilometrageFeatures,
             layer: this,
