@@ -31,7 +31,7 @@ const format = new GeoJSON();
 class Lines extends Search {
   constructor() {
     super();
-    this.dataProjection = "EPSG:21781";
+    this.dataProjection = "EPSG:3857";
 
     this.highlightStyle = (feature, resolution) => {
       const dataRes = getGreaterNumber(
