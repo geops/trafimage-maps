@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.15](https://github.com/geops/trafimage-maps/compare/v1.30.14...v1.30.15) (2025-01-15)
+
+### Bug Fixes
+
+- **energie:** add power plant address to overlay ([#1206](https://github.com/geops/trafimage-maps/issues/1206)) ([bf70ed3](https://github.com/geops/trafimage-maps/commit/bf70ed3234b5d8b001a7c607fc31acb36c8edda0))
+
 ### [1.30.14](https://github.com/geops/trafimage-maps/compare/v1.30.13...v1.30.14) (2025-01-07)
 
 ### Bug Fixes
