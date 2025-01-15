@@ -21,7 +21,6 @@ class KilometrageLayer extends MapboxStyleLayer {
       properties: {
         isQueryable: true,
         hideInLegend: true,
-        featureInfoEventTypes: ["singleclick"],
         useOverlay: false,
         popupComponent: "KilometragePopup",
         ...(options || {}).properties,
