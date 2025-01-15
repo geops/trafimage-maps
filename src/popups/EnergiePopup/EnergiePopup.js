@@ -220,6 +220,7 @@ function EnergiePopup({ feature }) {
         : feature.get("bezeichnung"),
     [feature],
   );
+  const adresse = feature.get("adresse");
 
   // Asset management
   const anlageBetreuer = useMemo(
@@ -318,6 +319,11 @@ function EnergiePopup({ feature }) {
           )}
           {description}
         </Typography>
+        {adresse && (
+          <div data-testid="energie-address">
+            <Typography>{adresse}</Typography>
+          </div>
+        )}
       </>
     );
   }, [
@@ -328,6 +334,7 @@ function EnergiePopup({ feature }) {
     trassennummer,
     losNr,
     description,
+    adresse,
   ]);
 
   return (
