@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.16](https://github.com/geops/trafimage-maps/compare/v1.30.15...v1.30.16) (2025-01-15)
+
+### Bug Fixes
+
+- **search:** change projection to EPSG:3857 for lines and operating points ([3a17325](https://github.com/geops/trafimage-maps/commit/3a1732575e9296f9fb5db095056d98c5a6660507))
+
 ### [1.30.15](https://github.com/geops/trafimage-maps/compare/v1.30.14...v1.30.15) (2025-01-15)
 
 ### Bug Fixes
