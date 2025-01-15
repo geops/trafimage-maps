@@ -42,7 +42,7 @@ class KilometrageLayer extends MapboxStyleLayer {
       const generalization = features
         .find((feat) => feat.get("line_number"))
         ?.get("generalization_level");
-
+      this.searchUrl = "https://wkp.dev.trafimage.geops.ch";
       return fetch(
         `${this.searchUrl}/search/measure?coords=${coordinate}&generalization_level=${generalization}&lines=${lines.toString()}`,
       )
