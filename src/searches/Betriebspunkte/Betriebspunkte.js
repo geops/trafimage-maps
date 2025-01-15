@@ -7,7 +7,7 @@ class Betriebspunkte extends Search {
   constructor() {
     super();
     this.showInPlaceholder = false;
-    this.dataProjection = "EPSG:21781";
+    this.dataProjection = "EPSG:3857";
   }
 
   // eslint-disable-next-line class-methods-use-this
