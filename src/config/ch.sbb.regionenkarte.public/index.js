@@ -111,7 +111,7 @@ export const regionenkarteOverlayGroup = new Layer({
   ],
 });
 
-const kilometrageLayer = new KilometrageLayer({
+export const kilometrageLayer = new KilometrageLayer({
   mapboxLayer: anlagenverantwortliche,
   queryRenderedLayersFilter: (layer) => {
     if (

@@ -162,7 +162,7 @@ export const isbSchmalspurbahnen = new SchmalspurLayer({
   },
 });
 
-const kilometrageLayer = new KilometrageLayer({
+export const kilometrageLayer = new KilometrageLayer({
   mapboxLayer: netzkarteIsb,
 });
 
