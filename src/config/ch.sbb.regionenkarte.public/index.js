@@ -113,15 +113,6 @@ export const regionenkarteOverlayGroup = new Layer({
 
 export const kilometrageLayer = new KilometrageLayer({
   mapboxLayer: anlagenverantwortliche,
-  queryRenderedLayersFilter: (layer) => {
-    if (
-      /^(anlagenverantwortliche.lines)$/.test(layer.id) &&
-      layer.type === "line"
-    ) {
-      return true;
-    }
-    return /^(base)$/.test(layer.source) && layer.type === "line";
-  },
 });
 
 export default [
