@@ -2,6 +2,13 @@
 
 describe("Funkmesswagen topic", () => {
   beforeEach(() => {
+    // make sure the request is not cached, it breaks FF otherwise
+    cy.intercept("**/messwagen/*.json", { middleware: true }, (req) => {
+      req.on("before:response", (res) => {
+        // force all API responses to not be cached
+        res.headers["cache-control"] = "no-store";
+      });
+    });
     cy.consent();
   });
 
