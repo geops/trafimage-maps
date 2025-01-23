@@ -1,8 +1,8 @@
 import { Layer } from "mobility-toolbox-js/ol";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
-import { kilometrageLayer } from "../ch.sbb.infrastruktur";
 import SchmalspurLayer from "../../layers/SchmalspurLayer";
+import { KilometrageLayer } from "../../layers";
 
 export const netzkarteIsb = new TrafimageMapboxLayer({
   name: "ch.sbb.isb",
@@ -160,6 +160,10 @@ export const isbSchmalspurbahnen = new SchmalspurLayer({
     shortToLongName: shortToLongNameSchmalspur,
     layerInfoComponent: "IsbSchmalspurLayerInfo",
   },
+});
+
+export const kilometrageLayer = new KilometrageLayer({
+  mapboxLayer: netzkarteIsb,
 });
 
 export default [
