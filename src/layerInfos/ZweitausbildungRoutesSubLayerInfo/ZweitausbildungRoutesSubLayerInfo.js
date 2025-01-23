@@ -28,6 +28,7 @@ function ZweitausbildungRoutesSubLayerInfo({ properties, staticFilesUrl }) {
       <p>{t(desc)}</p>
       <div className={classes.legend}>
         <img
+          width={382}
           src={`${staticFilesUrl}/img/layers/zweitausbildung/${legend.image}`}
           draggable="false"
           alt={t("Kein Bildtext")}
