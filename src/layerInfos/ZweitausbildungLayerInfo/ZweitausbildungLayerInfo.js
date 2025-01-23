@@ -20,6 +20,7 @@ function ZweitausbildungLayerInfo({ properties: layer }) {
       {!!legend && (
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
           <img
+            width={382}
             src={`${staticFilesUrl}/img/layers/zweitausbildung/${legend.image}`}
             alt={t(legend.name)}
           />

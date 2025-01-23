@@ -17,16 +17,7 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
 });
 
 export const kilometrageLayer = new KilometrageLayer({
-  name: "ch.sbb.kilometrage",
-  key: "ch.sbb.kilometrage",
-  visible: true,
-  properties: {
-    isQueryable: true,
-    hideInLegend: true,
-    featureInfoEventTypes: ["singleclick"],
-    useOverlay: false,
-    popupComponent: "KilometragePopup",
-  },
+  mapboxLayer: netzkarteEisenbahninfrastruktur,
 });
 
 export const betriebsRegionen = new MapboxStyleLayer({
