@@ -31,7 +31,7 @@ import geltungsbereicheMvpLayers, {
 import geltungsbereicheIframeLayers from "./ch.sbb.geltungsbereiche.iframe";
 import stsLayers from "./ch.sbb.sts";
 import dvLayers from "./ch.sbb.direktverbindungen";
-import defaultSearches, { handicapStopFinder } from "./searches";
+import defaultSearches, { handicapStopFinder, stopFinder } from "./searches";
 import GeltungsbereicheTopicMenu from "../menus/GeltungsbereicheTopicMenu";
 import StsMenu from "../menus/StsMenu";
 import {
@@ -50,6 +50,8 @@ import geltungsbereicheLegends from "../img/geltungsbereicheLegends";
 import messwagenLayers from "./ch.sbb.funkmesswagen";
 import MesswagenFollowButton from "./ch.sbb.funkmesswagen/MesswagenFollowButton";
 import { MesswagenPopup } from "../popups";
+import StsMenuToggler from "./ch.sbb.sts/StsMenuToggler/StsMenuToggler";
+import StsContextProvider from "./ch.sbb.sts/StsContextProvider";
 // For backward compatibility
 export {
   casaDataLayerWithoutLabels,
@@ -370,12 +372,17 @@ export const sts = {
   only: true,
   hideInLayerTree: true,
   menu: <StsMenu />,
+  contextProvider: StsContextProvider,
   enableFeatureClick: true,
   disablePermalinkLayers: false,
   center: [915788.3813658276, 5909670.533831286],
   zoom: 8,
   constrainOnlyCenter: true,
   overlaySide: "left",
+  searches: {
+    Stationen: stopFinder,
+  },
+  menuToggler: <StsMenuToggler />,
 };
 
 export const direktverbindungen = {
