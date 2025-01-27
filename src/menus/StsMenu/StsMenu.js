@@ -73,8 +73,8 @@ const useStyles = makeStyles(() => {
           borderRadius: "0 8px 8px 0",
         },
         "& .wkp-search-button-clear": {
-          right: 54,
-          top: 8,
+          right: "54px !important",
+          top: "8px !important",
         },
         "& .react-autosuggest__suggestions-container": {
           borderRadius: 8,
