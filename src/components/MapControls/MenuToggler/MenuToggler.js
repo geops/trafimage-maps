@@ -12,18 +12,17 @@ const useStyles = makeStyles({
   displayMenuToggler: { padding: "8px" },
 });
 
-function MenuToggler({ children, title, onClick, className, ...props }) {
+function MenuToggler({ children, ...props }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const displayMenu = useSelector((state) => state.app.displayMenu);
   const dispatch = useDispatch();
+
   return (
     <MapButton
-      className={
-        className ?? `wkp-display-menu-toggler ${classes.displayMenuToggler}`
-      }
-      onClick={() => onClick?.() ?? dispatch(setDisplayMenu(!displayMenu))}
-      title={title ?? (displayMenu ? t("Schliessen") : t("Menü"))}
+      className={`wkp-display-menu-toggler ${classes.displayMenuToggler}`}
+      onClick={() => dispatch(setDisplayMenu(!displayMenu))}
+      title={displayMenu ? t("Schliessen") : t("Menü")}
       data-testid="map-controls-menu-toggler"
       {...props}
     >
@@ -34,10 +33,6 @@ function MenuToggler({ children, title, onClick, className, ...props }) {
 
 MenuToggler.propTypes = {
   children: PropTypes.node,
-  title: PropTypes.string,
-  style: PropTypes.object,
-  onClick: PropTypes.func,
-  className: PropTypes.string,
 };
 
 export default MenuToggler;
