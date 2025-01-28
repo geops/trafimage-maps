@@ -55,30 +55,36 @@ const useStyles = makeStyles(() => {
       padding: "0 10px 15px",
     },
     searchContainer: {
-      width: "calc(100% - 12px)",
-      padding: 6,
+      width: (props) =>
+        props.isMobile ? "100%" : "calc(100% - 12px) !important",
+      padding: (props) => (props.isMobile ? 0 : 6),
+      zIndex: "1100 !important",
+      borderRadius: 8,
       "&.wkp-search": {
         left: "0 !important",
-        top: (props) => (props.isMobile ? "-8px !important" : "2px !important"),
+        top: (props) => (props.isMobile ? "-2px !important" : "2px !important"),
         right: "unset",
         "& .wkp-search-input": {
+          boxShadow: (props) => props.isMobile && boxShadow,
+          position: "relative !important",
           borderRadius: 8,
           "& input": {
             borderRadius: 8,
           },
         },
         "& .wkp-search-button-submit": {
-          right: "8px !important",
-          top: "8px !important",
+          right: "0px !important",
+          top: "0px !important",
           borderRadius: "0 8px 8px 0",
         },
         "& .wkp-search-button-clear": {
-          right: "54px !important",
-          top: "8px !important",
+          right: "42px !important",
+          top: "0px !important",
         },
         "& .react-autosuggest__suggestions-container": {
           borderRadius: 8,
           overflow: "hidden",
+          boxShadow,
         },
       },
     },

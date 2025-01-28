@@ -5,7 +5,6 @@ import Autosuggest from "react-autosuggest";
 import { FaSearch, FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { IconButton, Typography } from "@mui/material";
-import PropTypes from "prop-types";
 import { setFeatureInfo, setSearchOpen } from "../../model/app/actions";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 import SearchToggle from "./SearchToggle";
@@ -156,10 +155,14 @@ export function SearchInput() {
         placeholder: searchService.getPlaceholder(t),
         value,
       }}
-      renderInputComponent={(inputProps) => {
+      renderInputComponent={({ key, ...inputProps }) => {
         return (
-          <div className="wkp-search-input" ref={searchContainerRef}>
-            <input {...inputProps} />
+          <div
+            className="wkp-search-input"
+            ref={searchContainerRef}
+            data-testid="wkp-search-input"
+          >
+            <input {...inputProps} key={key} />
             {value && (
               <CloseButton
                 tabIndex={0}
@@ -242,11 +245,6 @@ export function SearchInput() {
     />
   );
 }
-
-SearchInput.propTypes = {
-  suggestions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setSuggestions: PropTypes.func.isRequired,
-};
 
 function Search() {
   const searchContainerRef = useRef();

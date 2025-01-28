@@ -51,7 +51,6 @@ import messwagenLayers from "./ch.sbb.funkmesswagen";
 import MesswagenFollowButton from "./ch.sbb.funkmesswagen/MesswagenFollowButton";
 import { MesswagenPopup } from "../popups";
 import StsMenuToggler from "./ch.sbb.sts/StsMenuToggler/StsMenuToggler";
-import StsContextProvider from "./ch.sbb.sts/StsContextProvider";
 // For backward compatibility
 export {
   casaDataLayerWithoutLabels,
@@ -372,7 +371,6 @@ export const sts = {
   only: true,
   hideInLayerTree: true,
   menu: <StsMenu />,
-  contextProvider: StsContextProvider,
   enableFeatureClick: true,
   disablePermalinkLayers: false,
   center: [915788.3813658276, 5909670.533831286],
