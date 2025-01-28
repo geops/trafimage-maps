@@ -75,7 +75,7 @@ const useStyles = makeStyles(() => {
         "& .wkp-search-button-submit": {
           right: "0px !important",
           top: "0px !important",
-          borderRadius: "0 8px 8px 0",
+          borderRadius: "0 7px 7px 0",
         },
         "& .wkp-search-button-clear": {
           right: "42px !important",
