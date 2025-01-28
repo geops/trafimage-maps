@@ -437,16 +437,8 @@ class TopicLoader extends PureComponent {
   }
 
   render() {
-    const { history, activeTopic } = this.props;
-
-    const TopicContextProvider = activeTopic?.contextProvider;
-    return TopicContextProvider ? (
-      <TopicContextProvider>
-        <TopicElements history={history} />
-      </TopicContextProvider>
-    ) : (
-      <TopicElements history={history} />
-    );
+    const { history } = this.props;
+    return <TopicElements history={history} />;
   }
 }
 
