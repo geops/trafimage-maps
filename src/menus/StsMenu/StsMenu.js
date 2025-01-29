@@ -83,7 +83,6 @@ const useStyles = makeStyles(() => {
         },
         "& .react-autosuggest__suggestions-container": {
           borderRadius: 8,
-          overflow: "hidden",
           boxShadow,
         },
       },
