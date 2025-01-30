@@ -1,4 +1,5 @@
 import { Style } from "ol/style";
+// import { Layer } from "mobility-toolbox-js/ol";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import { createPointStyleRenderer } from "../../utils/highlightPointStyle";
 
@@ -7,6 +8,7 @@ import {
   netzkarteNight,
   stationsLayer,
   bahnhofplaene,
+  // geschosseLayer,
 } from "../ch.sbb.netzkarte";
 import HandicapLayer from "../../layers/HandicapLayer";
 
@@ -23,6 +25,20 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   },
   group: "data",
 });
+
+// export const handicapGeschosseLayer = new Layer({
+//   name: "ch.sbb.geschosse",
+//   visible: true,
+//   properties: {
+//     hideInLegend: true,
+//   },
+// });
+
+// handicapGeschosseLayer.children = geschosseLayer.children.map((layer) => {
+//   return layer.clone({
+//     mapboxLayer: handicapDataLayer,
+//   });
+// });
 
 const handicapHighlightStyleMain = new Style({
   renderer: createPointStyleRenderer([
@@ -233,6 +249,7 @@ export default [
   nichtBarrierefrei,
   teilBarrierefrei,
   barrierefrei,
+  // handicapGeschosseLayer,
   // nichtBarrierefreieBahnhoefe,
   // barrierfreierBahnhoefe,
   // stuetzpunktBahnhoefe,

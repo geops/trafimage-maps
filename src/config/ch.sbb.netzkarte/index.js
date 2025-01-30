@@ -5,6 +5,7 @@ import StationsLayer from "../../layers/StationsLayer";
 import PlatformsLayer from "../../layers/PlatformsLayer";
 import TralisLayer from "../../layers/TralisLayer";
 import { LevelLayer } from "../../layers";
+import { FLOOR_LEVELS } from "../../utils/constants";
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: "ch.sbb.netzkarte.data",
@@ -314,21 +315,20 @@ export const geschosseLayer = new Layer({
   },
 });
 
-geschosseLayer.children = [-4, -3, -2, -1, 0, "2D", 1, 2, 3, 4, 5].map(
-  (level) => {
-    return new LevelLayer({
-      name: `ch.sbb.geschosse${level}`,
-      visible: level === "2D",
-      mapboxLayer: dataLayer,
-      styleLayersFilter: ({ metadata }) => metadata && metadata["geops.filter"],
-      level,
-      group: "ch.sbb.geschosse-layer",
-      properties: {
-        parent: geschosseLayer,
-      },
-    });
-  },
-);
+geschosseLayer.children = FLOOR_LEVELS.map((level) => {
+  return new LevelLayer({
+    name: `ch.sbb.geschosse${level}`,
+    visible: level === "2D",
+    mapboxLayer: dataLayer,
+    styleLayersFilter: ({ metadata }) => metadata && metadata["geops.filter"],
+    level,
+    group: "ch.sbb.geschosse-layer",
+    properties: {
+      parent: geschosseLayer,
+      hideInLegend: true,
+    },
+  });
+});
 
 export const defaultBaseLayers = [
   dataLayer,

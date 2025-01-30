@@ -6,10 +6,9 @@ import { transform } from "ol/proj";
 import { Divider, List, ListItem } from "@mui/material";
 import { Layer } from "mobility-toolbox-js/ol";
 import LayerService from "../../utils/LayerService";
+import { FLOOR_LEVELS } from "../../utils/constants";
 
-export const FLOOR_LEVELS = [-6, -5, -4, -3, -2, -1, 0, "2D", 1, 2, 3, 4, 5, 6];
-
-export const WALKING_BASE_URL = `https://walking.geops.io/`;
+export const WALKING_BASE_URL = process.env.REACT_APP_WALKING_URL;
 
 export const to4326 = (coord, decimal = 5) => {
   return transform(coord, "EPSG:3857", "EPSG:4326").map((c) =>
@@ -111,7 +110,7 @@ class FloorSwitcher extends PureComponent {
   selectFloor(floor) {
     const { layers } = this.props;
     const layerService = new LayerService(layers);
-    layerService.getLayer(`ch.sbb.geschosse`).children.forEach((layer) => {
+    layerService.getLayer(`ch.sbb.geschosse`)?.children.forEach((layer) => {
       // eslint-disable-next-line no-param-reassign
       layer.visible = false;
     });
@@ -126,7 +125,7 @@ class FloorSwitcher extends PureComponent {
     const { zoom } = this.props;
     const { floors, activeFloor } = this.state;
 
-    if (zoom < 16) {
+    if (zoom < 16 || !floors?.length) {
       return null;
     }
 
