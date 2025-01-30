@@ -123,7 +123,7 @@ export default {
     shortname: "IR 75",
     color: "#744B97",
   },
-  "Luzern – Zürich HB": {
+  "Luzern – Zürich HB  ": {
     property: "hauptlinie",
     shortname: "IR 70",
     color: "#F390BC",
