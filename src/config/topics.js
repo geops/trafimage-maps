@@ -79,6 +79,7 @@ export const netzkarte = {
     popup: true,
     shareMenu: true,
     trackerMenu: true,
+    floorSwitcher: true,
   },
   layers: netzkarteLayers,
   projection: "EPSG:3857",
