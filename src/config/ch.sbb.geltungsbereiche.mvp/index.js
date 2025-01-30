@@ -41,7 +41,6 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
       "ch.sbb.geltungsbereiche.products.ga",
       "ch.sbb.geltungsbereiche.products.ga-night",
       "ch.sbb.geltungsbereiche.products.ga-month",
-      "ch.sbb.geltungsbereiche.products.excursion",
       "ch.sbb.geltungsbereiche.products.hta-day",
       "ch.sbb.geltungsbereiche.products.hta-combi",
     ],
