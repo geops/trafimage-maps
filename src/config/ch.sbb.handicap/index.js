@@ -1,5 +1,5 @@
 import { Style } from "ol/style";
-// import { Layer } from "mobility-toolbox-js/ol";
+import { Layer } from "mobility-toolbox-js/ol";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import { createPointStyleRenderer } from "../../utils/highlightPointStyle";
 
@@ -8,7 +8,7 @@ import {
   netzkarteNight,
   stationsLayer,
   bahnhofplaene,
-  // geschosseLayer,
+  geschosseLayer,
 } from "../ch.sbb.netzkarte";
 import HandicapLayer from "../../layers/HandicapLayer";
 
@@ -26,19 +26,34 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   group: "data",
 });
 
-// export const handicapGeschosseLayer = new Layer({
-//   name: "ch.sbb.geschosse",
-//   visible: true,
-//   properties: {
-//     hideInLegend: true,
-//   },
-// });
+export const handicapLight = netzkarteLayer.clone({
+  mapboxLayer: handicapDataLayer,
+  style: "base_bright_v2_ch.sbb.handicap_v2",
+});
 
-// handicapGeschosseLayer.children = geschosseLayer.children.map((layer) => {
-//   return layer.clone({
-//     mapboxLayer: handicapDataLayer,
-//   });
-// });
+export const handicapDark = netzkarteNight.clone({
+  mapboxLayer: handicapDataLayer,
+  style: "base_dark_v2_ch.sbb.handicap_v2_dark",
+});
+
+export const handicapGeschosseLayer = new Layer({
+  name: "ch.sbb.geschosse",
+  visible: true,
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+handicapGeschosseLayer.children = geschosseLayer.children.map((layer) => {
+  return layer.clone({
+    mapboxLayer: handicapDataLayer,
+    properties: {
+      parent: handicapGeschosseLayer,
+      hideInLegend: true,
+      baselayers: [handicapLight, handicapDark],
+    },
+  });
+});
 
 const handicapHighlightStyleMain = new Style({
   renderer: createPointStyleRenderer([
@@ -209,14 +224,8 @@ const statusUnbekannt = new HandicapLayer({
 
 export default [
   handicapDataLayer,
-  netzkarteLayer.clone({
-    mapboxLayer: handicapDataLayer,
-    style: "base_bright_v2_ch.sbb.handicap_v2",
-  }),
-  netzkarteNight.clone({
-    mapboxLayer: handicapDataLayer,
-    style: "base_dark_v2_ch.sbb.handicap_v2_dark",
-  }),
+  handicapLight,
+  handicapDark,
   // netzkarteAerial.clone({
   //   mapboxLayer: handicapDataLayer,
   //   style: 'aerial_sbb_sbbkey_ch.sbb.handicap_v2',
@@ -249,7 +258,7 @@ export default [
   nichtBarrierefrei,
   teilBarrierefrei,
   barrierefrei,
-  // handicapGeschosseLayer,
+  handicapGeschosseLayer,
   // nichtBarrierefreieBahnhoefe,
   // barrierfreierBahnhoefe,
   // stuetzpunktBahnhoefe,

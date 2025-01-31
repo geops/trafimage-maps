@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getBottomLeft, getTopRight } from "ol/extent";
 import { transform } from "ol/proj";
-import { Divider, List, ListItem } from "@mui/material";
+import { IconButton, List, ListItem } from "@mui/material";
 import { Layer } from "mobility-toolbox-js/ol";
+import { unByKey } from "ol/Observable";
 import LayerService from "../../utils/LayerService";
 import { FLOOR_LEVELS } from "../../utils/constants";
 
@@ -22,58 +23,98 @@ const propTypes = {
   zoom: PropTypes.number.isRequired,
   map: PropTypes.object.isRequired,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
+  activeTopic: PropTypes.string.isRequired,
 };
 
-let abortController = new AbortController();
-
 class FloorSwitcher extends PureComponent {
-  /**
-   * Sort floors based on their latitude.
-   */
-  static sortFloors(floors) {
-    const sorted = [...floors];
-    sorted.sort(
-      (a, b) => parseInt(b.iabp_name, 10) - parseInt(a.iabp_name, 10),
-    );
-
-    return sorted;
-  }
-
   constructor(props) {
     super(props);
 
+    this.olListeners = [];
+    this.layerService = new LayerService();
     this.state = {
       floors: [],
       activeFloor: "2D",
+      baseLayerHasLevelLayers: false,
     };
+    this.onBaseLayerChange = this.onBaseLayerChange.bind(this);
+    this.abortController = new AbortController();
   }
 
   componentDidMount() {
+    this.initialize();
     this.loadFloors();
   }
 
-  componentDidUpdate(prevProps) {
-    const { center, zoom } = this.props;
+  componentDidUpdate(prevProps, prevState) {
+    const { center, zoom, layers, activeTopic } = this.props;
+    const { activeFloor, floors } = this.state;
+
+    if (prevProps.layers !== layers) {
+      this.initialize();
+    }
 
     if (prevProps.center !== center) {
       this.loadFloors();
     }
 
-    if (prevProps.zoom !== zoom && zoom < 16) {
+    if (
+      prevProps.activeTopic !== activeTopic ||
+      (prevState.floors !== floors && !floors.includes(activeFloor))
+    ) {
+      // Reset to 2D when the active floor is no longer in the extent floors and on topic change
       this.selectFloor("2D");
+    }
+
+    if (prevProps.zoom !== zoom) {
+      // Apply 2D floor when zoom is less than 16, use state floor otherwise
+      this.selectFloor(zoom <= 16 ? "2D" : activeFloor, false);
     }
   }
 
   componentWillUnmount() {
     // Reset when a topic without floors is loaded
     this.selectFloor("2D");
+    this.removeMapListeners();
+  }
+
+  onBaseLayerChange() {
+    const visibleBaselayer = this.layerService
+      .getBaseLayers()
+      .find((l) => l.visible);
+
+    const levelLayerBaselayers = this.layerService
+      .getLayer("ch.sbb.geschosse")
+      ?.children[0]?.get("baselayers");
+    this.setState({
+      baseLayerHasLevelLayers: levelLayerBaselayers?.includes(visibleBaselayer),
+    });
+  }
+
+  addMapListeners() {
+    this.removeMapListeners();
+    const baselayers = this.layerService.getBaseLayers();
+    baselayers.forEach((layer) => {
+      this.olListeners.push(layer.on("change:visible", this.onBaseLayerChange));
+    });
+  }
+
+  initialize() {
+    const { layers } = this.props;
+    this.layerService.setLayers(layers);
+    this.onBaseLayerChange();
+    this.addMapListeners();
+  }
+
+  removeMapListeners() {
+    unByKey(this.olListeners);
   }
 
   loadFloors() {
     const { map } = this.props;
-    abortController.abort();
-    abortController = new AbortController();
-    const { signal } = abortController;
+    this.abortController.abort();
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
 
     const extent = map.getView().calculateExtent();
     const reqUrl = `${WALKING_BASE_URL}availableLevels?bbox=${to4326(
@@ -107,25 +148,28 @@ class FloorSwitcher extends PureComponent {
       });
   }
 
-  selectFloor(floor) {
-    const { layers } = this.props;
-    const layerService = new LayerService(layers);
-    layerService.getLayer(`ch.sbb.geschosse`)?.children.forEach((layer) => {
-      // eslint-disable-next-line no-param-reassign
-      layer.visible = false;
-    });
-    const layer = layerService.getLayer(`ch.sbb.geschosse${floor}`);
+  selectFloor(floor, shouldSetState = true) {
+    this.layerService
+      .getLayer(`ch.sbb.geschosse`)
+      ?.children.forEach((layer) => {
+        // eslint-disable-next-line no-param-reassign
+        layer.visible = false;
+      });
+
+    const layer = this.layerService.getLayer(`ch.sbb.geschosse${floor}`);
     if (layer) {
       layer.visible = true;
-      this.setState({ activeFloor: floor });
+      if (shouldSetState) {
+        this.setState({ activeFloor: floor });
+      }
     }
   }
 
   render() {
     const { zoom } = this.props;
-    const { floors, activeFloor } = this.state;
+    const { floors, activeFloor, baseLayerHasLevelLayers } = this.state;
 
-    if (zoom < 16 || !floors?.length) {
+    if (zoom < 16 || floors?.length <= 2 || !baseLayerHasLevelLayers) {
       return null;
     }
 
@@ -134,48 +178,58 @@ class FloorSwitcher extends PureComponent {
         className="wkp-floor-switcher"
         sx={{
           zIndex: 1000,
-          width: 32,
           boxShadow: "0 0 7px rgba(0, 0, 0, 0.9)",
-          borderRadius: "25px",
+          borderRadius: "20px",
           overflow: "hidden",
           backgroundColor: "white",
-          gap: 0.5,
-          padding: 0.5,
+          gap: "2px",
           display: "flex",
           flexDirection: "column",
+          transition: "box-shadow 0.5s ease",
+          "&:hover": {
+            boxShadow: "0 0 12px 2px rgba(0, 0, 0, 0.9)",
+          },
         }}
       >
-        {floors.map((floor) => (
-          <>
-            {floor === "2D" && (
-              <Divider sx={{ borderColor: "text.secondary" }} />
-            )}
+        {floors.map((floor) => {
+          const color = floor === activeFloor ? "white" : "#444";
+          const backgroundColor = floor === "2D" ? "#e8e7e7" : "white";
+          return (
             <ListItem
               key={floor}
-              component="button"
               disablePadding
-              onClick={() => this.selectFloor(floor)}
               sx={{
-                fontWeight: floor === "2D" ? "bold" : "normal",
-                borderRadius: "50%",
-                backgroundColor: activeFloor === floor ? "#444" : "white",
-                border: 0,
-                alignItems: "center",
-                justifyContent: "center",
-                height: 32,
-                color: activeFloor === floor ? "white" : "text.secondary",
-                "&:hover": {
-                  color: activeFloor === floor ? "white" : "secondary.dark",
-                },
+                width: 40,
+                height: 40,
+                padding: 0.5,
+                backgroundColor: floor === "2D" ? "#e8e7e7" : "white",
               }}
             >
-              {floor}
+              <IconButton
+                onClick={() => this.selectFloor(floor)}
+                sx={{
+                  typography: "body1",
+                  borderRadius: "50%",
+                  backgroundColor:
+                    activeFloor === floor ? "#444" : backgroundColor,
+                  border: 0,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100%",
+                  height: "100%",
+                  color,
+                  "&:hover": {
+                    color: floor === activeFloor ? "white" : "secondary.dark",
+                    backgroundColor:
+                      activeFloor === floor ? "#444" : backgroundColor,
+                  },
+                }}
+              >
+                {floor}
+              </IconButton>
             </ListItem>
-            {floor === "2D" && (
-              <Divider sx={{ borderColor: "text.secondary" }} />
-            )}
-          </>
-        ))}
+          );
+        })}
       </List>
     );
   }
@@ -186,6 +240,7 @@ const mapStateToProps = (state) => ({
   zoom: state.map.zoom,
   map: state.app.map,
   layers: state.map.layers,
+  activeTopic: state.app.activeTopic,
 });
 
 const mapDispatchToProps = {};

@@ -96,6 +96,14 @@ class LevelLayer extends MapboxStyleLayer {
       }
     }
   }
+
+  /**
+   * Create exact copy of the LevelLayer
+   * @returns {LevelLayer} LevelLayer
+   */
+  clone(newOptions) {
+    return new LevelLayer({ ...this.options, ...newOptions });
+  }
 }
 
 export default LevelLayer;

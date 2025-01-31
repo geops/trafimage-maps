@@ -93,7 +93,7 @@ export const handicap = {
   elements: {
     ...defaultElements,
     shareMenu: true,
-    // floorSwitcher: true,
+    floorSwitcher: true,
     popup: true,
   },
   layers: handicapLayers,

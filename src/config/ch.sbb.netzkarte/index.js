@@ -326,6 +326,7 @@ geschosseLayer.children = FLOOR_LEVELS.map((level) => {
     properties: {
       parent: geschosseLayer,
       hideInLegend: true,
+      baselayers: [netzkarteLayer, netzkarteNight],
     },
   });
 });
