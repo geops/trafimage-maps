@@ -35,7 +35,7 @@ class FloorSwitcher extends PureComponent {
     this.state = {
       floors: [],
       activeFloor: "2D",
-      baseLayerHasLevelLayers: false,
+      baseLayerHasLevelLayers: true,
     };
     this.onBaseLayerChange = this.onBaseLayerChange.bind(this);
     this.abortController = new AbortController();
@@ -48,13 +48,16 @@ class FloorSwitcher extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     const { center, zoom, layers, activeTopic } = this.props;
-    const { activeFloor, floors } = this.state;
+    const { activeFloor, floors, baseLayerHasLevelLayers } = this.state;
 
     if (prevProps.layers !== layers) {
       this.initialize();
     }
 
-    if (prevProps.center !== center) {
+    if (
+      prevProps.center !== center ||
+      prevState.baseLayerHasLevelLayers !== baseLayerHasLevelLayers
+    ) {
       this.loadFloors();
     }
 
@@ -82,7 +85,6 @@ class FloorSwitcher extends PureComponent {
     const visibleBaselayer = this.layerService
       .getBaseLayers()
       .find((l) => l.visible);
-
     const levelLayerBaselayers = this.layerService
       .getLayer("ch.sbb.geschosse")
       ?.children[0]?.get("baselayers");
