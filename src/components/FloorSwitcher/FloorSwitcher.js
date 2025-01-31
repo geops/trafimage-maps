@@ -111,10 +111,18 @@ class FloorSwitcher extends PureComponent {
   }
 
   loadFloors() {
-    const { map } = this.props;
+    const { baseLayerHasLevelLayers } = this.state;
+    const { map, zoom } = this.props;
     this.abortController.abort();
     this.abortController = new AbortController();
     const { signal } = this.abortController;
+
+    if (!baseLayerHasLevelLayers || zoom < 16) {
+      this.setState({
+        floors: [],
+      });
+      return;
+    }
 
     const extent = map.getView().calculateExtent();
     const reqUrl = `${WALKING_BASE_URL}availableLevels?bbox=${to4326(
