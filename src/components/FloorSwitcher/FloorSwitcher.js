@@ -201,7 +201,6 @@ class FloorSwitcher extends PureComponent {
         }}
       >
         {floors.map((floor) => {
-          const color = floor === activeFloor ? "white" : "#444";
           const backgroundColor = floor === "2D" ? "#e8e7e7" : "white";
           return (
             <ListItem
@@ -211,7 +210,7 @@ class FloorSwitcher extends PureComponent {
                 width: 40,
                 height: 40,
                 padding: 0.5,
-                backgroundColor: floor === "2D" ? "#e8e7e7" : "white",
+                backgroundColor,
               }}
             >
               <IconButton
@@ -226,7 +225,7 @@ class FloorSwitcher extends PureComponent {
                   justifyContent: "center",
                   width: "100%",
                   height: "100%",
-                  color,
+                  color: floor === activeFloor ? "white" : "#444",
                   "&:hover": {
                     color: floor === activeFloor ? "white" : "secondary.dark",
                     backgroundColor:
