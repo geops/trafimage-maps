@@ -187,7 +187,6 @@ class FloorSwitcher extends PureComponent {
       <List
         className="wkp-floor-switcher"
         sx={{
-          zIndex: 1000,
           boxShadow: "0 0 7px rgba(0, 0, 0, 0.9)",
           borderRadius: "20px",
           overflow: "hidden",
