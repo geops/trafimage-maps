@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.17](https://github.com/geops/trafimage-maps/compare/v1.30.16...v1.30.17) (2025-02-03)
+
+### Bug Fixes
+
+- **kilometrage:** add support for multiple lines in popup ([#1207](https://github.com/geops/trafimage-maps/issues/1207)) ([50e1625](https://github.com/geops/trafimage-maps/commit/50e16255c96bb9f3d315f12d3e7c84c32f80b1de))
+- use good color for cancelled trains on low zoom level ([#1213](https://github.com/geops/trafimage-maps/issues/1213)) ([ebaf421](https://github.com/geops/trafimage-maps/commit/ebaf4213640e5f4648781c361f18d680f6a1b1b6))
+
 ### [1.30.16](https://github.com/geops/trafimage-maps/compare/v1.30.15...v1.30.16) (2025-01-15)
 
 ### Bug Fixes
