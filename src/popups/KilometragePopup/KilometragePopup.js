@@ -8,6 +8,7 @@ import { Typography } from "@mui/material";
 const useStyles = makeStyles(() => ({
   root: {
     minWidth: "max-content !important",
+    maxHeight: 200,
     display: "flex",
     flexDirection: "column",
     gap: 5,
