@@ -77,8 +77,10 @@ const memoized = React.memo(StationPopup);
 memoized.renderTitle = (feat, layer, t) => {
   const feature = feat.length ? feat[0] : feat;
   const platform = feature.get("platform");
+  const isRail = !!feature.get("rail");
+
   if (platform) {
-    return `${feature.get("name")} (${t("abfahrtszeiten_kante")} ${platform})`;
+    return `${feature.get("name")} (${t(isRail ? "abfahrtszeiten_gleis" : "abfahrtszeiten_kante")} ${platform})`;
   }
   return feature.get("name");
 };
