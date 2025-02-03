@@ -2,7 +2,17 @@ import ship100GothardPanoramExpress from "./GS100_Gotthard_Panorama_Expresses_sh
 import ship150GothardPanoramExpress from "./GS150_Gotthard_Panorama_Expresses_shiplines.json";
 
 export default {
-  "(Luzern –) Zürich HB – St.Gallen – Chur": {
+  "Genève-Aéroport – Neuchâtel": {
+    property: "hauptlinie",
+    shortname: "IR 57",
+    color: "#758536",
+  },
+  "Genève-Aéroport – Morges – Lausanne – Brig": {
+    property: "hauptlinie",
+    shortname: "IR 95",
+    color: "#801D6B",
+  },
+  "Zürich HB/St.Gallen – Sargans/Chur (SBB/SOB)": {
     property: "hauptlinie",
     shortname: "IR 13",
     color: "#f573c0",
@@ -63,7 +73,7 @@ export default {
     shortname: "IR 17",
     color: "#24529B",
   },
-  "Bern – Burgdorf – Olten – Zürich HB – Chur": {
+  "Bern – Burgdorf – Olten – Zürich HB – Chur (SOB/SBB)": {
     property: "hauptlinie",
     shortname: "IR 35",
     color: "#0e521c",
@@ -93,17 +103,16 @@ export default {
     shortname: "IR 15",
     color: "#0CB795",
   },
-  "Genève-Aéroport – Lausanne – Brig": {
+  "Genève-Aéroport – Renens VD – Lausanne – Brig": {
     property: "hauptlinie",
     shortname: "IR 90",
     color: "#007CA3",
   },
-  "Genève-Aéroport/Lausanne – Biel/Bienne – Zürich HB (– St.Gallen/Rorschach)":
-    {
-      property: "hauptlinie",
-      shortname: "IC 5",
-      color: "#F7931D",
-    },
+  "Lausanne – Biel/Bienne – Zürich HB(– St.Gallen/Rorschach)": {
+    property: "hauptlinie",
+    shortname: "IC 5",
+    color: "#F7931D",
+  },
   "Interlaken Ost – Bern – Zürich HB – Romanshorn": {
     property: "hauptlinie",
     shortname: "IC 81",
@@ -114,7 +123,7 @@ export default {
     shortname: "IR 75",
     color: "#744B97",
   },
-  "Luzern – Zürich HB (– St.Gallen – Chur)": {
+  "Luzern – Zürich HB  ": {
     property: "hauptlinie",
     shortname: "IR 70",
     color: "#F390BC",
