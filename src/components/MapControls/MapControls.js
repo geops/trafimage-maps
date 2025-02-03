@@ -90,6 +90,7 @@ function MapControls({
   const dispatch = useDispatch();
   const overlayWidth = useOverlayWidth();
   const screenHeight = useSelector((state) => state.app.screenHeight);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const isSmallHeight = useMemo(() => {
     return ["xs", "s"].includes(screenHeight);
   }, [screenHeight]);
@@ -153,7 +154,7 @@ function MapControls({
       className={`wkp-map-controls ${classes.mapControls}`}
       data-testid="map-controls-wrapper"
     >
-      {menuToggler && <MenuToggler />}
+      {menuToggler && (activeTopic?.menuToggler ?? <MenuToggler />)}
       <Zoom
         map={map}
         zoomInChildren={<ZoomIn />}
