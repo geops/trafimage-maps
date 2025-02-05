@@ -50,7 +50,7 @@ class FloorSwitcher extends PureComponent {
     const { center, zoom, layers, activeTopic } = this.props;
     const { activeFloor, floors, baseLayerHasLevelLayers } = this.state;
 
-    if (prevProps.layers !== layers) {
+    if (prevProps.layers !== layers && prevProps.activeTopic !== activeTopic) {
       this.initialize();
     }
 
@@ -61,10 +61,7 @@ class FloorSwitcher extends PureComponent {
       this.loadFloors();
     }
 
-    if (
-      prevProps.activeTopic !== activeTopic ||
-      (prevState.floors !== floors && !floors.includes(activeFloor))
-    ) {
+    if (prevState.floors !== floors && !floors.includes(activeFloor)) {
       // Reset to 2D when the active floor is no longer in the extent floors and on topic change
       this.selectFloor("2D");
     }
@@ -82,15 +79,23 @@ class FloorSwitcher extends PureComponent {
   }
 
   onBaseLayerChange() {
-    const visibleBaselayer = this.layerService
-      .getBaseLayers()
-      .find((l) => l.visible);
+    const baseLayers = this.layerService.getBaseLayers();
+    const visibleBaselayer = baseLayers.find((l) => l.visible);
     const levelLayerBaselayers = this.layerService
       .getLayer("ch.sbb.geschosse")
       ?.children[0]?.get("baselayers");
+
     this.setState({
-      baseLayerHasLevelLayers: levelLayerBaselayers?.includes(visibleBaselayer),
+      baseLayerHasLevelLayers: levelLayerBaselayers?.includes(
+        visibleBaselayer || baseLayers[0],
+      ),
     });
+  }
+
+  getVisibleLevelLayer() {
+    return this.layerService
+      .getLayer("ch.sbb.geschosse")
+      ?.children.find((l) => l.visible);
   }
 
   addMapListeners() {
@@ -102,10 +107,16 @@ class FloorSwitcher extends PureComponent {
   }
 
   initialize() {
-    const { layers } = this.props;
+    const { layers, zoom } = this.props;
     this.layerService.setLayers(layers);
     this.onBaseLayerChange();
     this.addMapListeners();
+    const visibleLevelLayer = this.getVisibleLevelLayer();
+    if (!visibleLevelLayer || zoom < 16) {
+      this.selectFloor("2D");
+      return;
+    }
+    this.selectFloor(visibleLevelLayer.level);
   }
 
   removeMapListeners() {
@@ -135,12 +146,11 @@ class FloorSwitcher extends PureComponent {
     fetch(reqUrl, { signal })
       .then((response) => response.json())
       .then((response) => {
-        const floors = response.properties.availableLevels
-          .filter((level) => FLOOR_LEVELS.includes(level))
-          .join()
-          .split(",");
+        const floors = response.properties.availableLevels.filter((level) =>
+          FLOOR_LEVELS.includes(level),
+        );
         if (!floors.includes("2D")) {
-          floors.splice(floors.indexOf("0") + 1, 0, "2D");
+          floors.splice(floors.indexOf(0) + 1, 0, "2D");
         }
         this.setState({
           floors: floors.reverse(),
@@ -179,7 +189,7 @@ class FloorSwitcher extends PureComponent {
     const { zoom } = this.props;
     const { floors, activeFloor, baseLayerHasLevelLayers } = this.state;
 
-    if (zoom < 16 || floors?.length <= 2 || !baseLayerHasLevelLayers) {
+    if (zoom <= 16 || floors?.length <= 2 || !baseLayerHasLevelLayers) {
       return null;
     }
 

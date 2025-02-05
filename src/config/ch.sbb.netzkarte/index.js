@@ -311,7 +311,7 @@ export const geschosseLayer = new Layer({
   name: "ch.sbb.geschosse",
   visible: true,
   properties: {
-    hideInLegend: true,
+    hideInLayerTree: true,
   },
 });
 
@@ -325,7 +325,7 @@ geschosseLayer.children = FLOOR_LEVELS.map((level) => {
     group: "ch.sbb.geschosse-layer",
     properties: {
       parent: geschosseLayer,
-      hideInLegend: true,
+      hideInLayerTree: true,
       baselayers: [netzkarteLayer, netzkarteNight],
     },
   });

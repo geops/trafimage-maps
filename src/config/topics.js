@@ -93,7 +93,6 @@ export const handicap = {
   elements: {
     ...defaultElements,
     shareMenu: true,
-    floorSwitcher: true,
     popup: true,
   },
   layers: handicapLayers,
@@ -278,6 +277,7 @@ const sandbox = {
   projection: "EPSG:3857",
   elements: {
     ...defaultElements,
+    floorSwitcher: true,
   },
   layerInfoComponent: "SandboxTopicInfo",
   searches: defaultSearches,
