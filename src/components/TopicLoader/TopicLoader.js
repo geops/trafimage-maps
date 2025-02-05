@@ -138,7 +138,8 @@ class TopicLoader extends PureComponent {
         cartaroUrl !== prevProps.cartaroUrl ||
         vectorTilesKey !== prevProps.vectorTilesKey ||
         vectorTilesUrl !== prevProps.vectorTilesUrl ||
-        staticFilesUrl !== prevProps.staticFilesUrl)
+        staticFilesUrl !== prevProps.staticFilesUrl ||
+        searchUrl !== prevProps.searchUrl)
     ) {
       this.updateLayers(activeTopic.layers);
     }
@@ -319,7 +320,6 @@ class TopicLoader extends PureComponent {
       apiKeyName,
       language,
       dispatchSetLayers,
-      cartaroUrl,
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
@@ -329,6 +329,7 @@ class TopicLoader extends PureComponent {
       realtimeKey,
       realtimeUrl,
       layers,
+      searchUrl,
     } = this.props;
 
     // wait until all web components attributes are properly set
@@ -338,7 +339,8 @@ class TopicLoader extends PureComponent {
       !appBaseUrl ||
       !activeTopic ||
       !vectorTilesUrl ||
-      !vectorTilesKey
+      !vectorTilesKey ||
+      !searchUrl
     ) {
       return [];
     }
@@ -406,9 +408,6 @@ class TopicLoader extends PureComponent {
           apiKeyName,
         );
       }
-      if (flatLayers[i].setCartaroUrl) {
-        flatLayers[i].setCartaroUrl(cartaroUrl);
-      }
       if (flatLayers[i].setLanguage) {
         flatLayers[i].setLanguage(language);
       }
@@ -417,6 +416,9 @@ class TopicLoader extends PureComponent {
       }
       if (flatLayers[i].api) {
         flatLayers[i].api.apiKey = apiKey;
+      }
+      if (flatLayers[i].setSearchUrl) {
+        flatLayers[i].setSearchUrl(searchUrl);
       }
 
       // Realtime layers
