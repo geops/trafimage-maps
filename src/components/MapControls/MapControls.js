@@ -15,7 +15,7 @@ import { ReactComponent as ZoomOut } from "../../img/minus.svg";
 import { ReactComponent as ZoomIn } from "../../img/plus.svg";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 import { setZoomType } from "../../model/map/actions";
-import FloorSwitcher from "../FloorSwitcher/FloorSwitcher";
+import FloorSwitcher from "../FloorSwitcher";
 
 const propTypes = {
   geolocation: PropTypes.bool,
