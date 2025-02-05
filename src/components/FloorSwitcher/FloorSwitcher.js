@@ -112,6 +112,7 @@ class FloorSwitcher extends PureComponent {
     this.onBaseLayerChange();
     this.addMapListeners();
     const visibleLevelLayer = this.getVisibleLevelLayer();
+
     if (!visibleLevelLayer || zoom < 16) {
       this.selectFloor("2D");
       return;
@@ -130,7 +131,7 @@ class FloorSwitcher extends PureComponent {
     this.abortController = new AbortController();
     const { signal } = this.abortController;
 
-    if (!baseLayerHasLevelLayers || zoom < 16) {
+    if (!baseLayerHasLevelLayers || zoom <= 16 || !WALKING_BASE_URL) {
       this.setState({
         floors: [],
       });
@@ -189,7 +190,12 @@ class FloorSwitcher extends PureComponent {
     const { zoom } = this.props;
     const { floors, activeFloor, baseLayerHasLevelLayers } = this.state;
 
-    if (zoom <= 16 || floors?.length <= 2 || !baseLayerHasLevelLayers) {
+    if (
+      !zoom || // When app is loaded without z param
+      zoom <= 16 ||
+      floors?.length <= 2 ||
+      !baseLayerHasLevelLayers
+    ) {
       return null;
     }
 
@@ -261,8 +267,6 @@ const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
 });
 
-const mapDispatchToProps = {};
-
 FloorSwitcher.propTypes = propTypes;
 
-export default connect(mapStateToProps, mapDispatchToProps)(FloorSwitcher);
+export default connect(mapStateToProps)(FloorSwitcher);
