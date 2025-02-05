@@ -50,7 +50,7 @@ class FloorSwitcher extends PureComponent {
     const { center, zoom, layers, activeTopic } = this.props;
     const { activeFloor, floors, baseLayerHasLevelLayers } = this.state;
 
-    if (prevProps.layers !== layers && prevProps.activeTopic !== activeTopic) {
+    if (prevProps.layers !== layers || prevProps.activeTopic !== activeTopic) {
       this.initialize();
     }
 
