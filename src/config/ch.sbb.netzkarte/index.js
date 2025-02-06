@@ -27,6 +27,8 @@ export const netzkarteLayer = new MapboxStyleLayer({
   properties: {
     isBaseLayer: true,
     previewImage: "ch.sbb.netzkarte",
+    hasLevels: true,
+    hideInLegend: true,
   },
   visible: true,
   mapboxLayer: dataLayer,
@@ -42,6 +44,8 @@ export const netzkarteNight = new MapboxStyleLayer({
   properties: {
     isBaseLayer: true,
     previewImage: "ch.sbb.netzkarte.dark",
+    hasLevels: true,
+    hideInLegend: true,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -326,7 +330,6 @@ geschosseLayer.children = FLOOR_LEVELS.map((level) => {
     properties: {
       parent: geschosseLayer,
       hideInLayerTree: true,
-      baselayers: [netzkarteLayer, netzkarteNight],
     },
   });
 });

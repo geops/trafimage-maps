@@ -68,7 +68,7 @@ class FloorSwitcher extends PureComponent {
 
     if (prevProps.zoom !== zoom) {
       // Apply 2D floor when zoom is less than 16, use state floor otherwise
-      this.selectFloor(zoom <= 16 ? "2D" : activeFloor, false);
+      this.selectFloor(zoom < 16 ? "2D" : activeFloor, false);
     }
   }
 
@@ -81,13 +81,10 @@ class FloorSwitcher extends PureComponent {
   onBaseLayerChange() {
     const baseLayers = this.layerService.getBaseLayers();
     const visibleBaselayer = baseLayers.find((l) => l.visible);
-    const levelLayerBaselayers = this.layerService
-      .getLayer("ch.sbb.geschosse")
-      ?.children[0]?.get("baselayers");
 
     this.setState({
-      baseLayerHasLevelLayers: levelLayerBaselayers?.includes(
-        visibleBaselayer || baseLayers[0],
+      baseLayerHasLevelLayers: (visibleBaselayer || baseLayers[0])?.get(
+        "hasLevels",
       ),
     });
   }
@@ -131,7 +128,7 @@ class FloorSwitcher extends PureComponent {
     this.abortController = new AbortController();
     const { signal } = this.abortController;
 
-    if (!baseLayerHasLevelLayers || zoom <= 16 || !WALKING_BASE_URL) {
+    if (!baseLayerHasLevelLayers || zoom < 16 || !WALKING_BASE_URL) {
       this.setState({
         floors: [],
       });
@@ -192,7 +189,7 @@ class FloorSwitcher extends PureComponent {
 
     if (
       !zoom || // When app is loaded without z param
-      zoom <= 16 ||
+      zoom < 16 ||
       floors?.length <= 2 ||
       !baseLayerHasLevelLayers
     ) {
