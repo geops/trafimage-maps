@@ -198,6 +198,7 @@ class FloorSwitcher extends PureComponent {
 
     return (
       <List
+        data-testid="floor-switcher"
         className="wkp-floor-switcher"
         sx={{
           boxShadow: "0 0 7px rgba(0, 0, 0, 0.9)",
@@ -227,6 +228,7 @@ class FloorSwitcher extends PureComponent {
               }}
             >
               <IconButton
+                data-testid={`floor-switcher${floor}-btn`}
                 onClick={() => this.selectFloor(floor)}
                 sx={{
                   typography: "body1",
