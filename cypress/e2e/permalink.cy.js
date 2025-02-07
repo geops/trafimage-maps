@@ -64,7 +64,9 @@ describe("permalink", () => {
           ),
         );
         cy.url().should("match", /lang=de/);
-        cy.url().should("match", /layers=&/);
+        cy.url().should("match", /[?&]layers=(&|$)/);
+        // cy.url().then((url) => console.log(url));
+
         // eslint-disable-next-line prefer-regex-literals
         cy.url().should("match", new RegExp("x=928460&y=5908948&z=8.5"));
       });
