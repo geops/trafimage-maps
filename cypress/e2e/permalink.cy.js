@@ -64,13 +64,7 @@ describe("permalink", () => {
           ),
         );
         cy.url().should("match", /lang=de/);
-<<<<<<< HEAD
         cy.url().should("match", /layers=ch.sbb.geschosse2D&/);
-=======
-        cy.url().should("match", /[?&]layers=(&|$)/);
-        // cy.url().then((url) => console.log(url));
-
->>>>>>> master
         // eslint-disable-next-line prefer-regex-literals
         cy.url().should("match", new RegExp("x=928460&y=5908948&z=8.5"));
       });
