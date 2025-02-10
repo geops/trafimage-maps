@@ -36,7 +36,7 @@ function GaExportMapButton() {
     <>
       <MapButton
         onClick={() => setShowMenu(!showMenu)}
-        style={{ padding: 8, color: "#444" }}
+        style={{ padding: 10, color: "#444" }}
         title={t("Karte als PDF exportieren")}
       >
         <BsDownload />
