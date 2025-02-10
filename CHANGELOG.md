@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.19](https://github.com/geops/trafimage-maps/compare/v1.30.18...v1.30.19) (2025-02-10)
+
+### Bug Fixes
+
+- **map buttons:** make mapbutton svg full width and height ([#1215](https://github.com/geops/trafimage-maps/issues/1215)) ([21962a4](https://github.com/geops/trafimage-maps/commit/21962a449cc002b68e1a93e0771178ea67f02b1b))
+
 ### [1.30.18](https://github.com/geops/trafimage-maps/compare/v1.30.17...v1.30.18) (2025-02-07)
 
 ### Bug Fixes
