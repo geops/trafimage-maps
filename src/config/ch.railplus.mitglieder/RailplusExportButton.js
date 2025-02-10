@@ -11,7 +11,7 @@ const format = "a0";
 
 function BtnCmpt({ isLoading, ...props }) {
   return (
-    <MapButton {...props} style={{ padding: 8, color: "#444" }}>
+    <MapButton {...props} style={{ padding: 10, color: "#444" }}>
       {isLoading ? <Loader /> : <BsDownload />}
     </MapButton>
   );

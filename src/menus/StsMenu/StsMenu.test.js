@@ -11,6 +11,10 @@ import { sts } from "../../config/topics";
 import stsLayers from "../../config/ch.sbb.sts";
 import highlightPointStyle from "../../utils/highlightPointStyle";
 import theme from "../../themes/default";
+import SearchService from "../../components/Search/SearchService";
+
+const searchService = new SearchService();
+searchService.setSearches(sts.searches);
 
 describe("StsMenu", () => {
   let store;
@@ -29,11 +33,12 @@ describe("StsMenu", () => {
         activeTopic: sts,
         featureInfo: [],
         displayMenu: true,
+        searchService,
       },
     });
   });
 
-  test("should render the menu opener and sts validity layerswitcher on load", () => {
+  test("should render the search, menu opener and sts validity layerswitcher on load", () => {
     const { getByTestId } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
@@ -42,6 +47,8 @@ describe("StsMenu", () => {
       </ThemeProvider>,
     );
 
+    const search = getByTestId("wkp-search-input");
+    expect(search).toBeTruthy();
     const opener = getByTestId("sts-menu-opener");
     expect(opener).toBeTruthy();
     const { getByText } = within(opener);

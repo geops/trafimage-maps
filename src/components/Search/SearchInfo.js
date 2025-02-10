@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => {
     searchInfoBox: {
       zIndex: 1500,
       left: "10px !important",
+      top: "-44px !important",
       width: "32vw",
       maxWidth: (props) => (props.screenWidth !== "xl" ? 258 : 420),
     },
@@ -86,7 +87,7 @@ const propTypes = {
   anchorEl: PropTypes.instanceOf(Element),
 };
 
-function SearchInfo({ anchorEl }) {
+function SearchInfo() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const screenWidth = useSelector((state) => state.app.screenWidth);
@@ -94,6 +95,7 @@ function SearchInfo({ anchorEl }) {
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const searchInfoOpen = useSelector((state) => state.app.searchInfoOpen);
   const activeTopic = useSelector((state) => state.app.activeTopic);
+  const anchorEl = useRef(null);
 
   const togglePopup = useCallback(() => {
     if (!searchInfoOpen) {
@@ -129,15 +131,16 @@ function SearchInfo({ anchorEl }) {
           className={classes.searchInfoBtn}
           onClick={togglePopup}
           title={t("Suche-Info")}
+          ref={anchorEl}
         >
           <QuestionIcon />
         </IconButton>
         {anchorEl && (
           <Popper
             open={searchInfoOpen}
-            anchorEl={anchorEl}
+            anchorEl={anchorEl?.current}
             transition
-            placement="right-start"
+            placement="top-start"
             className={classes.searchInfoBox}
           >
             {({ TransitionProps }) => (
