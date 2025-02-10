@@ -15,12 +15,14 @@ import { ReactComponent as ZoomOut } from "../../img/minus.svg";
 import { ReactComponent as ZoomIn } from "../../img/plus.svg";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 import { setZoomType } from "../../model/map/actions";
+import FloorSwitcher from "../FloorSwitcher";
 
 const propTypes = {
   geolocation: PropTypes.bool,
   zoomSlider: PropTypes.bool,
   fitExtent: PropTypes.bool,
   menuToggler: PropTypes.bool,
+  floorSwitcher: PropTypes.bool,
   children: PropTypes.node,
 };
 
@@ -85,6 +87,7 @@ function MapControls({
   geolocation = true,
   zoomSlider = true,
   fitExtent = true,
+  floorSwitcher = false,
   children,
 }) {
   const dispatch = useDispatch();
@@ -173,6 +176,7 @@ function MapControls({
       />
       {geolocation && <Geolocation />}
       {fitExtent && <FitExtent />}
+      {floorSwitcher && <FloorSwitcher />}
       {children}
     </div>
   );

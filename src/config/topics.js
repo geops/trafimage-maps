@@ -80,6 +80,7 @@ export const netzkarte = {
     popup: true,
     shareMenu: true,
     trackerMenu: true,
+    floorSwitcher: true,
   },
   layers: netzkarteLayers,
   projection: "EPSG:3857",
@@ -277,6 +278,7 @@ const sandbox = {
   projection: "EPSG:3857",
   elements: {
     ...defaultElements,
+    floorSwitcher: true,
   },
   layerInfoComponent: "SandboxTopicInfo",
   searches: defaultSearches,
