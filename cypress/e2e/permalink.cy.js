@@ -25,8 +25,6 @@ describe("permalink", () => {
         cy.get(".wkp-fit-extent").should("exist");
         // fitExtent
         cy.get(".wkp-geolocation").should("exist");
-        // zoomSlider
-        cy.get(".rs-zoomslider-wrapper").should("exist");
         // footer
         cy.get(".wkp-footer").should("exist");
 
@@ -104,12 +102,6 @@ describe("permalink", () => {
         cy.visit("/?disabled=geolocationButton");
         cy.get(".wkp-map-controls").should("exist");
         cy.get(".wkp-geolocation").should("not.exist");
-      });
-
-      it("should hide zoom slider", () => {
-        cy.visit("/?disabled=zoomSlider");
-        cy.get(".wkp-map-controls").should("exist");
-        cy.get(".rs-zoomslider-wrapper").should("not.exist");
       });
 
       it("should hide footer", () => {

@@ -16,9 +16,6 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     color: theme.colors.darkGray,
     "& svg": { scale: 0.8 },
-    "&:hover": {
-      color: theme.colors.darkGray,
-    },
   },
   rsFitExtent: {
     borderRadius: "50%",

@@ -1,11 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import Zoom from "react-spatial/components/Zoom";
-import { ZoomSlider } from "ol/control";
-import { unByKey } from "ol/Observable";
 import { makeStyles } from "@mui/styles";
 import FitExtent from "./FitExtent";
 import Geolocation from "./Geolocation";
@@ -19,7 +17,6 @@ import FloorSwitcher from "../FloorSwitcher";
 
 const propTypes = {
   geolocation: PropTypes.bool,
-  zoomSlider: PropTypes.bool,
   fitExtent: PropTypes.bool,
   menuToggler: PropTypes.bool,
   floorSwitcher: PropTypes.bool,
@@ -41,41 +38,42 @@ const useStyles = makeStyles((theme) => {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        gap: (props) => {
-          return props.margin;
-        },
-        "& .rs-zoomslider-wrapper": {
-          margin: 0,
-        },
-        "& .ol-zoomslider": {
-          border: "1px solid #5a5a5a !important",
-          paddingBottom: "3px !important",
-        },
-        "& .ol-zoomslider-thumb": {
-          background: `${theme.colors.darkGray} !important`,
-        },
+        boxShadow: "0 0 7px rgb(0 0 0 / 90%)",
+        transition: "box-shadow 0.5s ease",
+        backgroundColor: theme.colors.gray,
+        borderRadius: 20,
+        gap: 1,
+        overflow: "clip",
+        "&:hover": { boxShadow: "0 0 12px 2px rgb(0 0 0 / 90%)" },
         "& .rs-zoom-in, .rs-zoom-out": {
           background: "white",
-          boxShadow: "0 0 7px rgb(0 0 0 / 90%)",
-          borderRadius: "50%",
-          height: "40px",
-          width: "40px",
+          height: 40,
+          width: 40,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          transition: "box-shadow 0.5s ease",
           border: "none",
+          color: theme.colors.darkGray,
           "& svg": {
             "& path": {
               transition: "stroke 0.5s ease",
-              fill: theme.colors.darkGray,
+              fill: "currentColor",
+              stroke: "currentColor",
             },
           },
-          "&:hover": { boxShadow: "0 0 12px 2px rgb(0 0 0 / 90%)" },
           "&:disabled": {
             boxShadow: "0 0 7px 2px rgb(0 0 0 / 40%)",
             cursor: "default",
           },
+          "&:hover": {
+            color: theme.palette.secondary.dark,
+          },
+        },
+        "& .rs-zoom-in": {
+          borderBottom: `0.5px solid ${theme.colors.lightGray}`,
+        },
+        "& .rs-zoom-out": {
+          borderTop: `0.5px solid ${theme.colors.lightGray}`,
         },
       },
     },
@@ -85,7 +83,6 @@ const useStyles = makeStyles((theme) => {
 function MapControls({
   menuToggler = false,
   geolocation = true,
-  zoomSlider = true,
   fitExtent = true,
   floorSwitcher = false,
   children,
@@ -105,52 +102,6 @@ function MapControls({
   });
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
-  const [zoomSliderRef, setZoomSliderRef] = useState(null);
-
-  useEffect(() => {
-    let key = null;
-    // on resize reload the zoomSlider control
-    if (zoomSlider) {
-      key = map.on("change:size", () => {
-        const control = map
-          .getControls()
-          .getArray()
-          .find((ctrl) => ctrl instanceof ZoomSlider);
-        if (control) {
-          // Force reinitialization of the control
-          control.sliderInitialized_ = false;
-          setZoomSliderRef(control.target_);
-        } else {
-          setZoomSliderRef(null);
-        }
-      });
-    }
-    return () => {
-      if (map && key) {
-        unByKey([key]);
-      }
-    };
-  }, [dispatch, map, zoomSlider]);
-
-  useEffect(() => {
-    const onZoomSliderRefUpdate = () => {
-      dispatch(setZoomType("slider"));
-    };
-    if (zoomSliderRef) {
-      zoomSliderRef?.firstChild?.addEventListener(
-        "mousedown",
-        onZoomSliderRefUpdate,
-      );
-    }
-    return () => {
-      if (zoomSliderRef) {
-        zoomSliderRef?.firstChild?.removeEventListener(
-          "mousedown",
-          onZoomSliderRefUpdate,
-        );
-      }
-    };
-  }, [dispatch, zoomSliderRef]);
 
   return (
     <div
@@ -162,7 +113,7 @@ function MapControls({
         map={map}
         zoomInChildren={<ZoomIn />}
         zoomOutChildren={<ZoomOut />}
-        zoomSlider={!isSmallHeight && !isMobile && zoomSlider}
+        zoomSlider={false}
         titles={{
           zoomIn: t("Hineinzoomen"),
           zoomOut: t("Rauszoomen"),
