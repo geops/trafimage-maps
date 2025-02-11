@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => {
         flexDirection: "column",
         boxShadow: "0 0 7px rgb(0 0 0 / 90%)",
         transition: "box-shadow 0.5s ease",
-        backgroundColor: theme.colors.gray,
+        backgroundColor: "#e8e7e7",
         borderRadius: 20,
         gap: 1,
         overflow: "clip",
@@ -68,12 +68,6 @@ const useStyles = makeStyles((theme) => {
           "&:hover": {
             color: theme.palette.secondary.dark,
           },
-        },
-        "& .rs-zoom-in": {
-          borderBottom: `0.5px solid ${theme.colors.lightGray}`,
-        },
-        "& .rs-zoom-out": {
-          borderTop: `0.5px solid ${theme.colors.lightGray}`,
         },
       },
     },
