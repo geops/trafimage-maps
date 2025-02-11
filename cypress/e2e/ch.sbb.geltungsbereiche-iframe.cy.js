@@ -24,8 +24,6 @@ describe("Geltungsbereiche iframe topic", () => {
     cy.get(".wkp-fit-extent").should("exist");
     // fitExtent
     cy.get(".wkp-geolocation").should("not.exist");
-    // zoomSlider
-    cy.get(".rs-zoomslider-wrapper").should("exist");
     // footer
     cy.get(".wkp-footer").should("not.exist");
 

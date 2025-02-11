@@ -201,7 +201,6 @@ function TopicElements({ history = null }) {
             menuToggler={elements.menuToggler}
             geolocation={elements.geolocationButton}
             fitExtent={elements.fitExtent}
-            zoomSlider={elements.zoomSlider}
             floorSwitcher={elements.floorSwitcher}
           >
             {activeTopic.mapControls}
