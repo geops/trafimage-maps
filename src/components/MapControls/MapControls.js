@@ -40,10 +40,18 @@ const useStyles = makeStyles((theme) => {
         flexDirection: "column",
         boxShadow: "0 0 7px rgb(0 0 0 / 90%)",
         transition: "box-shadow 0.5s ease",
-        backgroundColor: "#e8e7e7",
         borderRadius: 20,
         gap: 1,
         overflow: "clip",
+        "&::after": {
+          position: "absolute",
+          content: '""',
+          top: 40,
+          left: 0,
+          height: 1,
+          width: "100%",
+          backgroundColor: "#e8e7e7",
+        },
         "&:hover": { boxShadow: "0 0 12px 2px rgb(0 0 0 / 90%)" },
         "& .rs-zoom-in, .rs-zoom-out": {
           background: "white",
@@ -60,10 +68,6 @@ const useStyles = makeStyles((theme) => {
               fill: "currentColor",
               stroke: "currentColor",
             },
-          },
-          "&:disabled": {
-            boxShadow: "0 0 7px 2px rgb(0 0 0 / 40%)",
-            cursor: "default",
           },
           "&:hover": {
             color: theme.palette.secondary.dark,
