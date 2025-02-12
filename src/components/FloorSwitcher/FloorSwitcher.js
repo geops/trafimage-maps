@@ -6,6 +6,8 @@ import { transform } from "ol/proj";
 import { IconButton, List, ListItem } from "@mui/material";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
+// import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
+import { HiArrowUp, HiArrowDown } from "react-icons/hi2";
 import LayerService from "../../utils/LayerService";
 import { FLOOR_LEVELS } from "../../utils/constants";
 
@@ -17,6 +19,23 @@ export const to4326 = (coord, decimal = 5) => {
   );
 };
 
+const listItemStyle = (theme) => ({
+  width: 40,
+  height: 40,
+  padding: 0.5,
+  backgroundColor: "white",
+  ...theme.styles.flexCenter,
+});
+
+const iconButtonStyle = (theme) => ({
+  typography: "body1",
+  borderRadius: "50%",
+  border: 0,
+  width: "100%",
+  height: "100%",
+  ...theme.styles.flexCenter,
+});
+
 const propTypes = {
   // mapStateToProps
   center: PropTypes.arrayOf(PropTypes.number.isRequired),
@@ -24,6 +43,8 @@ const propTypes = {
   map: PropTypes.object.isRequired,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
   activeTopic: PropTypes.string.isRequired,
+  screenWidth: PropTypes.string.isRequired,
+  screenHeight: PropTypes.string.isRequired,
 };
 
 class FloorSwitcher extends PureComponent {
@@ -47,7 +68,7 @@ class FloorSwitcher extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { center, zoom, layers, activeTopic } = this.props;
+    const { center, zoom, layers, activeTopic, screenHeight } = this.props;
     const { activeFloor, floors, baseLayerHasLevelLayers } = this.state;
 
     if (prevProps.layers !== layers || prevProps.activeTopic !== activeTopic) {
@@ -61,8 +82,11 @@ class FloorSwitcher extends PureComponent {
       this.loadFloors();
     }
 
-    if (prevState.floors !== floors && !floors.includes(activeFloor)) {
-      // Reset to 2D when the active floor is no longer in the extent floors and on topic change
+    if (
+      (prevState.floors !== floors && !floors.includes(activeFloor)) ||
+      (prevProps.screenHeight !== screenHeight && screenHeight === "xs")
+    ) {
+      // Reset to 2D when the active floor is no longer in the extent floors or when screen height is too small (switcher hidden)
       this.selectFloor("2D");
     }
 
@@ -184,14 +208,15 @@ class FloorSwitcher extends PureComponent {
   }
 
   render() {
-    const { zoom } = this.props;
+    const { zoom, screenWidth, screenHeight } = this.props;
     const { floors, activeFloor, baseLayerHasLevelLayers } = this.state;
 
     if (
       !zoom || // When app is loaded without z param
       zoom < 16 ||
       floors?.length <= 2 ||
-      !baseLayerHasLevelLayers
+      !baseLayerHasLevelLayers ||
+      screenHeight === "xs"
     ) {
       return null;
     }
@@ -200,6 +225,7 @@ class FloorSwitcher extends PureComponent {
       <List
         data-testid="floor-switcher"
         className="wkp-floor-switcher"
+        key={floors.toString()} // For rerendering properly
         sx={{
           boxShadow: "0 0 7px rgba(0, 0, 0, 0.9)",
           borderRadius: "20px",
@@ -214,45 +240,110 @@ class FloorSwitcher extends PureComponent {
           },
         }}
       >
-        {floors.map((floor) => {
-          const backgroundColor = floor === "2D" ? "#e8e7e7" : "white";
-          return (
-            <ListItem
-              key={floor}
-              disablePadding
-              sx={{
-                width: 40,
-                height: 40,
-                padding: 0.5,
-                backgroundColor,
-              }}
-            >
+        {floors.length > 5 && screenWidth === "xs" ? (
+          <>
+            <ListItem key="up" disablePadding sx={listItemStyle}>
               <IconButton
-                data-testid={`floor-switcher${floor}-btn`}
-                onClick={() => this.selectFloor(floor)}
-                sx={{
-                  typography: "body1",
-                  borderRadius: "50%",
-                  backgroundColor:
-                    activeFloor === floor ? "#444" : backgroundColor,
-                  border: 0,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "100%",
-                  height: "100%",
-                  color: floor === activeFloor ? "white" : "#444",
-                  "&:hover": {
-                    color: floor === activeFloor ? "white" : "secondary.dark",
-                    backgroundColor:
-                      activeFloor === floor ? "#444" : backgroundColor,
-                  },
+                data-testid="floor-switcher-up-btn"
+                disabled={floors.indexOf(activeFloor) === 0}
+                sx={{ color: "#444" }}
+                onClick={() => {
+                  const activeFloorIndex = floors.indexOf(activeFloor);
+                  const nextFloor = floors[activeFloorIndex - 1];
+                  if (nextFloor !== undefined) {
+                    this.selectFloor(nextFloor);
+                  }
                 }}
               >
-                {floor}
+                <HiArrowUp />
               </IconButton>
             </ListItem>
-          );
-        })}
+            <ListItem
+              key="up"
+              disablePadding
+              sx={(theme) => ({
+                ...listItemStyle(theme),
+                backgroundColor: activeFloor === "2D" ? "#e8e7e7" : "white",
+              })}
+            >
+              <IconButton
+                onClick={() => this.selectFloor("2D")}
+                data-testid="floor-switcher-floor2D-btn"
+                sx={(theme) => ({
+                  ...iconButtonStyle(theme),
+                  backgroundColor: "#444",
+                  color: "white",
+                  ...theme.styles.flexCenter,
+                  "& .floor-2D": {
+                    display: "none",
+                  },
+                  "&:hover": {
+                    backgroundColor: "#444",
+                    color: "white",
+                    "& .floor-2D": {
+                      display: "block",
+                    },
+                    "& .current-floor": {
+                      display: "none",
+                    },
+                  },
+                })}
+              >
+                <span className="current-floor">{activeFloor}</span>
+                <span className="floor-2D">2D</span>
+              </IconButton>
+            </ListItem>
+            <ListItem key="down" disablePadding sx={listItemStyle}>
+              <IconButton
+                data-testid="floor-switcher-down-btn"
+                disabled={floors.indexOf(activeFloor) === floors.length - 1}
+                sx={{ color: "#444" }}
+                onClick={() => {
+                  const activeFloorIndex = floors.indexOf(activeFloor);
+                  const nextFloor = floors[activeFloorIndex + 1];
+                  if (nextFloor !== undefined) {
+                    this.selectFloor(nextFloor);
+                  }
+                }}
+              >
+                <HiArrowDown />
+              </IconButton>
+            </ListItem>
+          </>
+        ) : (
+          floors.map((floor) => {
+            const backgroundColor = floor === "2D" ? "#e8e7e7" : "white";
+            return (
+              <ListItem
+                key={floor}
+                disablePadding
+                sx={(theme) => ({
+                  ...listItemStyle(theme),
+                  backgroundColor,
+                })}
+              >
+                <IconButton
+                  data-testid={`floor-switcher-floor${floor}-btn`}
+                  onClick={() => this.selectFloor(floor)}
+                  sx={(theme) => ({
+                    ...iconButtonStyle(theme),
+                    backgroundColor:
+                      activeFloor === floor ? "#444" : backgroundColor,
+                    color: floor === activeFloor ? "white" : "#444",
+                    fontWeight: floor === "2D" ? "bold" : "normal",
+                    "&:hover": {
+                      color: floor === activeFloor ? "white" : "secondary.dark",
+                      backgroundColor:
+                        activeFloor === floor ? "#444" : backgroundColor,
+                    },
+                  })}
+                >
+                  {floor}
+                </IconButton>
+              </ListItem>
+            );
+          })
+        )}
       </List>
     );
   }
@@ -264,6 +355,8 @@ const mapStateToProps = (state) => ({
   map: state.app.map,
   layers: state.map.layers,
   activeTopic: state.app.activeTopic,
+  screenWidth: state.app.screenWidth,
+  screenHeight: state.app.screenHeight,
 });
 
 FloorSwitcher.propTypes = propTypes;
