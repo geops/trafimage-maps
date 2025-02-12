@@ -6,7 +6,8 @@ import { transform } from "ol/proj";
 import { IconButton, List, ListItem } from "@mui/material";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
-import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
+// import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
+import { HiArrowUp, HiArrowDown } from "react-icons/hi2";
 import LayerService from "../../utils/LayerService";
 import { FLOOR_LEVELS } from "../../utils/constants";
 
@@ -42,6 +43,8 @@ const propTypes = {
   map: PropTypes.object.isRequired,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
   activeTopic: PropTypes.string.isRequired,
+  screenWidth: PropTypes.string.isRequired,
+  screenHeight: PropTypes.string.isRequired,
 };
 
 class FloorSwitcher extends PureComponent {
@@ -65,7 +68,7 @@ class FloorSwitcher extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { center, zoom, layers, activeTopic } = this.props;
+    const { center, zoom, layers, activeTopic, screenHeight } = this.props;
     const { activeFloor, floors, baseLayerHasLevelLayers } = this.state;
 
     if (prevProps.layers !== layers || prevProps.activeTopic !== activeTopic) {
@@ -79,8 +82,11 @@ class FloorSwitcher extends PureComponent {
       this.loadFloors();
     }
 
-    if (prevState.floors !== floors && !floors.includes(activeFloor)) {
-      // Reset to 2D when the active floor is no longer in the extent floors and on topic change
+    if (
+      (prevState.floors !== floors && !floors.includes(activeFloor)) ||
+      (prevProps.screenHeight !== screenHeight && screenHeight === "xs")
+    ) {
+      // Reset to 2D when the active floor is no longer in the extent floors or when screen height is too small (switcher hidden)
       this.selectFloor("2D");
     }
 
@@ -202,14 +208,15 @@ class FloorSwitcher extends PureComponent {
   }
 
   render() {
-    const { zoom } = this.props;
+    const { zoom, screenWidth, screenHeight } = this.props;
     const { floors, activeFloor, baseLayerHasLevelLayers } = this.state;
 
     if (
       !zoom || // When app is loaded without z param
       zoom < 16 ||
       floors?.length <= 2 ||
-      !baseLayerHasLevelLayers
+      !baseLayerHasLevelLayers ||
+      screenHeight === "xs"
     ) {
       return null;
     }
@@ -233,43 +240,7 @@ class FloorSwitcher extends PureComponent {
           },
         }}
       >
-        {floors.length <= 5 ? (
-          floors.map((floor) => {
-            const backgroundColor = floor === "2D" ? "#e8e7e7" : "white";
-            return (
-              <ListItem
-                key={floor}
-                disablePadding
-                sx={(theme) => ({
-                  ...listItemStyle(theme),
-                  backgroundColor,
-                })}
-              >
-                <IconButton
-                  data-testid={`floor-switcher-floor${floor}-btn`}
-                  onClick={() => this.selectFloor(floor)}
-                  sx={(theme) => ({
-                    ...iconButtonStyle(theme),
-                    backgroundColor:
-                      activeFloor === floor ? "#444" : backgroundColor,
-                    color: floor === activeFloor ? "white" : "#444",
-                    fontWeight:
-                      floor === "2D" || floor === activeFloor
-                        ? "bold"
-                        : "normal",
-                    "&:hover": {
-                      color: floor === activeFloor ? "white" : "secondary.dark",
-                      backgroundColor:
-                        activeFloor === floor ? "#444" : backgroundColor,
-                    },
-                  })}
-                >
-                  {floor}
-                </IconButton>
-              </ListItem>
-            );
-          })
-        ) : (
+        {floors.length > 5 && screenWidth === "xs" ? (
           <>
             <ListItem key="up" disablePadding sx={listItemStyle}>
               <IconButton
@@ -284,7 +255,7 @@ class FloorSwitcher extends PureComponent {
                   }
                 }}
               >
-                <ArrowUpward />
+                <HiArrowUp />
               </IconButton>
             </ListItem>
             <ListItem
@@ -302,7 +273,6 @@ class FloorSwitcher extends PureComponent {
                   ...iconButtonStyle(theme),
                   backgroundColor: "#444",
                   color: "white",
-                  fontWeight: "bold",
                   ...theme.styles.flexCenter,
                   "& .floor-2D": {
                     display: "none",
@@ -336,10 +306,43 @@ class FloorSwitcher extends PureComponent {
                   }
                 }}
               >
-                <ArrowDownward />
+                <HiArrowDown />
               </IconButton>
             </ListItem>
           </>
+        ) : (
+          floors.map((floor) => {
+            const backgroundColor = floor === "2D" ? "#e8e7e7" : "white";
+            return (
+              <ListItem
+                key={floor}
+                disablePadding
+                sx={(theme) => ({
+                  ...listItemStyle(theme),
+                  backgroundColor,
+                })}
+              >
+                <IconButton
+                  data-testid={`floor-switcher-floor${floor}-btn`}
+                  onClick={() => this.selectFloor(floor)}
+                  sx={(theme) => ({
+                    ...iconButtonStyle(theme),
+                    backgroundColor:
+                      activeFloor === floor ? "#444" : backgroundColor,
+                    color: floor === activeFloor ? "white" : "#444",
+                    fontWeight: floor === "2D" ? "bold" : "normal",
+                    "&:hover": {
+                      color: floor === activeFloor ? "white" : "secondary.dark",
+                      backgroundColor:
+                        activeFloor === floor ? "#444" : backgroundColor,
+                    },
+                  })}
+                >
+                  {floor}
+                </IconButton>
+              </ListItem>
+            );
+          })
         )}
       </List>
     );
@@ -352,6 +355,8 @@ const mapStateToProps = (state) => ({
   map: state.app.map,
   layers: state.map.layers,
   activeTopic: state.app.activeTopic,
+  screenWidth: state.app.screenWidth,
+  screenHeight: state.app.screenHeight,
 });
 
 FloorSwitcher.propTypes = propTypes;
