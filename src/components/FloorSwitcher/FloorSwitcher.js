@@ -42,8 +42,8 @@ const propTypes = {
   zoom: PropTypes.number.isRequired,
   map: PropTypes.object.isRequired,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
-  activeTopic: PropTypes.string.isRequired,
-  screenWidth: PropTypes.string.isRequired,
+  activeTopic: PropTypes.object.isRequired,
+  screenWidth: PropTypes.string,
 };
 
 class FloorSwitcher extends PureComponent {
@@ -252,7 +252,7 @@ class FloorSwitcher extends PureComponent {
       >
         {floors.length > 5 && screenWidth === "xs" ? (
           <>
-            <ListItem key="up" disablePadding sx={listItemStyle}>
+            <ListItem disablePadding sx={listItemStyle}>
               <IconButton
                 data-testid="floor-switcher-up-btn"
                 disabled={floors.indexOf(activeFloor) === 0}
@@ -269,7 +269,6 @@ class FloorSwitcher extends PureComponent {
               </IconButton>
             </ListItem>
             <ListItem
-              key="up"
               disablePadding
               sx={(theme) => ({
                 ...listItemStyle(theme),
@@ -293,7 +292,7 @@ class FloorSwitcher extends PureComponent {
                 <span className="current-floor">{activeFloor}</span>
               </IconButton>
             </ListItem>
-            <ListItem key="down" disablePadding sx={listItemStyle}>
+            <ListItem disablePadding sx={listItemStyle}>
               <IconButton
                 data-testid="floor-switcher-down-btn"
                 disabled={floors.indexOf(activeFloor) === floors.length - 1}
