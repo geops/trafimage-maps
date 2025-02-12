@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => {
         transition: "box-shadow 0.5s ease",
         borderRadius: 20,
         gap: 1,
-        overflow: "clip",
+        overflow: "hidden",
         "&::after": {
           position: "absolute",
           content: '""',
