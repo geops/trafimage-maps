@@ -284,23 +284,13 @@ class FloorSwitcher extends PureComponent {
                   backgroundColor: "#444",
                   color: "white",
                   ...theme.styles.flexCenter,
-                  "& .floor-2D": {
-                    display: "none",
-                  },
                   "&:hover": {
                     backgroundColor: "#444",
                     color: "white",
-                    "& .floor-2D": {
-                      display: "block",
-                    },
-                    "& .current-floor": {
-                      display: "none",
-                    },
                   },
                 })}
               >
                 <span className="current-floor">{activeFloor}</span>
-                <span className="floor-2D">2D</span>
               </IconButton>
             </ListItem>
             <ListItem key="down" disablePadding sx={listItemStyle}>
