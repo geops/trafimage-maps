@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.20](https://github.com/geops/trafimage-maps/compare/v1.30.19...v1.30.20) (2025-02-12)
+
+### Bug Fixes
+
+- **netzkarte:** update translations for departure and station popup ([#1214](https://github.com/geops/trafimage-maps/issues/1214)) ([f04b2d9](https://github.com/geops/trafimage-maps/commit/f04b2d99a27d94301d8f286b18757876fc444415))
+
 ### [1.30.19](https://github.com/geops/trafimage-maps/compare/v1.30.18...v1.30.19) (2025-02-10)
 
 ### Bug Fixes
