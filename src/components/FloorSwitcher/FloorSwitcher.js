@@ -44,7 +44,6 @@ const propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
   activeTopic: PropTypes.string.isRequired,
   screenWidth: PropTypes.string.isRequired,
-  screenHeight: PropTypes.string.isRequired,
 };
 
 class FloorSwitcher extends PureComponent {
@@ -57,8 +56,10 @@ class FloorSwitcher extends PureComponent {
       floors: [],
       activeFloor: "2D",
       baseLayerHasLevelLayers: true,
+      windowHeight: window.innerHeight,
     };
     this.onBaseLayerChange = this.onBaseLayerChange.bind(this);
+    this.onResize = this.onResize.bind(this);
     this.abortController = new AbortController();
   }
 
@@ -68,8 +69,9 @@ class FloorSwitcher extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { center, zoom, layers, activeTopic, screenHeight } = this.props;
-    const { activeFloor, floors, baseLayerHasLevelLayers } = this.state;
+    const { center, zoom, layers, activeTopic } = this.props;
+    const { activeFloor, floors, baseLayerHasLevelLayers, windowHeight } =
+      this.state;
 
     if (prevProps.layers !== layers || prevProps.activeTopic !== activeTopic) {
       this.initialize();
@@ -84,7 +86,7 @@ class FloorSwitcher extends PureComponent {
 
     if (
       (prevState.floors !== floors && !floors.includes(activeFloor)) ||
-      (prevProps.screenHeight !== screenHeight && screenHeight === "xs")
+      (prevState.windowHeight !== windowHeight && windowHeight < 500)
     ) {
       // Reset to 2D when the active floor is no longer in the extent floors or when screen height is too small (switcher hidden)
       this.selectFloor("2D");
@@ -113,25 +115,31 @@ class FloorSwitcher extends PureComponent {
     });
   }
 
+  onResize() {
+    this.setState({ windowHeight: window.innerHeight });
+  }
+
   getVisibleLevelLayer() {
     return this.layerService
       .getLayer("ch.sbb.geschosse")
       ?.children.find((l) => l.visible);
   }
 
-  addMapListeners() {
+  addListeners() {
     this.removeMapListeners();
     const baselayers = this.layerService.getBaseLayers();
     baselayers.forEach((layer) => {
       this.olListeners.push(layer.on("change:visible", this.onBaseLayerChange));
     });
+    window.addEventListener("resize", this.onResize);
   }
 
   initialize() {
     const { layers, zoom } = this.props;
     this.layerService.setLayers(layers);
     this.onBaseLayerChange();
-    this.addMapListeners();
+    this.onResize();
+    this.addListeners();
     const visibleLevelLayer = this.getVisibleLevelLayer();
 
     if (!visibleLevelLayer || zoom < 16) {
@@ -143,6 +151,7 @@ class FloorSwitcher extends PureComponent {
 
   removeMapListeners() {
     unByKey(this.olListeners);
+    window.removeEventListener("resize", this.onResize);
   }
 
   loadFloors() {
@@ -208,15 +217,16 @@ class FloorSwitcher extends PureComponent {
   }
 
   render() {
-    const { zoom, screenWidth, screenHeight } = this.props;
-    const { floors, activeFloor, baseLayerHasLevelLayers } = this.state;
+    const { zoom, screenWidth } = this.props;
+    const { floors, activeFloor, baseLayerHasLevelLayers, windowHeight } =
+      this.state;
 
     if (
       !zoom || // When app is loaded without z param
-      zoom < 16 ||
-      floors?.length <= 2 ||
-      !baseLayerHasLevelLayers ||
-      screenHeight === "xs"
+      zoom < 16 || // On higher zoom levels
+      floors?.length <= 2 || // When there are only 0 and 2D floors
+      !baseLayerHasLevelLayers || // When the base layer has no level layers
+      windowHeight < 500 // When the screen height is too small (e.g. mobile landscape mode)
     ) {
       return null;
     }
@@ -356,7 +366,6 @@ const mapStateToProps = (state) => ({
   layers: state.map.layers,
   activeTopic: state.app.activeTopic,
   screenWidth: state.app.screenWidth,
-  screenHeight: state.app.screenHeight,
 });
 
 FloorSwitcher.propTypes = propTypes;
