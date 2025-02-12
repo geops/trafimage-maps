@@ -6,6 +6,7 @@ import { transform } from "ol/proj";
 import { IconButton, List, ListItem } from "@mui/material";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
+import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import LayerService from "../../utils/LayerService";
 import { FLOOR_LEVELS } from "../../utils/constants";
 
@@ -16,6 +17,23 @@ export const to4326 = (coord, decimal = 5) => {
     parseFloat(c.toFixed(decimal)),
   );
 };
+
+const listItemStyle = (theme) => ({
+  width: 40,
+  height: 40,
+  padding: 0.5,
+  backgroundColor: "white",
+  ...theme.styles.flexCenter,
+});
+
+const iconButtonStyle = (theme) => ({
+  typography: "body1",
+  borderRadius: "50%",
+  border: 0,
+  width: "100%",
+  height: "100%",
+  ...theme.styles.flexCenter,
+});
 
 const propTypes = {
   // mapStateToProps
@@ -200,6 +218,7 @@ class FloorSwitcher extends PureComponent {
       <List
         data-testid="floor-switcher"
         className="wkp-floor-switcher"
+        key={floors.toString()} // For rerendering properly
         sx={{
           boxShadow: "0 0 7px rgba(0, 0, 0, 0.9)",
           borderRadius: "20px",
@@ -214,45 +233,114 @@ class FloorSwitcher extends PureComponent {
           },
         }}
       >
-        {floors.map((floor) => {
-          const backgroundColor = floor === "2D" ? "#e8e7e7" : "white";
-          return (
-            <ListItem
-              key={floor}
-              disablePadding
-              sx={{
-                width: 40,
-                height: 40,
-                padding: 0.5,
-                backgroundColor,
-              }}
-            >
-              <IconButton
-                data-testid={`floor-switcher${floor}-btn`}
-                onClick={() => this.selectFloor(floor)}
-                sx={{
-                  typography: "body1",
-                  borderRadius: "50%",
-                  backgroundColor:
-                    activeFloor === floor ? "#444" : backgroundColor,
-                  border: 0,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "100%",
-                  height: "100%",
-                  color: floor === activeFloor ? "white" : "#444",
-                  "&:hover": {
-                    color: floor === activeFloor ? "white" : "secondary.dark",
+        {floors.length <= 5 ? (
+          floors.map((floor) => {
+            const backgroundColor = floor === "2D" ? "#e8e7e7" : "white";
+            return (
+              <ListItem
+                key={floor}
+                disablePadding
+                sx={(theme) => ({
+                  ...listItemStyle(theme),
+                  backgroundColor,
+                })}
+              >
+                <IconButton
+                  data-testid={`floor-switcher-floor${floor}-btn`}
+                  onClick={() => this.selectFloor(floor)}
+                  sx={(theme) => ({
+                    ...iconButtonStyle(theme),
                     backgroundColor:
                       activeFloor === floor ? "#444" : backgroundColor,
-                  },
+                    color: floor === activeFloor ? "white" : "#444",
+                    fontWeight:
+                      floor === "2D" || floor === activeFloor
+                        ? "bold"
+                        : "normal",
+                    "&:hover": {
+                      color: floor === activeFloor ? "white" : "secondary.dark",
+                      backgroundColor:
+                        activeFloor === floor ? "#444" : backgroundColor,
+                    },
+                  })}
+                >
+                  {floor}
+                </IconButton>
+              </ListItem>
+            );
+          })
+        ) : (
+          <>
+            <ListItem key="up" disablePadding sx={listItemStyle}>
+              <IconButton
+                data-testid="floor-switcher-up-btn"
+                disabled={floors.indexOf(activeFloor) === 0}
+                sx={{ color: "#444" }}
+                onClick={() => {
+                  const activeFloorIndex = floors.indexOf(activeFloor);
+                  const nextFloor = floors[activeFloorIndex - 1];
+                  if (nextFloor !== undefined) {
+                    this.selectFloor(nextFloor);
+                  }
                 }}
               >
-                {floor}
+                <ArrowUpward />
               </IconButton>
             </ListItem>
-          );
-        })}
+            <ListItem
+              key="up"
+              disablePadding
+              sx={(theme) => ({
+                ...listItemStyle(theme),
+                backgroundColor: activeFloor === "2D" ? "#e8e7e7" : "white",
+              })}
+            >
+              <IconButton
+                onClick={() => this.selectFloor("2D")}
+                data-testid="floor-switcher-floor2D-btn"
+                sx={(theme) => ({
+                  ...iconButtonStyle(theme),
+                  backgroundColor: "#444",
+                  color: "white",
+                  fontWeight: "bold",
+                  ...theme.styles.flexCenter,
+                  "& .floor-2D": {
+                    display: "none",
+                  },
+                  "&:hover": {
+                    backgroundColor: "#444",
+                    color: "white",
+                    "& .floor-2D": {
+                      display: "block",
+                    },
+                    "& .current-floor": {
+                      display: "none",
+                    },
+                  },
+                })}
+              >
+                <span className="current-floor">{activeFloor}</span>
+                <span className="floor-2D">2D</span>
+              </IconButton>
+            </ListItem>
+            <ListItem key="down" disablePadding sx={listItemStyle}>
+              <IconButton
+                data-testid="floor-switcher-down-btn"
+                disabled={floors.indexOf(activeFloor) === floors.length - 1}
+                sx={{ color: "#444" }}
+                onClick={() => {
+                  const activeFloorIndex = floors.indexOf(activeFloor);
+                  const nextFloor = floors[activeFloorIndex + 1];
+                  if (nextFloor !== undefined) {
+                    this.selectFloor(nextFloor);
+                  }
+                }}
+              >
+                <ArrowDownward />
+              </IconButton>
+            </ListItem>
+          </>
+        )}
       </List>
     );
   }
