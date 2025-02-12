@@ -40,7 +40,7 @@ describe("FloorSwitcher", () => {
       .should("have.length", 5);
   });
 
-  it("should display arrow buttons on mobile when more than 5 floors in switcher and properly switch on click.", () => {
+  it("should display arrow buttons on mobile when more than 5 floors in switcher, properly switch on click and hide in landscape mode.", () => {
     cy.intercept(
       {
         method: "GET",
