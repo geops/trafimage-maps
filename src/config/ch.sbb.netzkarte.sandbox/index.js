@@ -26,17 +26,24 @@ export const poiLayer = new MapboxStyleLayer({
   style: "temp_entwicklungsstyle",
 });
 
-export const sandboxGeschosseLayer = geschosseLayer.clone();
-
-sandboxGeschosseLayer.children = geschosseLayer.children.map((layer) => {
-  return layer.clone({
-    mapboxLayer: sandboxDataLayer,
-    properties: {
-      parent: sandboxGeschosseLayer,
-      hideInLayerTree: true,
-    },
-  });
+export const sandboxGeschosseLayer = geschosseLayer.clone({
+  properties: {
+    hideInLayerTree: false,
+  },
 });
+
+sandboxGeschosseLayer.children = geschosseLayer.children
+  .slice(2, 12) // only show levels from -4 to 4
+  .map((layer) => {
+    return layer.clone({
+      mapboxLayer: sandboxDataLayer,
+      group: "ch.sbb.geschosse-layer",
+      properties: {
+        parent: sandboxGeschosseLayer,
+        hideInLayerTree: false,
+      },
+    });
+  });
 
 export default [
   sandboxDataLayer,
