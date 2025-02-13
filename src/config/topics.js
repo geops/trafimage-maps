@@ -276,10 +276,7 @@ const sandbox = {
   key: "ch.sbb.netzkarte.sandbox",
   layers: sandboxLayers,
   projection: "EPSG:3857",
-  elements: {
-    ...defaultElements,
-    floorSwitcher: true,
-  },
+  elements: defaultElements,
   layerInfoComponent: "SandboxTopicInfo",
   searches: defaultSearches,
 };
