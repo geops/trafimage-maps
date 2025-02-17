@@ -41,7 +41,6 @@ describe("MapControls", () => {
     expect(queryByTestId("map-controls-menu-toggler")).toBeNull();
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
-    expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
     expect(getByTestId("map-controls-geolocation")).toBeTruthy();
     expect(getByTestId("map-controls-fit-extent")).toBeTruthy();
   });
@@ -60,7 +59,6 @@ describe("MapControls", () => {
     expect(queryByTestId("map-controls-menu-toggler")).toBeNull();
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
-    expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
     expect(queryByTestId("map-controls-geolocation")).toBeNull();
     expect(getByTestId("map-controls-fit-extent")).toBeTruthy();
   });
@@ -79,7 +77,6 @@ describe("MapControls", () => {
     expect(queryByTestId("map-controls-menu-toggler")).toBeNull();
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
-    expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
     expect(getByTestId("map-controls-geolocation")).toBeTruthy();
     expect(queryByTestId("map-controls-fit-extent")).toBeNull();
   });
@@ -91,7 +88,7 @@ describe("MapControls", () => {
     const { container, getByTestId, queryByTestId } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <MapControls map={map} zoomSlider={false} />,
+          <MapControls map={map} />,
         </Provider>
       </ThemeProvider>,
     );
@@ -117,7 +114,6 @@ describe("MapControls", () => {
     expect(getByTestId("map-controls-menu-toggler")).toBeTruthy();
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
-    expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
     expect(getByTestId("map-controls-geolocation")).toBeTruthy();
     expect(getByTestId("map-controls-fit-extent")).toBeTruthy();
   });

@@ -80,6 +80,7 @@ export const netzkarte = {
     popup: true,
     shareMenu: true,
     trackerMenu: true,
+    floorSwitcher: true,
   },
   layers: netzkarteLayers,
   projection: "EPSG:3857",
@@ -275,9 +276,7 @@ const sandbox = {
   key: "ch.sbb.netzkarte.sandbox",
   layers: sandboxLayers,
   projection: "EPSG:3857",
-  elements: {
-    ...defaultElements,
-  },
+  elements: defaultElements,
   layerInfoComponent: "SandboxTopicInfo",
   searches: defaultSearches,
 };

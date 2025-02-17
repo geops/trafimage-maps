@@ -34,8 +34,7 @@ describe("Funkmesswagen topic", () => {
     cy.get(".wkp-fit-extent").should("exist");
     // fitExtent
     cy.get(".wkp-geolocation").should("exist");
-    // zoomSlider
-    cy.get(".rs-zoomslider-wrapper").should("exist");
+
     // footer
     cy.get(".wkp-footer").should("exist");
     cy.get(".wkp-share-menu").should("not.exist");

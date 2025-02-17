@@ -363,16 +363,6 @@ const v5 = {
         },
       },
     },
-    MuiListItem: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "white !important",
-          "&:hover": {
-            backgroundColor: "white !important",
-          },
-        },
-      },
-    },
     MuiFormControlLabel: {
       styleOverrides: {
         root: {
