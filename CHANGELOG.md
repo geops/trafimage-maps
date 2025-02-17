@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.21](https://github.com/geops/trafimage-maps/compare/v1.30.20...v1.30.21) (2025-02-17)
+
+### Bug Fixes
+
+- **Gemeindegrenzen:** update layer info status date ([#1216](https://github.com/geops/trafimage-maps/issues/1216)) ([ab99842](https://github.com/geops/trafimage-maps/commit/ab998424b27a9fb8cd7778ed50337eb318bc2224))
+- **netzkarte:** add FloorSwitcher component ([#1212](https://github.com/geops/trafimage-maps/issues/1212)) ([1a24e81](https://github.com/geops/trafimage-maps/commit/1a24e818c1e6b5ddc8b7d9fc150a2a71b05f05d8))
+
 ### [1.30.20](https://github.com/geops/trafimage-maps/compare/v1.30.19...v1.30.20) (2025-02-12)
 
 ### Bug Fixes

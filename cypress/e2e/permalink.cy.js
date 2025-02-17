@@ -62,7 +62,7 @@ describe("permalink", () => {
           ),
         );
         cy.url().should("match", /lang=de/);
-        cy.url().should("match", /layers=ch.sbb.geschosse2D&/);
+        cy.url().should("match", /layers=ch.sbb.geschosse2D(&|$)/);
         // eslint-disable-next-line prefer-regex-literals
         cy.url().should("match", new RegExp("x=928460&y=5908948&z=8.5"));
       });
