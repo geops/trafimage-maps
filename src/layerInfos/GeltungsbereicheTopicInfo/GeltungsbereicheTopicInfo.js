@@ -15,7 +15,7 @@ const comps = {
         auf einigen Webseiten von beteiligten Transportunternehmen integriert.
         Alle Angaben ohne Gewähr.
       </Typography>
-      <Typography>Datenstand Juni 2024</Typography>
+      <Typography>Datenstand Januar 2025</Typography>
     </>
   ),
   fr: (
@@ -29,7 +29,7 @@ const comps = {
         et intégrée aux sites Internet de certaines entreprises de transport
         participantes. Informations fournies sans garantie.
       </Typography>
-      <Typography>État des données Juin 2024</Typography>
+      <Typography>État des données janvier 2025</Typography>
     </>
   ),
   it: (
@@ -43,7 +43,7 @@ const comps = {
         delle imprese di trasporto partecipanti. Tutte le informazioni si
         intendono senza garanzia.
       </Typography>
-      <Typography>Aggiornamento dei dati giugno 2024</Typography>
+      <Typography>Aggiornamento dei dati gennaio 2025</Typography>
     </>
   ),
   en: (
@@ -57,7 +57,7 @@ const comps = {
         been integrated into the websites of some participating transport
         companies. No liability is taken for the accuracy of this information.
       </Typography>
-      <Typography>Data status June 2024</Typography>
+      <Typography>Data status January 2025</Typography>
     </>
   ),
 };
