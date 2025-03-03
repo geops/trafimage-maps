@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => {
         transition: "box-shadow 0.5s ease",
         borderRadius: 20,
         gap: 1,
-        overflow: "hidden",
         "&::after": {
           position: "absolute",
           content: '""',
@@ -72,6 +71,12 @@ const useStyles = makeStyles((theme) => {
           "&:hover": {
             color: theme.palette.secondary.dark,
           },
+        },
+        "& .rs-zoom-in": {
+          borderRadius: "20px 20px 0 0",
+        },
+        "& .rs-zoom-out": {
+          borderRadius: "0 0 20px 20px",
         },
       },
     },
