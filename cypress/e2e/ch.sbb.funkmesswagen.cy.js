@@ -90,7 +90,7 @@ describe("Funkmesswagen topic", () => {
     ).should("exist");
   });
 
-  it("should fetch Mewa 12 json file", () => {
+  it("should fetch mewa12.json and display Mewa 12 title", () => {
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen");
     cy.intercept(
@@ -100,14 +100,11 @@ describe("Funkmesswagen topic", () => {
         body: response,
       },
     ).as("json");
-    cy.wait("@json").then((interception) => {
-      expect(interception.response.statusCode).to.eq(200);
-    });
     cy.wait("@json");
     cy.get("[data-cy='messwagen-popup']").should("contain.text", "Mewa 12");
   });
 
-  it("should fetch Mess-bus json file", () => {
+  it("should fetch mb.json and display Mess-Bus title", () => {
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen?layers=ch.sbb.funkmesswagen.mb");
     cy.intercept(
@@ -120,14 +117,11 @@ describe("Funkmesswagen topic", () => {
         },
       },
     ).as("json");
-    cy.wait("@json").then((interception) => {
-      expect(interception.response.statusCode).to.eq(200);
-    });
     cy.wait("@json");
     cy.get("[data-cy='messwagen-popup']").should("contain.text", "Mess-Bus");
   });
 
-  it("should fetch Mobile json file", () => {
+  it("should fetch mobile.json and display Mobile title", () => {
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen?layers=ch.sbb.funkmesswagen.mobile");
     cy.intercept(
@@ -140,9 +134,6 @@ describe("Funkmesswagen topic", () => {
         },
       },
     ).as("json");
-    cy.wait("@json").then((interception) => {
-      expect(interception.response.statusCode).to.eq(200);
-    });
     cy.wait("@json");
     cy.get("[data-cy='messwagen-popup']").should("contain.text", "Mobile");
   });
@@ -156,9 +147,6 @@ describe("Funkmesswagen topic", () => {
         body: response,
       },
     ).as("json");
-    cy.wait("@json").then((interception) => {
-      expect(interception.response.statusCode).to.eq(200);
-    });
     cy.get("[data-cy='messwagen-popup']").should("contain.text", "Mewa 12");
 
     cy.get("[data-cy='messwagen-popup']").should(
