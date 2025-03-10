@@ -12,10 +12,14 @@ const StyledIconButton = withStyles((theme) => ({
     boxShadow: "0 0 7px rgba(0, 0, 0, 0.9)",
     transition: "box-shadow 0.5s ease",
     color: theme.colors.darkGray,
+    "& svg": {
+      width: "100%",
+      height: "100%",
+    },
     "&:hover": {
       boxShadow: "0 0 12px 2px rgba(0, 0, 0, 0.9)",
       backgroundColor: "white",
-      color: theme.colors.darkGray,
+      color: theme.palette.secondary.dark,
     },
     "&:disabled": {
       boxShadow: "0 0 7px 2px rgba(0, 0, 0, 0.4)",

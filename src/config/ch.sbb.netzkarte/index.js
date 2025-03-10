@@ -4,6 +4,8 @@ import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import StationsLayer from "../../layers/StationsLayer";
 import PlatformsLayer from "../../layers/PlatformsLayer";
 import TralisLayer from "../../layers/TralisLayer";
+import { LevelLayer } from "../../layers";
+import { FLOOR_LEVELS } from "../../utils/constants";
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: "ch.sbb.netzkarte.data",
@@ -25,6 +27,8 @@ export const netzkarteLayer = new MapboxStyleLayer({
   properties: {
     isBaseLayer: true,
     previewImage: "ch.sbb.netzkarte",
+    hasLevels: true,
+    hideInLegend: true,
   },
   visible: true,
   mapboxLayer: dataLayer,
@@ -40,6 +44,8 @@ export const netzkarteNight = new MapboxStyleLayer({
   properties: {
     isBaseLayer: true,
     previewImage: "ch.sbb.netzkarte.dark",
+    hasLevels: true,
+    hideInLegend: true,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -305,6 +311,29 @@ export const gemeindegrenzen = new MapboxStyleLayer({
   },
 });
 
+export const geschosseLayer = new Layer({
+  name: "ch.sbb.geschosse",
+  visible: true,
+  properties: {
+    hideInLayerTree: true,
+  },
+});
+
+geschosseLayer.children = FLOOR_LEVELS.map((level) => {
+  return new LevelLayer({
+    name: `ch.sbb.geschosse${level}`,
+    visible: level === "2D",
+    mapboxLayer: dataLayer,
+    styleLayersFilter: ({ metadata }) => metadata && metadata["geops.filter"],
+    level,
+    group: "ch.sbb.geschosse-layer",
+    properties: {
+      parent: geschosseLayer,
+      hideInLayerTree: true,
+    },
+  });
+});
+
 export const defaultBaseLayers = [
   dataLayer,
   netzkarteLayer,
@@ -325,4 +354,5 @@ export default [
   bahnhofplaene.clone({
     children: [interactivePlans.clone(), printPlans.clone()], // There is a bug in MTJS that breaks the radio buttons, so we need to clone the layers.
   }),
+  geschosseLayer,
 ];

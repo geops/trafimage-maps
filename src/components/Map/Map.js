@@ -176,34 +176,36 @@ class Map extends PureComponent {
     }
 
     const queryableLayers = getQueryableLayers("pointermove", layers, map);
-    getFeatureInfoAtCoordinate(coordinate, queryableLayers).then((newInfos) => {
-      // If the featureInfos contains one from a priority layer.
-      // We display only these featureInfos.
-      // See DirektVerbindungen layers for an example.
-      const priorityLayersInfos = newInfos.filter(({ layer }) =>
-        layer.get("priorityFeatureInfo"),
-      );
-      const hasPriorityLayer = !!priorityLayersInfos.length;
+    getFeatureInfoAtCoordinate(coordinate, queryableLayers, "pointermove").then(
+      (newInfos) => {
+        // If the featureInfos contains one from a priority layer.
+        // We display only these featureInfos.
+        // See DirektVerbindungen layers for an example.
+        const priorityLayersInfos = newInfos.filter(({ layer }) =>
+          layer.get("priorityFeatureInfo"),
+        );
+        const hasPriorityLayer = !!priorityLayersInfos.length;
 
-      const otherLayersInfos = newInfos.filter(
-        ({ layer }) => !layer.get("priorityFeatureInfo"),
-      );
+        const otherLayersInfos = newInfos.filter(
+          ({ layer }) => !layer.get("priorityFeatureInfo"),
+        );
 
-      const infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
+        const infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
 
-      // Show the hover style if the layer has the method.
-      infos.forEach(({ layer, features }) => {
-        if (!layer.get("priorityFeatureInfo")) {
-          layer?.hover?.(features);
-        }
-      });
+        // Show the hover style if the layer has the method.
+        infos.forEach(({ layer, features }) => {
+          if (!layer.get("priorityFeatureInfo")) {
+            layer?.hover?.(features);
+          }
+        });
 
-      map.getTarget().style.cursor = infos.find(
-        ({ features }) => !!features.length,
-      )
-        ? "pointer"
-        : "auto";
-    });
+        map.getTarget().style.cursor = infos.find(
+          ({ features }) => !!features.length,
+        )
+          ? "pointer"
+          : "auto";
+      },
+    );
   }
 
   onSingleClick(evt) {
@@ -226,7 +228,7 @@ class Map extends PureComponent {
     }
 
     const queryableLayers = getQueryableLayers("singleclick", layers, map);
-    getFeatureInfoAtCoordinate(coordinate, queryableLayers).then(
+    getFeatureInfoAtCoordinate(coordinate, queryableLayers, "singleclick").then(
       (featureInfos) => {
         // If the featureInfos contains one from a priority layer.
         // We display only these featureInfos.

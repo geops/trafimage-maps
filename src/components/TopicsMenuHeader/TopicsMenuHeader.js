@@ -30,6 +30,7 @@ function TopicsMenuHeader({ isOpen = false, onToggle }) {
     const topicLayers = flatLayers.reverse().filter((l) => {
       return (
         !l.get("isBaseLayer") &&
+        !l.get("hideInLayerTree") &&
         !l.get("hideInLegend") &&
         !flatLayers.includes(l.parent) // only root layers
       );

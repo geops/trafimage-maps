@@ -6,12 +6,7 @@ import { setSearchOpen } from "../../model/app/actions";
 import { ReactComponent as SearchIcon } from "./Search.svg";
 import SearchInfo from "./SearchInfo";
 
-const propTypes = {
-  children: PropTypes.node,
-  popupAnchor: PropTypes.instanceOf(Element),
-};
-
-function SearchToggle({ popupAnchor, children }) {
+function SearchToggle({ children }) {
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -21,7 +16,7 @@ function SearchToggle({ popupAnchor, children }) {
         className={`wkp-search-toggle-container${searchOpen ? "--open" : ""}`}
       >
         {children}
-        <SearchInfo anchorEl={popupAnchor} />
+        <SearchInfo />
       </div>
       {!searchOpen && (
         <button
@@ -37,6 +32,8 @@ function SearchToggle({ popupAnchor, children }) {
   );
 }
 
-SearchToggle.propTypes = propTypes;
+SearchToggle.propTypes = {
+  children: PropTypes.node,
+};
 
 export default SearchToggle;

@@ -116,7 +116,7 @@ describe("FeatureInformation", () => {
     expect(highlighLayer.getStyle()).toBe(highlightPointStyle);
   });
 
-  test("adds an hihglight feature if the feature is not a point but mapbox displays an icon", () => {
+  test("adds an highlight feature if the feature is not a point but mapbox displays an icon", () => {
     const l = new Layer({
       key: "foo",
       properties: {
@@ -157,7 +157,7 @@ describe("FeatureInformation", () => {
     unmount();
   });
 
-  test("doesn't add an hihglight feature if the feature is not a point and not a mapbox feature", () => {
+  test("doesn't add an highlight feature if the feature is not a point and not a mapbox feature", () => {
     const l = new Layer({
       key: "foo",
       properties: {

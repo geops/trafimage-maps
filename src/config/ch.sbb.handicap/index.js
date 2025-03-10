@@ -24,6 +24,16 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   group: "data",
 });
 
+export const handicapLight = netzkarteLayer.clone({
+  mapboxLayer: handicapDataLayer,
+  style: "base_bright_v2_ch.sbb.handicap_v2",
+});
+
+export const handicapDark = netzkarteNight.clone({
+  mapboxLayer: handicapDataLayer,
+  style: "base_dark_v2_ch.sbb.handicap_v2_dark",
+});
+
 const handicapHighlightStyleMain = new Style({
   renderer: createPointStyleRenderer([
     { offsetX: 0, offsetY: -25, radius: 25, resolution: 19.5 },
@@ -193,14 +203,8 @@ const statusUnbekannt = new HandicapLayer({
 
 export default [
   handicapDataLayer,
-  netzkarteLayer.clone({
-    mapboxLayer: handicapDataLayer,
-    style: "base_bright_v2_ch.sbb.handicap_v2",
-  }),
-  netzkarteNight.clone({
-    mapboxLayer: handicapDataLayer,
-    style: "base_dark_v2_ch.sbb.handicap_v2_dark",
-  }),
+  handicapLight,
+  handicapDark,
   // netzkarteAerial.clone({
   //   mapboxLayer: handicapDataLayer,
   //   style: 'aerial_sbb_sbbkey_ch.sbb.handicap_v2',

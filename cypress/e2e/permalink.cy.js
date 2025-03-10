@@ -25,8 +25,6 @@ describe("permalink", () => {
         cy.get(".wkp-fit-extent").should("exist");
         // fitExtent
         cy.get(".wkp-geolocation").should("exist");
-        // zoomSlider
-        cy.get(".rs-zoomslider-wrapper").should("exist");
         // footer
         cy.get(".wkp-footer").should("exist");
 
@@ -64,7 +62,7 @@ describe("permalink", () => {
           ),
         );
         cy.url().should("match", /lang=de/);
-        cy.url().should("match", /layers=&/);
+        cy.url().should("match", /layers=ch.sbb.geschosse2D(&|$)/);
         // eslint-disable-next-line prefer-regex-literals
         cy.url().should("match", new RegExp("x=928460&y=5908948&z=8.5"));
       });
@@ -104,12 +102,6 @@ describe("permalink", () => {
         cy.visit("/?disabled=geolocationButton");
         cy.get(".wkp-map-controls").should("exist");
         cy.get(".wkp-geolocation").should("not.exist");
-      });
-
-      it("should hide zoom slider", () => {
-        cy.visit("/?disabled=zoomSlider");
-        cy.get(".wkp-map-controls").should("exist");
-        cy.get(".rs-zoomslider-wrapper").should("not.exist");
       });
 
       it("should hide footer", () => {

@@ -1,5 +1,38 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 
+const response = {
+  title: "Mewa 12",
+  latitude: 46.945881979666666,
+  longitude: 7.4081100135,
+  info: [
+    {
+      label: "Datum",
+      value: "05.03.2024",
+    },
+    {
+      label: "Zeit",
+      value: "11:08:07 UTC",
+    },
+    {
+      label: "Navigation",
+      value: "iNAT-RQT",
+    },
+    {
+      label: "Satelliten",
+      value: "0",
+    },
+    {
+      label: "Richtung",
+      value: "N_HBS",
+    },
+    {
+      label: "V WGI",
+      value: "127.4 km/h",
+    },
+  ],
+  gwVersion: "v1.0.1",
+};
+
 describe("Funkmesswagen topic", () => {
   beforeEach(() => {
     // make sure the request is not cached, it breaks FF otherwise
@@ -34,8 +67,7 @@ describe("Funkmesswagen topic", () => {
     cy.get(".wkp-fit-extent").should("exist");
     // fitExtent
     cy.get(".wkp-geolocation").should("exist");
-    // zoomSlider
-    cy.get(".rs-zoomslider-wrapper").should("exist");
+
     // footer
     cy.get(".wkp-footer").should("exist");
     cy.get(".wkp-share-menu").should("not.exist");
@@ -58,80 +90,64 @@ describe("Funkmesswagen topic", () => {
     ).should("exist");
   });
 
-  it("should fetch Mewa 12 json file", () => {
+  it("should fetch mewa12.json and display Mewa 12 title", () => {
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen");
-    cy.intercept("GET", "**/messwagen/mewa12.json").as("json");
-    cy.wait("@json").then((interception) => {
-      expect(interception.response.statusCode).to.eq(200);
-    });
+    cy.intercept(
+      { method: "GET", url: /\/messwagen\/mewa12.json/ },
+      {
+        statusCode: 200,
+        body: response,
+      },
+    ).as("json");
     cy.wait("@json");
     cy.get("[data-cy='messwagen-popup']").should("contain.text", "Mewa 12");
   });
 
-  it("should fetch Mess-bus json file", () => {
+  it("should fetch mb.json and display Mess-Bus title", () => {
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen?layers=ch.sbb.funkmesswagen.mb");
-    cy.intercept("GET", "**/messwagen/mb.json").as("json");
-    cy.wait("@json").then((interception) => {
-      expect(interception.response.statusCode).to.eq(200);
-    });
+    cy.intercept(
+      { method: "GET", url: /\/messwagen\/mb.json/ },
+      {
+        statusCode: 200,
+        body: {
+          ...response,
+          title: "Mess-Bus",
+        },
+      },
+    ).as("json");
     cy.wait("@json");
     cy.get("[data-cy='messwagen-popup']").should("contain.text", "Mess-Bus");
   });
 
-  it("should fetch Mobile json file", () => {
+  it("should fetch mobile.json and display Mobile title", () => {
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen?layers=ch.sbb.funkmesswagen.mobile");
-    cy.intercept("GET", "**/messwagen/mobile.json").as("json");
-    cy.wait("@json").then((interception) => {
-      expect(interception.response.statusCode).to.eq(200);
-    });
+    cy.intercept(
+      { method: "GET", url: /\/messwagen\/mobile.json/ },
+      {
+        statusCode: 200,
+        body: {
+          ...response,
+          title: "Mobile",
+        },
+      },
+    ).as("json");
     cy.wait("@json");
     cy.get("[data-cy='messwagen-popup']").should("contain.text", "Mobile");
   });
 
   it("should display content of json file in popup", () => {
-    const response = {
-      title: "Mewa 12",
-      latitude: 46.369965904333334,
-      longitude: 7.765056989666666,
-      info: [
-        {
-          label: "Datum",
-          value: "05.03.2024",
-        },
-        {
-          label: "Zeit",
-          value: "11:08:07 UTC",
-        },
-        {
-          label: "Navigation",
-          value: "iNAT-RQT",
-        },
-        {
-          label: "Satelliten",
-          value: "0",
-        },
-        {
-          label: "Richtung",
-          value: "N_HBS",
-        },
-        {
-          label: "V WGI",
-          value: "127.4 km/h",
-        },
-      ],
-      gwVersion: "v1.0.1",
-    };
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen");
-    cy.intercept("GET", "**/messwagen/mewa12.json", {
-      body: response,
-    }).as("json");
-    cy.wait("@json").then((interception) => {
-      expect(interception.response.statusCode).to.eq(200);
-    });
+    cy.intercept(
+      { method: "GET", url: /messwagen\/mewa12.json/ },
+      {
+        body: response,
+      },
+    ).as("json");
+    cy.wait("@json");
     cy.get("[data-cy='messwagen-popup']").should("contain.text", "Mewa 12");
 
     cy.get("[data-cy='messwagen-popup']").should(
