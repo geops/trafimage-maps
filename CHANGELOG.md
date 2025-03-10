@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.23](https://github.com/geops/trafimage-maps/compare/v1.30.22...v1.30.23) (2025-03-10)
+
+### Bug Fixes
+
+- **accessibility:** update telephone text, add titles to floor switcher buttons ([#1218](https://github.com/geops/trafimage-maps/issues/1218)) ([83dcfad](https://github.com/geops/trafimage-maps/commit/83dcfada1192f728d13a073aefc28ccc6df26b9e))
+
 ### [1.30.22](https://github.com/geops/trafimage-maps/compare/v1.30.21...v1.30.22) (2025-02-28)
 
 ### Bug Fixes
