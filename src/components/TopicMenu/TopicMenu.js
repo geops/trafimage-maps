@@ -124,7 +124,11 @@ class TopicMenu extends PureComponent {
       layerTree = (
         <div className="wkp-layer-tree">
           <LayerTree
-            isItemHidden={(l) => l.get("isBaseLayer") || l.get("hideInLegend")}
+            isItemHidden={(l) =>
+              l.get("isBaseLayer") ||
+              l.get("hideInLegend") ||
+              l.get("hideInLayerTree")
+            }
             layers={layers}
             t={t}
             titles={this.titles}
@@ -184,8 +188,13 @@ class TopicMenu extends PureComponent {
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
     const isActiveTopic = topic.key === activeTopic.key;
     const isMenuVisibleLayers = (topic.layers || []).find((l) => {
-      return !l.get("hideInLegend");
+      return (
+        !l.get("hideInLegend") &&
+        !l.get("isBaseLayer") &&
+        !l.get("hideInLayerTree")
+      );
     });
+
     const baseLayers = new LayerService(layers).getBaseLayers();
     const currentBaseLayer = baseLayers.find((l) => l.visible);
 

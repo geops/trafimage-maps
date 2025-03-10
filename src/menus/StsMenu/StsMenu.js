@@ -18,6 +18,7 @@ import { DV_KEY } from "../../utils/constants";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
+import SearchInput from "../../components/Search/SearchInput";
 
 const boxShadow =
   "0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)";
@@ -51,7 +52,40 @@ const useStyles = makeStyles(() => {
       },
     },
     layerSwitcher: {
-      padding: "15px 10px",
+      padding: "0 10px 15px",
+    },
+    searchContainer: {
+      width: (props) =>
+        props.isMobile ? "100%" : "calc(100% - 12px) !important",
+      padding: (props) => (props.isMobile ? 0 : 6),
+      zIndex: "1100 !important",
+      borderRadius: 8,
+      "&.wkp-search": {
+        left: "0 !important",
+        top: (props) => (props.isMobile ? "-2px !important" : "2px !important"),
+        right: "unset",
+        "& .wkp-search-input": {
+          boxShadow: (props) => props.isMobile && boxShadow,
+          position: "relative !important",
+          borderRadius: 8,
+          "& input": {
+            borderRadius: 8,
+          },
+        },
+        "& .wkp-search-button-submit": {
+          right: "0px !important",
+          top: "0px !important",
+          borderRadius: "0 7px 7px 0",
+        },
+        "& .wkp-search-button-clear": {
+          right: "42px !important",
+          top: "0px !important",
+        },
+        "& .react-autosuggest__suggestions-container": {
+          borderRadius: 8,
+          boxShadow,
+        },
+      },
     },
   };
 });
@@ -79,15 +113,16 @@ const updateLayers = (key = "sts", baseLayer) => {
   }
 };
 
-function StsTopicMenu() {
+function StsMenu() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
   const isMobile = useHasScreenSize();
+  const classes = useStyles({ isMobile });
   const [activeMenu, setActiveMenu] = useState();
   const [anchorEl, setAnchorEl] = useState();
+  const displayMenu = useSelector((state) => state.app.displayMenu);
   const stsBaseLayer = useMemo(
     () => stsLayers.find((layer) => /ch.sbb.sts.validity.data/.test(layer.key)),
     [],
@@ -152,71 +187,86 @@ function StsTopicMenu() {
   }
 
   return (
-    <IframeMenu
-      header={
-        <>
-          <Button
-            color="secondary"
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={(evt) => setAnchorEl(evt.currentTarget)}
-            endIcon={anchorEl ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            className={classes.dropdownToggler}
-            data-testid="sts-menu-opener"
-          >
-            <b>
-              {activeMenu === "sts"
-                ? t("Validity of Swiss Travel Pass")
-                : t("Direct trains to Switzerland")}
-            </b>
-          </Button>
-          <StyledMenu
-            keepMounted
-            open={!!anchorEl}
-            data-cy="sts-select"
-            anchorEl={anchorEl}
-            onClose={() => setAnchorEl(null)}
-            transitionDuration="auto"
-            MenuListProps={{
-              autoFocusItem: false,
-            }}
-            data-testid="sts-menu-popover"
-          >
-            <StyledMenuItem
-              disabled={activeMenu === "sts"}
-              onClick={() => onChange("sts")}
-              data-testid="sts-menu-sts"
+    <>
+      {isMobile && !displayMenu ? (
+        <div className={`wkp-search ${classes.searchContainer}`}>
+          <SearchInput />
+        </div>
+      ) : null}
+      <IframeMenu
+        header={
+          <>
+            {!isMobile ? (
+              <>
+                <div className={`wkp-search ${classes.searchContainer}`}>
+                  <SearchInput />
+                </div>
+                <div style={{ height: 70, width: "100%" }} />
+              </>
+            ) : null}
+            <Button
+              color="secondary"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={(evt) => setAnchorEl(evt.currentTarget)}
+              endIcon={anchorEl ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              className={classes.dropdownToggler}
+              data-testid="sts-menu-opener"
             >
-              {t("Validity of Swiss Travel Pass")}
-            </StyledMenuItem>
-            <StyledMenuItem
-              disabled={activeMenu === "dv"}
-              onClick={() => onChange("dv")}
-              data-testid="sts-menu-dv"
+              <b>
+                {activeMenu === "sts"
+                  ? t("Validity of Swiss Travel Pass")
+                  : t("Direct trains to Switzerland")}
+              </b>
+            </Button>
+            <StyledMenu
+              keepMounted
+              open={!!anchorEl}
+              data-cy="sts-select"
+              anchorEl={anchorEl}
+              onClose={() => setAnchorEl(null)}
+              transitionDuration="auto"
+              MenuListProps={{
+                autoFocusItem: false,
+              }}
+              data-testid="sts-menu-popover"
             >
-              {t("Direct trains to Switzerland")}
-            </StyledMenuItem>
-          </StyledMenu>
-          <div className={classes.layerSwitcher}>
-            {activeMenu === "sts" && <StsValidityLayerSwitcher />}
-            {activeMenu === "dv" && <DvLayerSwitcher />}
-          </div>
-        </>
-      }
-      title={activeMenu === "dv" && <DvFeatureInfoTitle />}
-      body={
-        <>
-          {!isMobile && <Divider />}
-          {activeMenu === "sts" && (
-            <StsValidityFeatureInfo menuOpen={!featureInfo} />
-          )}
-          {activeMenu === "dv" && <DvFeatureInfo filterByType />}
-        </>
-      }
-    />
+              <StyledMenuItem
+                disabled={activeMenu === "sts"}
+                onClick={() => onChange("sts")}
+                data-testid="sts-menu-sts"
+              >
+                {t("Validity of Swiss Travel Pass")}
+              </StyledMenuItem>
+              <StyledMenuItem
+                disabled={activeMenu === "dv"}
+                onClick={() => onChange("dv")}
+                data-testid="sts-menu-dv"
+              >
+                {t("Direct trains to Switzerland")}
+              </StyledMenuItem>
+            </StyledMenu>
+            <div className={classes.layerSwitcher}>
+              {activeMenu === "sts" && <StsValidityLayerSwitcher />}
+              {activeMenu === "dv" && <DvLayerSwitcher />}
+            </div>
+          </>
+        }
+        title={activeMenu === "dv" && <DvFeatureInfoTitle />}
+        body={
+          <>
+            {!isMobile && <Divider />}
+            {activeMenu === "sts" && (
+              <StsValidityFeatureInfo menuOpen={!featureInfo} />
+            )}
+            {activeMenu === "dv" && <DvFeatureInfo filterByType />}
+          </>
+        }
+      />
+    </>
   );
 }
 
-StsTopicMenu.propTypes = {};
+StsMenu.propTypes = {};
 
-export default StsTopicMenu;
+export default StsMenu;

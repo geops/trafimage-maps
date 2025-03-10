@@ -98,7 +98,6 @@ describe("TopicElements", () => {
     // MapControls
     expect(container.querySelectorAll(".wkp-map-controls").length).toBe(0);
     expect(container.querySelectorAll(".wkp-geolocation").length).toBe(0);
-    expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(0);
     expect(container.querySelectorAll(".wkp-fit-extent").length).toBe(0);
   });
 
@@ -125,7 +124,6 @@ describe("TopicElements", () => {
         // MapControls
         mapControls: false,
         geolocationButton: false,
-        zoomSlider: false,
         fitExtent: false,
       },
     };
@@ -166,7 +164,6 @@ describe("TopicElements", () => {
     // MapControls
     expect(container.querySelectorAll(".wkp-map-controls").length).toBe(0);
     expect(container.querySelectorAll(".wkp-geolocation").length).toBe(0);
-    expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(0);
     expect(container.querySelectorAll(".wkp-fit-extent").length).toBe(0);
   });
 
@@ -194,7 +191,6 @@ describe("TopicElements", () => {
         // MapControls
         mapControls: true,
         geolocationButton: true,
-        zoomSlider: true,
         fitExtent: true,
       },
     };
@@ -238,7 +234,6 @@ describe("TopicElements", () => {
     // MapControls
     expect(container.querySelectorAll(".wkp-map-controls").length).toBe(1);
     expect(container.querySelectorAll(".wkp-geolocation").length).toBe(1);
-    expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
     expect(container.querySelectorAll(".wkp-fit-extent").length).toBe(1);
   });
 });

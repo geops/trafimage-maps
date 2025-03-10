@@ -31,7 +31,7 @@ import geltungsbereicheMvpLayers, {
 import geltungsbereicheIframeLayers from "./ch.sbb.geltungsbereiche.iframe";
 import stsLayers from "./ch.sbb.sts";
 import dvLayers from "./ch.sbb.direktverbindungen";
-import defaultSearches, { handicapStopFinder } from "./searches";
+import defaultSearches, { handicapStopFinder, stopFinder } from "./searches";
 import GeltungsbereicheTopicMenu from "../menus/GeltungsbereicheTopicMenu";
 import StsMenu from "../menus/StsMenu";
 import {
@@ -50,6 +50,7 @@ import geltungsbereicheLegends from "../img/geltungsbereicheLegends";
 import messwagenLayers from "./ch.sbb.funkmesswagen";
 import MesswagenFollowButton from "./ch.sbb.funkmesswagen/MesswagenFollowButton";
 import { MesswagenPopup } from "../popups";
+import StsMenuToggler from "./ch.sbb.sts/StsMenuToggler/StsMenuToggler";
 // For backward compatibility
 export {
   casaDataLayerWithoutLabels,
@@ -79,6 +80,7 @@ export const netzkarte = {
     popup: true,
     shareMenu: true,
     trackerMenu: true,
+    floorSwitcher: true,
   },
   layers: netzkarteLayers,
   projection: "EPSG:3857",
@@ -274,9 +276,7 @@ const sandbox = {
   key: "ch.sbb.netzkarte.sandbox",
   layers: sandboxLayers,
   projection: "EPSG:3857",
-  elements: {
-    ...defaultElements,
-  },
+  elements: defaultElements,
   layerInfoComponent: "SandboxTopicInfo",
   searches: defaultSearches,
 };
@@ -376,6 +376,10 @@ export const sts = {
   zoom: 8,
   constrainOnlyCenter: true,
   overlaySide: "left",
+  searches: {
+    Stationen: stopFinder,
+  },
+  menuToggler: <StsMenuToggler />,
 };
 
 export const direktverbindungen = {

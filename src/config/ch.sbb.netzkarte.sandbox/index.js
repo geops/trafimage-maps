@@ -1,7 +1,5 @@
-import { Layer } from "mobility-toolbox-js/ol";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
-import LevelLayer from "../../layers/LevelLayer";
-import { dataLayer, netzkarteLayer } from "../ch.sbb.netzkarte";
+import { dataLayer, netzkarteLayer, geschosseLayer } from "../ch.sbb.netzkarte";
 
 const sandboxDataLayer = dataLayer.clone({
   key: "ch.sbb.netzkarte.sandbox.data",
@@ -18,6 +16,8 @@ export const poiLayer = new MapboxStyleLayer({
   properties: {
     previewImage: "ch.sbb.netzkarte",
     isBaseLayer: true,
+    hideInLegend: true,
+    hasLevels: true,
   },
   visible: false,
   mapboxLayer: sandboxDataLayer,
@@ -26,28 +26,28 @@ export const poiLayer = new MapboxStyleLayer({
   style: "temp_entwicklungsstyle",
 });
 
-export const geschosseLayer = new Layer({
-  name: "ch.sbb.geschosse",
-  visible: true,
+export const sandboxGeschosseLayer = geschosseLayer.clone({
+  properties: {
+    hideInLayerTree: false,
+  },
 });
 
-geschosseLayer.children = [-4, -3, -2, -1, 0, "2D", 1, 2, 3, 4].map((level) => {
-  return new LevelLayer({
-    name: `ch.sbb.geschosse${level}`,
-    visible: level === "2D",
-    mapboxLayer: sandboxDataLayer,
-    styleLayersFilter: ({ metadata }) => metadata && metadata["geops.filter"],
-    level,
-    group: "ch.sbb.geschosse-layer",
-    properties: {
-      parent: geschosseLayer,
-    },
+sandboxGeschosseLayer.children = geschosseLayer.children
+  .slice(2, 12) // only show levels from -4 to 4
+  .map((layer) => {
+    return layer.clone({
+      mapboxLayer: sandboxDataLayer,
+      group: "ch.sbb.geschosse-layer",
+      properties: {
+        parent: sandboxGeschosseLayer,
+        hideInLayerTree: false,
+      },
+    });
   });
-});
 
 export default [
   sandboxDataLayer,
   sandboxNetzkarteLayer,
   poiLayer,
-  geschosseLayer,
+  sandboxGeschosseLayer,
 ];

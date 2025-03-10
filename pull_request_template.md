@@ -13,4 +13,5 @@
 - [ ] The title means something for a human being and follows the [conventional commits](https://www.conventionalcommits.org/) specification.
 - [ ] The title contains [WIP] if it's necessary.
 - [ ] Labels applied. if it's a release? a hotfix?
+- [ ] Check the preview app on iOS before merge: Is everything working? SVGs visible?
 - [ ] Tests added.

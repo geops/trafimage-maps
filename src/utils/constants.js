@@ -61,3 +61,6 @@ export const LS_SIZE_KEY = "tm.max.canvas.size";
 
 // hideInLayerTree values
 export const ONLY_WHEN_NOT_LOGGED_IN = "onlyWhenNotLoggedIn";
+
+// Level layers
+export const FLOOR_LEVELS = [-6, -5, -4, -3, -2, -1, 0, "2D", 1, 2, 3, 4, 5, 6];

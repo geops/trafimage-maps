@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.23](https://github.com/geops/trafimage-maps/compare/v1.30.22...v1.30.23) (2025-03-10)
+
+### Bug Fixes
+
+- **accessibility:** update telephone text, add titles to floor switcher buttons ([#1218](https://github.com/geops/trafimage-maps/issues/1218)) ([83dcfad](https://github.com/geops/trafimage-maps/commit/83dcfada1192f728d13a073aefc28ccc6df26b9e))
+
+### [1.30.22](https://github.com/geops/trafimage-maps/compare/v1.30.21...v1.30.22) (2025-02-28)
+
+### Bug Fixes
+
+- change data status date ([#1217](https://github.com/geops/trafimage-maps/issues/1217)) ([911e67a](https://github.com/geops/trafimage-maps/commit/911e67a681bb933bca5f86c7cf3e2de5afe39959))
+
+### [1.30.21](https://github.com/geops/trafimage-maps/compare/v1.30.20...v1.30.21) (2025-02-17)
+
+### Bug Fixes
+
+- **Gemeindegrenzen:** update layer info status date ([#1216](https://github.com/geops/trafimage-maps/issues/1216)) ([ab99842](https://github.com/geops/trafimage-maps/commit/ab998424b27a9fb8cd7778ed50337eb318bc2224))
+- **netzkarte:** add FloorSwitcher component ([#1212](https://github.com/geops/trafimage-maps/issues/1212)) ([1a24e81](https://github.com/geops/trafimage-maps/commit/1a24e818c1e6b5ddc8b7d9fc150a2a71b05f05d8))
+
+### [1.30.20](https://github.com/geops/trafimage-maps/compare/v1.30.19...v1.30.20) (2025-02-12)
+
+### Bug Fixes
+
+- **netzkarte:** update translations for departure and station popup ([#1214](https://github.com/geops/trafimage-maps/issues/1214)) ([f04b2d9](https://github.com/geops/trafimage-maps/commit/f04b2d99a27d94301d8f286b18757876fc444415))
+
+### [1.30.19](https://github.com/geops/trafimage-maps/compare/v1.30.18...v1.30.19) (2025-02-10)
+
+### Bug Fixes
+
+- **map buttons:** make mapbutton svg full width and height ([#1215](https://github.com/geops/trafimage-maps/issues/1215)) ([21962a4](https://github.com/geops/trafimage-maps/commit/21962a449cc002b68e1a93e0771178ea67f02b1b))
+
+### [1.30.18](https://github.com/geops/trafimage-maps/compare/v1.30.17...v1.30.18) (2025-02-07)
+
+### Bug Fixes
+
+- **sts:** add station search in STS menu ([#1210](https://github.com/geops/trafimage-maps/issues/1210)) ([a7ffbb0](https://github.com/geops/trafimage-maps/commit/a7ffbb08b322ecc37a07873216165d3e9271c252))
+
+### [1.30.17](https://github.com/geops/trafimage-maps/compare/v1.30.16...v1.30.17) (2025-02-03)
+
+### Bug Fixes
+
+- **kilometrage:** add support for multiple lines in popup ([#1207](https://github.com/geops/trafimage-maps/issues/1207)) ([50e1625](https://github.com/geops/trafimage-maps/commit/50e16255c96bb9f3d315f12d3e7c84c32f80b1de))
+- use good color for cancelled trains on low zoom level ([#1213](https://github.com/geops/trafimage-maps/issues/1213)) ([ebaf421](https://github.com/geops/trafimage-maps/commit/ebaf4213640e5f4648781c361f18d680f6a1b1b6))
+
+### [1.30.17](https://github.com/geops/trafimage-maps/compare/v1.30.16...v1.30.17) (2025-02-03)
+
+### Bug Fixes
+
+- **kilometrage:** add support for multiple lines in popup ([#1207](https://github.com/geops/trafimage-maps/issues/1207)) ([50e1625](https://github.com/geops/trafimage-maps/commit/50e16255c96bb9f3d315f12d3e7c84c32f80b1de))
+- use good color for cancelled trains on low zoom level ([#1213](https://github.com/geops/trafimage-maps/issues/1213)) ([ebaf421](https://github.com/geops/trafimage-maps/commit/ebaf4213640e5f4648781c361f18d680f6a1b1b6))
+
 ### [1.30.16](https://github.com/geops/trafimage-maps/compare/v1.30.15...v1.30.16) (2025-01-15)
 
 ### Bug Fixes
