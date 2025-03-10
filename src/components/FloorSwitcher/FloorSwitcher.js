@@ -4,10 +4,11 @@ import PropTypes from "prop-types";
 import { getBottomLeft, getTopRight } from "ol/extent";
 import { transform } from "ol/proj";
 import { IconButton, List, ListItem } from "@mui/material";
+import { compose } from "redux";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
-// import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import { HiArrowUp, HiArrowDown } from "react-icons/hi2";
+import { withTranslation } from "react-i18next";
 import LayerService from "../../utils/LayerService";
 import { FLOOR_LEVELS } from "../../utils/constants";
 
@@ -44,6 +45,8 @@ const propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
   activeTopic: PropTypes.object.isRequired,
   screenWidth: PropTypes.string,
+
+  t: PropTypes.func.isRequired,
 };
 
 class FloorSwitcher extends PureComponent {
@@ -217,7 +220,7 @@ class FloorSwitcher extends PureComponent {
   }
 
   render() {
-    const { zoom, screenWidth } = this.props;
+    const { zoom, screenWidth, t } = this.props;
     const { floors, activeFloor, baseLayerHasLevelLayers, windowHeight } =
       this.state;
 
@@ -322,6 +325,7 @@ class FloorSwitcher extends PureComponent {
                 })}
               >
                 <IconButton
+                  title={t(`ch.sbb.geschosse${floor}`)}
                   data-testid={`floor-switcher-floor${floor}-btn`}
                   onClick={() => this.selectFloor(floor)}
                   sx={(theme) => ({
@@ -359,4 +363,7 @@ const mapStateToProps = (state) => ({
 
 FloorSwitcher.propTypes = propTypes;
 
-export default connect(mapStateToProps)(FloorSwitcher);
+export default compose(
+  withTranslation(),
+  connect(mapStateToProps),
+)(FloorSwitcher);
