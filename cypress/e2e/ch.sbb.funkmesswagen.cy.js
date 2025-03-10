@@ -1,5 +1,38 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 
+const response = {
+  title: "Mewa 12",
+  latitude: 46.945881979666666,
+  longitude: 7.4081100135,
+  info: [
+    {
+      label: "Datum",
+      value: "05.03.2024",
+    },
+    {
+      label: "Zeit",
+      value: "11:08:07 UTC",
+    },
+    {
+      label: "Navigation",
+      value: "iNAT-RQT",
+    },
+    {
+      label: "Satelliten",
+      value: "0",
+    },
+    {
+      label: "Richtung",
+      value: "N_HBS",
+    },
+    {
+      label: "V WGI",
+      value: "127.4 km/h",
+    },
+  ],
+  gwVersion: "v1.0.1",
+};
+
 describe("Funkmesswagen topic", () => {
   beforeEach(() => {
     // make sure the request is not cached, it breaks FF otherwise
@@ -60,7 +93,13 @@ describe("Funkmesswagen topic", () => {
   it("should fetch Mewa 12 json file", () => {
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen");
-    cy.intercept("GET", "**/messwagen/mewa12.json").as("json");
+    cy.intercept(
+      { method: "GET", url: /\/messwagen\/mewa12.json/ },
+      {
+        statusCode: 200,
+        body: response,
+      },
+    ).as("json");
     cy.wait("@json").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);
     });
@@ -71,7 +110,16 @@ describe("Funkmesswagen topic", () => {
   it("should fetch Mess-bus json file", () => {
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen?layers=ch.sbb.funkmesswagen.mb");
-    cy.intercept("GET", "**/messwagen/mb.json").as("json");
+    cy.intercept(
+      { method: "GET", url: /\/messwagen\/mb.json/ },
+      {
+        statusCode: 200,
+        body: {
+          ...response,
+          title: "Mess-Bus",
+        },
+      },
+    ).as("json");
     cy.wait("@json").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);
     });
@@ -82,7 +130,16 @@ describe("Funkmesswagen topic", () => {
   it("should fetch Mobile json file", () => {
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen?layers=ch.sbb.funkmesswagen.mobile");
-    cy.intercept("GET", "**/messwagen/mobile.json").as("json");
+    cy.intercept(
+      { method: "GET", url: /\/messwagen\/mobile.json/ },
+      {
+        statusCode: 200,
+        body: {
+          ...response,
+          title: "Mobile",
+        },
+      },
+    ).as("json");
     cy.wait("@json").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);
     });
@@ -91,43 +148,14 @@ describe("Funkmesswagen topic", () => {
   });
 
   it("should display content of json file in popup", () => {
-    const response = {
-      title: "Mewa 12",
-      latitude: 46.369965904333334,
-      longitude: 7.765056989666666,
-      info: [
-        {
-          label: "Datum",
-          value: "05.03.2024",
-        },
-        {
-          label: "Zeit",
-          value: "11:08:07 UTC",
-        },
-        {
-          label: "Navigation",
-          value: "iNAT-RQT",
-        },
-        {
-          label: "Satelliten",
-          value: "0",
-        },
-        {
-          label: "Richtung",
-          value: "N_HBS",
-        },
-        {
-          label: "V WGI",
-          value: "127.4 km/h",
-        },
-      ],
-      gwVersion: "v1.0.1",
-    };
     cy.viewport(1440, 900);
     cy.visit("/ch.sbb.funkmesswagen");
-    cy.intercept("GET", "**/messwagen/mewa12.json", {
-      body: response,
-    }).as("json");
+    cy.intercept(
+      { method: "GET", url: /messwagen\/mewa12.json/ },
+      {
+        body: response,
+      },
+    ).as("json");
     cy.wait("@json").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);
     });
