@@ -147,6 +147,7 @@ describe("Funkmesswagen topic", () => {
         body: response,
       },
     ).as("json");
+    cy.wait("@json");
     cy.get("[data-cy='messwagen-popup']").should("contain.text", "Mewa 12");
 
     cy.get("[data-cy='messwagen-popup']").should(
