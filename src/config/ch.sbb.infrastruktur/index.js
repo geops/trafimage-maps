@@ -22,7 +22,7 @@ export const kilometrageLayer = new KilometrageLayer({
 
 export const betriebsRegionen = new MapboxStyleLayer({
   name: "ch.sbb.betriebsregionen",
-  visible: true,
+  visible: false,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: ({ metadata }) =>
     /^operational_regions$/.test(metadata?.["general.filter"]),
