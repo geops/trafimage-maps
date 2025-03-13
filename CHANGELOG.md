@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.26](https://github.com/geops/trafimage-maps/compare/v1.30.25...v1.30.26) (2025-03-13)
+
+### Bug Fixes
+
+- **eisenbahninfrastruktur:** use layer metadata instead of id for stylelayers filter ([#1219](https://github.com/geops/trafimage-maps/issues/1219)) ([4c9ab65](https://github.com/geops/trafimage-maps/commit/4c9ab65a3802007224a464386f08eb6aa7b68bbc))
+
+### [1.30.25](https://github.com/geops/trafimage-maps/compare/v1.30.24...v1.30.25) (2025-03-12)
+
+### Bug Fixes
+
+- **zweitausbildung:** update status date ([4289241](https://github.com/geops/trafimage-maps/commit/428924115a3218205a9872a9bcaab13eb4b1730e))
+
+### [1.30.24](https://github.com/geops/trafimage-maps/compare/v1.30.23...v1.30.24) (2025-03-12)
+
+### Bug Fixes
+
+- **zweitausbildung:** update routes ([#1208](https://github.com/geops/trafimage-maps/issues/1208)) ([0c1c133](https://github.com/geops/trafimage-maps/commit/0c1c1339b6e9f5b435ef1dc58b9027670196d21e))
+
 ### [1.30.23](https://github.com/geops/trafimage-maps/compare/v1.30.22...v1.30.23) (2025-03-10)
 
 ### Bug Fixes
