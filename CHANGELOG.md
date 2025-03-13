@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.27](https://github.com/geops/trafimage-maps/compare/v1.30.26...v1.30.27) (2025-03-13)
+
+### Bug Fixes
+
+- **LevelLayer:** adjust LevelLayer applyLayoutVisibility to accomodate greyout layers ([#1220](https://github.com/geops/trafimage-maps/issues/1220)) ([bf4d322](https://github.com/geops/trafimage-maps/commit/bf4d322e6098b52ecfa1f7f3a326c47f7ed6ed7e))
+
 ### [1.30.26](https://github.com/geops/trafimage-maps/compare/v1.30.25...v1.30.26) (2025-03-13)
 
 ### Bug Fixes
