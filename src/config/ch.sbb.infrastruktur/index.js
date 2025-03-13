@@ -24,7 +24,8 @@ export const betriebsRegionen = new MapboxStyleLayer({
   name: "ch.sbb.betriebsregionen",
   visible: false,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => /pattern_/.test(id),
+  styleLayersFilter: ({ metadata }) =>
+    /^operational_regions$/.test(metadata?.["general.filter"]),
   properties: {
     isQueryable: true,
     hasInfos: true,
@@ -39,7 +40,8 @@ export const betriebsRegionenVisible = new MapboxStyleLayer({
   name: "ch.sbb.betriebsregionen",
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => /pattern_/.test(id),
+  styleLayersFilter: ({ metadata }) =>
+    /^operational_regions$/.test(metadata?.["general.filter"]),
   properties: {
     isQueryable: true,
     hasInfos: true,
@@ -53,10 +55,7 @@ export const tochtergesellschaftenSBB = new MapboxStyleLayer({
   name: "ch.sbb.infrastruktur.tochtergesellschaften.group",
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => {
-    // negative look behind regex doesn"t work on all browsers.
-    return /_SBB/.test(id) && id.indexOf("_only_") === -1;
-  },
+  styleLayersFilter: ({ metadata }) => /^sbb$/.test(metadata?.["infra.filter"]),
   properties: {
     hasInfos: true,
     description: "ch.sbb.infrastruktur.tochtergesellschaften.group-desc",
@@ -67,9 +66,8 @@ export const gewässer = new MapboxStyleLayer({
   name: "ch.sbb.infrastruktur.gewaesser.group",
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: (styleLayer) => {
-    return /waters/.test(styleLayer.id);
-  },
+  styleLayersFilter: ({ metadata }) =>
+    /^waters$/.test(metadata?.["general.filter"]),
   properties: {
     hasInfos: true,
     description: "ch.sbb.infrastruktur.gewaesser.group-desc",
@@ -80,10 +78,7 @@ export const uebrigeBahnen = new MapboxStyleLayer({
   name: "ch.sbb.infrastruktur.uebrigebahnen.group",
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => {
-    // negative look behind regex doesn"t work on all browsers.
-    return /_KTU/.test(id) && id.indexOf("_only_") === -1;
-  },
+  styleLayersFilter: ({ metadata }) => /^ktu$/.test(metadata?.["infra.filter"]),
   properties: {
     hasInfos: true,
     description: "ch.sbb.infrastruktur.uebrigebahnen.group-desc",
@@ -111,11 +106,8 @@ export const grenzen = new Layer({
           visible: false,
           isQueryable: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: (styleLayer) => {
-            return /(border_Gemeinde|border_Gemeinde-IMAGICO)$/.test(
-              styleLayer.id,
-            );
-          },
+          styleLayersFilter: ({ metadata }) =>
+            /^border\.municipality\.green$/.test(metadata?.["general.filter"]),
           group: "ch.sbb.infrastruktur.gemeindegrenzen.group",
           properties: {
             hasInfos: true,
@@ -127,11 +119,8 @@ export const grenzen = new Layer({
           visible: false,
           isQueryable: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: (styleLayer) => {
-            return /(border_Gemeinde-Grey|border_Gemeinde-IMAGICO-Grey)$/.test(
-              styleLayer.id,
-            );
-          },
+          styleLayersFilter: ({ metadata }) =>
+            /^border\.municipality\.grey$/.test(metadata?.["general.filter"]),
           group: "ch.sbb.infrastruktur.gemeindegrenzen.group",
           properties: {
             hasInfos: true,
@@ -152,9 +141,8 @@ export const grenzen = new Layer({
           name: "ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen",
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: (styleLayer) => {
-            return /(border_Kanton|border_Kanton-IMAGICO)$/.test(styleLayer.id);
-          },
+          styleLayersFilter: ({ metadata }) =>
+            /^border\.canton\.green$/.test(metadata?.["general.filter"]),
           group: "ch.sbb.infrastruktur.kantonsgrenzen.group",
           properties: {
             hasInfos: true,
@@ -165,11 +153,8 @@ export const grenzen = new Layer({
           name: "ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen",
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: (styleLayer) => {
-            return /(border_Kanton-Grey|border_Kanton-IMAGICO-Grey)$/.test(
-              styleLayer.id,
-            );
-          },
+          styleLayersFilter: ({ metadata }) =>
+            /^border\.canton\.grey$/.test(metadata?.["general.filter"]),
           group: "ch.sbb.infrastruktur.kantonsgrenzen.group",
           properties: {
             hasInfos: true,
