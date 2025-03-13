@@ -54,7 +54,7 @@ class LevelLayer extends MapboxStyleLayer {
 
       // Store the initial filter value
       if (!filterCache[styleLayer.id]) {
-        filterCache[styleLayer.id] = [...styleLayer.filter];
+        filterCache[styleLayer.id] = [...(styleLayer.filter || [])];
       }
 
       // level 2D
