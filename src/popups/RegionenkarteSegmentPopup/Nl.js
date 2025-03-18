@@ -25,7 +25,7 @@ function Nl({ feature }) {
     <>
       <Line feature={feature} />
       <div className={classes.description}>
-        <div>{`${t("Leiter NL")} ${name}`}</div>
+        <div>{`${t("Leiter Perimeter")} ${name}`}</div>
         {person && (
           <div>
             <Person person={person} isIntern />
