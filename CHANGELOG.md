@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.28](https://github.com/geops/trafimage-maps/compare/v1.30.27...v1.30.28) (2025-03-18)
+
+### Bug Fixes
+
+- **regionenkarte:** replace Niederlassung with Perimeter ([#1221](https://github.com/geops/trafimage-maps/issues/1221)) ([3fb5eee](https://github.com/geops/trafimage-maps/commit/3fb5eee1859d8ea658887aa5ae8ac22c9eb2e7a4))
+
 ### [1.30.27](https://github.com/geops/trafimage-maps/compare/v1.30.26...v1.30.27) (2025-03-13)
 
 ### Bug Fixes
