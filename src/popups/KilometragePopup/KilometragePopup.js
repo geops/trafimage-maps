@@ -24,7 +24,8 @@ function KilometragePopup({ feature }) {
     <div className={classes.root}>
       {lines?.map((l) => {
         return (
-          <Typography key={l.line}>
+          // TRAFKLEIN-848: Safari only apply minWidth  the size of the child so the p must have the all width
+          <Typography key={l.line} style={{ width: "max-content" }}>
             {`${t("Linien-Nr.")} ${l.line}`}, {`km ${Number(l.km).toFixed(2)}`}
           </Typography>
         );
