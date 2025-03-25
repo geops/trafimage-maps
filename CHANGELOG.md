@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.29](https://github.com/geops/trafimage-maps/compare/v1.30.28...v1.30.29) (2025-03-25)
+
+### Bug Fixes
+
+- fix safari bug in kilometers popup ([#1223](https://github.com/geops/trafimage-maps/issues/1223)) ([7bb3c7e](https://github.com/geops/trafimage-maps/commit/7bb3c7e18b7fb91d5e0560a7049988bead271ad9))
+
 ### [1.30.28](https://github.com/geops/trafimage-maps/compare/v1.30.27...v1.30.28) (2025-03-18)
 
 ### Bug Fixes
