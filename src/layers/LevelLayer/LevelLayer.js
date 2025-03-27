@@ -94,6 +94,20 @@ class LevelLayer extends MapboxStyleLayer {
           }
         }
       }
+
+      if (styleLayer.metadata?.["general.floor"] === "level_greyout") {
+        if (this.visible && this.level !== 0 && this.level !== "2D") {
+          mbMap.setLayoutProperty(styleLayer.id, "visibility", "visible");
+        } else if (this.visible) {
+          mbMap.setLayoutProperty(styleLayer.id, "visibility", "none");
+        }
+        const areAllHidden = !this.get("parent")?.children.some(
+          (l) => l.visible,
+        );
+        if (areAllHidden) {
+          mbMap.setLayoutProperty(styleLayer.id, "visibility", "none");
+        }
+      }
     }
   }
 
