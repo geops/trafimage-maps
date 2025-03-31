@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.30](https://github.com/geops/trafimage-maps/compare/v1.30.29...v1.30.30) (2025-03-31)
+
+### Bug Fixes
+
+- **geltungsbereiche:** remove Ausflugs-Abo from legend ([#1211](https://github.com/geops/trafimage-maps/issues/1211)) ([e6923e2](https://github.com/geops/trafimage-maps/commit/e6923e22c74628ab6b4970193c5b269d87fda9c4))
+
 ### [1.30.29](https://github.com/geops/trafimage-maps/compare/v1.30.28...v1.30.29) (2025-03-25)
 
 ### Bug Fixes
