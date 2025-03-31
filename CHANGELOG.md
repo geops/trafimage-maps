@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.29](https://github.com/geops/trafimage-maps/compare/v1.30.28...v1.30.29) (2025-03-25)
+
+### Bug Fixes
+
+- fix safari bug in kilometers popup ([#1223](https://github.com/geops/trafimage-maps/issues/1223)) ([7bb3c7e](https://github.com/geops/trafimage-maps/commit/7bb3c7e18b7fb91d5e0560a7049988bead271ad9))
+
+### [1.30.28](https://github.com/geops/trafimage-maps/compare/v1.30.27...v1.30.28) (2025-03-18)
+
+### Bug Fixes
+
+- **regionenkarte:** replace Niederlassung with Perimeter ([#1221](https://github.com/geops/trafimage-maps/issues/1221)) ([3fb5eee](https://github.com/geops/trafimage-maps/commit/3fb5eee1859d8ea658887aa5ae8ac22c9eb2e7a4))
+
+### [1.30.27](https://github.com/geops/trafimage-maps/compare/v1.30.26...v1.30.27) (2025-03-13)
+
+### Bug Fixes
+
+- **LevelLayer:** adjust LevelLayer applyLayoutVisibility to accomodate greyout layers ([#1220](https://github.com/geops/trafimage-maps/issues/1220)) ([bf4d322](https://github.com/geops/trafimage-maps/commit/bf4d322e6098b52ecfa1f7f3a326c47f7ed6ed7e))
+
 ### [1.30.26](https://github.com/geops/trafimage-maps/compare/v1.30.25...v1.30.26) (2025-03-13)
 
 ### Bug Fixes

@@ -81,7 +81,7 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
             className={classes.tabs}
           >
             <Tab className={classes.tab} label={t("Region")} />
-            <Tab className={classes.tab} label={t("NL")} />
+            <Tab className={classes.tab} label={t("Perimeter")} />
             <Tab className={classes.tab} label={t("Av")} />
           </Tabs>
           <div className={classes.tabPanel}>
