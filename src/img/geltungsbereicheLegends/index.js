@@ -51,7 +51,7 @@ const galegends = [
     language: "fr",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3Fr,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.295),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.305),
   },
   {
     paperSize: "a3",
@@ -65,7 +65,7 @@ const galegends = [
     language: "en",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3En,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.29),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.275),
   },
   {
     paperSize: "a4",
@@ -93,7 +93,7 @@ const galegends = [
     language: "en",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4En,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.305),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.295),
   },
 ];
 
