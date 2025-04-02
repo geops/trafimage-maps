@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.31](https://github.com/geops/trafimage-maps/compare/v1.30.30...v1.30.31) (2025-04-02)
+
+### Bug Fixes
+
+- **geltungsbereiche:** add white space in GA-A4 PDF legend ([f2db631](https://github.com/geops/trafimage-maps/commit/f2db6319a9a1087451e21f24ba5965cf3efbd06c))
+
 ### [1.30.30](https://github.com/geops/trafimage-maps/compare/v1.30.29...v1.30.30) (2025-03-31)
 
 ### Bug Fixes
