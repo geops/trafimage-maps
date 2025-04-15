@@ -10,7 +10,7 @@ const getHtmlPageCode = (wcCode, scriptCode) => {
    }
   </head>
   <body>
-    <div className="width:750px;height:500px;">
+    <div style="width:750px;height:500px;">
       ${wcCode}
     </div>
   </body>
