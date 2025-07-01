@@ -205,7 +205,7 @@
   "ch.sbb.geltungsbereiche-other": "Other means of transport",
   "ch.sbb.geltungsbereiche-rail": "Railway lines",
   "ch.sbb.geltungsbereiche.layerinfo-footer": "On certain bus routes, a supplement and/or seat reservation is required. Please also note that a bike space reservation is mandatory for bicycles on InterCity (IC) trains from 21 March to 31 October. Please note the information for the desired connection in the (online) timetable.",
-  "ch.sbb.geltungsbereiche.mvp-at": "Automatic ticketing: SBB EasyRide, FAIRTIQ, ZVV Check-in, BLS Check-in",
+  "ch.sbb.geltungsbereiche.mvp-at": "Automatic ticketing: SBB EasyRide, FAIRTIQ, ZVV Check-in, BLS Check-in, tl Check-in",
   "ch.sbb.geltungsbereiche.mvp-at.layerinfo-footer": "On certain bus routes, a supplement and/or seat reservation is required. Bicycles can be taken on most trains and buses, but not on the entire area of validity of the automatic ticketing system. On boats and cable cars in particular, bicycle transport is sometimes restricted or only possible with other tickets. From 21 March to 31 October, bicycle reservations are compulsory on most InterCity trains. Check the timetable or contact the transport companies directly before travelling by bike.",
   "ch.sbb.geltungsbereiche.mvp-ga_s25": "<b>GA Travelcard</b>, <b>Night GA Travelcard</b>, 1-month GA Travelcard, Day Pass for the Half Fare Travelcard and Saver Day Pass / Special Day Pass / Municipal Saver Day Pass with a valid Half Fare Travelcard",
   "ch.sbb.geltungsbereiche.mvp-hta": "<b>Half Fare Travelcard</b>",
