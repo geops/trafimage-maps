@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.33](https://github.com/geops/trafimage-maps/compare/v1.30.32...v1.30.33) (2025-07-10)
+
+### Bug Fixes
+
+- **geltungsbereiche:** add product tl Check-in for automatic ticketing ([#1225](https://github.com/geops/trafimage-maps/issues/1225)) ([44b8aa1](https://github.com/geops/trafimage-maps/commit/44b8aa14e7b503fa3ddfef09163b19766ac42317))
+- **zweitausbildung:** update layer names for point data ([#1226](https://github.com/geops/trafimage-maps/issues/1226)) ([1421a7e](https://github.com/geops/trafimage-maps/commit/1421a7ebaaf558ecbe09e36ee807b1b2cd393d17))
+
 ### [1.30.32](https://github.com/geops/trafimage-maps/compare/v1.30.31...v1.30.32) (2025-04-23)
 
 ### Bug Fixes
