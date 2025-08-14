@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
+    />
+    <title>Trafimage Webkarten</title>
+  </head>
+  <body style="width: 100%; box-sizing: border-box; margin: 0">
+    <div>
+      <h1>Search autofocus</h1>
+      <p>When loading in an iframe or embedded, trafimage-maps shouldn't auto focus to prevent the parent site from jumping to it on load.</p>
+    </div>
+    <div>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+      <p>More content</p>
+    </div>
+    <div
+      id="root"
+      style="
+        width: 100%;
+        height: 700px;
+        border: solid 1px black;
+        box-sizing: border-box;
+      "
+    >
+      <iframe
+        id="iframe"
+        src="/ch.sbb.netzkarte"
+        style="width: 100%; height: 100%; border: none"
+      ></iframe>
+    </div>
+  </body>
+  <script>
+    function downloadPdf() {
+      const iframe = document.getElementById('iframe');
+      if (iframe) {
+        iframe.contentWindow.postMessage('pdf-download-event', '*');
+      }
+    }
+  </script>
+</html>
