@@ -25,6 +25,7 @@ function SearchInput() {
   const searchContainerRef = useRef();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isEmbedded = window !== window.parent;
 
   useEffect(() => {
     if (!searchService) {
@@ -122,7 +123,7 @@ function SearchInput() {
       }}
       containerProps={{ className: "wkp-autosuggest" }}
       inputProps={{
-        autoFocus: true,
+        autoFocus: !isEmbedded,
         tabIndex: 0,
         "aria-label": t("Suchmaske"),
         onChange: (e, { newValue }) => setValue(newValue),
