@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.34](https://github.com/geops/trafimage-maps/compare/v1.30.33...v1.30.34) (2025-08-26)
+
+### Bug Fixes
+
+- **SearchInput:** prevent jumping to iframe by applying autofocus conditionally ([#1227](https://github.com/geops/trafimage-maps/issues/1227)) ([9975b42](https://github.com/geops/trafimage-maps/commit/9975b424d2bc72b30769ebac05f9acea66da6917))
+
 ### [1.30.33](https://github.com/geops/trafimage-maps/compare/v1.30.32...v1.30.33) (2025-07-10)
 
 ### Bug Fixes
