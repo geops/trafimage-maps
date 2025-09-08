@@ -461,8 +461,8 @@ export const railPlus = {
   ],
   exportConfig: {
     getTemplateValues: () => ({
-      publishedAt: "12/2024",
-      year: "2024",
+      publishedAt: "08/2025",
+      year: "2025",
     }),
     getOverlayImageUrl: () => railplusLegend,
     getExportFileName: () =>
