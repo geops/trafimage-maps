@@ -7,7 +7,7 @@ describe("Tarifverbundkarte topic", () => {
     "/ch.sbb.tarifverbundkarte.public",
     "/ch.sbb.tarifverbundkarte.public?layers=", // TRAFKLEIN-726
   ].forEach((url) => {
-    describe(`when loading directly the topic witht url ${url}`, () => {
+    describe(`when loading directly the topic with url ${url}`, () => {
       beforeEach(() => {
         cy.visit(url);
       });
