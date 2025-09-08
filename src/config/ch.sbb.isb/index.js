@@ -68,7 +68,6 @@ const shortToLongNameTVS = {
   HBS: "Hafenbahn Schweiz AG",
   OeBB: "Oensingen-Balsthal-Bahn",
   ST: "Sursee-Triengen-Bahn",
-  STB: "Sensetalbahn AG",
   SZU: "Sihltal Zürich Uetliberg Bahn SZU AG",
   TMR: "Transports de Martigny et Régions SA",
   TPF: "Transports publics fribourgeois SA",
