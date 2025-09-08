@@ -125,29 +125,32 @@ class SearchService {
 
   select(item, padding = [120, 50, 50, 50]) {
     // If item is not defined, we zoom on the current highlighted feature.
-    this.searches[item.section].select(item);
-    this.selectItem = item;
+    const selectedItem = this.searches[item.section].select(item, this.map);
+    this.selectItem = selectedItem;
     this.selectLayer.getSource().clear();
 
-    if (!item || !this.map) {
+    if (!selectedItem || !this.map) {
       return;
     }
 
     const featureProjection = this.map.getView().getProjection();
-    const feature = this.searches[item.section].getFeature(item, {
-      featureProjection,
-    });
+    const feature = this.searches[selectedItem.section].getFeature(
+      selectedItem,
+      {
+        featureProjection,
+      },
+    );
 
     if (feature) {
       this.selectLayer.getSource().addFeature(feature);
     }
 
-    this.popupItem = item;
+    this.popupItem = selectedItem;
     this.map.getView().fit(this.selectLayer.getSource().getExtent(), {
       padding,
       maxZoom: 15.6,
       callback: () => {
-        this.searches[item.section].openPopup(this.popupItem);
+        this.searches[selectedItem.section].openPopup(this.popupItem);
       },
     });
   }
