@@ -6,7 +6,9 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
      aria-describedby="wkp-popup-desc"
      role="dialog"
 >
-  <div class="wkp-feature-information-header">
+  <div class="wkp-feature-information-header"
+       aria-live="assertive"
+  >
     <span id="wkp-popup-label">
     </span>
     <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1go4m0m-MuiButtonBase-root-MuiIconButton-root"
@@ -101,7 +103,9 @@ exports[`FeatureInformation should match snapshot. using the info's popupCompone
      aria-describedby="wkp-popup-desc"
      role="dialog"
 >
-  <div class="wkp-feature-information-header">
+  <div class="wkp-feature-information-header"
+       aria-live="assertive"
+  >
     <span id="wkp-popup-label">
     </span>
     <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1go4m0m-MuiButtonBase-root-MuiIconButton-root"
@@ -160,7 +164,9 @@ exports[`FeatureInformation should match snapshot. using the layers's popupCompo
      aria-describedby="wkp-popup-desc"
      role="dialog"
 >
-  <div class="wkp-feature-information-header">
+  <div class="wkp-feature-information-header"
+       aria-live="assertive"
+  >
     <span id="wkp-popup-label">
     </span>
     <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1go4m0m-MuiButtonBase-root-MuiIconButton-root"

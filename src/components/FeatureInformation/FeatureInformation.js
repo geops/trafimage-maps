@@ -76,7 +76,7 @@ function FeatureInformation({ featureInfo }) {
         {!hideHeader ||
         (hideHeader && // For dynamic header rendering (e.g. CASA)
           !hideHeader(feature)) ? (
-          <div className="wkp-feature-information-header">
+          <div className="wkp-feature-information-header" aria-live="assertive">
             <span id="wkp-popup-label">
               {renderTitle
                 ? renderTitle(feature, info.layer, t)
