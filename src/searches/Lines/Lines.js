@@ -102,7 +102,7 @@ class Lines extends Search {
     const newItem = { ...item };
     newItem.geometry = this.getGeneralizedGeometry(
       format.readFeature(item),
-      map.getView().getResolution(),
+      map.getView().getResolutionForZoom(14),
     );
     return newItem;
   }
