@@ -345,7 +345,7 @@ export const defaultBaseLayers = [
 
 export default [
   ...defaultBaseLayers,
-  punctuality,
+  // punctuality,
   stationsLayer,
   platformsLayer,
   passagierfrequenzen,
