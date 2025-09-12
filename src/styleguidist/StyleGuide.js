@@ -88,13 +88,13 @@ export function StyleGuideRenderer({
 }) {
   const [apiKey, setApiKey] = useState();
   useEffect(() => {
-    fetch("https://backend.developer.geops.io/publickey")
+    fetch("https://developer.geops.io/publickey")
       .then((response) => response.json())
       .then((data) => {
         setApiKey(data.key);
       })
       .catch(() => {
-        setApiKey("error");
+        setApiKey("5cc87b12d7c5370001c1d6554840ecb89d2743d2b0aad0588b8ba7eb");
         // eslint-disable-next-line no-console
         console.error("Request to get the apiKey failed");
       });
