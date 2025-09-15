@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Feature } from "ol";
 import {
@@ -47,18 +47,33 @@ function useZoomOnProvider(bbox) {
 
 function RailplusPopup({ feature, layer }) {
   const { t } = useTranslation();
+  const [sprite, setSprite] = useState(null);
+
+  useEffect(() => {
+    if (!layer.mapboxLayer?.mbMap?.style?.stylesheet.sprite) {
+      return;
+    }
+    const fetchSprite = async () => {
+      const response = await fetch(
+        `${layer.mapboxLayer?.mbMap?.style?.stylesheet.sprite}.json`,
+      );
+      const data = await response.json();
+      setSprite(data);
+    };
+    fetchSprite();
+  }, [layer.mapboxLayer?.mbMap?.style?.stylesheet.sprite]);
+
   const {
     long_name: longName,
     location_headquarter: address,
-    logo,
     picture,
-    name,
     cantons,
     highest_point: highestPoint,
     lowest_point: lowestPoint,
     number_of_employees: numberOfEmployees,
     yearly_number_of_passengers: yearlyNumberOfPassengers,
     route_length: routeLength,
+    tu_nummer: tuNummer,
     bbox,
   } = layer.railplusProviders[feature.get("isb_tu_nummer")] || {};
 
@@ -73,17 +88,18 @@ function RailplusPopup({ feature, layer }) {
         marginBottom: 50,
       }}
     >
-      {logo && (
+      {sprite?.[tuNummer] && (
         <div
+          data-testid="railplus-logo"
           style={{
             marginTop: 15,
-            display: "flex",
+            width: sprite?.[tuNummer]?.width,
+            height: sprite?.[tuNummer]?.height,
+            background: `url(${layer.mapboxLayer?.mbMap?.style?.stylesheet.sprite}.png) -${sprite?.[tuNummer]?.x || 0}px -${sprite?.[tuNummer]?.y || 0}px`,
           }}
-          data-testid="railplus-logo"
-        >
-          <img src={logo} alt={`${name}_logo`} />
-        </div>
+        />
       )}
+
       {longName && (
         <Typography
           component="b"
