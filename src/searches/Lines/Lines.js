@@ -33,7 +33,7 @@ class Lines extends Search {
     super();
     this.dataProjection = "EPSG:3857";
 
-    this.highlightStyle = (feature, resolution) => {
+    this.getGeneralizedGeometry = (feature, resolution) => {
       const dataRes = getGreaterNumber(
         resolution,
         Object.keys(genLevelByMapRes),
@@ -41,6 +41,15 @@ class Lines extends Search {
       const generalizationLevel = genLevelByMapRes[dataRes];
       const generalizedGeometry =
         feature.get("geoms") && feature.get("geoms")[generalizationLevel];
+
+      return generalizedGeometry;
+    };
+
+    this.highlightStyle = (feature, resolution) => {
+      const generalizedGeometry = this.getGeneralizedGeometry(
+        feature,
+        resolution,
+      );
 
       const geometry = generalizedGeometry
         ? format.readGeometry(generalizedGeometry, {
@@ -83,6 +92,19 @@ class Lines extends Search {
     };
 
     this.highlightStyle = this.highlightStyle.bind(this);
+  }
+
+  select(item, map) {
+    if (!item || !map) {
+      return item;
+    }
+    // Lines have generalization levels, so we need to adapt the geometry to the map resolution.
+    const newItem = { ...item };
+    newItem.geometry = this.getGeneralizedGeometry(
+      format.readFeature(item),
+      map.getView().getResolutionForZoom(14),
+    );
+    return newItem;
   }
 
   // eslint-disable-next-line class-methods-use-this
