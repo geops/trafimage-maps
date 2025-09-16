@@ -237,14 +237,20 @@ function StopPlacePopup({ feature }) {
       passengerInformation,
       url,
     ].filter(Boolean);
-    return content?.length ? content : t("Keine Daten für diese Station");
-  }, [data?.prmInformation, i18n.language, t]);
+    return content?.length ? (
+      <div aria-live="polite" className={classes.popup}>
+        {content}
+      </div>
+    ) : (
+      t("Keine Daten für diese Station")
+    );
+  }, [classes.popup, data?.prmInformation, i18n.language, t]);
 
   if (loading) {
     return <div>{t("Laden...")}</div>;
   }
 
-  return <div className={classes.popup}>{popupContent}</div>;
+  return popupContent;
 }
 
 StopPlacePopup.propTypes = propTypes;
