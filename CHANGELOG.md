@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.35](https://github.com/geops/trafimage-maps/compare/v1.30.34...v1.30.35) (2025-09-16)
+
+### Bug Fixes
+
+- **handicap:** use aria-live to read handicap popup content ([#1230](https://github.com/geops/trafimage-maps/issues/1230)) ([cd45bc1](https://github.com/geops/trafimage-maps/commit/cd45bc136caf37d8d07ed2f88c4e9fb2cf7ce2ea))
+- **infrastrukturbetreiberinnen:** remove STB from standard gauge lines ([#1229](https://github.com/geops/trafimage-maps/issues/1229)) ([8330658](https://github.com/geops/trafimage-maps/commit/833065856d7326d8b506c91a520fd5bc16868545))
+- **lines search:** use generalised geometry for line km search ([#1231](https://github.com/geops/trafimage-maps/issues/1231)) ([3e5a427](https://github.com/geops/trafimage-maps/commit/3e5a427640d8009d1ebadd23029fed6a3ee32fc9))
+- **railplus:** update publish date in PDF to 08/2025 ([#1228](https://github.com/geops/trafimage-maps/issues/1228)) ([32224ef](https://github.com/geops/trafimage-maps/commit/32224efe3299fc44d95475bd8bfab4247b4aa484))
+
 ### [1.30.34](https://github.com/geops/trafimage-maps/compare/v1.30.33...v1.30.34) (2025-08-26)
 
 ### Bug Fixes
