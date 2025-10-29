@@ -144,11 +144,12 @@ class TopicMenu extends PureComponent {
               </>
             )}
             renderAfterItem={(layer, level) => {
-              const component = layer.get("filtersComponent");
+              let filter = null;
+              let renderAfterItem = null;
 
-              if (component) {
-                const FiltersComponent = filters[component];
-                return (
+              if (typeof layer.get("filtersComponent") === "string") {
+                const FiltersComponent = filters[layer.get("filtersComponent")];
+                filter = FiltersComponent && (
                   <div
                     style={{
                       display: "flex",
@@ -159,7 +160,17 @@ class TopicMenu extends PureComponent {
                   </div>
                 );
               }
-              return null;
+
+              if (typeof layer.get("renderAfterItem") === "function") {
+                renderAfterItem = layer.get("renderAfterItem")(layer, level);
+              }
+
+              return (
+                <>
+                  {filter}
+                  {renderAfterItem}
+                </>
+              );
             }}
             renderCheckbox={(layer) => {
               return (
