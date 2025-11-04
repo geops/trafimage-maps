@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.36](https://github.com/geops/trafimage-maps/compare/v1.30.35...v1.30.36) (2025-11-04)
+
+### Bug Fixes
+
+- **LayerTree:** add layer.renderAfterItem option for rendering content after layer tree items ([#1234](https://github.com/geops/trafimage-maps/issues/1234)) ([474f50f](https://github.com/geops/trafimage-maps/commit/474f50f0f3ebc0bc0adfe32866eda58adcdf74b9))
+- **railplus:** set max-width for logo in popup ([#1233](https://github.com/geops/trafimage-maps/issues/1233)) ([6930e35](https://github.com/geops/trafimage-maps/commit/6930e3500047591724d07715177d1014d651aa5b))
+
 ### [1.30.35](https://github.com/geops/trafimage-maps/compare/v1.30.34...v1.30.35) (2025-09-16)
 
 ### Bug Fixes
