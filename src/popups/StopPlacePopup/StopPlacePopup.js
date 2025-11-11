@@ -118,7 +118,7 @@ const getAccessibility = (value, language, t) => {
         {notTranslatedInfo && <Typography>{notTranslatedInfo}</Typography>}
       </fieldset>
     ),
-    text: `${t("accessibility")}, ${formatStateData(value?.state)}${hasTranslatedString ? `, ${t(hardcodedStringForNote)}` : ""}${notTranslatedInfo ? `, ${notTranslatedInfo}` : ""}`,
+    text: `${t("accessibility")}, ${t(formatStateData(value?.state))}${hasTranslatedString ? `, ${t(hardcodedStringForNote)}` : ""}${notTranslatedInfo ? `, ${notTranslatedInfo}` : ""}`,
   };
 };
 
