@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
 import { useSelector } from "react-redux";
@@ -20,6 +20,7 @@ const flexStyle = {
 };
 const useStyles = makeStyles(() => ({
   popup: {
+    padding: 10,
     ...flexStyle,
     "& legend": {
       fontWeight: "bold", // Ensure the title is bold in gitlab
@@ -90,13 +91,13 @@ const getAccessibility = (value, language, t) => {
   const notTranslatedInfo = hasTranslatedString
     ? note?.split(hardcodedStringForNote)[1]
     : note;
-  return (
-    <fieldset key="accessibility" data-testid="stopplace-accessibility">
-      <legend>{t("accessibility")}</legend>
-      <Typography>{t(formatStateData(value?.state))}</Typography>
-      {hasTranslatedString && (
-        <Typography>
-          {hasTranslatedString ? (
+  return {
+    component: (
+      <fieldset key="accessibility" data-testid="stopplace-accessibility">
+        <legend>{t("accessibility")}</legend>
+        <Typography>{t(formatStateData(value?.state))}</Typography>
+        {hasTranslatedString && (
+          <Typography>
             <Trans
               i18nKey={hardcodedStringForNote}
               components={{
@@ -112,12 +113,13 @@ const getAccessibility = (value, language, t) => {
                 ),
               }}
             />
-          ) : null}
-        </Typography>
-      )}
-      {notTranslatedInfo && <Typography>{notTranslatedInfo}</Typography>}
-    </fieldset>
-  );
+          </Typography>
+        )}
+        {notTranslatedInfo && <Typography>{notTranslatedInfo}</Typography>}
+      </fieldset>
+    ),
+    text: `${t("accessibility")}, ${formatStateData(value?.state)}${hasTranslatedString ? `, ${t(hardcodedStringForNote)}` : ""}${notTranslatedInfo ? `, ${notTranslatedInfo}` : ""}`,
+  };
 };
 
 const getAlternativeTransport = (value, language, t) => {
@@ -128,60 +130,70 @@ const getAlternativeTransport = (value, language, t) => {
   )
     return null;
 
-  return (
-    <fieldset
-      key="alternativeTransport"
-      data-testid="stopplace-alternative-transport"
-    >
-      <legend>{t("alternativeTransport")}</legend>
-      {!note && /YES/.test(value?.state) && (
-        <Typography data-testid="stopplace-alternative-transport-state">
-          {t("Shuttle-Fahrdienst")}
-        </Typography>
-      )}
-      {note && (
-        <Typography data-testid="stopplace-alternative-transport-note">
-          {note}
-        </Typography>
-      )}
-    </fieldset>
-  );
+  const hasShuttleService = !note && /YES/.test(value?.state);
+  return {
+    component: (
+      <fieldset
+        key="alternativeTransport"
+        data-testid="stopplace-alternative-transport"
+      >
+        <legend>{t("alternativeTransport")}</legend>
+        {hasShuttleService && (
+          <Typography data-testid="stopplace-alternative-transport-state">
+            {t("Shuttle-Fahrdienst")}
+          </Typography>
+        )}
+        {note && (
+          <Typography data-testid="stopplace-alternative-transport-note">
+            {note}
+          </Typography>
+        )}
+      </fieldset>
+    ),
+    text: `${t("alternativeTransport")}, ${hasShuttleService ? `, ${t("Shuttle-Fahrdienst")}` : ""}${note ? `, ${note}` : ""}`,
+  };
 };
 
-const getPassengetInformation = (value, t) => {
+const getPassengerInformation = (value, t) => {
   if (!value) return null;
   const entries = Object.entries(value).filter(([k, val]) => {
     return val !== "NO" && val !== "UNKNOWN" && k !== "note";
   });
-  return (
-    !!entries.length && (
-      <fieldset
-        key="passengerInformation"
-        data-testid="stopplace-passengerinfo"
-      >
-        <legend>{t("passengerInformation")}</legend>
-        {entries.map(([k]) => {
-          return (
-            <div key={k} data-testid={`stopplace-passengerinfo-${k}`}>
-              {t(k)}
-            </div>
-          );
-        })}
-      </fieldset>
-    )
-  );
+  return entries.length
+    ? {
+        component: (
+          <fieldset
+            key="passengerInformation"
+            data-testid="stopplace-passengerinfo"
+          >
+            <legend>{t("passengerInformation")}</legend>
+            {entries.map(([k]) => {
+              return (
+                <div key={k} data-testid={`stopplace-passengerinfo-${k}`}>
+                  {t(k)}
+                </div>
+              );
+            })}
+          </fieldset>
+        ),
+        text: `${t("passengerInformation")}, ${entries.map(([k]) => t(k)).join(", ")}`,
+      }
+    : null;
 };
 
 const getNote = (value, language, t) => {
   const text = getNoteTranslation(value, language);
   if (!text) return null;
 
-  return (
-    <fieldset key="note" data-testid="stopplace-note">
-      <legend>{t("Hinweise zur Haltestelle")}</legend>
-      {text}
-    </fieldset>
-  );
+  return {
+    component: (
+      <fieldset key="note" data-testid="stopplace-note">
+        <legend>{t("Hinweise zur Haltestelle")}</legend>
+        {text}
+      </fieldset>
+    ),
+    text: `${t("Hinweise zur Haltestelle")}, ${text}`,
+  };
 };
 
 const getUrl = (value, t) => {
@@ -195,17 +207,21 @@ const getUrl = (value, t) => {
     console.log("StopPlacePopup. Not a parseable url: ", value);
     niceVal = value;
   }
-  return (
-    <fieldset key="url" data-testid="stopplace-url">
-      <legend>{t("Weitere Informationen")}</legend>
-      <Link href={url}>{niceVal}</Link>
-    </fieldset>
-  );
+  return {
+    component: (
+      <fieldset key="url" data-testid="stopplace-url">
+        <legend>{t("Weitere Informationen")}</legend>
+        <Link href={url}>{niceVal}</Link>
+      </fieldset>
+    ),
+    text: `${t("Weitere Informationen")}, ${url}`,
+  };
 };
 
 function StopPlacePopup({ feature }) {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
+  const announcerRef = useRef(null);
   const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
   const uic = useMemo(() => {
     return feature?.get("uic");
@@ -224,33 +240,71 @@ function StopPlacePopup({ feature }) {
       i18n.language,
       t,
     );
-    const passengerInformation = getPassengetInformation(
+    const passengerInformation = getPassengerInformation(
       infos.passengerInformation,
       t,
     );
     const note = getNote(infos.note, i18n.language, t);
     const url = getUrl(infos.url, t);
-    const content = [
-      note,
-      accessibility,
-      alternativeTransport,
-      passengerInformation,
-      url,
+    const components = [
+      note?.component,
+      accessibility?.component,
+      alternativeTransport?.component,
+      passengerInformation?.component,
+      url?.component,
     ].filter(Boolean);
-    return content?.length ? (
-      <div aria-live="polite" className={classes.popup}>
-        {content}
-      </div>
-    ) : (
-      t("Keine Daten für diese Station")
-    );
+    return {
+      component: components.length ? (
+        <div className={classes.popup} data-testid="stopplace-popup">
+          {components}
+        </div>
+      ) : (
+        <div className={classes.popup} data-testid="stopplace-popup">
+          <Typography>{t("Keine Daten für diese Station")}</Typography>
+        </div>
+      ),
+      text: [
+        note?.text,
+        accessibility?.text,
+        alternativeTransport?.text,
+        passengerInformation?.text,
+        url?.text,
+      ]
+        .filter(Boolean)
+        .join(". "),
+    };
   }, [classes.popup, data?.prmInformation, i18n.language, t]);
 
-  if (loading) {
+  useEffect(() => {
+    if (popupContent.text && announcerRef.current) {
+      announcerRef.current.textContent = popupContent.text;
+    }
+  }, [popupContent.text]);
+
+  if (loading || !popupContent) {
     return <div>{t("Laden...")}</div>;
   }
 
-  return popupContent;
+  return (
+    <>
+      {/** Rendering the text separately ensures the text content is read out in the correct order on load by the screen reader */}
+      <div
+        data-testid="stopplace-announcer"
+        ref={announcerRef}
+        aria-live="assertive"
+        aria-atomic="true"
+        className="sr-only"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          height: "1px",
+          width: "1px",
+          overflow: "hidden",
+        }}
+      />
+      {popupContent?.component}
+    </>
+  );
 }
 
 StopPlacePopup.propTypes = propTypes;
