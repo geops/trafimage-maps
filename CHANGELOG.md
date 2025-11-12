@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.37](https://github.com/geops/trafimage-maps/compare/v1.30.36...v1.30.37) (2025-11-12)
+
+### Bug Fixes
+
+- **handicap:** ensure the screen reader reads the popup content in the correct order ([#1237](https://github.com/geops/trafimage-maps/issues/1237)) ([d5b6839](https://github.com/geops/trafimage-maps/commit/d5b68397d80e890da09d86c6b975e18a377fa139))
+
 ### [1.30.36](https://github.com/geops/trafimage-maps/compare/v1.30.35...v1.30.36) (2025-11-04)
 
 ### Bug Fixes
