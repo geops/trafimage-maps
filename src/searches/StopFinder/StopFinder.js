@@ -63,19 +63,24 @@ class StopFinder extends Search {
     return item.properties.name;
   }
 
-  openPopup(item) {
+  openPopup(item, map) {
     const { layerService } = this.props;
     const layer = layerService.getLayer("ch.sbb.netzkarte.stationen");
 
     if (!layer) {
       return;
     }
+    this.map = map;
     this.popupItem = item;
 
     // We try to display the overlay only when the stations layer is ready and has all the stations loaded.
     if (layer.ready) {
       this.onIdle();
     } else {
+      // disable map interactions to avoid clicking on wrong station
+      this.map.getInteractions().forEach((interaction) => {
+        interaction.setActive(false);
+      });
       layer.once("datarendered", this.onIdle);
     }
   }
@@ -118,6 +123,11 @@ class StopFinder extends Search {
         ({ features }) => features.length,
       );
       dispatchSetFeatureInfo(this.featureInfos);
+    });
+
+    // reactivate map interactions
+    this.map.getInteractions().forEach((interaction) => {
+      interaction.setActive(true);
     });
   }
 
