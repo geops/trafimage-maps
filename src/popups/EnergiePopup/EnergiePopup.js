@@ -13,6 +13,7 @@ import capitalizeFirstLetter from "../../utils/capitalizeFirstLetter";
 import formatPhone from "../../utils/formatPhone";
 
 import PersonCard from "../../components/PersonCard";
+import safeJsonParse from "../../utils/safeJsonParse";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -182,7 +183,7 @@ InterventionPersonCard.defaultProps = {
 };
 
 const validatedParseProperty = (feature, property) => {
-  return feature.get(property) && JSON.parse(feature.get(property));
+  return feature.get(property) && safeJsonParse(feature.get(property));
 };
 
 const renderSicherheitsrelevantPersons = (sbbPersons, externalPersons) => {
@@ -226,27 +227,27 @@ function EnergiePopup({ feature }) {
   const anlagenverantwortlicher = useMemo(
     () =>
       feature.get("anlagebetreuer") &&
-      JSON.parse(feature.get("anlagebetreuer")),
+      safeJsonParse(feature.get("anlagebetreuer")),
     [feature],
   );
 
   const anlagenverantwortlicherExtern = useMemo(
     () =>
       feature.get("anlagebetreuer_extern") &&
-      JSON.parse(feature.get("anlagebetreuer_extern")),
+      safeJsonParse(feature.get("anlagebetreuer_extern")),
     [feature],
   );
 
   const betriebInstandhaltung = useMemo(
     () =>
       feature.get("betrieb_instandhaltung") &&
-      JSON.parse(feature.get("betrieb_instandhaltung")),
+      safeJsonParse(feature.get("betrieb_instandhaltung")),
     [feature],
   );
   const lifeCycleManager = useMemo(
     () =>
       feature.get("life_cycle_manager") &&
-      JSON.parse(feature.get("life_cycle_manager")),
+      safeJsonParse(feature.get("life_cycle_manager")),
     [feature],
   );
 
@@ -347,7 +348,7 @@ function EnergiePopup({ feature }) {
 
   return (
     <div>
-      {permissionInfos?.user && activeTopic.permission === "sbb" ? (
+      {!(permissionInfos?.user && activeTopic.permission === "sbb") ? (
         <>
           <Tabs
             value={TABS.indexOf(tab)}
