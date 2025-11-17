@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.39](https://github.com/geops/trafimage-maps/compare/v1.30.38...v1.30.39) (2025-11-17)
+
+### Bug Fixes
+
+- **energie:** fix energie popup content ([6448d57](https://github.com/geops/trafimage-maps/commit/6448d57de571194977b01cb8854643d3c398aaf6))
+
 ### [1.30.38](https://github.com/geops/trafimage-maps/compare/v1.30.37...v1.30.38) (2025-11-17)
 
 ### Bug Fixes
