@@ -223,12 +223,20 @@ function EnergiePopup({ feature }) {
   const adresse = feature.get("adresse");
 
   // Asset management
-  const anlageBetreuer = useMemo(
+  const anlagenverantwortlicher = useMemo(
     () =>
       feature.get("anlagebetreuer") &&
       JSON.parse(feature.get("anlagebetreuer")),
     [feature],
   );
+
+  const anlagenverantwortlicherExtern = useMemo(
+    () =>
+      feature.get("anlagebetreuer_extern") &&
+      JSON.parse(feature.get("anlagebetreuer_extern")),
+    [feature],
+  );
+
   const betriebInstandhaltung = useMemo(
     () =>
       feature.get("betrieb_instandhaltung") &&
@@ -339,7 +347,7 @@ function EnergiePopup({ feature }) {
 
   return (
     <div>
-      {permissionInfos?.user && activeTopic.permission === "sbb" ? (
+      {!(permissionInfos?.user && activeTopic.permission === "sbb") ? (
         <>
           <Tabs
             value={TABS.indexOf(tab)}
@@ -359,20 +367,26 @@ function EnergiePopup({ feature }) {
             <br />
             {tab === TABS[0] && (
               <>
-                {anlageBetreuer && (
+                {anlagenverantwortlicher && (
                   <PersonCard
-                    title={`${t(
-                      kategorie ? "Anlagebetreuer" : "LeitungAnlagebetreuer",
-                    )}`}
-                    name={anlageBetreuer.name}
-                    email={anlageBetreuer.email}
-                    phone={anlageBetreuer.phone}
-                    division={anlageBetreuer.division}
+                    title={t("ch.sbb.energie.anlagenverantwortlich")}
+                    name={anlagenverantwortlicher.name}
+                    email={anlagenverantwortlicher.email}
+                    phone={anlagenverantwortlicher.phone}
+                    division={anlagenverantwortlicher.division}
+                  />
+                )}
+                {anlagenverantwortlicherExtern && (
+                  <PersonCard
+                    title={t("ch.sbb.energie.anlagenverantwortlich.extern")}
+                    name={anlagenverantwortlicherExtern.name}
+                    email={anlagenverantwortlicherExtern.email}
+                    phone={anlagenverantwortlicherExtern.phone}
                   />
                 )}
                 {betriebInstandhaltung && (
                   <PersonCard
-                    title={t("Verantwortlich Betrieb und Instandhaltung")}
+                    title={t("ch.sbb.energie.betrieb_instandhaltung")}
                     name={betriebInstandhaltung.name}
                     email={betriebInstandhaltung.email}
                     phone={betriebInstandhaltung.phone}
@@ -381,7 +395,7 @@ function EnergiePopup({ feature }) {
                 )}
                 {lifeCycleManager && (
                   <PersonCard
-                    title={t("Life-Cycle Manager")}
+                    title={t("ch.sbb.energie.life_cycle_manager")}
                     name={lifeCycleManager.name}
                     email={lifeCycleManager.email}
                     phone={lifeCycleManager.phone}
