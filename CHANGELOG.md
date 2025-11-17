@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.38](https://github.com/geops/trafimage-maps/compare/v1.30.37...v1.30.38) (2025-11-17)
+
+### Bug Fixes
+
+- **energie:** add AV external person to popup, add local translations ([#1238](https://github.com/geops/trafimage-maps/issues/1238)) ([607b474](https://github.com/geops/trafimage-maps/commit/607b474730052d2cda78853d050d7ecd44d57a81))
+
 ### [1.30.37](https://github.com/geops/trafimage-maps/compare/v1.30.36...v1.30.37) (2025-11-12)
 
 ### Bug Fixes
