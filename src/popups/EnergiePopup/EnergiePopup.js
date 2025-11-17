@@ -13,6 +13,7 @@ import capitalizeFirstLetter from "../../utils/capitalizeFirstLetter";
 import formatPhone from "../../utils/formatPhone";
 
 import PersonCard from "../../components/PersonCard";
+import safeJsonParse from "../../utils/safeJsonParse";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -182,7 +183,7 @@ InterventionPersonCard.defaultProps = {
 };
 
 const validatedParseProperty = (feature, property) => {
-  return feature.get(property) && JSON.parse(feature.get(property));
+  return feature.get(property) && safeJsonParse(feature.get(property));
 };
 
 const renderSicherheitsrelevantPersons = (sbbPersons, externalPersons) => {
@@ -223,22 +224,30 @@ function EnergiePopup({ feature }) {
   const adresse = feature.get("adresse");
 
   // Asset management
-  const anlageBetreuer = useMemo(
+  const anlagenverantwortlicher = useMemo(
     () =>
       feature.get("anlagebetreuer") &&
-      JSON.parse(feature.get("anlagebetreuer")),
+      safeJsonParse(feature.get("anlagebetreuer")),
     [feature],
   );
+
+  const anlagenverantwortlicherExtern = useMemo(
+    () =>
+      feature.get("anlagebetreuer_extern") &&
+      safeJsonParse(feature.get("anlagebetreuer_extern")),
+    [feature],
+  );
+
   const betriebInstandhaltung = useMemo(
     () =>
       feature.get("betrieb_instandhaltung") &&
-      JSON.parse(feature.get("betrieb_instandhaltung")),
+      safeJsonParse(feature.get("betrieb_instandhaltung")),
     [feature],
   );
   const lifeCycleManager = useMemo(
     () =>
       feature.get("life_cycle_manager") &&
-      JSON.parse(feature.get("life_cycle_manager")),
+      safeJsonParse(feature.get("life_cycle_manager")),
     [feature],
   );
 
@@ -339,7 +348,7 @@ function EnergiePopup({ feature }) {
 
   return (
     <div>
-      {permissionInfos?.user && activeTopic.permission === "sbb" ? (
+      {!(permissionInfos?.user && activeTopic.permission === "sbb") ? (
         <>
           <Tabs
             value={TABS.indexOf(tab)}
@@ -359,20 +368,26 @@ function EnergiePopup({ feature }) {
             <br />
             {tab === TABS[0] && (
               <>
-                {anlageBetreuer && (
+                {anlagenverantwortlicher && (
                   <PersonCard
-                    title={`${t(
-                      kategorie ? "Anlagebetreuer" : "LeitungAnlagebetreuer",
-                    )}`}
-                    name={anlageBetreuer.name}
-                    email={anlageBetreuer.email}
-                    phone={anlageBetreuer.phone}
-                    division={anlageBetreuer.division}
+                    title={t("ch.sbb.energie.anlagenverantwortlich")}
+                    name={anlagenverantwortlicher.name}
+                    email={anlagenverantwortlicher.email}
+                    phone={anlagenverantwortlicher.phone}
+                    division={anlagenverantwortlicher.division}
+                  />
+                )}
+                {anlagenverantwortlicherExtern && (
+                  <PersonCard
+                    title={t("ch.sbb.energie.anlagenverantwortlich.extern")}
+                    name={anlagenverantwortlicherExtern.name}
+                    email={anlagenverantwortlicherExtern.email}
+                    phone={anlagenverantwortlicherExtern.phone}
                   />
                 )}
                 {betriebInstandhaltung && (
                   <PersonCard
-                    title={t("Verantwortlich Betrieb und Instandhaltung")}
+                    title={t("ch.sbb.energie.betrieb_instandhaltung")}
                     name={betriebInstandhaltung.name}
                     email={betriebInstandhaltung.email}
                     phone={betriebInstandhaltung.phone}
@@ -381,7 +396,7 @@ function EnergiePopup({ feature }) {
                 )}
                 {lifeCycleManager && (
                   <PersonCard
-                    title={t("Life-Cycle Manager")}
+                    title={t("ch.sbb.energie.life_cycle_manager")}
                     name={lifeCycleManager.name}
                     email={lifeCycleManager.email}
                     phone={lifeCycleManager.phone}
