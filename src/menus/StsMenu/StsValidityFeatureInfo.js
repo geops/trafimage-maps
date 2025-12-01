@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import Point from "ol/geom/Point";
 import { Divider, Typography } from "@mui/material";
@@ -7,16 +6,10 @@ import { makeStyles } from "@mui/styles";
 import Link from "../../components/Link";
 import usePrevious from "../../utils/usePrevious";
 import GeltungsbereichePopup from "../../popups/GeltungsbereicheGaPopup/GeltungsbereicheGaPopup";
-import {
-  otherRoutes,
-  highlightRoutes,
-  highlights,
-} from "../../config/ch.sbb.sts";
+import { otherRoutes, highlightRoutes } from "../../config/ch.sbb.sts";
 import { parseFeaturesInfos } from "./stsParseFeatureInfo";
-import panCenterFeature from "../../utils/panCenterFeature";
 import { setFeatureInfo } from "../../model/app/actions";
 import useFetch from "../../utils/useFetch";
-import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles(() => {
   return {
@@ -42,18 +35,10 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const clearHighlightsSelection = () =>
-  highlights.olLayer
-    .getSource()
-    .getFeatures()
-    .forEach((feat) => feat.set("selected", false));
-
-function StsValidityFeatureInfo({ menuOpen }) {
+function StsValidityFeatureInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const map = useSelector((state) => state.app.map);
-  const isMobile = useHasScreenSize();
 
   const [selectedFeature, setSelectedFeature] = useState();
   const previousSelectedFeature = usePrevious(selectedFeature);
@@ -77,33 +62,16 @@ function StsValidityFeatureInfo({ menuOpen }) {
         previousSelectedFeature.set("selected", false);
       }
       if (!feature) {
-        clearHighlightsSelection();
         highlightRoutes.highlightRoutes([]);
         return;
       }
-      if (feature.getGeometry() instanceof Point) {
-        feature.set("selected", true);
-        panCenterFeature(
-          map,
-          [featureInfo.layer],
-          feature.getGeometry().getCoordinates(),
-          !menuOpen, // default menuOpen to false
-          isMobile,
-          true, // useOverlay
-          0, // ignore right overlay for desktop
-          410, // new overlayHeightMobile
-        );
-        highlightRoutes.highlightRoutes([]);
-      } else {
-        clearHighlightsSelection();
-        highlightRoutes.highlightRoutes(
-          [feature.get("title")],
-          feature.get("routeProperty") || null,
-        );
-      }
+      highlightRoutes.highlightRoutes(
+        [feature.get("title")],
+        feature.get("routeProperty") || null,
+      );
       setSelectedFeature(feature);
     },
-    [previousSelectedFeature, featureInfo, map, menuOpen, isMobile],
+    [previousSelectedFeature],
   );
 
   const mainFeatures = useMemo(() => {
@@ -158,10 +126,7 @@ function StsValidityFeatureInfo({ menuOpen }) {
       ) : null}
       {mainFeatures?.length
         ? mainFeatures.map((feat, idx, array) => {
-            const title =
-              feat.get("title") ||
-              feat.get("route_names_premium") ||
-              feat.get("route_names_gttos");
+            const title = feat.get("title") || feat.get("route_names_gttos");
             const images = feat.get("images") && feat.get("images").length;
             const description = feat.get("lead_text");
             const highlightUrl = feat.get("highlight_url");
@@ -203,10 +168,5 @@ function StsValidityFeatureInfo({ menuOpen }) {
     </div>
   );
 }
-
-StsValidityFeatureInfo.propTypes = {
-  menuOpen: PropTypes.bool,
-};
-StsValidityFeatureInfo.defaultProps = { menuOpen: true };
 
 export default StsValidityFeatureInfo;
