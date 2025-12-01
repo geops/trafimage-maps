@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.40](https://github.com/geops/trafimage-maps/compare/v1.30.39...v1.30.40) (2025-12-01)
+
+### Bug Fixes
+
+- **sts:** remove premium and POI layers along with all data and references ([#1240](https://github.com/geops/trafimage-maps/issues/1240)) ([a24df77](https://github.com/geops/trafimage-maps/commit/a24df77612993b70b47ef368486544b76c23f74e))
+
 ### [1.30.39](https://github.com/geops/trafimage-maps/compare/v1.30.38...v1.30.39) (2025-11-17)
 
 ### Bug Fixes
