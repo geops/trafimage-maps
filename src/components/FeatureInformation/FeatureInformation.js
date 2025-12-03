@@ -96,6 +96,7 @@ function FeatureInformation({ featureInfo }) {
             t={t}
             layer={layers[featureIndex]} // always an array
             feature={features[featureIndex]} //  can be an array of array of features
+            featureInfo={featureInfo} // full featureInfo for context
             coordinate={coordinates[featureIndex]} // always an array
             language={language}
             appBaseUrl={appBaseUrl}
