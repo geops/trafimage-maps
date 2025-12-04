@@ -5,7 +5,12 @@ import { useTranslation } from "react-i18next";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import WestOutlinedIcon from "@mui/icons-material/WestOutlined";
 
-function CycleButton({ onClick, children }) {
+function CycleButton({
+  onClick,
+  children,
+  "data-testid": dataTestId,
+  ...props
+}) {
   const { t } = useTranslation();
   return (
     <IconButton
@@ -20,6 +25,8 @@ function CycleButton({ onClick, children }) {
       aria-label={t("zurück")}
       onClick={onClick}
       tabIndex={0}
+      data-testid={dataTestId}
+      {...props}
     >
       {children}
     </IconButton>
@@ -29,6 +36,7 @@ function CycleButton({ onClick, children }) {
 CycleButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  "data-testid": PropTypes.string,
 };
 
 const buttonWrapperSx = {
@@ -55,10 +63,11 @@ function Pagination({ onNext, onPrevious, index, count }) {
         className="wkp-pagination-button-wrapper"
       >
         {index > 0 && (
-          <CycleButton onClick={onPrevious}>
-            <WestOutlinedIcon
-              sx={{ height: "16px !important", width: "16px !important" }}
-            />
+          <CycleButton
+            onClick={onPrevious}
+            data-testid="pagination-previous-button"
+          >
+            <WestOutlinedIcon sx={{ height: 16, width: 16 }} />
           </CycleButton>
         )}
       </Box>
@@ -69,10 +78,8 @@ function Pagination({ onNext, onPrevious, index, count }) {
         className="wkp-pagination-button-wrapper"
       >
         {index < count - 1 && (
-          <CycleButton onClick={onNext}>
-            <EastOutlinedIcon
-              sx={{ height: "16px !important", width: "16px !important" }}
-            />
+          <CycleButton onClick={onNext} data-testid="pagination-next-button">
+            <EastOutlinedIcon sx={{ height: 16, width: 16 }} />
           </CycleButton>
         )}
       </Box>

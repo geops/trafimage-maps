@@ -67,8 +67,9 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
                 type="button"
                 title="zurück"
                 aria-label="zurück"
+                data-testid="pagination-next-button"
         >
-          <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1wlp5ap-MuiSvgIcon-root"
+          <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-ftj3l6-MuiSvgIcon-root"
                focusable="false"
                aria-hidden="true"
                viewbox="0 0 24 24"

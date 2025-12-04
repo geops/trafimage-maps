@@ -44,12 +44,11 @@ describe("PhotoCarusel", () => {
       </MatomoProvider>,
     );
     expect(queryByTestId("carousel-photo")).toBeTruthy();
-    expect(queryByTestId("carousel-photo-increment-button")).toBeTruthy();
-    const decrementBtn = getByTestId("carousel-photo-decrement-button");
-    expect(decrementBtn).toBeDisabled();
-    const incrementBtn = getByTestId("carousel-photo-increment-button");
+    expect(queryByTestId("pagination-previous-button")).toBeFalsy();
+    expect(queryByTestId("pagination-next-button")).toBeTruthy();
+    const incrementBtn = getByTestId("pagination-next-button");
     fireEvent.click(incrementBtn);
-    expect(decrementBtn).not.toBeDisabled();
-    expect(incrementBtn).toBeDisabled();
+    expect(queryByTestId("pagination-previous-button")).toBeTruthy();
+    expect(queryByTestId("pagination-nex-button")).toBeFalsy();
   });
 });
