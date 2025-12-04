@@ -20,7 +20,7 @@ describe("PhotoCarusel", () => {
     });
   });
 
-  test("should match snapshot with empty photo array.", () => {
+  test("should not render with empty photo array.", () => {
     const { queryByTestId } = render(
       <MatomoProvider value={{}}>
         <ThemeProvider theme={theme}>
@@ -33,7 +33,7 @@ describe("PhotoCarusel", () => {
     expect(queryByTestId("carousel-photo")).toBeNull();
   });
 
-  test("should match snapshot with two photos and cycle buttons should behave correctly.", () => {
+  test("should render two photos with cycle buttons that behave correctly.", () => {
     const { queryByTestId, getByTestId } = render(
       <MatomoProvider value={{}}>
         <ThemeProvider theme={theme}>

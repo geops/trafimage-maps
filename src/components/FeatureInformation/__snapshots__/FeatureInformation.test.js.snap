@@ -62,7 +62,7 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
       </span>
       1 von 4
       <span class="wkp-pagination-button-wrapper MuiBox-root css-tzey71">
-        <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium wkp-pagination-button css-o7cjpn-MuiButtonBase-root-MuiIconButton-root"
+        <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium wkp-pagination-button css-8yomva-MuiButtonBase-root-MuiIconButton-root"
                 tabindex="0"
                 type="button"
                 title="zurück"

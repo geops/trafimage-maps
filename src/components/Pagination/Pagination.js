@@ -5,27 +5,19 @@ import { useTranslation } from "react-i18next";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import WestOutlinedIcon from "@mui/icons-material/WestOutlined";
 
-function CycleButton({
-  onClick,
-  children,
-  "data-testid": dataTestId,
-  ...props
-}) {
+function CycleButton({ onClick, children, ...props }) {
   const { t } = useTranslation();
   return (
     <IconButton
-      sx={(theme) => ({
+      sx={{
         padding: 0,
         height: 25,
         width: 25,
-        "&:hover": { color: theme.palette.secondary.main },
-      })}
+      }}
       className="wkp-pagination-button"
       title={t("zurück")}
       aria-label={t("zurück")}
       onClick={onClick}
-      tabIndex={0}
-      data-testid={dataTestId}
       {...props}
     >
       {children}
@@ -39,10 +31,24 @@ CycleButton.propTypes = {
   "data-testid": PropTypes.string,
 };
 
-const buttonWrapperSx = {
-  padding: "0 10px",
-  height: 25,
-  width: 25,
+function CycleButtonWrapper({ children }) {
+  return (
+    <Box
+      component="span"
+      sx={{
+        padding: "0 10px",
+        height: 25,
+        width: 25,
+      }}
+      className="wkp-pagination-button-wrapper"
+    >
+      {children}
+    </Box>
+  );
+}
+
+CycleButtonWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 function Pagination({ onNext, onPrevious, index, count }) {
@@ -57,11 +63,7 @@ function Pagination({ onNext, onPrevious, index, count }) {
       }}
       className="wkp-pagination-wrapper"
     >
-      <Box
-        component="span"
-        sx={buttonWrapperSx}
-        className="wkp-pagination-button-wrapper"
-      >
+      <CycleButtonWrapper>
         {index > 0 && (
           <CycleButton
             onClick={onPrevious}
@@ -70,19 +72,15 @@ function Pagination({ onNext, onPrevious, index, count }) {
             <WestOutlinedIcon sx={{ height: 16, width: 16 }} />
           </CycleButton>
         )}
-      </Box>
+      </CycleButtonWrapper>
       {index + 1} {t("von")} {count}
-      <Box
-        component="span"
-        sx={buttonWrapperSx}
-        className="wkp-pagination-button-wrapper"
-      >
+      <CycleButtonWrapper>
         {index < count - 1 && (
           <CycleButton onClick={onNext} data-testid="pagination-next-button">
             <EastOutlinedIcon sx={{ height: 16, width: 16 }} />
           </CycleButton>
         )}
-      </Box>
+      </CycleButtonWrapper>
     </Box>
   );
 }
