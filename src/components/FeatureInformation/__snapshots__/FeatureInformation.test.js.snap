@@ -57,11 +57,17 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
         </span>
       </div>
     </div>
-    <div class="wkp-pagination-wrapper MuiBox-root css-bk8eri">
-      <span class="wkp-pagination-button-wrapper MuiBox-root css-tzey71">
+    <div style="display: flex; align-items: center; justify-content: center; height: 35px;"
+         class="wkp-pagination-wrapper"
+    >
+      <span style="padding: 0px 10px; height: 25px; width: 25px;"
+            class="wkp-pagination-button-wrapper"
+      >
       </span>
       1 von 4
-      <span class="wkp-pagination-button-wrapper MuiBox-root css-tzey71">
+      <span style="padding: 0px 10px; height: 25px; width: 25px;"
+            class="wkp-pagination-button-wrapper"
+      >
         <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium wkp-pagination-button css-8yomva-MuiButtonBase-root-MuiIconButton-root"
                 tabindex="0"
                 type="button"

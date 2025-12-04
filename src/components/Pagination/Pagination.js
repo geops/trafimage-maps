@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import WestOutlinedIcon from "@mui/icons-material/WestOutlined";
@@ -28,14 +28,12 @@ function CycleButton({ onClick, children, ...props }) {
 CycleButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
-  "data-testid": PropTypes.string,
 };
 
 function CycleButtonWrapper({ children }) {
   return (
-    <Box
-      component="span"
-      sx={{
+    <span
+      style={{
         padding: "0 10px",
         height: 25,
         width: 25,
@@ -43,7 +41,7 @@ function CycleButtonWrapper({ children }) {
       className="wkp-pagination-button-wrapper"
     >
       {children}
-    </Box>
+    </span>
   );
 }
 
@@ -54,8 +52,8 @@ CycleButtonWrapper.propTypes = {
 function Pagination({ onNext, onPrevious, index, count }) {
   const { t } = useTranslation();
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -81,7 +79,7 @@ function Pagination({ onNext, onPrevious, index, count }) {
           </CycleButton>
         )}
       </CycleButtonWrapper>
-    </Box>
+    </div>
   );
 }
 
