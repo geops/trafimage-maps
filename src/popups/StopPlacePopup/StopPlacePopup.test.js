@@ -58,6 +58,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-passengerinfo")).toBeTruthy();
     expect(queryByTestId("stopplace-note")).toBeTruthy();
     expect(queryByTestId("stopplace-url")).toBeTruthy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   test("only displays accessibility box with Ja and with note", async () => {
@@ -90,6 +91,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   test("only displays alternative-transport box with only note when state = PARTIALLY", async () => {
@@ -121,6 +123,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   test("only displays alternative-transport box with Shuttle-Fahrdienst when state = YES and no note is defined", async () => {
@@ -149,6 +152,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   ["NO", "UNKNOWN", "NOT_APPLICABLE"].forEach((state) => {
@@ -185,6 +189,7 @@ describe("StopPlacePopup", () => {
       expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
       expect(queryByTestId("stopplace-note")).toBeFalsy();
       expect(queryByTestId("stopplace-url")).toBeFalsy();
+      expect(queryByTestId("stopplace-announcer")).toBeTruthy();
     });
   });
 
@@ -217,6 +222,7 @@ describe("StopPlacePopup", () => {
       expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
       expect(queryByTestId("stopplace-note")).toBeFalsy();
       expect(queryByTestId("stopplace-url")).toBeFalsy();
+      expect(queryByTestId("stopplace-announcer")).toBeTruthy();
     });
   });
 
@@ -248,6 +254,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   test("only displays passengerinfo box with dynamicOpticStyte only", async () => {
@@ -283,6 +290,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-passengerinfo-acousticState")).toBeFalsy();
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   test("doesn't display passengerinfo box when all states NO or UNKNOWN", async () => {
@@ -312,6 +320,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-passengerinfo-acousticState")).toBeFalsy();
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   test("only displays Link", async () => {
@@ -338,6 +347,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeTruthy();
     expect(queryByText(url)).toBeTruthy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   test("only displays note (string)", async () => {
@@ -364,6 +374,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-note")).toBeTruthy();
     expect(queryByText(note)).toBeTruthy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   test("only displays note (object)", async () => {
@@ -394,6 +405,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-note")).toBeTruthy();
     expect(queryByText(note)).toBeTruthy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 
   test("displays no data message when all values are falsy", async () => {
@@ -431,5 +443,6 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
     expect(queryByText("Keine Daten für diese Station")).toBeTruthy();
+    expect(queryByTestId("stopplace-announcer")).toBeTruthy();
   });
 });

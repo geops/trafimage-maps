@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.40](https://github.com/geops/trafimage-maps/compare/v1.30.39...v1.30.40) (2025-12-01)
+
+### Bug Fixes
+
+- **sts:** remove premium and POI layers along with all data and references ([#1240](https://github.com/geops/trafimage-maps/issues/1240)) ([a24df77](https://github.com/geops/trafimage-maps/commit/a24df77612993b70b47ef368486544b76c23f74e))
+
+### [1.30.39](https://github.com/geops/trafimage-maps/compare/v1.30.38...v1.30.39) (2025-11-17)
+
+### Bug Fixes
+
+- **energie:** fix energie popup content ([6448d57](https://github.com/geops/trafimage-maps/commit/6448d57de571194977b01cb8854643d3c398aaf6))
+
+### [1.30.38](https://github.com/geops/trafimage-maps/compare/v1.30.37...v1.30.38) (2025-11-17)
+
+### Bug Fixes
+
+- **energie:** add AV external person to popup, add local translations ([#1238](https://github.com/geops/trafimage-maps/issues/1238)) ([607b474](https://github.com/geops/trafimage-maps/commit/607b474730052d2cda78853d050d7ecd44d57a81))
+
+### [1.30.37](https://github.com/geops/trafimage-maps/compare/v1.30.36...v1.30.37) (2025-11-12)
+
+### Bug Fixes
+
+- **handicap:** ensure the screen reader reads the popup content in the correct order ([#1237](https://github.com/geops/trafimage-maps/issues/1237)) ([d5b6839](https://github.com/geops/trafimage-maps/commit/d5b68397d80e890da09d86c6b975e18a377fa139))
+
+### [1.30.36](https://github.com/geops/trafimage-maps/compare/v1.30.35...v1.30.36) (2025-11-04)
+
+### Bug Fixes
+
+- **LayerTree:** add layer.renderAfterItem option for rendering content after layer tree items ([#1234](https://github.com/geops/trafimage-maps/issues/1234)) ([474f50f](https://github.com/geops/trafimage-maps/commit/474f50f0f3ebc0bc0adfe32866eda58adcdf74b9))
+- **railplus:** set max-width for logo in popup ([#1233](https://github.com/geops/trafimage-maps/issues/1233)) ([6930e35](https://github.com/geops/trafimage-maps/commit/6930e3500047591724d07715177d1014d651aa5b))
+
 ### [1.30.35](https://github.com/geops/trafimage-maps/compare/v1.30.34...v1.30.35) (2025-09-16)
 
 ### Bug Fixes

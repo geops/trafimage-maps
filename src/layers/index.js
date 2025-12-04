@@ -14,7 +14,6 @@ import ZweitausbildungRoutesLayer from "./ZweitausbildungRoutesLayer";
 import BeleuchtungsLayer from "./BeleuchtungsLayer/BeleuchtungsLayer";
 import MapsGeoAdminLayer from "./MapsGeoAdminLayer/MapsGeoAdminLayer";
 import GeltungsbereicheLayer from "./GeltungsbereicheLayer";
-import StsPoisLayer from "./StsPoisLayer";
 import SchmalspurLayer from "./SchmalspurLayer";
 import MesswagenLayer from "./MesswagenLayer";
 
@@ -34,7 +33,6 @@ export { default as ZweitausbildungRoutesLayer } from "./ZweitausbildungRoutesLa
 export { default as BeleuchtungsLayer } from "./BeleuchtungsLayer";
 export { default as GeltungsbereicheLayer } from "./GeltungsbereicheLayer";
 export { default as SchmalspurLayer } from "./SchmalspurLayer";
-export { default as StsPoisLayer } from "./StsPoisLayer";
 export { default as MesswagenLayer } from "./MesswagenLayer";
 
 export default {
@@ -54,7 +52,6 @@ export default {
   BeleuchtungsLayer,
   MapsGeoAdminLayer,
   GeltungsbereicheLayer,
-  StsPoisLayer,
   SchmalspurLayer,
   MesswagenLayer,
 };
