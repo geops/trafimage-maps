@@ -57,7 +57,7 @@ export const defaultElements = {
   header: true,
   footer: true,
   menu: true,
-  permalink: false,
+  permalink: true,
   mapControls: true,
   baseLayerSwitcher: true,
   popup: true,
