@@ -281,7 +281,7 @@ function StopPlacePopup({ feature }) {
   }
 
   return (
-    <>
+    <div>
       {/** Rendering the text separately ensures the text content is read out in the correct order on load by the screen reader */}
       <div
         data-testid="stopplace-announcer"
@@ -298,7 +298,7 @@ function StopPlacePopup({ feature }) {
         }}
       />
       {popupContent?.component}
-    </>
+    </div>
   );
 }
 
