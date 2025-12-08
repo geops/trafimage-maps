@@ -3,7 +3,7 @@ import MapboxStyleLayer from "../MapboxStyleLayer";
 const lineWidth = 15;
 
 class HighlightRoutesLayer extends MapboxStyleLayer {
-  highlightRoutes(names = [], property = "route_names_premium") {
+  highlightRoutes(names = [], property = "route_names_gttos") {
     const { mbMap, loaded } = this.mapboxLayer || {};
     if (loaded && mbMap && mbMap.getStyle()) {
       let lineWidthProp = 0;

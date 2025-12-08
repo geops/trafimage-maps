@@ -93,10 +93,7 @@ const useStyles = makeStyles(() => {
 const updateLayers = (key = "sts", baseLayer) => {
   if (key === "sts") {
     stsLayers.forEach((layer) => {
-      layer.visible =
-        /(ch\.sbb\.sts\.validity(?!\.(highlights|premium|hidden)$))/.test(
-          layer.key,
-        );
+      layer.visible = /(ch\.sbb\.sts\.validity(?!\.(hidden)$))/.test(layer.key);
       // Ensure layout visibility is applied after style url change (otherwise hidden layers will be displayed)
       layer?.applyLayoutVisibility?.();
     });

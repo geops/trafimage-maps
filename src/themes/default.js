@@ -189,11 +189,16 @@ const v5 = {
         },
       },
     },
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
     MuiIconButton: {
       defaultProps: {
         size: "small",
-        disableRipple: true,
         disableFocusRipple: true,
+        disableElevation: true,
       },
       styleOverrides: {
         root: {
@@ -214,11 +219,10 @@ const v5 = {
     },
     MuiButton: {
       defaultProps: {
-        variant: "contained",
-        color: "primary",
-        disableRipple: true,
         disableFocusRipple: true,
         disableElevation: true,
+        variant: "contained",
+        color: "primary",
       },
       styleOverrides: {
         root: {

@@ -3,8 +3,6 @@ import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
-import { Link } from "@mui/material";
 import { setFeatureInfo } from "../../model/app/actions";
 import useUpdateFeatureInfoOnLayerToggle from "../../utils/useUpdateFeatureInfoOnLayerToggle";
 import useIndexedFeatureInfo from "../../utils/useIndexedFeatureInfo";
@@ -12,6 +10,7 @@ import useHighlightLayer from "../../utils/useHighlightLayer";
 import getPopupComponent from "../../utils/getPopupComponent";
 import "./FeatureInformation.scss";
 import CloseButton from "../CloseButton";
+import Pagination from "../Pagination";
 
 function FeatureInformation({ featureInfo }) {
   const { t } = useTranslation();
@@ -76,7 +75,7 @@ function FeatureInformation({ featureInfo }) {
         {!hideHeader ||
         (hideHeader && // For dynamic header rendering (e.g. CASA)
           !hideHeader(feature)) ? (
-          <div className="wkp-feature-information-header">
+          <div className="wkp-feature-information-header" aria-live="assertive">
             <span id="wkp-popup-label">
               {renderTitle
                 ? renderTitle(feature, info.layer, t)
@@ -96,39 +95,19 @@ function FeatureInformation({ featureInfo }) {
             t={t}
             layer={layers[featureIndex]} // always an array
             feature={features[featureIndex]} //  can be an array of array of features
+            featureInfo={featureInfo} // full featureInfo for context
             coordinate={coordinates[featureIndex]} // always an array
             language={language}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}
           />
           {features.length > 1 && (
-            <div className="wkp-pagination-wrapper">
-              <span className="wkp-pagination-button-wrapper">
-                {featureIndex > 0 && (
-                  <Link
-                    className="wkp-pagination-button"
-                    title={t("zurück")}
-                    onClick={() => setFeatureIndex(featureIndex - 1)}
-                    tabIndex="0"
-                  >
-                    <IoIosArrowRoundBack />
-                  </Link>
-                )}
-              </span>
-              {featureIndex + 1} {t("von")} {features.length}
-              <span className="wkp-pagination-button-wrapper">
-                {featureIndex < features.length - 1 && (
-                  <Link
-                    className="wkp-pagination-button"
-                    title={t("weiter")}
-                    onClick={() => setFeatureIndex(featureIndex + 1)}
-                    tabIndex="0"
-                  >
-                    <IoIosArrowRoundForward />
-                  </Link>
-                )}
-              </span>
-            </div>
+            <Pagination
+              onNext={() => setFeatureIndex((i) => i + 1)}
+              onPrevious={() => setFeatureIndex((i) => i - 1)}
+              index={featureIndex}
+              count={features.length}
+            />
           )}
         </div>
       </React.Suspense>

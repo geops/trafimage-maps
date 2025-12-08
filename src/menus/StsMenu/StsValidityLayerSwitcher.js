@@ -5,14 +5,10 @@ import { useTranslation } from "react-i18next";
 import { FormGroup, FormControlLabel } from "@mui/material";
 import { unByKey } from "ol/Observable";
 import SBBSwitch from "../../components/SBBSwitch";
-// import { highlights, gttos, premium } from '../../config/ch.sbb.sts';
 import { STS_KEY } from "../../utils/constants";
 import { setFeatureInfo } from "../../model/app/actions";
 
-const stsStyleLayerRegex = new RegExp(
-  `^${STS_KEY}.validity.(highlights|premium|gttos)$`,
-);
-const stsHightlightLayerRegex = new RegExp(`^${STS_KEY}.validity.highlights$`);
+const stsStyleLayerRegex = new RegExp(`^${STS_KEY}.validity.gttos$`);
 function StsValidityLayerSwitcher() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -45,21 +41,13 @@ function StsValidityLayerSwitcher() {
   const onChange = useCallback(
     (layer) => {
       dispatch(setFeatureInfo([]));
-      if (stsHightlightLayerRegex.test(layer.key)) {
-        layer.visible = !layer.visible;
-        return;
-      }
       if (layer.visible) {
         layer.visible = false;
         return;
       }
-      const otherGroupLayer = stsLayers.find(
-        (lyr) => lyr.get("group") && lyr.key !== layer.key,
-      );
-      otherGroupLayer.visible = false;
       layer.visible = true;
     },
-    [dispatch, stsLayers],
+    [dispatch],
   );
 
   return (

@@ -7,7 +7,8 @@ function MessageListener() {
   );
 
   useEffect(() => {
-    const unlistens = [];
+    const abrtCtrl = new AbortController();
+    const { signal } = abrtCtrl;
     (messageEvents || []).forEach((messageEvent) => {
       const callback = (evt) => {
         if (
@@ -17,16 +18,11 @@ function MessageListener() {
           messageEvent.callback(evt);
         }
       };
-      window.addEventListener("message", callback);
-      unlistens.push(() => {
-        window.removeEventListener("message", callback);
-      });
+      window.addEventListener("message", callback, { signal });
     });
 
     return () => {
-      unlistens.forEach((unlisten) => {
-        unlisten();
-      });
+      abrtCtrl.abort();
     };
   }, [messageEvents]);
 

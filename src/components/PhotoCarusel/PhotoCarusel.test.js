@@ -20,7 +20,7 @@ describe("PhotoCarusel", () => {
     });
   });
 
-  test("should match snapshot with empty photo array.", () => {
+  test("should not render with empty photo array.", () => {
     const { queryByTestId } = render(
       <MatomoProvider value={{}}>
         <ThemeProvider theme={theme}>
@@ -33,7 +33,7 @@ describe("PhotoCarusel", () => {
     expect(queryByTestId("carousel-photo")).toBeNull();
   });
 
-  test("should match snapshot with two photos and cycle buttons should behave correctly.", () => {
+  test("should render two photos with cycle buttons that behave correctly.", () => {
     const { queryByTestId, getByTestId } = render(
       <MatomoProvider value={{}}>
         <ThemeProvider theme={theme}>
@@ -44,12 +44,11 @@ describe("PhotoCarusel", () => {
       </MatomoProvider>,
     );
     expect(queryByTestId("carousel-photo")).toBeTruthy();
-    expect(queryByTestId("carousel-photo-increment-button")).toBeTruthy();
-    const decrementBtn = getByTestId("carousel-photo-decrement-button");
-    expect(decrementBtn).toBeDisabled();
-    const incrementBtn = getByTestId("carousel-photo-increment-button");
+    expect(queryByTestId("pagination-previous-button")).toBeFalsy();
+    expect(queryByTestId("pagination-next-button")).toBeTruthy();
+    const incrementBtn = getByTestId("pagination-next-button");
     fireEvent.click(incrementBtn);
-    expect(decrementBtn).not.toBeDisabled();
-    expect(incrementBtn).toBeDisabled();
+    expect(queryByTestId("pagination-previous-button")).toBeTruthy();
+    expect(queryByTestId("pagination-nex-button")).toBeFalsy();
   });
 });

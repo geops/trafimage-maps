@@ -66,6 +66,7 @@ class Search {
   // eslint-disable-next-line class-methods-use-this, no-unused-vars
   select(item) {
     // Can be overwritten by sub-classes.
+    return item;
   }
 
   // eslint-disable-next-line class-methods-use-this, no-unused-vars

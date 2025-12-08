@@ -44,7 +44,7 @@ const App = () => {
       <br />
       <Editor
         code={getHtmlPageCode(
-          `<!--Please contact sbb_map@geops.ch for your own API key-->\n      <trafimage-maps\n\tid="map"\n\telements="permalink=false"\n\tapiKey="${window.apiKey}"\n\theight="500px"\n      />\n      <button\r\n\tonClick=\"changeAttr('zoom', 16)\"\r\n\tstyle="height: 40px; cursor: pointer;"\r\n      >\r\n\tChange zoom to 16\r\n      </button>`,
+          `<!--Please contact sbb_map@geops.ch for your own API key-->\n      <trafimage-maps\n\tid="map"\n\telements="permalink=false"\n\tapiKey="${window.apiKey}"\n      />\n      <button\r\n\tonClick=\"changeAttr('zoom', 16)\"\r\n\tstyle="height: 40px; cursor: pointer;"\r\n      >\r\n\tChange zoom to 16\r\n      </button>`,
           "<script type=\"text/javascript\">\n\twindow.changeAttr = async function (attr, val) {\r\n\t  var map = document.getElementById('map');\r\n\t  // Trigger update by setting attribute to null, then to the new value\r\n\t  if (!val) {\r\n\t    map.removeAttribute(attr);\r\n\t  }\r\n\t  if (!!map.getAttribute(attr.toLowerCase())) {\r\n\t    await changeAttr(attr.toLowerCase(), null);\r\n\t  }\r\n\t  map.setAttribute(attr.toLowerCase(), val);\r\n\t}\n   </script>",
         )}
         onChange={(code) => null}

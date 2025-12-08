@@ -81,7 +81,13 @@ function RailplusPopup({ feature, layer }) {
           }}
           data-testid="railplus-logo"
         >
-          <img src={logo} alt={`${name}_logo`} />
+          <img
+            src={logo}
+            alt={`${name}_logo`}
+            style={{
+              maxWidth: "100%",
+            }}
+          />
         </div>
       )}
       {longName && (

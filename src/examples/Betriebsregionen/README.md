@@ -19,7 +19,7 @@ const App = () => {
       <br />
       <Editor
         code={getHtmlPageCode(
-          `<!--Please contact sbb_map@geops.ch for your own API key-->\n      <trafimage-maps\n\tappName="betriebsregionen"\n\tapiKey="${window.apiKey}"\n\theight="500px"\n      />`,
+          `<!--Please contact sbb_map@geops.ch for your own API key-->\n      <trafimage-maps\n\tappName="betriebsregionen"\n\tapiKey="${window.apiKey}"\n      />`,
         )}
         onChange={(code) => null} //setCode(code)}
       />

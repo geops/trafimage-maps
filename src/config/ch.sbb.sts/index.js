@@ -8,24 +8,20 @@ import {
   STS_HIT_TOLERANCE,
   SWISS_EXTENT,
 } from "../../utils/constants";
-import StsPoisLayer from "../../layers/StsPoisLayer";
 import { dvDay, dvNight } from "../ch.sbb.direktverbindungen";
 
 const FILTER_KEY = "sts.filter";
 const FILTER_GTTOS_VALUE = "sts_gttos";
-const FILTER_PREMIUM_VALUE = "sts_premium";
 const FILTER_HIGHLIGHT_VALUE = "sts_highlight";
 const FILTER_OTHERS_VALUE = "sts_others";
 const FILTER_LINE_VALUE = "sts.line"; // style using nova daten
 
 const STS_VALIDITY_DATA_LAYER_KEY = "ch.sbb.sts.validity.data";
 const STS_DIREKTVERBINDUNGEN_DATA_LAYER_KEY = "ch.sbb.direktverbindungen.data";
-const HIGHLIGHTS_LAYER_KEY = "ch.sbb.sts.validity.highlights";
 const ROUTES_HIGHLIGHT_LAYER_KEY = "ch.sbb.sts.validity.routes_highlight";
 const STS_HIDDEN_ROUTES_LAYER_KEY = "ch.sbb.sts.validity.hidden";
 const OTHER_LAYER_KEY = "ch.sbb.sts.validity.other";
 const GTTOS_LAYER_KEY = "ch.sbb.sts.validity.gttos";
-const PREMIUM_LAYER_KEY = "ch.sbb.sts.validity.premium";
 
 const stsValidityDataLayer = new TrafimageMapboxLayer({
   name: STS_VALIDITY_DATA_LAYER_KEY,
@@ -54,18 +50,6 @@ const stsDirektverbindungenDataLayer = new TrafimageMapboxLayer({
     isQueryable: false,
     isBaseLayer: true,
     hideInLegend: true,
-  },
-});
-
-export const highlights = new StsPoisLayer({
-  name: "Highlights",
-  key: HIGHLIGHTS_LAYER_KEY,
-  visible: false,
-  properties: {
-    isQueryable: true,
-    disableSetFeatureInfoOnHover: true,
-    maxExtent: SWISS_EXTENT,
-    minZoom: 8,
   },
 });
 
@@ -159,22 +143,6 @@ export const gttos = new MapboxStyleLayer({
   },
 });
 
-export const premium = new MapboxStyleLayer({
-  name: "Premium Panoramic Trains",
-  key: PREMIUM_LAYER_KEY,
-  mapboxLayer: stsValidityDataLayer,
-  visible: false,
-  group: "ch.sbb.sts.validity.group",
-  styleLayersFilter: ({ metadata }) =>
-    metadata && metadata[FILTER_KEY] === FILTER_PREMIUM_VALUE,
-  properties: {
-    disableSetFeatureInfoOnHover: true,
-    isQueryable: true,
-    maxExtent: SWISS_EXTENT,
-    minZoom: 8,
-  },
-});
-
 const stsDvDay = dvDay.clone({
   mapboxLayer: stsDirektverbindungenDataLayer,
   visible: false,
@@ -208,9 +176,7 @@ export default [
   hiddenRoutes,
   otherRoutes,
   highlightRoutes,
-  premium,
   gttos,
-  highlights,
   stsDvMain,
   stsDvDay,
   stsDvNight,

@@ -2,6 +2,77 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.41](https://github.com/geops/trafimage-maps/compare/v1.30.40...v1.30.41) (2025-12-04)
+
+### Bug Fixes
+
+- **Popup:** add featureInfo to PopupComponent props, add Pagination component ([#1241](https://github.com/geops/trafimage-maps/issues/1241)) ([ebfbb33](https://github.com/geops/trafimage-maps/commit/ebfbb33568b1ef50d4ba4dfd5ef0b4208a20e44b))
+
+### [1.30.40](https://github.com/geops/trafimage-maps/compare/v1.30.39...v1.30.40) (2025-12-01)
+
+### Bug Fixes
+
+- **sts:** remove premium and POI layers along with all data and references ([#1240](https://github.com/geops/trafimage-maps/issues/1240)) ([a24df77](https://github.com/geops/trafimage-maps/commit/a24df77612993b70b47ef368486544b76c23f74e))
+
+### [1.30.39](https://github.com/geops/trafimage-maps/compare/v1.30.38...v1.30.39) (2025-11-17)
+
+### Bug Fixes
+
+- **energie:** fix energie popup content ([6448d57](https://github.com/geops/trafimage-maps/commit/6448d57de571194977b01cb8854643d3c398aaf6))
+
+### [1.30.38](https://github.com/geops/trafimage-maps/compare/v1.30.37...v1.30.38) (2025-11-17)
+
+### Bug Fixes
+
+- **energie:** add AV external person to popup, add local translations ([#1238](https://github.com/geops/trafimage-maps/issues/1238)) ([607b474](https://github.com/geops/trafimage-maps/commit/607b474730052d2cda78853d050d7ecd44d57a81))
+
+### [1.30.37](https://github.com/geops/trafimage-maps/compare/v1.30.36...v1.30.37) (2025-11-12)
+
+### Bug Fixes
+
+- **handicap:** ensure the screen reader reads the popup content in the correct order ([#1237](https://github.com/geops/trafimage-maps/issues/1237)) ([d5b6839](https://github.com/geops/trafimage-maps/commit/d5b68397d80e890da09d86c6b975e18a377fa139))
+
+### [1.30.36](https://github.com/geops/trafimage-maps/compare/v1.30.35...v1.30.36) (2025-11-04)
+
+### Bug Fixes
+
+- **LayerTree:** add layer.renderAfterItem option for rendering content after layer tree items ([#1234](https://github.com/geops/trafimage-maps/issues/1234)) ([474f50f](https://github.com/geops/trafimage-maps/commit/474f50f0f3ebc0bc0adfe32866eda58adcdf74b9))
+- **railplus:** set max-width for logo in popup ([#1233](https://github.com/geops/trafimage-maps/issues/1233)) ([6930e35](https://github.com/geops/trafimage-maps/commit/6930e3500047591724d07715177d1014d651aa5b))
+
+### [1.30.35](https://github.com/geops/trafimage-maps/compare/v1.30.34...v1.30.35) (2025-09-16)
+
+### Bug Fixes
+
+- **handicap:** use aria-live to read handicap popup content ([#1230](https://github.com/geops/trafimage-maps/issues/1230)) ([cd45bc1](https://github.com/geops/trafimage-maps/commit/cd45bc136caf37d8d07ed2f88c4e9fb2cf7ce2ea))
+- **infrastrukturbetreiberinnen:** remove STB from standard gauge lines ([#1229](https://github.com/geops/trafimage-maps/issues/1229)) ([8330658](https://github.com/geops/trafimage-maps/commit/833065856d7326d8b506c91a520fd5bc16868545))
+- **lines search:** use generalised geometry for line km search ([#1231](https://github.com/geops/trafimage-maps/issues/1231)) ([3e5a427](https://github.com/geops/trafimage-maps/commit/3e5a427640d8009d1ebadd23029fed6a3ee32fc9))
+- **railplus:** update publish date in PDF to 08/2025 ([#1228](https://github.com/geops/trafimage-maps/issues/1228)) ([32224ef](https://github.com/geops/trafimage-maps/commit/32224efe3299fc44d95475bd8bfab4247b4aa484))
+
+### [1.30.34](https://github.com/geops/trafimage-maps/compare/v1.30.33...v1.30.34) (2025-08-26)
+
+### Bug Fixes
+
+- **SearchInput:** prevent jumping to iframe by applying autofocus conditionally ([#1227](https://github.com/geops/trafimage-maps/issues/1227)) ([9975b42](https://github.com/geops/trafimage-maps/commit/9975b424d2bc72b30769ebac05f9acea66da6917))
+
+### [1.30.33](https://github.com/geops/trafimage-maps/compare/v1.30.32...v1.30.33) (2025-07-10)
+
+### Bug Fixes
+
+- **geltungsbereiche:** add product tl Check-in for automatic ticketing ([#1225](https://github.com/geops/trafimage-maps/issues/1225)) ([44b8aa1](https://github.com/geops/trafimage-maps/commit/44b8aa14e7b503fa3ddfef09163b19766ac42317))
+- **zweitausbildung:** update layer names for point data ([#1226](https://github.com/geops/trafimage-maps/issues/1226)) ([1421a7e](https://github.com/geops/trafimage-maps/commit/1421a7ebaaf558ecbe09e36ee807b1b2cd393d17))
+
+### [1.30.32](https://github.com/geops/trafimage-maps/compare/v1.30.31...v1.30.32) (2025-04-23)
+
+### Bug Fixes
+
+- use level grey out style ([#1224](https://github.com/geops/trafimage-maps/issues/1224)) ([f25ae10](https://github.com/geops/trafimage-maps/commit/f25ae107be735a83034c18b4c6b772113a628e51))
+
+### [1.30.31](https://github.com/geops/trafimage-maps/compare/v1.30.30...v1.30.31) (2025-04-02)
+
+### Bug Fixes
+
+- **geltungsbereiche:** add white space in GA-A4 PDF legend ([f2db631](https://github.com/geops/trafimage-maps/commit/f2db6319a9a1087451e21f24ba5965cf3efbd06c))
+
 ### [1.30.30](https://github.com/geops/trafimage-maps/compare/v1.30.29...v1.30.30) (2025-03-31)
 
 ### Bug Fixes
