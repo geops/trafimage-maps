@@ -22,6 +22,18 @@ export const TRACK_SHARE_DL_ACTION = "clickShareDownload";
 export const TRACK_SHARE_FB_ACTION = "clickShareFacebook";
 export const TRACK_SHARE_TW_ACTION = "clickShareTwitter";
 
+// Layer names
+export const DATA_LAYER_NAME = "ch.sbb.netzkarte.data";
+export const NETZKARTE_LAYER_NAME = "ch.sbb.netzkarte.layer";
+export const NETZKARTE_AERIAL_LAYER_NAME = "ch.sbb.netzkarte.luftbild.group";
+export const STATIONS_LAYER_NAME = "ch.sbb.netzkarte.stationen";
+export const PLATFORMS_LAYER_NAME = "ch.sbb.netzkarte.platforms";
+export const STOPO_LANDESKARTE_LAYER_NAME = "ch.sbb.netzkarte.landeskarte";
+export const STOPO_LANDESKARTE_GRAU_LAYER_NAME =
+  "ch.sbb.netzkarte.landeskarte.grau";
+export const NETZKARTE_DARK_LAYER_NAME = "ch.sbb.netzkarte.dark";
+export const BAHNHOFPLAENE_LAYER_NAME = "ch.sbb.bahnhofplaene";
+export const GESCHOSSE_LAYER_NAME = "ch.sbb.geschosse";
 // Direktverbindungen
 export const DV_KEY = "ch.sbb.direktverbindungen";
 export const DV_DAY_NIGHT_REGEX = new RegExp(`^${DV_KEY}.(day|night)$`);

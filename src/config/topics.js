@@ -3,34 +3,31 @@ import "./proj4";
 import tarifverbundkarteLegend from "../img/tarifverbund_legend.url.svg";
 import railplusLegend from "../img/railplus_legend.svg";
 import energieLegendPub from "../img/energie_legend_pub.url.svg";
-import railPlusLayers from "./ch.railplus.mitglieder";
-import netzkarteLayers, {
-  dataLayer,
-  netzkarteLayer,
-  stationsLayer,
-  bahnhofplaene,
-} from "./ch.sbb.netzkarte";
+import { getRailplusLayers } from "./ch.railplus.mitglieder";
+import { getNetzkarteLayers } from "./ch.sbb.netzkarte";
 // import constructionLayers from "./ch.sbb.construction";
-import handicapLayers from "./ch.sbb.handicap";
-import infrastrukturLayers, {
+import { getHandicapLayers } from "./ch.sbb.handicap";
+import {
   netzkarteEisenbahninfrastruktur,
   betriebsRegionenVisible,
+  getInfrastrukturLayers,
 } from "./ch.sbb.infrastruktur";
-import energieLayers from "./ch.sbb.energie";
-import tarifverbundkarteLayers from "./ch.sbb.tarifverbundkarte.public";
-import regionenkarteLayers from "./ch.sbb.regionenkarte.public";
-import beleuchtungLayers from "./ch.sbb.beleuchtungsstaerken";
-import isbLayers from "./ch.sbb.isb";
-import sandboxLayers from "./ch.sbb.netzkarte.sandbox";
-import zweitausbildungLayers from "./ch.sbb.zweitausbildung";
-import geltungsbereicheMvpLayers, {
+import { getEnergieLayers } from "./ch.sbb.energie";
+import { getTarifverbundkarteLayers } from "./ch.sbb.tarifverbundkarte.public";
+import { getRegionenkartePublicLayers } from "./ch.sbb.regionenkarte.public";
+import { getBeleuchtungsLayers } from "./ch.sbb.beleuchtungsstaerken";
+import { getIsbLayers } from "./ch.sbb.isb";
+import { getSandboxLayers } from "./ch.sbb.netzkarte.sandbox";
+import { getZweitausbildungLayers } from "./ch.sbb.zweitausbildung";
+import {
   geltungsbereicheTk,
   geltungsbereicheHta,
   geltungsbereicheGA,
+  getGeltungsbereicheLayers,
 } from "./ch.sbb.geltungsbereiche.mvp";
-import geltungsbereicheIframeLayers from "./ch.sbb.geltungsbereiche.iframe";
-import stsLayers from "./ch.sbb.sts";
-import dvLayers from "./ch.sbb.direktverbindungen";
+import { getGeltungsbereicheIframeLayers } from "./ch.sbb.geltungsbereiche.iframe";
+import { getStsLayers } from "./ch.sbb.sts";
+import { getDirektverbindungenLayers } from "./ch.sbb.direktverbindungen";
 import { getDefaultSearches, getSearchByName, SearchName } from "./searches";
 import GeltungsbereicheTopicMenu from "../menus/GeltungsbereicheTopicMenu";
 import StsMenu from "../menus/StsMenu";
@@ -47,7 +44,7 @@ import RailplusMenu from "../menus/RailplusMenu";
 import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
 import GaExportMapButton from "../menus/GaExportMenu/GaExportMapButton";
 import geltungsbereicheLegends from "../img/geltungsbereicheLegends";
-import messwagenLayers from "./ch.sbb.funkmesswagen";
+import { getFunkmesswagenLayers } from "./ch.sbb.funkmesswagen";
 import MesswagenFollowButton from "./ch.sbb.funkmesswagen/MesswagenFollowButton";
 import { MesswagenPopup } from "../popups";
 import StsMenuToggler from "./ch.sbb.sts/StsMenuToggler/StsMenuToggler";
@@ -87,7 +84,7 @@ export const getTopics = () => {
       trackerMenu: true,
       floorSwitcher: true,
     },
-    layers: netzkarteLayers,
+    layers: getNetzkarteLayers(),
     projection: "EPSG:3857",
     layerInfoComponent: "NetzkarteTopicInfo",
     searches: defaultSearches,
@@ -101,7 +98,7 @@ export const getTopics = () => {
       shareMenu: true,
       popup: true,
     },
-    layers: handicapLayers,
+    layers: getHandicapLayers(),
     projection: "EPSG:3857",
     layerInfoComponent: "HandicapTopicInfo",
     searches: {
@@ -113,7 +110,7 @@ export const getTopics = () => {
   const netzkarteStelen = {
     name: "ch.sbb.netzkarte.topic",
     key: "ch.sbb.netzkarte",
-    layers: [dataLayer, netzkarteLayer, stationsLayer, bahnhofplaene],
+    // layers: [dataLayer, netzkarteLayer, stationsLayer, bahnhofplaene],
     elements: {},
     projection: "EPSG:3857",
   };
@@ -144,7 +141,7 @@ export const getTopics = () => {
       shareMenu: true,
       popup: true,
     },
-    layers: infrastrukturLayers,
+    layers: getInfrastrukturLayers(),
     projection: "EPSG:3857",
     layerInfoComponent: "InfrastrukturTopicInfo",
     searches: defaultSearches,
@@ -173,7 +170,7 @@ export const getTopics = () => {
       popup: true,
       overlay: true,
     },
-    layers: regionenkarteLayers,
+    layers: getRegionenkartePublicLayers(),
     layerInfoComponent: "RegionenkartePublicTopicInfo",
     searches: defaultSearches,
     minZoom: 7,
@@ -183,7 +180,7 @@ export const getTopics = () => {
     name: "ch.sbb.tarifverbundkarte.public",
     key: "ch.sbb.tarifverbundkarte.public",
     layerInfoComponent: "TarifverbundkarteTopicInfo",
-    layers: tarifverbundkarteLayers,
+    layers: getTarifverbundkarteLayers(),
     maxZoom: 12,
     minZoom: 7,
     exportConfig: {
@@ -212,7 +209,7 @@ export const getTopics = () => {
     key: "ch.sbb.zweitausbildung",
     maxZoom: 13,
     elements: { ...defaultElements, shareMenu: true, popup: true },
-    layers: zweitausbildungLayers,
+    layers: getZweitausbildungLayers(),
     projection: "EPSG:3857",
     layerInfoComponent: "ZweitausbildungTopicInfo",
     searches: defaultSearches,
@@ -224,7 +221,7 @@ export const getTopics = () => {
     key: "ch.sbb.beleuchtungsstaerken",
     maxZoom: 14,
     elements: { ...defaultElements, shareMenu: true, popup: true },
-    layers: beleuchtungLayers,
+    layers: getBeleuchtungsLayers(),
     projection: "EPSG:3857",
     layerInfoComponent: "BeleuchtungTopicInfo",
     searches: defaultSearches,
@@ -253,7 +250,7 @@ export const getTopics = () => {
       }),
       getOverlayImageUrl: () => energieLegendPub,
     },
-    layers: energieLayers,
+    layers: getEnergieLayers(),
     projection: "EPSG:3857",
     layerInfoComponent: "EnergiePublicTopicInfo",
     searches: defaultSearches,
@@ -269,7 +266,7 @@ export const getTopics = () => {
       shareMenu: true,
       popup: true,
     },
-    layers: isbLayers,
+    layers: getIsbLayers(),
     projection: "EPSG:3857",
     layerInfoComponent: "IsbTopicInfo",
     searches: defaultSearches,
@@ -279,7 +276,7 @@ export const getTopics = () => {
   const sandbox = {
     name: "ch.sbb.netzkarte.sandbox",
     key: "ch.sbb.netzkarte.sandbox",
-    layers: sandboxLayers,
+    layers: getSandboxLayers(),
     projection: "EPSG:3857",
     elements: defaultElements,
     layerInfoComponent: "SandboxTopicInfo",
@@ -301,7 +298,7 @@ export const getTopics = () => {
     },
     maxZoom: 14,
     minZoom: 7,
-    layers: geltungsbereicheMvpLayers,
+    layers: getGeltungsbereicheLayers(),
     projection: "EPSG:3857",
     layerInfoComponent: "GeltungsbereicheTopicInfo",
     searches: defaultSearches,
@@ -347,7 +344,7 @@ export const getTopics = () => {
       menu: false,
     },
     key: "ch.sbb.geltungsbereiche-iframe",
-    layers: geltungsbereicheIframeLayers,
+    layers: getGeltungsbereicheIframeLayers(),
     only: true,
     hideInLayerTree: true,
     menu: <GeltungsbereicheTopicMenu />,
@@ -371,7 +368,7 @@ export const getTopics = () => {
       menuToggler: true,
       baseLayerSwitcher: false,
     },
-    layers: stsLayers,
+    layers: getStsLayers(),
     only: true,
     hideInLayerTree: true,
     menu: <StsMenu />,
@@ -398,7 +395,7 @@ export const getTopics = () => {
     },
     maxZoom: 13,
     minZoom: 6,
-    layers: dvLayers,
+    layers: getDirektverbindungenLayers(),
     projection: "EPSG:3857",
     layerInfoComponent: "DvTopicInfo",
     searches: defaultSearches,
@@ -425,7 +422,7 @@ export const getTopics = () => {
     },
     maxZoom: 13,
     minZoom: 6,
-    layers: dvLayers,
+    layers: getDirektverbindungenLayers(),
     enableFeatureClick: true,
     only: true,
     hideInLayerTree: true,
@@ -450,7 +447,7 @@ export const getTopics = () => {
     },
     key: "ch.railplus.mitglieder",
     name: "ch.railplus.mitglieder",
-    layers: railPlusLayers,
+    layers: getRailplusLayers(),
     only: true,
     hideInLayerTree: true,
     enableFeatureClick: true,
@@ -481,7 +478,7 @@ export const getTopics = () => {
   const messwagen = {
     name: "ch.sbb.funkmesswagen",
     key: "ch.sbb.funkmesswagen",
-    layers: messwagenLayers,
+    layers: getFunkmesswagenLayers(),
     elements: {
       ...defaultElements,
       drawMenu: false,
