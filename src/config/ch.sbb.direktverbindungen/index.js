@@ -4,6 +4,9 @@ import DirektverbindungenLayer from "../../layers/DirektverbindungenLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import { DV_HIT_TOLERANCE, DV_KEY } from "../../utils/constants";
 
+export const DV_DAY_LAYER_KEY = `${DV_KEY}.day`;
+export const DV_NIGHT_LAYER_KEY = `${DV_KEY}.night`;
+
 // eslint-disable-next-line import/prefer-default-export
 export const getDirektverbindungenLayers = () => {
   const dataLayer = new TrafimageMapboxLayer({
@@ -63,8 +66,8 @@ export const getDirektverbindungenLayers = () => {
   });
 
   const dvDay = new Layer({
-    name: `${DV_KEY}.day`,
-    key: `${DV_KEY}.day`,
+    name: DV_DAY_LAYER_KEY,
+    key: DV_DAY_LAYER_KEY,
     mapboxLayer: dataLayer,
     visible: true,
     properties: {
@@ -79,8 +82,8 @@ export const getDirektverbindungenLayers = () => {
   });
 
   const dvNight = new Layer({
-    name: `${DV_KEY}.night`,
-    key: `${DV_KEY}.night`,
+    name: DV_NIGHT_LAYER_KEY,
+    key: DV_NIGHT_LAYER_KEY,
     mapboxLayer: dataLayer,
     visible: true,
     properties: {

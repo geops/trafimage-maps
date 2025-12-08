@@ -96,7 +96,7 @@ const getInitialState = () => {
     selectedForInfos: null,
     map: new OLMap({
       controls: [],
-      interactions: dftlInteractions,
+      // interactions: dftlInteractions,
     }),
     searchService: new SearchService(),
     screenWidth: null,

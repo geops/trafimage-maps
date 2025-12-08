@@ -1,7 +1,11 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import { useSelector } from "react-redux";
 import useTranslation from "../../utils/useTranslation";
-import { dvDay, dvNight } from "../../config/ch.sbb.direktverbindungen";
+import {
+  DV_DAY_LAYER_KEY,
+  DV_NIGHT_LAYER_KEY,
+} from "../../config/ch.sbb.direktverbindungen";
 import DataLink from "../../components/DataLink";
 import DvLegendLine from "../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine";
 
@@ -16,7 +20,10 @@ const useStyles = makeStyles({
 
 function DvTopicInfo() {
   const { t, i18n } = useTranslation();
+  const layers = useSelector((state) => state.app.layers);
   const classes = useStyles();
+  const dvDay = layers.find((l) => l.get("name") === DV_DAY_LAYER_KEY);
+  const dvNight = layers.find((l) => l.get("name") === DV_NIGHT_LAYER_KEY);
   const legend = [dvDay, dvNight].map((layer) => (
     <div className={classes.legendItem} key={layer.key}>
       <DvLegendLine color={layer.get("color")} />

@@ -10,14 +10,12 @@ import {
 // eslint-disable-next-line import/prefer-default-export
 export const getCasaLayers = () => {
   const layers = getNetzkarteLayers();
-  const dataLayer = layers.find((l) => l.get("name") === DATA_LAYER_NAME);
+  const dataLayer = layers.find((l) => l.name === DATA_LAYER_NAME);
 
-  const netzkarteLayer = layers.find(
-    (l) => l.get("name") === NETZKARTE_LAYER_NAME,
-  );
+  const netzkarteLayer = layers.find((l) => l.name === NETZKARTE_LAYER_NAME);
 
   const netzkarteAerial = layers.find(
-    (l) => l.get("name") === NETZKARTE_AERIAL_LAYER_NAME,
+    (l) => l.name === NETZKARTE_AERIAL_LAYER_NAME,
   );
 
   const casaDataLayerWithoutLabels = dataLayer.clone({

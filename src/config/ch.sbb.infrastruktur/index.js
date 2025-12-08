@@ -2,11 +2,12 @@ import { Layer } from "mobility-toolbox-js/ol";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import KilometrageLayer from "../../layers/KilometrageLayer";
+import { INFRASTRUKTUR_LAYER_NAME } from "../../utils/constants";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getInfrastrukturLayers = () => {
   const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
-    name: "ch.sbb.infrastruktur",
+    name: INFRASTRUKTUR_LAYER_NAME,
     visible: true,
     zIndex: -1,
     style: "netzkarte_eisenbahninfrastruktur_v3",
@@ -36,22 +37,6 @@ export const getInfrastrukturLayers = () => {
       layerInfoComponent: "BetriebsRegionenLayerInfo",
     },
   });
-
-  // Clone layer to set visibility true by default for appName="betriebsregionen" [TRAFDIV-421]
-  // const betriebsRegionenVisible = new MapboxStyleLayer({
-  //   name: "ch.sbb.betriebsregionen",
-  //   visible: true,
-  //   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  //   styleLayersFilter: ({ metadata }) =>
-  //     /^operational_regions$/.test(metadata?.["general.filter"]),
-  //   properties: {
-  //     isQueryable: true,
-  //     hasInfos: true,
-  //     useOverlay: true,
-  //     popupComponent: "BetriebsRegionenPopup",
-  //     layerInfoComponent: "BetriebsRegionenLayerInfo",
-  //   },
-  // });
 
   const tochtergesellschaftenSBB = new MapboxStyleLayer({
     name: "ch.sbb.infrastruktur.tochtergesellschaften.group",

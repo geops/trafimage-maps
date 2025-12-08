@@ -15,20 +15,18 @@ import { getNetzkarteLayers } from "../ch.sbb.netzkarte";
 export const getFunkmesswagenLayers = () => {
   const layers = getNetzkarteLayers();
 
-  const netzkarteLayer = layers.find(
-    (l) => l.get("name") === NETZKARTE_LAYER_NAME,
-  );
+  const netzkarteLayer = layers.find((l) => l.name === NETZKARTE_LAYER_NAME);
 
   const netzkarteAerial = layers.find(
-    (l) => l.get("name") === NETZKARTE_AERIAL_LAYER_NAME,
+    (l) => l.name === NETZKARTE_AERIAL_LAYER_NAME,
   );
 
   const swisstopoLandeskarte = layers.find(
-    (l) => l.get("name") === STOPO_LANDESKARTE_LAYER_NAME,
+    (l) => l.name === STOPO_LANDESKARTE_LAYER_NAME,
   );
 
   const swisstopoLandeskarteGrau = layers.find(
-    (l) => l.get("name") === STOPO_LANDESKARTE_GRAU_LAYER_NAME,
+    (l) => l.name === STOPO_LANDESKARTE_GRAU_LAYER_NAME,
   );
 
   const messwagenDataLayer = new TrafimageMapboxLayer({

@@ -16,20 +16,14 @@ import HandicapLayer from "../../layers/HandicapLayer";
 export const getHandicapLayers = () => {
   const layers = getNetzkarteLayers();
 
-  const netzkarteLayer = layers.find(
-    (l) => l.get("name") === NETZKARTE_LAYER_NAME,
-  );
+  const netzkarteLayer = layers.find((l) => l.name === NETZKARTE_LAYER_NAME);
   const netzkarteNight = layers.find(
-    (l) => l.get("name") === NETZKARTE_DARK_LAYER_NAME,
+    (l) => l.name === NETZKARTE_DARK_LAYER_NAME,
   );
 
-  const stationsLayer = layers.find(
-    (l) => l.get("name") === STATIONS_LAYER_NAME,
-  );
+  const stationsLayer = layers.find((l) => l.name === STATIONS_LAYER_NAME);
 
-  const bahnhofplaene = layers.find(
-    (l) => l.get("name") === BAHNHOFPLAENE_LAYER_NAME,
-  );
+  const bahnhofplaene = layers.find((l) => l.name === BAHNHOFPLAENE_LAYER_NAME);
 
   const handicapDataLayer = new TrafimageMapboxLayer({
     name: "ch.sbb.handicap.data",

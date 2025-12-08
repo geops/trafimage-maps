@@ -1,8 +1,17 @@
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
-import { dataLayer, netzkarteLayer, geschosseLayer } from "../ch.sbb.netzkarte";
+import {
+  DATA_LAYER_NAME,
+  GESCHOSSE_LAYER_NAME,
+  NETZKARTE_LAYER_NAME,
+} from "../../utils/constants";
+import { getNetzkarteLayers } from "../ch.sbb.netzkarte";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getSandboxLayers = () => {
+  const layers = getNetzkarteLayers();
+  const dataLayer = layers.find((l) => l.name === DATA_LAYER_NAME);
+  const netzkarteLayer = layers.find((l) => l.name === NETZKARTE_LAYER_NAME);
+  const geschosseLayer = layers.find((l) => l.name === GESCHOSSE_LAYER_NAME);
   const sandboxDataLayer = dataLayer.clone({
     key: "ch.sbb.netzkarte.sandbox.data",
   });

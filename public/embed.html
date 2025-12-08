@@ -13,6 +13,7 @@
         .then((response) => response.json())
         .then((data) => {
           document.getElementById('map').setAttribute('apiKey', data.key);
+          document.getElementById('map2').setAttribute('apiKey', data.key);
         });
     </script>
   </head>

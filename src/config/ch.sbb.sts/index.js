@@ -8,7 +8,11 @@ import {
   STS_HIT_TOLERANCE,
   SWISS_EXTENT,
 } from "../../utils/constants";
-import { dvDay, dvNight } from "../ch.sbb.direktverbindungen";
+import {
+  DV_DAY_LAYER_KEY,
+  DV_NIGHT_LAYER_KEY,
+  getDirektverbindungenLayers,
+} from "../ch.sbb.direktverbindungen";
 
 const FILTER_KEY = "sts.filter";
 const FILTER_GTTOS_VALUE = "sts_gttos";
@@ -18,13 +22,18 @@ const FILTER_LINE_VALUE = "sts.line"; // style using nova daten
 
 const STS_VALIDITY_DATA_LAYER_KEY = "ch.sbb.sts.validity.data";
 const STS_DIREKTVERBINDUNGEN_DATA_LAYER_KEY = "ch.sbb.direktverbindungen.data";
-const ROUTES_HIGHLIGHT_LAYER_KEY = "ch.sbb.sts.validity.routes_highlight";
+export const ROUTES_HIGHLIGHT_LAYER_KEY =
+  "ch.sbb.sts.validity.routes_highlight";
 const STS_HIDDEN_ROUTES_LAYER_KEY = "ch.sbb.sts.validity.hidden";
-const OTHER_LAYER_KEY = "ch.sbb.sts.validity.other";
-const GTTOS_LAYER_KEY = "ch.sbb.sts.validity.gttos";
+export const OTHER_LAYER_KEY = "ch.sbb.sts.validity.other";
+export const GTTOS_LAYER_KEY = "ch.sbb.sts.validity.gttos";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getStsLayers = () => {
+  const dvLayers = getDirektverbindungenLayers();
+  const dvDay = dvLayers.find((l) => l.name === DV_DAY_LAYER_KEY);
+  const dvNight = dvLayers.find((l) => l.name === DV_NIGHT_LAYER_KEY);
+
   const stsValidityDataLayer = new TrafimageMapboxLayer({
     name: STS_VALIDITY_DATA_LAYER_KEY,
     key: STS_VALIDITY_DATA_LAYER_KEY,

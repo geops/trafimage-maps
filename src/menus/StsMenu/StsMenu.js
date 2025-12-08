@@ -12,7 +12,6 @@ import DvLayerSwitcher from "../DirektverbindungenMenu/DvLayerSwitcher";
 import DvFeatureInfo from "../../config/ch.sbb.direktverbindungen/DvFeatureInfo";
 import StsValidityFeatureInfo from "./StsValidityFeatureInfo";
 import IframeMenu from "../IframeMenu";
-import stsLayers from "../../config/ch.sbb.sts";
 import { setFeatureInfo } from "../../model/app/actions";
 import { DV_KEY } from "../../utils/constants";
 import useHasScreenSize from "../../utils/useHasScreenSize";
@@ -90,7 +89,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const updateLayers = (key = "sts", baseLayer) => {
+const updateLayers = (key = "sts", baseLayer, stsLayers) => {
   if (key === "sts") {
     stsLayers.forEach((layer) => {
       layer.visible = /(ch\.sbb\.sts\.validity(?!\.(hidden)$))/.test(layer.key);
@@ -121,15 +120,13 @@ function StsMenu() {
   const [anchorEl, setAnchorEl] = useState();
   const displayMenu = useSelector((state) => state.app.displayMenu);
   const stsBaseLayer = useMemo(
-    () => stsLayers.find((layer) => /ch.sbb.sts.validity.data/.test(layer.key)),
-    [],
+    () => layers.find((layer) => /ch.sbb.sts.validity.data/.test(layer.key)),
+    [layers],
   );
   const dvBaseLayer = useMemo(
     () =>
-      stsLayers.find((layer) =>
-        /ch.sbb.direktverbindungen.data/.test(layer.key),
-      ),
-    [],
+      layers.find((layer) => /ch.sbb.direktverbindungen.data/.test(layer.key)),
+    [layers],
   );
 
   useEffect(() => {
@@ -153,7 +150,7 @@ function StsMenu() {
         layer?.on("change:visible", (evt) => {
           if (evt.target.visible) {
             evt.target.mbMap?.once("idle", () => {
-              updateLayers(activeMenu, layer);
+              updateLayers(activeMenu, layer, layers);
             });
           }
         }),

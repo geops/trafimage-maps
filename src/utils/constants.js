@@ -34,6 +34,9 @@ export const STOPO_LANDESKARTE_GRAU_LAYER_NAME =
 export const NETZKARTE_DARK_LAYER_NAME = "ch.sbb.netzkarte.dark";
 export const BAHNHOFPLAENE_LAYER_NAME = "ch.sbb.bahnhofplaene";
 export const GESCHOSSE_LAYER_NAME = "ch.sbb.geschosse";
+export const INFRASTRUKTUR_LAYER_NAME = "ch.sbb.infrastruktur";
+export const STS_OTHER_ROUTES_LAYER_NAME = "Other routes";
+export const STS_HIGHLIGHT_ROUTES_LAYER_NAME = "Highlight routes";
 // Direktverbindungen
 export const DV_KEY = "ch.sbb.direktverbindungen";
 export const DV_DAY_NIGHT_REGEX = new RegExp(`^${DV_KEY}.(day|night)$`);

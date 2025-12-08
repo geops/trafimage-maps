@@ -7,11 +7,7 @@ import { getRailplusLayers } from "./ch.railplus.mitglieder";
 import { getNetzkarteLayers } from "./ch.sbb.netzkarte";
 // import constructionLayers from "./ch.sbb.construction";
 import { getHandicapLayers } from "./ch.sbb.handicap";
-import {
-  netzkarteEisenbahninfrastruktur,
-  betriebsRegionenVisible,
-  getInfrastrukturLayers,
-} from "./ch.sbb.infrastruktur";
+import { getInfrastrukturLayers } from "./ch.sbb.infrastruktur";
 import { getEnergieLayers } from "./ch.sbb.energie";
 import { getTarifverbundkarteLayers } from "./ch.sbb.tarifverbundkarte.public";
 import { getRegionenkartePublicLayers } from "./ch.sbb.regionenkarte.public";
@@ -20,10 +16,10 @@ import { getIsbLayers } from "./ch.sbb.isb";
 import { getSandboxLayers } from "./ch.sbb.netzkarte.sandbox";
 import { getZweitausbildungLayers } from "./ch.sbb.zweitausbildung";
 import {
-  geltungsbereicheTk,
-  geltungsbereicheHta,
-  geltungsbereicheGA,
   getGeltungsbereicheLayers,
+  TK_LAYER_KEY,
+  HTA_LAYER_KEY,
+  GA_LAYER_KEY,
 } from "./ch.sbb.geltungsbereiche.mvp";
 import { getGeltungsbereicheIframeLayers } from "./ch.sbb.geltungsbereiche.iframe";
 import { getStsLayers } from "./ch.sbb.sts";
@@ -33,6 +29,7 @@ import GeltungsbereicheTopicMenu from "../menus/GeltungsbereicheTopicMenu";
 import StsMenu from "../menus/StsMenu";
 import {
   DV_KEY,
+  INFRASTRUKTUR_LAYER_NAME,
   ONLY_WHEN_NOT_LOGGED_IN,
   PDF_DOWNLOAD_EVENT_TYPE,
   RAILPLUS_EXPORTBTN_ID,
@@ -48,12 +45,13 @@ import { getFunkmesswagenLayers } from "./ch.sbb.funkmesswagen";
 import MesswagenFollowButton from "./ch.sbb.funkmesswagen/MesswagenFollowButton";
 import { MesswagenPopup } from "../popups";
 import StsMenuToggler from "./ch.sbb.sts/StsMenuToggler/StsMenuToggler";
-// For backward compatibility
-export {
-  casaDataLayerWithoutLabels,
-  casaNetzkarteLayerWithLabels,
-  casaNetzkarteLayerWithoutLabels,
-} from "./ch.sbb.casa";
+import MapboxStyleLayer from "../layers/MapboxStyleLayer";
+// // For backward compatibility
+// export {
+//   casaDataLayerWithoutLabels,
+//   casaNetzkarteLayerWithLabels,
+//   casaNetzkarteLayerWithoutLabels,
+// } from "./ch.sbb.casa";
 
 export const defaultElements = {
   header: true,
@@ -146,6 +144,25 @@ export const getTopics = () => {
     layerInfoComponent: "InfrastrukturTopicInfo",
     searches: defaultSearches,
   };
+
+  const netzkarteEisenbahninfrastruktur = infrastruktur.layers.find(
+    (l) => l.name === INFRASTRUKTUR_LAYER_NAME,
+  );
+  // Clone layer to set visibility true by default for appName="betriebsregionen" [TRAFDIV-421]
+  const betriebsRegionenVisible = new MapboxStyleLayer({
+    name: "ch.sbb.betriebsregionen",
+    visible: true,
+    mapboxLayer: netzkarteEisenbahninfrastruktur,
+    styleLayersFilter: ({ metadata }) =>
+      /^operational_regions$/.test(metadata?.["general.filter"]),
+    properties: {
+      isQueryable: true,
+      hasInfos: true,
+      useOverlay: true,
+      popupComponent: "BetriebsRegionenPopup",
+      layerInfoComponent: "BetriebsRegionenLayerInfo",
+    },
+  });
 
   const betriebsregionen = {
     name: "ch.sbb.infrastruktur",
@@ -283,6 +300,16 @@ export const getTopics = () => {
     searches: defaultSearches,
   };
 
+  const geltunsbereicheLayers = getGeltungsbereicheLayers();
+  const geltungsbereicheTk = geltunsbereicheLayers.find(
+    (l) => l.name === TK_LAYER_KEY,
+  );
+  const geltungsbereicheHta = geltunsbereicheLayers.find(
+    (l) => l.name === HTA_LAYER_KEY,
+  );
+  const geltungsbereicheGA = geltunsbereicheLayers.find(
+    (l) => l.name === GA_LAYER_KEY,
+  );
   const getVisibleGbExportLayer = () =>
     [geltungsbereicheTk, geltungsbereicheHta, geltungsbereicheGA].find(
       (l) => l.visible,
@@ -298,7 +325,7 @@ export const getTopics = () => {
     },
     maxZoom: 14,
     minZoom: 7,
-    layers: getGeltungsbereicheLayers(),
+    layers: geltunsbereicheLayers,
     projection: "EPSG:3857",
     layerInfoComponent: "GeltungsbereicheTopicInfo",
     searches: defaultSearches,

@@ -13,13 +13,12 @@ import {
 export const getConstructionLayers = () => {
   const layers = getNetzkarteLayers();
 
-  const netzkarteLayer = layers.find(
-    (l) => l.get("name") === NETZKARTE_LAYER_NAME,
-  );
+  const netzkarteLayer = layers.find((l) => l.name === NETZKARTE_LAYER_NAME);
 
   const netzkarteAerial = layers.find(
-    (l) => l.get("name") === NETZKARTE_AERIAL_LAYER_NAME,
+    (l) => l.name === NETZKARTE_AERIAL_LAYER_NAME,
   );
+
   const constructionDataLayer = new TrafimageMapboxLayer({
     name: "ch.sbb.construction.data",
     visible: true,
