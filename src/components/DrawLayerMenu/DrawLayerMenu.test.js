@@ -31,6 +31,7 @@ describe("DrawLayerMenu", () => {
 
     test("using the layerService property", () => {
       store = global.mockStore({
+        i18n: global.i18n,
         map: {
           drawLayer,
           layers: [],

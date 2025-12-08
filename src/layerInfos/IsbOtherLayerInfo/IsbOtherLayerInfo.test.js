@@ -1,7 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { isbOther } from "../../config/ch.sbb.isb";
+import { getIsbLayers } from "../../config/ch.sbb.isb";
 import IsbOtherLayerInfo from ".";
+
+const layers = getIsbLayers();
+const isbOther = layers.find((layer) => layer.key === "ch.sbb.isb.other");
 
 describe("IsbOtherLayerInfo", () => {
   test("render something", () => {

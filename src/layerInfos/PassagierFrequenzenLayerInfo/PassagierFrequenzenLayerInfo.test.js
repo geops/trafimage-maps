@@ -1,7 +1,11 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { passagierfrequenzen } from "../../config/ch.sbb.netzkarte";
 import PassagierFrequenzenLayerInfo from ".";
+import { getNetzkarteLayers } from "../../config/ch.sbb.netzkarte";
+
+const passagierfrequenzen = getNetzkarteLayers().find(
+  (layer) => layer.key === "ch.sbb.bahnhoffrequenzen",
+);
 
 describe("PassagierFrequenzenLayerInfo", () => {
   test("should display link to data", () => {

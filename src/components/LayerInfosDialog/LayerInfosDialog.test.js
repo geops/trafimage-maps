@@ -7,8 +7,13 @@ import { Layer } from "mobility-toolbox-js/ol";
 import OLLayer from "ol/layer/Vector";
 import { ThemeProvider } from "@mui/material";
 import theme from "../../themes/default";
-import { bahnhofplaene } from "../../config/ch.sbb.netzkarte";
+import { getNetzkarteLayers } from "../../config/ch.sbb.netzkarte";
 import LayerInfosDialog from ".";
+import BAHNHOFPLAENE_LAYER_NAME from "../../utils/constants";
+
+const bahnhofplaene = getNetzkarteLayers().find(
+  (layer) => layer.name === BAHNHOFPLAENE_LAYER_NAME,
+);
 
 describe("LayerInfosDialog", () => {
   let store;

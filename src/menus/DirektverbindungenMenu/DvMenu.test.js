@@ -7,12 +7,15 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import OLMap from "ol/Map";
 import DvMenu from "./DvMenu";
-import { direktverbindungenIframe } from "../../config/topics";
+import { getTopics } from "../../config/topics";
 import dvLayers from "../../config/ch.sbb.direktverbindungen";
 import { DV_KEY } from "../../utils/constants";
 import highlightPointStyle from "../../utils/highlightPointStyle";
 import theme from "../../themes/default";
 
+const direktverbindungenIframe = getTopics().find(
+  (t) => t.key === "ch.sbb.direktverbindungen-iframe.topic",
+);
 describe("DvMenu", () => {
   let store;
   const highlightLayer = new VectorLayer({

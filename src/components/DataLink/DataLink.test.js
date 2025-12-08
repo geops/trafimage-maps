@@ -2,7 +2,11 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Layer } from "mobility-toolbox-js/ol";
 import DataLink from "./DataLink";
-import { passagierfrequenzen } from "../../config/ch.sbb.netzkarte";
+import { getNetzkarteLayers } from "../../config/ch.sbb.netzkarte";
+
+const passagierfrequenzen = getNetzkarteLayers().find(
+  (layer) => layer.key === "ch.sbb.netzkarte.passagierfrequenzen",
+);
 
 describe("DataLink", () => {
   describe("should dislay data link with Open Data text", () => {

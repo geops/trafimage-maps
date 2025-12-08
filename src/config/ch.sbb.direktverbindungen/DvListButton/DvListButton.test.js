@@ -5,9 +5,13 @@ import { Provider } from "react-redux";
 import OLMap from "ol/Map";
 import { ThemeProvider } from "@mui/material";
 import dvLayers from "../index";
-import { direktverbindungenIframe } from "../../topics";
+import { getTopics } from "../../topics";
 import DvListButton from "./DvListButton";
 import theme from "../../../themes/default";
+
+const direktverbindungenIframe = getTopics().find(
+  (topic) => topic.key === "ch.sbb.direktverbindungen-iframe.topic",
+);
 
 describe("DvListButton", () => {
   let store;
