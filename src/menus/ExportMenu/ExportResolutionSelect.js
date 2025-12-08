@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import { MenuItem, InputLabel, FormControl } from "@mui/material";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import useTranslation from "../../utils/useTranslation";
 import Select from "../../components/Select";
 import { validateOption } from "../../utils/exportUtils";
 import { setExportPrintOptions } from "../../model/app/actions";
@@ -44,7 +44,6 @@ function ExportResolutionSelect({ options, className }) {
     <FormControl className={className}>
       <InputLabel className={classes.label}>{t("Format")}</InputLabel>
       <Select
-        id="pdf-format-select-label"
         className={classes.input}
         value={value}
         onChange={(evt) => dispatch(setExportPrintOptions(evt.target.value))}

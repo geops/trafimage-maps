@@ -2,10 +2,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
 import { useSelector } from "react-redux";
-import { useTranslation, Trans } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
 import Link from "../../components/Link";
+import useTranslation from "../../utils/useTranslation";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -98,21 +98,16 @@ const getAccessibility = (value, language, t) => {
         <Typography>{t(formatStateData(value?.state))}</Typography>
         {hasTranslatedString && (
           <Typography>
-            <Trans
-              i18nKey={hardcodedStringForNote}
-              components={{
-                1: <br />,
-                2: (
-                  <a
-                    href="https://www.swisspass.ch/handicap"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    swisspass.ch/handicap
-                  </a>
+            <span
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: t(hardcodedStringForNote).replace(
+                  "swisspass.ch/handicap",
+                  '<a href="https://www.swisspass.ch/handicap" rel="noopener noreferrer"  target="_blank">swisspass.ch/handicap</a>',
                 ),
               }}
             />
+            s
           </Typography>
         )}
         {notTranslatedInfo && <Typography>{notTranslatedInfo}</Typography>}

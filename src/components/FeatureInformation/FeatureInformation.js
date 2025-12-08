@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import { setFeatureInfo } from "../../model/app/actions";
 import useUpdateFeatureInfoOnLayerToggle from "../../utils/useUpdateFeatureInfoOnLayerToggle";
 import useIndexedFeatureInfo from "../../utils/useIndexedFeatureInfo";
@@ -19,6 +19,8 @@ function FeatureInformation({ featureInfo }) {
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
+  const id = useId();
+  const descId = useId();
 
   // List of features, layers and coordinates available for pagination.
   const infoIndexed = useIndexedFeatureInfo(featureInfo);
@@ -67,8 +69,8 @@ function FeatureInformation({ featureInfo }) {
   return (
     <div
       className="wkp-feature-information"
-      aria-labelledby="wkp-popup-label"
-      aria-describedby="wkp-popup-desc"
+      aria-labelledby={id}
+      aria-describedby={descId}
       role="dialog"
     >
       <React.Suspense fallback="...loading">
@@ -76,7 +78,7 @@ function FeatureInformation({ featureInfo }) {
         (hideHeader && // For dynamic header rendering (e.g. CASA)
           !hideHeader(feature)) ? (
           <div className="wkp-feature-information-header" aria-live="assertive">
-            <span id="wkp-popup-label">
+            <span id={id}>
               {renderTitle
                 ? renderTitle(feature, info.layer, t)
                 : info.layer.name && t(info.layer.name)}
@@ -100,6 +102,7 @@ function FeatureInformation({ featureInfo }) {
             language={language}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}
+            descId={descId}
           />
           {features.length > 1 && (
             <Pagination

@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import Zoom from "react-spatial/components/Zoom";
 import { makeStyles } from "@mui/styles";
+import useTranslation from "../../utils/useTranslation";
 import FitExtent from "./FitExtent";
 import Geolocation from "./Geolocation";
 import MenuToggler from "./MenuToggler";

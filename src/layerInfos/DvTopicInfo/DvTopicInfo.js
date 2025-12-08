@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import { dvDay, dvNight } from "../../config/ch.sbb.direktverbindungen";
 import DataLink from "../../components/DataLink";
 import DvLegendLine from "../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine";

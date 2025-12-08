@@ -3,8 +3,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import i18next from "i18next";
-import { withTranslation } from "react-i18next";
-import { compose } from "redux";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
 import LayerService from "../../utils/LayerService";
@@ -466,6 +464,7 @@ const mapStateToProps = (state) => ({
   loginUrl: state.app.loginUrl,
   realtimeKey: state.app.realtimeKey,
   realtimeUrl: state.app.realtimeUrl,
+  t: state.app.t,
 });
 
 const mapDispatchToProps = {
@@ -483,7 +482,4 @@ TopicLoader.propTypes = propTypes;
 TopicLoader.defaultProps = defaultProps;
 TopicLoader.contextType = MatomoContext;
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps, mapDispatchToProps),
-)(TopicLoader);
+export default connect(mapStateToProps, mapDispatchToProps)(TopicLoader);

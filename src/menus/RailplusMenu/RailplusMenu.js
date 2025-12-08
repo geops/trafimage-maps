@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import IframeMenu from "../IframeMenu";
 import { RailplusPopup } from "../../popups";
 import { setFeatureInfo } from "../../model/app/actions";

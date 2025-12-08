@@ -1,8 +1,8 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import RsCopyright from "react-spatial/components/Copyright";
 import { makeStyles } from "@mui/styles";
+import useTranslation from "../../utils/useTranslation";
 
 const useStyles = makeStyles(() => ({
   wrapper: {

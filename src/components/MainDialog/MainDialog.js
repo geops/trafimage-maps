@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { FaInfo } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import LayerInfosDialog, {
   NAME as LAYER_INFOS_DIALOG_NAME,
 } from "../LayerInfosDialog";

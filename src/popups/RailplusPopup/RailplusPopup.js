@@ -8,11 +8,11 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { useTranslation } from "react-i18next";
 import { FaCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { LineString } from "ol/geom";
 import { containsExtent } from "ol/extent";
+import useTranslation from "../../utils/useTranslation";
 import RailplusLayer from "../../layers/RailplusLayer";
 import PhotoCarusel from "../../components/PhotoCarusel";
 import useHasScreenSize from "../../utils/useHasScreenSize";

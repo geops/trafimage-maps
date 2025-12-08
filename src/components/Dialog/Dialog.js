@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState, useRef, forwardRef } from "react";
+import React, { useEffect, useState, useRef, useId, forwardRef } from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import { Dialog as MuiDialog, DialogTitle, Paper } from "@mui/material";
 import Draggable from "react-draggable";
+import useTranslation from "../../utils/useTranslation";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 import { setDialogVisible, setDialogPosition } from "../../model/app/actions";
 import CloseButton from "../CloseButton";
@@ -88,7 +88,8 @@ function DraggablePaperComponent(props) {
   return (
     <Draggable
       nodeRef={nodeRef}
-      handle="#draggable-dialog-title"
+      // eslint-disable-next-line react/destructuring-assignment, react/prop-types
+      handle={`#${props?.handleId}`}
       cancel={'[class*="MuiDialogContent-root"]'}
       defaultPosition={dialogPosition}
       position={dialogPosition}
@@ -128,6 +129,7 @@ function Dialog({
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const id = useId();
   const classesProp = classes || {};
 
   const [dialogNode, setDialogNode] = useState(null);
@@ -192,6 +194,9 @@ function Dialog({
       hideBackdrop: false,
       maxWidth: "md",
       PaperComponent,
+      PaperProps: {
+        handleId: id,
+      },
       classes: {
         ...classesProp,
         scrollPaper: `${classesDialog.scrollPaperModal}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
@@ -211,7 +216,7 @@ function Dialog({
         {...dialogProps}
       >
         <DialogTitle
-          id="draggable-dialog-title"
+          id={id}
           variant="h4"
           style={{ cursor: isModal ? "auto" : "move" }}
         >

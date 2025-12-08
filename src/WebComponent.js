@@ -6,7 +6,7 @@ import Style from "style-it";
 import LayerService from "./utils/LayerService";
 import TrafimageMaps from "./components/TrafimageMaps";
 import styles from "./WebComponent.scss";
-import { getTopicConfig } from "./config/topics";
+import { getTopicsFromAppName } from "./config/topics";
 
 const propTypes = {
   /**
@@ -269,7 +269,7 @@ function WebComponent(props) {
   );
 
   const appTopics = useMemo(() => {
-    const tps = topics || getTopicConfig(appName);
+    const tps = topics || getTopicsFromAppName(appName);
 
     if (!tps) {
       // eslint-disable-next-line no-console

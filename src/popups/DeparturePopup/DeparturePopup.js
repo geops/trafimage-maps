@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
-import { withTranslation } from "react-i18next";
 import DeparturePopupContent from "./DeparturePopupContent";
 
 function DeparturePopup({ feature, children }) {
@@ -21,7 +20,7 @@ DeparturePopup.propTypes = {
 };
 DeparturePopup.defaultProps = { children: undefined };
 
-const composed = withTranslation()(DeparturePopup);
+const composed = DeparturePopup;
 composed.renderTitle = (feat, layer, t) => {
   const platform = feat.get("platform");
   if (platform) {

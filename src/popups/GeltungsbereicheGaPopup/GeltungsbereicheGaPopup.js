@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import Feature from "ol/Feature";
 import { Layer } from "mobility-toolbox-js/ol";
@@ -12,6 +11,7 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import { FaCircle } from "react-icons/fa";
+import useTranslation from "../../utils/useTranslation";
 import GeltungsbereicheLegend, { getLegends } from "./GeltungsbereicheLegend";
 import { infos } from "../../layerInfos/GeltungsbereicheLayerInfo/GeltungsbereicheLayerInfo";
 

@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { FormGroup, FormControlLabel } from "@mui/material";
 import { unByKey } from "ol/Observable";
+import useTranslation from "../../utils/useTranslation";
 import SBBSwitch from "../../components/SBBSwitch";
 import { STS_KEY } from "../../utils/constants";
 import { setFeatureInfo } from "../../model/app/actions";

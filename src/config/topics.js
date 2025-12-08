@@ -10,7 +10,7 @@ import netzkarteLayers, {
   stationsLayer,
   bahnhofplaene,
 } from "./ch.sbb.netzkarte";
-import constructionLayers from "./ch.sbb.construction";
+// import constructionLayers from "./ch.sbb.construction";
 import handicapLayers from "./ch.sbb.handicap";
 import infrastrukturLayers, {
   netzkarteEisenbahninfrastruktur,
@@ -31,7 +31,7 @@ import geltungsbereicheMvpLayers, {
 import geltungsbereicheIframeLayers from "./ch.sbb.geltungsbereiche.iframe";
 import stsLayers from "./ch.sbb.sts";
 import dvLayers from "./ch.sbb.direktverbindungen";
-import defaultSearches, { handicapStopFinder, stopFinder } from "./searches";
+import { getDefaultSearches, getSearchByName, SearchName } from "./searches";
 import GeltungsbereicheTopicMenu from "../menus/GeltungsbereicheTopicMenu";
 import StsMenu from "../menus/StsMenu";
 import {
@@ -62,7 +62,7 @@ export const defaultElements = {
   header: true,
   footer: true,
   menu: true,
-  permalink: true,
+  permalink: false,
   mapControls: true,
   baseLayerSwitcher: true,
   popup: true,
@@ -72,455 +72,461 @@ export const defaultElements = {
   geolocationButton: true,
 };
 
-export const netzkarte = {
-  name: "ch.sbb.netzkarte.topic",
-  key: "ch.sbb.netzkarte",
-  elements: {
-    ...defaultElements,
-    popup: true,
-    shareMenu: true,
-    trackerMenu: true,
-    floorSwitcher: true,
-  },
-  layers: netzkarteLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "NetzkarteTopicInfo",
-  searches: defaultSearches,
-};
+export const getTopics = () => {
+  const defaultSearches = getDefaultSearches();
+  const handicapStopFinder = getSearchByName(SearchName.HandicapStopFinder);
+  const stopFinder = getSearchByName(SearchName.Stationen);
 
-export const handicap = {
-  name: "ch.sbb.handicap",
-  key: "ch.sbb.handicap",
-  elements: {
-    ...defaultElements,
-    shareMenu: true,
-    popup: true,
-  },
-  layers: handicapLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "HandicapTopicInfo",
-  searches: {
-    Stationen: handicapStopFinder,
-  },
-  minZoom: 7,
-};
+  const netzkarte = {
+    name: "ch.sbb.netzkarte.topic",
+    key: "ch.sbb.netzkarte",
+    elements: {
+      ...defaultElements,
+      popup: true,
+      shareMenu: true,
+      trackerMenu: true,
+      floorSwitcher: true,
+    },
+    layers: netzkarteLayers,
+    projection: "EPSG:3857",
+    layerInfoComponent: "NetzkarteTopicInfo",
+    searches: defaultSearches,
+  };
 
-export const netzkarteStelen = {
-  name: "ch.sbb.netzkarte.topic",
-  key: "ch.sbb.netzkarte",
-  layers: [dataLayer, netzkarteLayer, stationsLayer, bahnhofplaene],
-  elements: {},
-  projection: "EPSG:3857",
-};
+  const handicap = {
+    name: "ch.sbb.handicap",
+    key: "ch.sbb.handicap",
+    elements: {
+      ...defaultElements,
+      shareMenu: true,
+      popup: true,
+    },
+    layers: handicapLayers,
+    projection: "EPSG:3857",
+    layerInfoComponent: "HandicapTopicInfo",
+    searches: {
+      Stationen: handicapStopFinder,
+    },
+    minZoom: 7,
+  };
 
-export const bauprojekte = {
-  name: "ch.sbb.construction",
-  key: "ch.sbb.construction",
-  elements: {
-    ...defaultElements,
-    shareMenu: true,
-    popup: true,
-    filter: true,
-    filters: true,
-  },
-  layers: constructionLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "ConstructionTopicInfo",
-  searches: defaultSearches,
-  minZoom: 7,
-};
+  const netzkarteStelen = {
+    name: "ch.sbb.netzkarte.topic",
+    key: "ch.sbb.netzkarte",
+    layers: [dataLayer, netzkarteLayer, stationsLayer, bahnhofplaene],
+    elements: {},
+    projection: "EPSG:3857",
+  };
 
-export const infrastruktur = {
-  name: "ch.sbb.infrastruktur",
-  key: "ch.sbb.infrastruktur",
-  maxZoom: 14,
-  elements: {
-    ...defaultElements,
-    shareMenu: true,
-    popup: true,
-  },
-  layers: infrastrukturLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "InfrastrukturTopicInfo",
-  searches: defaultSearches,
-};
+  // const bauprojekte = {
+  //   name: "ch.sbb.construction",
+  //   key: "ch.sbb.construction",
+  //   elements: {
+  //     ...defaultElements,
+  //     shareMenu: true,
+  //     popup: true,
+  //     filter: true,
+  //     filters: true,
+  //   },
+  //   layers: constructionLayers,
+  //   projection: "EPSG:3857",
+  //   layerInfoComponent: "ConstructionTopicInfo",
+  //   searches: defaultSearches,
+  //   minZoom: 7,
+  // };
 
-export const betriebsregionen = {
-  name: "ch.sbb.infrastruktur",
-  key: "ch.sbb.infrastruktur",
-  elements: {
-    ...defaultElements,
-    header: false,
-    search: false,
-    drawMenu: false,
-    popup: true,
-  },
-  layers: [netzkarteEisenbahninfrastruktur, betriebsRegionenVisible],
-  projection: "EPSG:3857",
-};
+  const infrastruktur = {
+    name: "ch.sbb.infrastruktur",
+    key: "ch.sbb.infrastruktur",
+    maxZoom: 14,
+    elements: {
+      ...defaultElements,
+      shareMenu: true,
+      popup: true,
+    },
+    layers: infrastrukturLayers,
+    projection: "EPSG:3857",
+    layerInfoComponent: "InfrastrukturTopicInfo",
+    searches: defaultSearches,
+  };
 
-export const regionenkartePublic = {
-  name: "ch.sbb.regionenkarte.public",
-  key: "ch.sbb.regionenkarte.public",
-  maxZoom: 14,
-  elements: {
-    ...defaultElements,
-    popup: true,
-    overlay: true,
-  },
-  layers: regionenkarteLayers,
-  layerInfoComponent: "RegionenkartePublicTopicInfo",
-  searches: defaultSearches,
-  minZoom: 7,
-};
+  const betriebsregionen = {
+    name: "ch.sbb.infrastruktur",
+    key: "ch.sbb.infrastruktur",
+    elements: {
+      ...defaultElements,
+      header: false,
+      search: false,
+      drawMenu: false,
+      popup: true,
+    },
+    layers: [netzkarteEisenbahninfrastruktur, betriebsRegionenVisible],
+    projection: "EPSG:3857",
+  };
 
-export const tarifverbundkarte = {
-  name: "ch.sbb.tarifverbundkarte.public",
-  key: "ch.sbb.tarifverbundkarte.public",
-  layerInfoComponent: "TarifverbundkarteTopicInfo",
-  layers: tarifverbundkarteLayers,
-  maxZoom: 12,
-  minZoom: 7,
-  exportConfig: {
-    getTemplateValues: () => ({
-      publisher: "tobias.hauser@sbb.ch",
-      publishedAt: "12/2024",
-      dateDe: "15.12.2024",
-      dateFr: "15.12.2024",
-      year: "2024",
-    }),
-    getOverlayImageUrl: () => tarifverbundkarteLegend,
-  },
-  elements: {
-    ...defaultElements,
-    popup: true,
-    shareMenu: { collapsedOnLoad: true },
-    trackerMenu: true,
-    exportMenu: true,
-    drawMenu: { collapsedOnLoad: true },
-  },
-  searches: defaultSearches,
-};
+  const regionenkartePublic = {
+    name: "ch.sbb.regionenkarte.public",
+    key: "ch.sbb.regionenkarte.public",
+    maxZoom: 14,
+    elements: {
+      ...defaultElements,
+      popup: true,
+      overlay: true,
+    },
+    layers: regionenkarteLayers,
+    layerInfoComponent: "RegionenkartePublicTopicInfo",
+    searches: defaultSearches,
+    minZoom: 7,
+  };
 
-export const zweitausbildung = {
-  name: "ch.sbb.zweitausbildung",
-  key: "ch.sbb.zweitausbildung",
-  maxZoom: 13,
-  elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: zweitausbildungLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "ZweitausbildungTopicInfo",
-  searches: defaultSearches,
-  minZoom: 7,
-};
-
-export const beleuchtungsstaerken = {
-  name: "ch.sbb.beleuchtungsstaerken",
-  key: "ch.sbb.beleuchtungsstaerken",
-  maxZoom: 14,
-  elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: beleuchtungLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "BeleuchtungTopicInfo",
-  searches: defaultSearches,
-  minZoom: 7,
-};
-
-export const energiePublic = {
-  name: "ch.sbb.energie",
-  key: "ch.sbb.energie",
-  maxZoom: 14,
-  elements: {
-    ...defaultElements,
-    shareMenu: true,
-    popup: true,
-    overlay: true,
-    exportMenu: true,
-  },
-  exportConfig: {
-    getTemplateValues: () => ({
-      publisher: "I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch",
-      publishedAt: () => {
-        const date = new Date();
-        return `${date.getMonth() + 1}/${date.getFullYear()}`;
-      },
-      year: () => new Date().getFullYear(),
-    }),
-    getOverlayImageUrl: () => energieLegendPub,
-  },
-  layers: energieLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "EnergiePublicTopicInfo",
-  searches: defaultSearches,
-  minZoom: 7,
-};
-
-export const isb = {
-  name: "ch.sbb.isb",
-  key: "ch.sbb.isb",
-  maxZoom: 14,
-  elements: {
-    ...defaultElements,
-    shareMenu: true,
-    popup: true,
-  },
-  layers: isbLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "IsbTopicInfo",
-  searches: defaultSearches,
-  minZoom: 7,
-};
-
-const sandbox = {
-  name: "ch.sbb.netzkarte.sandbox",
-  key: "ch.sbb.netzkarte.sandbox",
-  layers: sandboxLayers,
-  projection: "EPSG:3857",
-  elements: defaultElements,
-  layerInfoComponent: "SandboxTopicInfo",
-  searches: defaultSearches,
-};
-
-const getVisibleGbExportLayer = () =>
-  [geltungsbereicheTk, geltungsbereicheHta, geltungsbereicheGA].find(
-    (l) => l.visible,
-  );
-
-export const geltungsbereicheMvp = {
-  name: "ch.sbb.geltungsbereiche",
-  key: "ch.sbb.geltungsbereiche",
-  elements: {
-    ...defaultElements,
-    popup: true,
-    shareMenu: true,
-  },
-  maxZoom: 14,
-  minZoom: 7,
-  layers: geltungsbereicheMvpLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "GeltungsbereicheTopicInfo",
-  searches: defaultSearches,
-  mapControls: <GaExportMapButton />,
-  exportConfig: {
-    getTemplateValues: () => ({
-      publishedAt: new Date().toLocaleDateString("en-GB", {
-        year: "numeric",
-        month: "2-digit",
+  const tarifverbundkarte = {
+    name: "ch.sbb.tarifverbundkarte.public",
+    key: "ch.sbb.tarifverbundkarte.public",
+    layerInfoComponent: "TarifverbundkarteTopicInfo",
+    layers: tarifverbundkarteLayers,
+    maxZoom: 12,
+    minZoom: 7,
+    exportConfig: {
+      getTemplateValues: () => ({
+        publisher: "tobias.hauser@sbb.ch",
+        publishedAt: "12/2024",
+        dateDe: "15.12.2024",
+        dateFr: "15.12.2024",
+        year: "2024",
       }),
-    }),
-    getOverlayImageUrl: (lang, paperSize) => {
-      const visibleLayer = getVisibleGbExportLayer();
-      return (
-        geltungsbereicheLegends.find(
-          (l) =>
-            l.paperSize === paperSize &&
-            l.language === lang &&
-            l.validity === visibleLayer?.name,
-        )?.legend || geltungsbereicheLegends[0].legend
-      );
+      getOverlayImageUrl: () => tarifverbundkarteLegend,
     },
-    getExportFileName: (t, paperSize, lang) => {
-      const nameByLang = t("ch.sbb.geltungsbereiche").replaceAll(" ", "_");
-      const date = new Date().toISOString().slice(0, 10);
-      return `${nameByLang}_${paperSize.toUpperCase()}_${lang.toUpperCase()}_${date}.pdf`;
+    elements: {
+      ...defaultElements,
+      popup: true,
+      shareMenu: { collapsedOnLoad: true },
+      trackerMenu: true,
+      exportMenu: true,
+      drawMenu: { collapsedOnLoad: true },
     },
-  },
-};
+    searches: defaultSearches,
+  };
 
-export const geltungsbereicheIframe = {
-  ...geltungsbereicheMvp,
-  elements: {
-    ...defaultElements,
-    popup: true,
-    shareMenu: false,
-    drawMenu: false,
-    permalink: true,
-    geolocationButton: false,
-    header: false,
-    search: false,
-    footer: false,
-    menu: false,
-  },
-  key: "ch.sbb.geltungsbereiche-iframe",
-  layers: geltungsbereicheIframeLayers,
-  only: true,
-  hideInLayerTree: true,
-  menu: <GeltungsbereicheTopicMenu />,
-};
+  const zweitausbildung = {
+    name: "ch.sbb.zweitausbildung",
+    key: "ch.sbb.zweitausbildung",
+    maxZoom: 13,
+    elements: { ...defaultElements, shareMenu: true, popup: true },
+    layers: zweitausbildungLayers,
+    projection: "EPSG:3857",
+    layerInfoComponent: "ZweitausbildungTopicInfo",
+    searches: defaultSearches,
+    minZoom: 7,
+  };
 
-export const sts = {
-  name: "ch.sbb.sts",
-  key: "ch.sbb.sts",
-  elements: {
-    ...defaultElements,
-    overlay: false,
-    popup: false,
-    shareMenu: false,
-    drawMenu: false,
-    permalink: true,
-    geolocationButton: false,
-    header: false,
-    search: false,
-    footer: false,
-    menu: false,
-    menuToggler: true,
-    baseLayerSwitcher: false,
-  },
-  layers: stsLayers,
-  only: true,
-  hideInLayerTree: true,
-  menu: <StsMenu />,
-  enableFeatureClick: true,
-  disablePermalinkLayers: false,
-  center: [915788.3813658276, 5909670.533831286],
-  zoom: 8,
-  constrainOnlyCenter: true,
-  overlaySide: "left",
-  searches: {
-    Stationen: stopFinder,
-  },
-  menuToggler: <StsMenuToggler />,
-};
+  const beleuchtungsstaerken = {
+    name: "ch.sbb.beleuchtungsstaerken",
+    key: "ch.sbb.beleuchtungsstaerken",
+    maxZoom: 14,
+    elements: { ...defaultElements, shareMenu: true, popup: true },
+    layers: beleuchtungLayers,
+    projection: "EPSG:3857",
+    layerInfoComponent: "BeleuchtungTopicInfo",
+    searches: defaultSearches,
+    minZoom: 7,
+  };
 
-export const direktverbindungen = {
-  name: `${DV_KEY}.topic`,
-  key: `${DV_KEY}`,
-  elements: {
-    ...defaultElements,
-    popup: true,
-    shareMenu: true,
-    fitExtent: false,
-  },
-  maxZoom: 13,
-  minZoom: 6,
-  layers: dvLayers,
-  projection: "EPSG:3857",
-  layerInfoComponent: "DvTopicInfo",
-  searches: defaultSearches,
-  mapControls: <DvListButton />,
-};
-
-export const direktverbindungenIframe = {
-  name: `${DV_KEY}-iframe.topic`,
-  key: `${DV_KEY}-iframe`,
-  elements: {
-    ...defaultElements,
-    overlay: false,
-    popup: false,
-    shareMenu: false,
-    drawMenu: false,
-    permalink: true,
-    geolocationButton: true,
-    header: false,
-    search: false,
-    footer: false,
-    menu: false,
-    baseLayerSwitcher: false,
-    fitExtent: false,
-  },
-  maxZoom: 13,
-  minZoom: 6,
-  layers: dvLayers,
-  enableFeatureClick: true,
-  only: true,
-  hideInLayerTree: true,
-  menu: <DvMenu />,
-  mapControls: <DvListButton />,
-  overlaySide: "left",
-};
-
-export const railPlus = {
-  elements: {
-    ...defaultElements,
-    overlay: false,
-    popup: false,
-    shareMenu: false,
-    drawMenu: false,
-    permalink: true,
-    geolocationButton: false,
-    header: false,
-    search: false,
-    footer: false,
-    menu: false,
-  },
-  key: "ch.railplus.mitglieder",
-  name: "ch.railplus.mitglieder",
-  layers: railPlusLayers,
-  only: true,
-  hideInLayerTree: true,
-  enableFeatureClick: true,
-  mapControls: <RailplusExportButton />,
-  menu: <RailplusMenu />,
-  embedded: true,
-  overlaySide: "left",
-  messageEvents: [
-    {
-      eventType: PDF_DOWNLOAD_EVENT_TYPE,
-      callback: () => document.getElementById(RAILPLUS_EXPORTBTN_ID).click(),
+  const energiePublic = {
+    name: "ch.sbb.energie",
+    key: "ch.sbb.energie",
+    maxZoom: 14,
+    elements: {
+      ...defaultElements,
+      shareMenu: true,
+      popup: true,
+      overlay: true,
+      exportMenu: true,
     },
-  ],
-  exportConfig: {
-    getTemplateValues: () => ({
-      publishedAt: "08/2025",
-      year: "2025",
-    }),
-    getOverlayImageUrl: () => railplusLegend,
-    getExportFileName: () =>
-      `RAILplus Streckennetz-Carte du réseau-Carta della rete  ${new Date().toISOString().slice(0, 10)}`,
-  },
-  minZoom: 7,
-  maxZoom: 13,
-  noTracking: true,
+    exportConfig: {
+      getTemplateValues: () => ({
+        publisher: "I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch",
+        publishedAt: () => {
+          const date = new Date();
+          return `${date.getMonth() + 1}/${date.getFullYear()}`;
+        },
+        year: () => new Date().getFullYear(),
+      }),
+      getOverlayImageUrl: () => energieLegendPub,
+    },
+    layers: energieLayers,
+    projection: "EPSG:3857",
+    layerInfoComponent: "EnergiePublicTopicInfo",
+    searches: defaultSearches,
+    minZoom: 7,
+  };
+
+  const isb = {
+    name: "ch.sbb.isb",
+    key: "ch.sbb.isb",
+    maxZoom: 14,
+    elements: {
+      ...defaultElements,
+      shareMenu: true,
+      popup: true,
+    },
+    layers: isbLayers,
+    projection: "EPSG:3857",
+    layerInfoComponent: "IsbTopicInfo",
+    searches: defaultSearches,
+    minZoom: 7,
+  };
+
+  const sandbox = {
+    name: "ch.sbb.netzkarte.sandbox",
+    key: "ch.sbb.netzkarte.sandbox",
+    layers: sandboxLayers,
+    projection: "EPSG:3857",
+    elements: defaultElements,
+    layerInfoComponent: "SandboxTopicInfo",
+    searches: defaultSearches,
+  };
+
+  const getVisibleGbExportLayer = () =>
+    [geltungsbereicheTk, geltungsbereicheHta, geltungsbereicheGA].find(
+      (l) => l.visible,
+    );
+
+  const geltungsbereicheMvp = {
+    name: "ch.sbb.geltungsbereiche",
+    key: "ch.sbb.geltungsbereiche",
+    elements: {
+      ...defaultElements,
+      popup: true,
+      shareMenu: true,
+    },
+    maxZoom: 14,
+    minZoom: 7,
+    layers: geltungsbereicheMvpLayers,
+    projection: "EPSG:3857",
+    layerInfoComponent: "GeltungsbereicheTopicInfo",
+    searches: defaultSearches,
+    mapControls: <GaExportMapButton />,
+    exportConfig: {
+      getTemplateValues: () => ({
+        publishedAt: new Date().toLocaleDateString("en-GB", {
+          year: "numeric",
+          month: "2-digit",
+        }),
+      }),
+      getOverlayImageUrl: (lang, paperSize) => {
+        const visibleLayer = getVisibleGbExportLayer();
+        return (
+          geltungsbereicheLegends.find(
+            (l) =>
+              l.paperSize === paperSize &&
+              l.language === lang &&
+              l.validity === visibleLayer?.name,
+          )?.legend || geltungsbereicheLegends[0].legend
+        );
+      },
+      getExportFileName: (t, paperSize, lang) => {
+        const nameByLang = t("ch.sbb.geltungsbereiche").replaceAll(" ", "_");
+        const date = new Date().toISOString().slice(0, 10);
+        return `${nameByLang}_${paperSize.toUpperCase()}_${lang.toUpperCase()}_${date}.pdf`;
+      },
+    },
+  };
+
+  const geltungsbereicheIframe = {
+    ...geltungsbereicheMvp,
+    elements: {
+      ...defaultElements,
+      popup: true,
+      shareMenu: false,
+      drawMenu: false,
+      permalink: true,
+      geolocationButton: false,
+      header: false,
+      search: false,
+      footer: false,
+      menu: false,
+    },
+    key: "ch.sbb.geltungsbereiche-iframe",
+    layers: geltungsbereicheIframeLayers,
+    only: true,
+    hideInLayerTree: true,
+    menu: <GeltungsbereicheTopicMenu />,
+  };
+
+  const sts = {
+    name: "ch.sbb.sts",
+    key: "ch.sbb.sts",
+    elements: {
+      ...defaultElements,
+      overlay: false,
+      popup: false,
+      shareMenu: false,
+      drawMenu: false,
+      permalink: true,
+      geolocationButton: false,
+      header: false,
+      search: false,
+      footer: false,
+      menu: false,
+      menuToggler: true,
+      baseLayerSwitcher: false,
+    },
+    layers: stsLayers,
+    only: true,
+    hideInLayerTree: true,
+    menu: <StsMenu />,
+    enableFeatureClick: true,
+    disablePermalinkLayers: false,
+    center: [915788.3813658276, 5909670.533831286],
+    zoom: 8,
+    constrainOnlyCenter: true,
+    overlaySide: "left",
+    searches: {
+      Stationen: stopFinder,
+    },
+    menuToggler: <StsMenuToggler />,
+  };
+
+  const direktverbindungen = {
+    name: `${DV_KEY}.topic`,
+    key: `${DV_KEY}`,
+    elements: {
+      ...defaultElements,
+      popup: true,
+      shareMenu: true,
+      fitExtent: false,
+    },
+    maxZoom: 13,
+    minZoom: 6,
+    layers: dvLayers,
+    projection: "EPSG:3857",
+    layerInfoComponent: "DvTopicInfo",
+    searches: defaultSearches,
+    mapControls: <DvListButton />,
+  };
+
+  const direktverbindungenIframe = {
+    name: `${DV_KEY}-iframe.topic`,
+    key: `${DV_KEY}-iframe`,
+    elements: {
+      ...defaultElements,
+      overlay: false,
+      popup: false,
+      shareMenu: false,
+      drawMenu: false,
+      permalink: true,
+      geolocationButton: true,
+      header: false,
+      search: false,
+      footer: false,
+      menu: false,
+      baseLayerSwitcher: false,
+      fitExtent: false,
+    },
+    maxZoom: 13,
+    minZoom: 6,
+    layers: dvLayers,
+    enableFeatureClick: true,
+    only: true,
+    hideInLayerTree: true,
+    menu: <DvMenu />,
+    mapControls: <DvListButton />,
+    overlaySide: "left",
+  };
+
+  const railPlus = {
+    elements: {
+      ...defaultElements,
+      overlay: false,
+      popup: false,
+      shareMenu: false,
+      drawMenu: false,
+      permalink: true,
+      geolocationButton: false,
+      header: false,
+      search: false,
+      footer: false,
+      menu: false,
+    },
+    key: "ch.railplus.mitglieder",
+    name: "ch.railplus.mitglieder",
+    layers: railPlusLayers,
+    only: true,
+    hideInLayerTree: true,
+    enableFeatureClick: true,
+    mapControls: <RailplusExportButton />,
+    menu: <RailplusMenu />,
+    embedded: true,
+    overlaySide: "left",
+    messageEvents: [
+      {
+        eventType: PDF_DOWNLOAD_EVENT_TYPE,
+        callback: () => document.getElementById(RAILPLUS_EXPORTBTN_ID).click(),
+      },
+    ],
+    exportConfig: {
+      getTemplateValues: () => ({
+        publishedAt: "08/2025",
+        year: "2025",
+      }),
+      getOverlayImageUrl: () => railplusLegend,
+      getExportFileName: () =>
+        `RAILplus Streckennetz-Carte du réseau-Carta della rete  ${new Date().toISOString().slice(0, 10)}`,
+    },
+    minZoom: 7,
+    maxZoom: 13,
+    noTracking: true,
+  };
+
+  const messwagen = {
+    name: "ch.sbb.funkmesswagen",
+    key: "ch.sbb.funkmesswagen",
+    layers: messwagenLayers,
+    elements: {
+      ...defaultElements,
+      drawMenu: false,
+    },
+    hideInLayerTree: ONLY_WHEN_NOT_LOGGED_IN,
+    mapControls: <MesswagenFollowButton />,
+    searches: defaultSearches,
+    layerInfoComponent: "MesswagenTopicInfo",
+    customElements: <MesswagenPopup />,
+  };
+
+  return {
+    wkp: [
+      netzkarte,
+      geltungsbereicheMvp,
+      direktverbindungen,
+      direktverbindungenIframe,
+      zweitausbildung,
+      handicap,
+      tarifverbundkarte,
+      infrastruktur,
+      isb,
+      regionenkartePublic,
+      beleuchtungsstaerken,
+      geltungsbereicheIframe,
+      sts,
+      energiePublic,
+      sandbox,
+      railPlus,
+      messwagen,
+    ],
+    stelen: [netzkarteStelen],
+    betriebsregionen: [betriebsregionen],
+  };
 };
 
-export const messwagen = {
-  name: "ch.sbb.funkmesswagen",
-  key: "ch.sbb.funkmesswagen",
-  layers: messwagenLayers,
-  elements: {
-    ...defaultElements,
-    drawMenu: false,
-  },
-  hideInLayerTree: ONLY_WHEN_NOT_LOGGED_IN,
-  mapControls: <MesswagenFollowButton />,
-  searches: defaultSearches,
-  layerInfoComponent: "MesswagenTopicInfo",
-  customElements: <MesswagenPopup />,
-};
+export const getTopicsFromAppName = (name) => {
+  const topics = getTopics();
 
-const topics = {
-  wkp: [
-    netzkarte,
-    geltungsbereicheMvp,
-    direktverbindungen,
-    direktverbindungenIframe,
-    zweitausbildung,
-    handicap,
-    tarifverbundkarte,
-    infrastruktur,
-    isb,
-    regionenkartePublic,
-    beleuchtungsstaerken,
-    geltungsbereicheIframe,
-    sts,
-    energiePublic,
-    sandbox,
-    railPlus,
-    messwagen,
-  ],
-  stelen: [netzkarteStelen],
-  betriebsregionen: [betriebsregionen],
-};
+  topics.wkp.forEach((topic) => {
+    applyPermalinkVisiblity(
+      topic.layers,
+      (pathname) => pathname?.indexOf(`/${topic.key}`) !== -1,
+    );
+  });
 
-topics.wkp.forEach((topic) => {
-  applyPermalinkVisiblity(
-    topic.layers,
-    (pathname) => pathname?.indexOf(`/${topic.key}`) !== -1,
-  );
-});
-
-export const getTopicConfig = (name) => {
   return topics[name];
 };
-
-export default topics;

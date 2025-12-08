@@ -1,7 +1,7 @@
-import i18n from "i18next";
 import { defaults as defaultInteractions } from "ol/interaction";
 import OLMap from "ol/Map";
 import DragPan from "ol/interaction/DragPan";
+import { loadI18n } from "../../i18n";
 import DblClickDragZoom from "../../ol/interaction/DblClickDragZoom";
 import DblPointerClickZoomOut from "../../ol/interaction/DblPointerClickZoomOut";
 import {
@@ -72,47 +72,52 @@ const index = dftlInteractions
   .findIndex((interaction) => interaction instanceof DragPan);
 dftlInteractions.insertAt(index + 1, new DblClickDragZoom());
 
-const getInitialState = () => ({
-  // We set the permission to null instead of a default empty object
-  // to know when the request has been done.
-  permissionInfos: null,
-  topics: [],
-  featureInfo: [],
-  language: "de",
-  projection: {
-    label: "WGS 84",
-    value: "EPSG:4326",
-    format: (c) => c,
-  },
-  dialogPosition: { x: 390, y: 110 },
-  // Open the menu when mapset has opened the page.
-  menuOpen: isOpenedByMapset(),
-  searchOpen: false,
-  searchInfoOpen: false,
-  selectedForInfos: null,
-  map: new OLMap({
-    controls: [],
-    interactions: dftlInteractions,
-  }),
-  searchService: new SearchService(),
-  screenWidth: null,
-  drawIds: null,
-  destinationUrl: null,
-  departuresUrl: null,
-  apiKey: null,
-  apiKeyName: "key",
-  showPopups: true,
-  embeddded: false,
-  consentGiven: false,
-  disableCookies: false,
-  displayMenu: true,
-  maxCanvasSize:
-    localStorage.getItem(LS_SIZE_KEY) &&
-    parseFloat(localStorage.getItem(LS_SIZE_KEY)),
-  exportPrintOptions: null,
-  isGeolocating: false,
-  isFollowing: false,
-});
+const getInitialState = () => {
+  const i18n = loadI18n();
+  return {
+    i18n,
+    t: i18n.t,
+    // We set the permission to null instead of a default empty object
+    // to know when the request has been done.
+    permissionInfos: null,
+    topics: [],
+    featureInfo: [],
+    language: "de",
+    projection: {
+      label: "WGS 84",
+      value: "EPSG:4326",
+      format: (c) => c,
+    },
+    dialogPosition: { x: 390, y: 110 },
+    // Open the menu when mapset has opened the page.
+    menuOpen: isOpenedByMapset(),
+    searchOpen: false,
+    searchInfoOpen: false,
+    selectedForInfos: null,
+    map: new OLMap({
+      controls: [],
+      interactions: dftlInteractions,
+    }),
+    searchService: new SearchService(),
+    screenWidth: null,
+    drawIds: null,
+    destinationUrl: null,
+    departuresUrl: null,
+    apiKey: null,
+    apiKeyName: "key",
+    showPopups: true,
+    embeddded: false,
+    consentGiven: false,
+    disableCookies: false,
+    displayMenu: true,
+    maxCanvasSize:
+      localStorage.getItem(LS_SIZE_KEY) &&
+      parseFloat(localStorage.getItem(LS_SIZE_KEY)),
+    exportPrintOptions: null,
+    isGeolocating: false,
+    isFollowing: false,
+  };
+};
 
 export default function app(state = getInitialState(), action) {
   switch (action.type) {
@@ -127,10 +132,11 @@ export default function app(state = getInitialState(), action) {
         topics: action.data || [],
       };
     case SET_LANGUAGE:
-      i18n.changeLanguage(action.data);
+      state.i18n.changeLanguage(action.data);
       return {
         ...state,
         language: action.data,
+        t: (...args) => state.i18n.t(...args),
       };
     case SET_PROJECTION:
       return {

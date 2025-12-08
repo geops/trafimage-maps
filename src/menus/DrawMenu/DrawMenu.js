@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { FaPencilAlt } from "react-icons/fa";
+import useTranslation from "../../utils/useTranslation";
 import MenuItem from "../../components/Menu/MenuItem";
 import Draw from "../../components/Draw";
 import { isOpenedByMapset } from "../../utils/redirectHelper";

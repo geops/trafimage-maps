@@ -9,7 +9,7 @@ import { thunk } from "redux-thunk";
 import proj4 from "proj4";
 import { register } from "ol/proj/proj4";
 import mediaQuery from "css-mediaquery";
-import i18n from "./i18n";
+import { loadI18n } from "./i18n";
 
 proj4.defs(
   "EPSG:21781",
@@ -28,6 +28,7 @@ proj4.defs(
 register(proj4);
 
 // We don't want to test translations content so we reinitialize the 'de' bundle with empty translations.
+const i18n = loadI18n();
 i18n.removeResourceBundle("de", "translation");
 i18n.addResourceBundle("de", "translation", {});
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import useTranslation from "../../utils/useTranslation";
 import Link from "../../components/Link";
 
 const propTypes = {

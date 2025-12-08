@@ -1,20 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
-import { useSelector } from "react-redux";
-import { withTranslation } from "react-i18next";
 import { Typography, Link } from "@mui/material";
 import { ReactComponent as LinkIcon } from "../../components/Link/Link.svg";
+import useTranslation from "../../utils/useTranslation";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {};
 
-function PassagierFrequenzenPopup({ feature, t }) {
-  const language = useSelector((state) => state.app.language);
+function PassagierFrequenzenPopup({ feature }) {
+  const { t, language } = useTranslation();
 
   const statisticDate = feature.get("passagier_freq_jahr");
   const dwv = feature
@@ -62,7 +60,7 @@ function PassagierFrequenzenPopup({ feature, t }) {
 PassagierFrequenzenPopup.propTypes = propTypes;
 PassagierFrequenzenPopup.defaultProps = defaultProps;
 
-const composed = withTranslation()(PassagierFrequenzenPopup);
+const composed = PassagierFrequenzenPopup;
 
 composed.renderTitle = (feat) => feat.get("name");
 export default composed;

@@ -1,8 +1,8 @@
 import React, { memo } from "react";
-import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
+import useTranslation from "../../utils/useTranslation";
 import { lightingMapping } from "../../layerInfos/BeleuchtungLayerInfo/lightingMapping";
 import LegendCircle from "../../components/LegendCircle/LegendCircle";
 

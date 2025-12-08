@@ -3,7 +3,7 @@ import { Style, Icon } from "ol/style";
 import { makeStyles } from "@mui/styles";
 import RsGeolocation from "react-spatial/components/Geolocation";
 import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../../utils/useTranslation";
 import MapButton from "../../MapButton";
 import Geolocate from "../../../img/Geolocate";
 import geolocateMarkerWithDirection from "../../../img/geolocate_marker_direction.svg";

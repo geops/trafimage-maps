@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import { ReactComponent as SBBUser } from "../../img/sbb/user_92_large.svg";
 
 import "./Login.scss";
