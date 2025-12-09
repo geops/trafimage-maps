@@ -8,14 +8,14 @@ import VectorSource from "ol/source/Vector";
 import OLMap from "ol/Map";
 import DvMenu from "./DvMenu";
 import { getTopics } from "../../config/topics";
-import dvLayers from "../../config/ch.sbb.direktverbindungen";
 import { DV_KEY } from "../../utils/constants";
 import highlightPointStyle from "../../utils/highlightPointStyle";
 import theme from "../../themes/default";
 
-const direktverbindungenIframe = getTopics().find(
-  (t) => t.key === "ch.sbb.direktverbindungen-iframe.topic",
+const direktverbindungenIframe = getTopics().wkp.find(
+  (t) => t.key === "ch.sbb.direktverbindungen-iframe",
 );
+const dvLayers = direktverbindungenIframe.layers;
 describe("DvMenu", () => {
   let store;
   const highlightLayer = new VectorLayer({
@@ -29,6 +29,8 @@ describe("DvMenu", () => {
     store = global.mockStore({
       map: { layers: dvLayers, highlightLayer },
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         map: new OLMap({}),
         activeTopic: direktverbindungenIframe,
         featureInfo: [],
@@ -68,6 +70,8 @@ describe("DvMenu", () => {
     store = global.mockStore({
       map: { layers: dvLayers, highlightLayer },
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         map: new OLMap({}),
         activeTopic: direktverbindungenIframe,
         featureInfo: [],

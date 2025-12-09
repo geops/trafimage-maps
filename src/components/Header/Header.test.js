@@ -11,7 +11,7 @@ describe("Header", () => {
   test("match snapshots", () => {
     const store = global.mockStore({
       map: {},
-      app: { language: "fr" },
+      app: { i18n: global.i18n, language: "fr" },
     });
     const { container } = render(
       <ThemeProvider theme={theme}>

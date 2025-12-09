@@ -7,6 +7,7 @@ import "@testing-library/jest-dom";
 import configureStore from "redux-mock-store";
 import { thunk } from "redux-thunk";
 import proj4 from "proj4";
+import Map from "ol/Map";
 import { register } from "ol/proj/proj4";
 import mediaQuery from "css-mediaquery";
 import { loadI18n } from "./i18n";
@@ -39,6 +40,16 @@ global.URL.createObjectURL = jest.fn(() => "fooblob");
 global.ResizeObserver = ResizeObserver;
 
 global.mockStore = configureStore([thunk]);
+
+global.store = global.mockStore({
+  map: {},
+  app: {
+    i18n: global.i18n,
+    t: global.i18n.t,
+    language: "de",
+    map: new Map({}),
+  },
+});
 
 // See https://mui.com/components/use-media-query/#testing
 global.createMatchMedia = (width) => {

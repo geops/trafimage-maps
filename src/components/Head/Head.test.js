@@ -54,8 +54,8 @@ describe("Head", () => {
 
   // TODO can't be tested with testing-library, use cypress
   test.skip("add consent script in HEAD with the current language value", () => {
-    store = global.global.mockStore({
-      app: { language: "fr" },
+    store = global.mockStore({
+      app: { i18n: global.i18n, language: "fr" },
     });
     // Here we don't test react-helmet we expect it to work, we just test the script is well added to react-helmet.
     // We let cypress test if the script is in the head.

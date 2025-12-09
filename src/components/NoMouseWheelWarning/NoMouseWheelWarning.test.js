@@ -15,7 +15,9 @@ describe("NoMouseWheelWarning", () => {
     expect(mouseWheelZoom.getActive()).toBe(true);
     render(
       <Provider
-        store={global.global.mockStore({ app: { map, embedded: true } })}
+        store={global.mockStore({
+          app: { i18n: global.i18n, map, embedded: true },
+        })}
       >
         <NoMouseWheelWarning />
       </Provider>,
@@ -32,7 +34,9 @@ describe("NoMouseWheelWarning", () => {
     expect(mouseWheelZoom.getActive()).toBe(true);
     render(
       <Provider
-        store={global.global.mockStore({ app: { map, embedded: false } })}
+        store={global.mockStore({
+          app: { i18n: global.i18n, map, embedded: false },
+        })}
       >
         <NoMouseWheelWarning />
       </Provider>,

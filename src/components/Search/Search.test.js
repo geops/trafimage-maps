@@ -47,10 +47,7 @@ describe("Search", () => {
   searchService.setSearches([dfltSearch, dfltSearch]);
 
   const dfltStore = {
-    app: {
-      ...dfltApp,
-      searchService,
-    },
+    app: { i18n: global.i18n, ...dfltApp, searchService },
   };
 
   test("render inputs.", () => {

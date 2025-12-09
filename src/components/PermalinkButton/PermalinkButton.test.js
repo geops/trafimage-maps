@@ -9,7 +9,7 @@ describe("PermalinkButton", () => {
   test("should match snapshot.", () => {
     store = global.mockStore({
       map: {},
-      app: { drawIds: {} },
+      app: { i18n: global.i18n, drawIds: {} },
     });
 
     const component = render(

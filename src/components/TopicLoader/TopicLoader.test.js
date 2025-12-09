@@ -21,6 +21,8 @@ describe("TopicLoader", () => {
         layers: [],
       },
       app: {
+        t: global.i18n.t,
+        i18n: global.i18n,
         map,
         language: "de",
         apiKey: "apikey",
@@ -43,6 +45,8 @@ describe("TopicLoader", () => {
     store = global.mockStore({
       ...initialStore,
       app: {
+        t: global.i18n.t,
+        i18n: global.i18n,
         ...initialStore.app,
         activeTopic: topicDflt,
         topics: [topicDflt],
@@ -72,6 +76,8 @@ describe("TopicLoader", () => {
     store = global.mockStore({
       ...initialStore,
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         ...initialStore.app,
         activeTopic: topicPermalinkFalse,
         topics: [topicPermalinkFalse],

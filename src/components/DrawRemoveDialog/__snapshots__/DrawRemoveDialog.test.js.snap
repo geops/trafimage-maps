@@ -25,7 +25,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
            aria-labelledby=":r0:"
       >
         <h2 class="MuiTypography-root MuiTypography-h4 MuiDialogTitle-root css-x5n03r-MuiTypography-root-MuiDialogTitle-root"
-            id="draggable-dialog-title"
+            id=":r0:"
             style="cursor: auto;"
         >
           <span>

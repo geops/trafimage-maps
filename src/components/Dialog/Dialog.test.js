@@ -15,7 +15,7 @@ describe("Dialog", () => {
   beforeEach(() => {
     store = global.mockStore({
       map: {},
-      app: {},
+      app: { i18n: global.i18n },
     });
     map = new Map({ view: new View({}) });
   });

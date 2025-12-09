@@ -81,7 +81,8 @@ const PaperComponent = forwardRef((props, ref) => {
   return <Paper square ref={ref} {...props} elevation={4} />;
 });
 
-function DraggablePaperComponent(props) {
+// eslint-disable-next-line react/prop-types
+function DraggablePaperComponent({ handleId, ...props }) {
   const dispatch = useDispatch();
   const dialogPosition = useSelector((state) => state.app.dialogPosition);
   const nodeRef = useRef(null);
@@ -89,7 +90,7 @@ function DraggablePaperComponent(props) {
     <Draggable
       nodeRef={nodeRef}
       // eslint-disable-next-line react/destructuring-assignment, react/prop-types
-      handle={`#${props?.handleId}`}
+      handle={`#${handleId}`}
       cancel={'[class*="MuiDialogContent-root"]'}
       defaultPosition={dialogPosition}
       position={dialogPosition}
@@ -178,6 +179,11 @@ function Dialog({
     PaperComponent: isSmallScreen
       ? PaperComponent
       : React.memo(DraggablePaperComponent),
+    PaperProps: !isSmallScreen // only for DraggeblePaper
+      ? {
+          handleId: id,
+        }
+      : undefined,
     classes: {
       ...classesProp,
       root: `${!isSmallScreen ? classesDialog.rootDesktop : ""}${classesProp.root ? ` ${classesProp.root}` : ""}`,
@@ -194,9 +200,6 @@ function Dialog({
       hideBackdrop: false,
       maxWidth: "md",
       PaperComponent,
-      PaperProps: {
-        handleId: id,
-      },
       classes: {
         ...classesProp,
         scrollPaper: `${classesDialog.scrollPaperModal}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
@@ -213,6 +216,7 @@ function Dialog({
         disablePortal
         open
         name={name}
+        aria-labelledby={id}
         {...dialogProps}
       >
         <DialogTitle

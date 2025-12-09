@@ -4,21 +4,20 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material";
 import LanguageSelect from "./LanguageSelect";
-import getStore from "../../model/store";
+// import getStore from "../../model/store";
 import theme from "../../themes/default";
 
 describe("LanguageSelect", () => {
-  let store;
   delete global.window.location;
   global.window = Object.create(window);
   global.window.location = { hostname: "wkp-dev.foo" };
   afterEach(() => jest.restoreAllMocks());
 
   test("should add tracking event on switch to IT", async () => {
-    store = getStore();
+    // store = getStore();
     render(
       <ThemeProvider theme={theme}>
-        <Provider store={store}>
+        <Provider store={global.store}>
           <LanguageSelect />
         </Provider>
       </ThemeProvider>,

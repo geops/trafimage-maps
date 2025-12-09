@@ -15,6 +15,8 @@ describe("DrawRemoveDialog", () => {
   beforeEach(() => {
     store = global.mockStore({
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         dialogPosition: {
           top: 0,
           left: 0,

@@ -28,8 +28,8 @@ describe("MapControls", () => {
   });
 
   test("should display all buttons by default", () => {
-    const store = global.global.mockStore({
-      app: { map },
+    const store = global.mockStore({
+      app: { i18n: global.i18n, map },
     });
     const { container, getByTestId, queryByTestId } = render(
       <ThemeProvider theme={theme}>
@@ -46,8 +46,8 @@ describe("MapControls", () => {
   });
 
   test("should not display geolocation", () => {
-    const store = global.global.mockStore({
-      app: { map },
+    const store = global.mockStore({
+      app: { i18n: global.i18n, map },
     });
     const { container, queryByTestId, getByTestId } = render(
       <ThemeProvider theme={theme}>
@@ -64,8 +64,8 @@ describe("MapControls", () => {
   });
 
   test("should not display fitExtent", () => {
-    const store = global.global.mockStore({
-      app: { map },
+    const store = global.mockStore({
+      app: { i18n: global.i18n, map },
     });
     const { container, getByTestId, queryByTestId } = render(
       <ThemeProvider theme={theme}>
@@ -82,8 +82,8 @@ describe("MapControls", () => {
   });
 
   test("should not display zoomSlider", () => {
-    const store = global.global.mockStore({
-      app: { map },
+    const store = global.mockStore({
+      app: { i18n: global.i18n, map },
     });
     const { container, getByTestId, queryByTestId } = render(
       <ThemeProvider theme={theme}>
@@ -101,8 +101,8 @@ describe("MapControls", () => {
   });
 
   test("should display menuToggler", () => {
-    const store = global.global.mockStore({
-      app: { map },
+    const store = global.mockStore({
+      app: { i18n: global.i18n, map },
     });
     const { container, getByTestId } = render(
       <ThemeProvider theme={theme}>

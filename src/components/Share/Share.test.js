@@ -13,9 +13,11 @@ describe("Share", () => {
   global.window = Object.create(window);
   global.window.location = { hostname: "wkp-dev.foo" };
   beforeEach(() => {
-    store = global.global.mockStore({
+    store = global.mockStore({
       map: {},
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         map: new Map({ view: new View({}) }),
         activeTopic: {
           key: "test",

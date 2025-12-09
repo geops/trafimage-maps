@@ -41,7 +41,7 @@ const useStyles = makeStyles(() => {
 function StsValidityFeatureInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const layers = useSelector((state) => state.app.layers);
+  const layers = useSelector((state) => state.map.layers);
   const featureInfo = useSelector((state) => state.app.featureInfo);
 
   const [selectedFeature, setSelectedFeature] = useState();

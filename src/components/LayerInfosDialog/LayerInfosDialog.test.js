@@ -8,12 +8,13 @@ import OLLayer from "ol/layer/Vector";
 import { ThemeProvider } from "@mui/material";
 import theme from "../../themes/default";
 import { getNetzkarteLayers } from "../../config/ch.sbb.netzkarte";
+import LayerService from "../../utils/LayerService";
 import LayerInfosDialog from ".";
-import BAHNHOFPLAENE_LAYER_NAME from "../../utils/constants";
+import { BAHNHOFPLAENE_LAYER_NAME } from "../../utils/constants";
 
-const bahnhofplaene = getNetzkarteLayers().find(
-  (layer) => layer.name === BAHNHOFPLAENE_LAYER_NAME,
-);
+const bahnhofplaene = new LayerService(getNetzkarteLayers())
+  .getLayersAsFlatArray()
+  .find((layer) => layer.name === BAHNHOFPLAENE_LAYER_NAME);
 
 describe("LayerInfosDialog", () => {
   let store;
@@ -28,10 +29,7 @@ describe("LayerInfosDialog", () => {
       },
     });
     store = global.mockStore({
-      app: {
-        language: "de",
-        t: (t) => t,
-      },
+      app: { i18n: global.i18n, t: global.i18n.t, language: "de" },
     });
   });
 

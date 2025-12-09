@@ -1,10 +1,10 @@
 import { getLayersAsFlatArray } from "mobility-toolbox-js/common";
-import layers from "./index";
+import { getHandicapLayers } from "./index";
 
 describe("ch.sbb.handicap", () => {
   it("should always have the same layers key for layers available via permalink", () => {
     expect(true).toBe(true);
-    const permalinkKeys = getLayersAsFlatArray(layers)
+    const permalinkKeys = getLayersAsFlatArray(getHandicapLayers())
       .filter((l) => {
         return !l.get("hideInLegend") && !l.get("isBaseLayer");
       })

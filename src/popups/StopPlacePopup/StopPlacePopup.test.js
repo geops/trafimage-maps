@@ -13,10 +13,7 @@ describe("StopPlacePopup", () => {
     jest.resetModules();
     store = global.mockStore({
       map: {},
-      app: {
-        cartaroUrl,
-        language: "de",
-      },
+      app: { i18n: global.i18n, cartaroUrl, language: "de" },
     });
   });
   afterEach(() => {
@@ -386,7 +383,7 @@ describe("StopPlacePopup", () => {
     });
     const newStore = global.mockStore({
       map: {},
-      app: { cartaroUrl },
+      app: { i18n: global.i18n, cartaroUrl },
     });
 
     const { queryByTestId, queryByText } = render(
@@ -424,7 +421,7 @@ describe("StopPlacePopup", () => {
     });
     const newStore = global.mockStore({
       map: {},
-      app: { cartaroUrl },
+      app: { i18n: global.i18n, cartaroUrl },
     });
 
     const { queryByTestId, queryByText } = render(

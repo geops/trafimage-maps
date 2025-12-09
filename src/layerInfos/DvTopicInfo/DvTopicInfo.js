@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 
 function DvTopicInfo() {
   const { t, i18n } = useTranslation();
-  const layers = useSelector((state) => state.app.layers);
+  const layers = useSelector((state) => state.map.layers);
   const classes = useStyles();
   const dvDay = layers.find((l) => l.get("name") === DV_DAY_LAYER_KEY);
   const dvNight = layers.find((l) => l.get("name") === DV_NIGHT_LAYER_KEY);

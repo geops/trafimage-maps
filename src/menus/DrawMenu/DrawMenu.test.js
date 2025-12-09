@@ -18,7 +18,13 @@ describe("DrawMenu", () => {
     };
     store = global.mockStore({
       map: {},
-      app: { activeTopic: info, map: new OLMap(), menuOpen: true },
+      app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
+        activeTopic: info,
+        map: new OLMap(),
+        menuOpen: true,
+      },
     });
     const { container } = render(
       <ThemeProvider theme={theme}>

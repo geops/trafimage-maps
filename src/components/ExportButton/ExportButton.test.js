@@ -8,11 +8,9 @@ import tarifverbundkarteLegend from "../../img/tarifverbund_legend.url.svg";
 import energieLegend from "../../img/energie_legend_pub.url.svg";
 import railplusLegend from "../../img/railplus_legend.svg";
 import { SWISS_CENTER } from "../../utils/constants";
-import getStore from "../../model/store";
 import theme from "../../themes/default";
 
 describe("ExportButton", () => {
-  let store;
   delete global.window.location;
   global.window = Object.create(window);
   global.window.location = { hostname: "wkp-dev.foo" };
@@ -47,7 +45,7 @@ describe("ExportButton", () => {
     jest.spyOn(console, "error");
     // eslint-disable-next-line no-console
     console.error.mockImplementation(() => {});
-    store = getStore();
+    const { store } = global;
     const { getByRole } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>

@@ -21,7 +21,7 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
            style="transform: translate(0px,0px);"
       >
         <h2 class="MuiTypography-root MuiTypography-h4 MuiDialogTitle-root css-x5n03r-MuiTypography-root-MuiDialogTitle-root"
-            id="draggable-dialog-title"
+            id=":r0:"
             style="cursor: move;"
         >
           <span>
@@ -53,9 +53,11 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
         </button>
         <div class="makeStyles-dialogBody-7 ">
           <div>
-            description
-            <br>
-            break
+            <p>
+              description
+              <br>
+              break
+            </p>
           </div>
         </div>
       </div>

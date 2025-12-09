@@ -11,7 +11,7 @@ describe("TopicInfosButton", () => {
     const info = { key: "foo" };
     store = global.mockStore({
       map: {},
-      app: { activeTopic: info, selectedForInfos: {} },
+      app: { i18n: global.i18n, activeTopic: info, selectedForInfos: {} },
     });
     const { container } = render(
       <Provider store={store}>
@@ -27,7 +27,7 @@ describe("TopicInfosButton", () => {
     const info = { key: "foo" };
     store = global.mockStore({
       map: {},
-      app: { activeTopic: info, selectedForInfos: info },
+      app: { i18n: global.i18n, activeTopic: info, selectedForInfos: info },
     });
     const { container } = render(
       <Provider store={store}>

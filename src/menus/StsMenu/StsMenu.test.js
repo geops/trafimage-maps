@@ -8,14 +8,14 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import StsMenu from "./StsMenu";
 import { getTopics } from "../../config/topics";
-import stsLayers from "../../config/ch.sbb.sts";
 import highlightPointStyle from "../../utils/highlightPointStyle";
 import theme from "../../themes/default";
 import SearchService from "../../components/Search/SearchService";
 
-const sts = getTopics().find((t) => t.key === "ch.sbb.sts");
+const sts = getTopics().wkp.find((t) => t.key === "ch.sbb.sts");
 const searchService = new SearchService();
 searchService.setSearches(sts.searches);
+const stsLayers = sts.layers;
 
 describe("StsMenu", () => {
   let store;
@@ -30,6 +30,8 @@ describe("StsMenu", () => {
     store = global.mockStore({
       map: { layers: stsLayers, highlightLayer },
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         map: new OLMap({}),
         activeTopic: sts,
         featureInfo: [],
