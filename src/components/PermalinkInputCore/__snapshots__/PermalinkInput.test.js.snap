@@ -6,7 +6,7 @@ exports[`PermalinkInput matches snapshot 1`] = `
          tabindex="0"
          title
          class="tm-permalink-input"
-         value
+         value="http://url.test"
   >
   <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium tm-permalink-bt css-78trlr-MuiButtonBase-root-MuiIconButton-root"
           tabindex="0"

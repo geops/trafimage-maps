@@ -68,7 +68,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
                        tabindex="0"
                        title
                        class="tm-permalink-input"
-                       value
+                       value="http://localhost/"
                 >
                 <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall tm-permalink-bt css-1y5s1zr-MuiButtonBase-root-MuiIconButton-root"
                         tabindex="0"

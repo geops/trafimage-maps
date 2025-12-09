@@ -6,19 +6,28 @@ import { ThemeProvider } from "@mui/material";
 import { MatomoProvider } from "@jonkoops/matomo-tracker-react";
 import theme from "../../themes/default";
 import Share from ".";
+import { getNetzkarteLayers } from "../../config/ch.sbb.netzkarte";
 
 describe("Share", () => {
   let store;
+  let mapElement;
   delete global.window.location;
   global.window = Object.create(window);
   global.window.location = { hostname: "wkp-dev.foo" };
+
   beforeEach(() => {
+    mapElement = document.createElement("div");
+    mapElement.tabIndex = 1;
+    mapElement.tabindex = 1;
+    document.body.appendChild(mapElement);
     store = global.mockStore({
-      map: {},
+      map: {
+        layers: getNetzkarteLayers(),
+      },
       app: {
         i18n: global.i18n,
         t: global.i18n.t,
-        map: new Map({ view: new View({}) }),
+        map: new Map({ target: mapElement, view: new View({}) }),
         activeTopic: {
           key: "test",
         },
@@ -26,6 +35,10 @@ describe("Share", () => {
         appBaseUrl: "https://maps.trafimage.ch",
       },
     });
+  });
+
+  afterEach(() => {
+    document.body.removeChild(mapElement);
   });
 
   test("should match snapshot.", () => {

@@ -198,7 +198,6 @@ const v5 = {
       defaultProps: {
         size: "small",
         disableFocusRipple: true,
-        disableElevation: true,
       },
       styleOverrides: {
         root: {
