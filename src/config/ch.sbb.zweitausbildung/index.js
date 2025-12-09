@@ -260,7 +260,7 @@ export const zweitausbildungRoutes = new Layer({
             title: "ch.sbb.zweitausbildung.hauptlinien.group",
             desc: "ch.sbb.zweitausbildung.hauptlinien.group-desc",
             legend: {
-              image: "legend_hauptlinien.png",
+              image: "legend_hauptlinien.svg",
             },
           },
           layer: "zweitausbildung_hauptlinien_grouped_qry",
