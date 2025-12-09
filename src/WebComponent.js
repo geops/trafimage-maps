@@ -3,7 +3,6 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import Style from "style-it";
-import { Layer } from "mobility-toolbox-js/ol";
 import LayerService from "./utils/LayerService";
 import TrafimageMaps from "./components/TrafimageMaps";
 import styles from "./WebComponent.scss";
@@ -332,10 +331,8 @@ function WebComponent(props) {
         const layerService = new LayerService(topic.layers);
         const layers = layerService.getLayersAsFlatArray();
 
-        // We put then in a rootLayer to be sure the group property is properly applied
-        const rootLayer = new Layer({ children: layers });
         Object.entries(obj).forEach(([key, value]) => {
-          rootLayer.children.forEach((layer) => {
+          layers.forEach((layer) => {
             const initalVisibility = initialLayersVisibility[layer.key];
             if (
               (initalVisibility === true || initalVisibility === false) &&
@@ -355,7 +352,7 @@ function WebComponent(props) {
 
               // Hide other base layers
               if (layer.get("isBaseLayer") && value) {
-                rootLayer.children
+                layers
                   .filter((l) => l.get("isBaseLayer"))
                   .forEach((l) => {
                     if (l.key !== key) {
@@ -368,7 +365,7 @@ function WebComponent(props) {
           });
         });
 
-        rootLayer.children
+        layers
           .filter((layer) => layer.get("isBaseLayer"))
           .forEach((layer) => {
             // When the base layer refers to a MapboxLayer we have to update the style of the
