@@ -21,7 +21,6 @@ export function getDefaultSearches() {
     [SearchName.Orte]: new Locations(),
     [SearchName.Betriebspunkte]: new Betriebspunkte(),
     [SearchName.Linien]: new Lines(),
-    [SearchName.HandicapStopFinder]: new HandicapStopFinder(),
   };
 }
 
