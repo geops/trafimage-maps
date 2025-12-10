@@ -57,23 +57,23 @@ import SearchService from "../../components/Search/SearchService";
 import { isOpenedByMapset } from "../../utils/redirectHelper";
 import { LS_SIZE_KEY } from "../../utils/constants";
 
-const dftlInteractions = defaultInteractions({
-  altShiftDragRotate: false,
-  pinchRotate: false,
-  mouseWheelZoom: false,
-});
-
-// It's important to put it before PinchZoom otherwise the pointerdown is stopped by the PinchZoom.
-dftlInteractions.insertAt(0, new DblPointerClickZoomOut());
-
-// It's important to put it just after DragPan otherwise the interaction also drag the map.
-const index = dftlInteractions
-  .getArray()
-  .findIndex((interaction) => interaction instanceof DragPan);
-dftlInteractions.insertAt(index + 1, new DblClickDragZoom());
-
 const getInitialState = () => {
   const i18n = loadI18n();
+
+  const dftlInteractions = defaultInteractions({
+    altShiftDragRotate: false,
+    pinchRotate: false,
+    mouseWheelZoom: false,
+  });
+
+  // It's important to put it before PinchZoom otherwise the pointerdown is stopped by the PinchZoom.
+  dftlInteractions.insertAt(0, new DblPointerClickZoomOut());
+
+  // It's important to put it just after DragPan otherwise the interaction also drag the map.
+  const index = dftlInteractions
+    .getArray()
+    .findIndex((interaction) => interaction instanceof DragPan);
+  dftlInteractions.insertAt(index + 1, new DblClickDragZoom());
   return {
     i18n,
     t: i18n.t,
