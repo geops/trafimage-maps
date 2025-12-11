@@ -32,7 +32,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
             Zeichnung löschen
           </span>
         </h2>
-        <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-13 css-1perq7w-MuiButtonBase-root-MuiIconButton-root"
+        <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-13 css-d7to0t-MuiButtonBase-root-MuiIconButton-root"
                 tabindex="0"
                 type="button"
                 title="Dialog schließen"
@@ -70,7 +70,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
                        class="tm-permalink-input"
                        value
                 >
-                <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall tm-permalink-bt css-bp3e88-MuiButtonBase-root-MuiIconButton-root"
+                <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall tm-permalink-bt css-1y5s1zr-MuiButtonBase-root-MuiIconButton-root"
                         tabindex="0"
                         type="button"
                         title

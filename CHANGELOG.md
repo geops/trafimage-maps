@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.30.42](https://github.com/geops/trafimage-maps/compare/v1.30.41...v1.30.42) (2025-12-05)
+
+### Bug Fixes
+
+- do not use a root layer because reinitilize the parent property ([#1239](https://github.com/geops/trafimage-maps/issues/1239)) ([75a6c56](https://github.com/geops/trafimage-maps/commit/75a6c56843189161caa98824f6598537b1cec9eb))
+
+### [1.30.41](https://github.com/geops/trafimage-maps/compare/v1.30.40...v1.30.41) (2025-12-04)
+
+### Bug Fixes
+
+- **Popup:** add featureInfo to PopupComponent props, add Pagination component ([#1241](https://github.com/geops/trafimage-maps/issues/1241)) ([ebfbb33](https://github.com/geops/trafimage-maps/commit/ebfbb33568b1ef50d4ba4dfd5ef0b4208a20e44b))
+
 ### [1.30.40](https://github.com/geops/trafimage-maps/compare/v1.30.39...v1.30.40) (2025-12-01)
 
 ### Bug Fixes

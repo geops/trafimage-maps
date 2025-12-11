@@ -1,15 +1,19 @@
 import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import { IconButton, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-import { ChevronLeft, ChevronRight, ZoomIn } from "@mui/icons-material";
+import { ZoomIn } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import useHasScreenSize from "../../utils/useHasScreenSize";
+import Pagination from "../Pagination";
+import Loading from "../Loading";
+import { ReactComponent as Loader } from "../../img/loader.svg";
 
 const useStylesPhoto = makeStyles((theme) => ({
   wrapper: {
     ...theme.styles.flexCenter,
+    justifyContent: "center",
     maxWidth: "100%",
+    width: "100%",
   },
 }));
 
@@ -20,7 +24,9 @@ function Photo({ src = "" }) {
   useEffect(() => setLoading(true), [src]);
   return (
     <div className={classes.wrapper}>
-      {loading && <div>{t("Wird geladen")}...</div>}
+      {loading && (
+        <Loading icon={<Loader />} label={`${t("Wird geladen")}...`} />
+      )}
       <img
         src={src}
         alt={src}
@@ -145,27 +151,15 @@ function PhotoCarusel({
         <Photo src={photos[currentPhotoIndex]} />
       )}
       {photos.length > 1 && (
-        <div className={classes.photoNavigation}>
-          <IconButton
-            title={t("zurück")}
-            disabled={currentPhotoIndex === 0}
-            onClick={decrementPhotoIndex}
-            data-testid="carousel-photo-decrement-button"
-          >
-            <ChevronLeft />
-          </IconButton>
-          <Typography>
-            {currentPhotoIndex + 1} {t("von")} {photos.length}
-          </Typography>
-          <IconButton
-            title={t("weiter")}
-            disabled={currentPhotoIndex === photos.length - 1}
-            onClick={incrementPhotoIndex}
-            data-testid="carousel-photo-increment-button"
-          >
-            <ChevronRight />
-          </IconButton>
-        </div>
+        <>
+          <br />
+          <Pagination
+            onNext={incrementPhotoIndex}
+            onPrevious={decrementPhotoIndex}
+            index={currentPhotoIndex}
+            count={photos.length}
+          />
+        </>
       )}
     </div>
   );
