@@ -186,6 +186,7 @@ function IsbNormalspurLayerInfo({ properties: layer }) {
   return (
     <div>
       {description}
+      <hr style={{ margin: "20px 0" }} />
       {shortToLongName.map(([shortName, longName]) => {
         return (
           <OperatorShortAndLongName
@@ -195,6 +196,8 @@ function IsbNormalspurLayerInfo({ properties: layer }) {
           />
         );
       })}
+      <hr style={{ margin: "20px 0" }} />
+
       <p>
         {dataInfo1}
         <br />
