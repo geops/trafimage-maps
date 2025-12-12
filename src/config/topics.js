@@ -490,7 +490,7 @@ export const getTopics = () => {
     ],
     exportConfig: {
       getTemplateValues: () => ({
-        publishedAt: "08/2025",
+        publishedAt: "12/2025",
         year: "2025",
       }),
       getOverlayImageUrl: () => railplusLegend,

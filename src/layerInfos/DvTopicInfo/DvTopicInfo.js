@@ -56,7 +56,7 @@ function DvTopicInfo() {
           </p>
           {legend}
           <p>
-            Datenstand Dezember 2024.
+            Datenstand Dezember 2025.
             <br />
             Die Karte wird jährlich zum Fahrplanwechsel aktualisiert.
             <br />
@@ -76,7 +76,7 @@ function DvTopicInfo() {
           </p>
           {legend}
           <p>
-            Mise à jour des données en décembre 2024.
+            Mise à jour des données en décembre 2025.
             <br />
             La carte est actualisée chaque année lors du changement
             d&apos;horaire.
@@ -96,7 +96,7 @@ function DvTopicInfo() {
           </p>
           {legend}
           <p>
-            Data updated in December 2024.
+            Data updated in December 2025.
             <br />
             The map is updated annually at the time of the timetable change.
             <br />
@@ -116,7 +116,7 @@ function DvTopicInfo() {
           </p>
           {legend}
           <p>
-            Stato dei dati dicembre 2024.
+            Stato dei dati dicembre 2025.
             <br />
             La mappa viene aggiornata ogni anno al momento del cambio
             d&apos;orario.

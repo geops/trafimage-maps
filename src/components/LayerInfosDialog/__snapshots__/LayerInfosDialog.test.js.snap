@@ -51,7 +51,7 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
             </path>
           </svg>
         </button>
-        <div class="makeStyles-dialogBody-7 ">
+        <div class="makeStyles-dialogBody-7 makeStyles-dialogBodyDesktop-8 makeStyles-dialogBodyDesktop-11">
           <div>
             <p>
               description

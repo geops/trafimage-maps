@@ -55,7 +55,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
             </path>
           </svg>
         </button>
-        <div class="makeStyles-dialogBody-10 ">
+        <div class="makeStyles-dialogBody-10 makeStyles-dialogBodyDesktop-11 makeStyles-dialogBodyDesktop-14">
           <div>
             <div>
               Wollen Sie den Plan wirklich aus der Karte löschen?
