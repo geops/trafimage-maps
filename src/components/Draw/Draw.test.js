@@ -14,7 +14,7 @@ describe("Draw", () => {
   test("should render only one disabled button", () => {
     store = global.mockStore({
       map: {},
-      app: { drawIds: {} },
+      app: { i18n: global.i18n, drawIds: {} },
     });
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -33,7 +33,7 @@ describe("Draw", () => {
   test("should render three disabled buttons", () => {
     store = global.mockStore({
       map: {},
-      app: {},
+      app: { i18n: global.i18n },
     });
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -53,7 +53,7 @@ describe("Draw", () => {
     window.open = jest.fn();
     store = global.mockStore({
       map: {},
-      app: { activeTopic: { key: "foo" } },
+      app: { i18n: global.i18n, activeTopic: { key: "foo" } },
     });
     const matomo = {
       pushInstruction: jest.fn(),

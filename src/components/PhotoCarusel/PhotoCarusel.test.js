@@ -14,9 +14,9 @@ const photos = [
 describe("PhotoCarusel", () => {
   let store;
   beforeEach(() => {
-    store = global.global.mockStore({
+    store = global.mockStore({
       map: {},
-      app: {},
+      app: { i18n: global.i18n },
     });
   });
 

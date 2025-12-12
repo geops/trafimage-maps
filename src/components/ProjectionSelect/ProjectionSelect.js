@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { MenuItem } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import Select from "../Select";
 import { setProjection } from "../../model/app/actions";
 import useHasScreenSize from "../../utils/useHasScreenSize";

@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import DataLink from "../../components/DataLink";
 
 const comps = {

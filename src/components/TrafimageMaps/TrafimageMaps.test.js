@@ -1,6 +1,6 @@
 import React from "react";
 import { createInstance } from "@jonkoops/matomo-tracker-react";
-import { render } from "@testing-library/react";
+import { render, act } from "@testing-library/react";
 import TrafimageMaps from ".";
 
 describe("TrafimageMaps", () => {
@@ -111,7 +111,9 @@ describe("TrafimageMaps", () => {
           },
         };
         window.OptanonActiveGroups = "C0001,C0002,C0003";
-        expect(optW()).toBe(undefined);
+        act(() => {
+          expect(optW()).toBe(undefined);
+        });
         // TODO find a way to test this with testing-library
         // expect(store.dispatch).toHaveBeenCalledTimes(1);
         // expect(store.dispatch).toHaveBeenCalledWith({
@@ -127,7 +129,9 @@ describe("TrafimageMaps", () => {
           },
         };
         window.OptanonActiveGroups = "C0001,C0004,C0203";
-        expect(optW()).toBe(undefined);
+        act(() => {
+          expect(optW()).toBe(undefined);
+        });
         // TODO find a way to test this with testing-library
         // expect(store.dispatch).toHaveBeenCalledTimes(2);
         // expect(store.dispatch.mock.calls[0][0]).toEqual({

@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
 
 import "./ConstructionLayerInfo.scss";
+import useTranslation from "../../utils/useTranslation";
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
   staticFilesUrl: PropTypes.string.isRequired,
 };
 
-function ConstructionLayerInfo({ t, properties, staticFilesUrl }) {
+function ConstructionLayerInfo({ properties, staticFilesUrl }) {
+  const { t } = useTranslation();
   const config = properties.get("construction");
   const filename = `${config.art}_${config.ort}`.replace(
     /[^A-Z,^0-9,-_]/gi,
@@ -31,4 +31,4 @@ function ConstructionLayerInfo({ t, properties, staticFilesUrl }) {
 
 ConstructionLayerInfo.propTypes = propTypes;
 
-export default withTranslation()(ConstructionLayerInfo);
+export default ConstructionLayerInfo;

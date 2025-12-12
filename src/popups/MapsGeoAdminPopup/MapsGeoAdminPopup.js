@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import { getId } from "../../utils/removeDuplicateFeatures";
 
 const propTypes = {

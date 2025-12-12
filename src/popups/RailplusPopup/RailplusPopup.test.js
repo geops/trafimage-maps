@@ -52,11 +52,9 @@ describe("RailplusPopup", () => {
         zoom: 0,
       }),
     });
-    store = global.global.mockStore({
+    store = global.mockStore({
       map: {},
-      app: {
-        map,
-      },
+      app: { i18n: global.i18n, map },
     });
   });
 

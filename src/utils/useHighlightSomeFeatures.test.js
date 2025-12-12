@@ -36,7 +36,7 @@ function Test({ feature, layer }) {
 
 describe("useHighlightSomeFeatures", () => {
   test("should highlight only the features of the current layer", () => {
-    const store = global.mockStore({ app: { featureInfo } });
+    const store = global.mockStore({ app: { i18n: global.i18n, featureInfo } });
     const { rerender } = render(
       <Provider store={store}>
         <Test feature={[feature1]} layer={layer1} />

@@ -1,5 +1,7 @@
 import React from "react";
-import topics from "../../config/topics";
+import { getTopics } from "../../config/topics";
+
+const topics = getTopics();
 
 const defaultPermalinkParams = [
   {

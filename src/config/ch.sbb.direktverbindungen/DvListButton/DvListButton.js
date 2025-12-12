@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { unByKey } from "ol/Observable";
 import { extend, createEmpty } from "ol/extent";
+import useTranslation from "../../../utils/useTranslation";
 import MapButton from "../../../components/MapButton";
 import { setFeatureInfo } from "../../../model/app/actions";
 import { DV_KEY } from "../../../utils/constants";

@@ -1,9 +1,9 @@
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import makeStyles from "@mui/styles/makeStyles";
-import { useTranslation } from "react-i18next";
 import Typography from "@mui/material/Typography";
 import Feature from "ol/Feature";
+import useTranslation from "../../utils/useTranslation";
 import Dialog from "../../components/Dialog";
 import PhotoCarusel from "../../components/PhotoCarusel";
 

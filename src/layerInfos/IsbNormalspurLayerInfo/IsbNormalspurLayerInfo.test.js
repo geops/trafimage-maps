@@ -1,7 +1,16 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { render } from "@testing-library/react";
 import { Layer } from "mobility-toolbox-js/ol";
-import IsbNormalspurLayerInfo from ".";
+import IsbNormalspurLayerInfoBase from ".";
+
+function IsbNormalspurLayerInfo(props) {
+  return (
+    <Provider store={global.store}>
+      <IsbNormalspurLayerInfoBase {...props} />
+    </Provider>
+  );
+}
 
 describe("IsbNormalspurLayerInfo", () => {
   test("render opertaors in alphabetical order", () => {

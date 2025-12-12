@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import { setFeatureInfo } from "../../model/app/actions";
 import useUpdateFeatureInfoOnLayerToggle from "../../utils/useUpdateFeatureInfoOnLayerToggle";
 import useIndexedFeatureInfo from "../../utils/useIndexedFeatureInfo";
@@ -19,6 +19,17 @@ function FeatureInformation({ featureInfo }) {
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
+  const idd = useId();
+
+  const descIdd = useId();
+
+  // The id creates useID is not a valid selector so we make it
+  // valid by replacing colons with underscores
+  const id = useMemo(() => idd.replace(/:/g, "_"), [idd]);
+
+  // The id creates useID is not a valid selector so we
+  // valid by replacing colons with underscores
+  const descId = useMemo(() => descIdd.replace(/:/g, "_"), [descIdd]);
 
   // List of features, layers and coordinates available for pagination.
   const infoIndexed = useIndexedFeatureInfo(featureInfo);
@@ -67,8 +78,8 @@ function FeatureInformation({ featureInfo }) {
   return (
     <div
       className="wkp-feature-information"
-      aria-labelledby="wkp-popup-label"
-      aria-describedby="wkp-popup-desc"
+      aria-labelledby={id}
+      aria-describedby={descId}
       role="dialog"
     >
       <React.Suspense fallback="...loading">
@@ -76,7 +87,7 @@ function FeatureInformation({ featureInfo }) {
         (hideHeader && // For dynamic header rendering (e.g. CASA)
           !hideHeader(feature)) ? (
           <div className="wkp-feature-information-header" aria-live="assertive">
-            <span id="wkp-popup-label">
+            <span id={id}>
               {renderTitle
                 ? renderTitle(feature, info.layer, t)
                 : info.layer.name && t(info.layer.name)}
@@ -100,6 +111,7 @@ function FeatureInformation({ featureInfo }) {
             language={language}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}
+            descId={descId}
           />
           {features.length > 1 && (
             <Pagination

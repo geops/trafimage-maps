@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import useTranslation from "../../../utils/useTranslation";
 import { DV_KEY } from "../../../utils/constants";
 import useHasScreenSize from "../../../utils/useHasScreenSize";
 import { setFeatureInfo } from "../../../model/app/actions";

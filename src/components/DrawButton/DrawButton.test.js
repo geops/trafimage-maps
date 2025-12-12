@@ -8,7 +8,7 @@ import DrawButton from ".";
 describe("DrawButton", () => {
   const store = global.mockStore({
     map: {},
-    app: { mapsetUrl: "foo.mapset.ch" },
+    app: { i18n: global.i18n, mapsetUrl: "foo.mapset.ch" },
   });
 
   test("display basic default icon.", () => {

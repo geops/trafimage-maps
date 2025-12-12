@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import { lightingMapping } from "../BeleuchtungLayerInfo/lightingMapping";
 import LegendCircle from "../../components/LegendCircle/LegendCircle";
 

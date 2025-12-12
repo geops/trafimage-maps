@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { Trans, withTranslation } from "react-i18next";
 import { compose } from "redux";
 import PropTypes from "prop-types";
 import { FaLock } from "react-icons/fa";
@@ -65,13 +64,6 @@ class TopicMenu extends PureComponent {
       isCollapsed: false,
       currentBaseLayerKey: null,
     };
-
-    this.titles = {
-      layerShow: props.t("Layer anzeigen"),
-      layerHide: props.t("Layer verbergen"),
-      subLayerShow: props.t("Layer anzeigen"),
-      subLayerHide: props.t("Layer verbergen"),
-    };
   }
 
   onTopicClick(topic) {
@@ -131,9 +123,17 @@ class TopicMenu extends PureComponent {
             }
             layers={layers}
             t={t}
-            titles={this.titles}
+            titles={{
+              layerShow: t("Layer anzeigen"),
+              layerHide: t("Layer verbergen"),
+              subLayerShow: t("Layer anzeigen"),
+              subLayerHide: t("Layer verbergen"),
+            }}
             renderLabel={(layer) => {
-              return <Trans i18nKey={layer.name} />;
+              return (
+                // eslint-disable-next-line react/no-danger
+                <span dangerouslySetInnerHTML={{ __html: t(layer.name) }} />
+              );
             }}
             renderItemContent={(layer, layerTreeComp) => (
               <>
@@ -304,6 +304,7 @@ const mapStateToProps = (state) => ({
   map: state.app.map,
   activeTopic: state.app.activeTopic,
   layers: state.map.layers,
+  t: state.app.t,
 });
 
 const mapDispatchToProps = {
@@ -313,7 +314,6 @@ const mapDispatchToProps = {
 };
 
 export default compose(
-  withTranslation(),
   connect(mapStateToProps, mapDispatchToProps),
   withStyles(styles, { withTheme: true }),
 )(TopicMenu);

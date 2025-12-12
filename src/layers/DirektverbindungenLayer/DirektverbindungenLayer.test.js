@@ -8,8 +8,8 @@ describe("DirektverbindungenLayer", () => {
     const layer = new DirektverbindungenLayer({
       visible: false,
       properties: {
-        dayLayer: new Layer({ visible: false }),
-        nightLayer: new Layer({ visible: false }),
+        dayLayer: new Layer({ visible: false, apiKey: "day" }),
+        nightLayer: new Layer({ visible: false, apiKey: "night" }),
       },
     });
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../../utils/useTranslation";
 import MapButton from "../../../components/MapButton";
 import { ReactComponent as Gps } from "../../../img/sbb/gps-medium.svg";
 import { setFollowing } from "../../../model/app/actions";

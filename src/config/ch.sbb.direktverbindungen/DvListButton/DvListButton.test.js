@@ -4,18 +4,25 @@ import { Provider } from "react-redux";
 
 import OLMap from "ol/Map";
 import { ThemeProvider } from "@mui/material";
-import dvLayers from "../index";
-import { direktverbindungenIframe } from "../../topics";
+import { getTopics } from "../../topics";
 import DvListButton from "./DvListButton";
 import theme from "../../../themes/default";
+
+const direktverbindungenIframe = getTopics().wkp.find(
+  (topic) => topic.key === "ch.sbb.direktverbindungen-iframe",
+);
 
 describe("DvListButton", () => {
   let store;
 
   beforeEach(() => {
     store = global.mockStore({
-      map: { layers: dvLayers },
+      map: {
+        layers: direktverbindungenIframe.layers,
+      },
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         map: new OLMap({}),
         activeTopic: direktverbindungenIframe,
         featureInfo: [],

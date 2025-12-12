@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import useTranslation from "../../utils/useTranslation";
 import { setSearchOpen } from "../../model/app/actions";
 import { ReactComponent as SearchIcon } from "./Search.svg";
 import SearchInfo from "./SearchInfo";

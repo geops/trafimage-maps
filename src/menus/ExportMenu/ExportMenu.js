@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { FaDownload, FaInfoCircle } from "react-icons/fa";
 import { makeStyles } from "@mui/styles";
 import Typography from "@mui/material/Typography";
+import useTranslation from "../../utils/useTranslation";
 import MenuItem from "../../components/Menu/MenuItem";
 import ExportButton from "../../components/ExportButton";
 import ExportResolutionSelect from "./ExportResolutionSelect";

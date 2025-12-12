@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
 const propTypes = {
   properties: PropTypes.object.isRequired,

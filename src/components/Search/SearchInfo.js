@@ -2,7 +2,6 @@
 import React, { useEffect, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import {
   IconButton,
@@ -15,6 +14,7 @@ import {
   ClickAwayListener,
   Typography,
 } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 import { ReactComponent as QuestionIcon } from "../../img/circleQuestionMark.svg";
 import { setSearchInfoOpen } from "../../model/app/actions";
 import CloseButton from "../CloseButton";

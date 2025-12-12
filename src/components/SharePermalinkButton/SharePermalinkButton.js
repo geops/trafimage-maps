@@ -1,8 +1,8 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 import PermalinkInput from "../PermalinkInput";
 import PermalinkButton from "../PermalinkButton";
 

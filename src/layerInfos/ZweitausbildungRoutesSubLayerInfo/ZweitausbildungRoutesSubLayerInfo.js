@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
+import useTranslation from "../../utils/useTranslation";
 
 const propTypes = {
   properties: PropTypes.object.isRequired,

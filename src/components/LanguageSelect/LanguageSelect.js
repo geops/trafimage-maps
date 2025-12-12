@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MenuItem } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import Select from "../Select";
 import { setLanguage } from "../../model/app/actions";
 import { ReactComponent as SBBGlobe } from "../../img/sbb/globe_210_large.svg";

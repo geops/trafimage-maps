@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
-import { useTranslation, withTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
 const useStyles = makeStyles(() => ({
   legendWrapper: {
@@ -183,4 +183,4 @@ function PunctualityLayerInfo() {
 
 PunctualityLayerInfo.propTypes = propTypes;
 
-export default withTranslation()(PunctualityLayerInfo);
+export default PunctualityLayerInfo;

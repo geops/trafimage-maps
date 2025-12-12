@@ -1,8 +1,11 @@
 import Feature from "ol/Feature";
-import { gttos } from "../../config/ch.sbb.sts";
-import { dvDay, dvNight } from "../../config/ch.sbb.direktverbindungen";
+import {
+  DV_DAY_LAYER_KEY,
+  DV_NIGHT_LAYER_KEY,
+} from "../../config/ch.sbb.direktverbindungen";
 import parseDvFeatures from "../../config/ch.sbb.direktverbindungen/dvParseFeatures";
 import { getId } from "../../utils/removeDuplicateFeatures";
+import { GTTOS_LAYER_KEY } from "../../config/ch.sbb.sts";
 
 /**
  * Rearrange the features for the popup
@@ -23,10 +26,10 @@ export const parseFeaturesInfos = (infos, tours = []) => {
   });
 
   // Then we put all direktverbindung features
-  if (infoFeatures[dvDay.name] || infoFeatures[dvNight.name]) {
+  if (infoFeatures[DV_DAY_LAYER_KEY] || infoFeatures[DV_NIGHT_LAYER_KEY]) {
     parseDvFeatures([
-      ...(infoFeatures[dvDay.name] || []),
-      ...(infoFeatures[dvNight.name] || []),
+      ...(infoFeatures[DV_DAY_LAYER_KEY] || []),
+      ...(infoFeatures[DV_NIGHT_LAYER_KEY] || []),
     ]).forEach((feature) => {
       featuresForPopup.push(feature);
     });
@@ -34,8 +37,8 @@ export const parseFeaturesInfos = (infos, tours = []) => {
 
   // Then we display the gttos features if a validity text has not been
   // found with the poi highlights.
-  if (infoFeatures[gttos.key]) {
-    const [feature] = [...(infoFeatures[gttos.key] || [])];
+  if (infoFeatures[GTTOS_LAYER_KEY]) {
+    const [feature] = [...(infoFeatures[GTTOS_LAYER_KEY] || [])];
     const layerName = feature.get("layer").key;
     // Read routes for gttos or panorama layers
     const propertyName = "route_names_gttos";

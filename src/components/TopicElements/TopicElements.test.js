@@ -36,6 +36,8 @@ describe("TopicElements", () => {
     });
     dfltStore = {
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         map,
         language: "de",
         menuOpen: true,
@@ -58,12 +60,9 @@ describe("TopicElements", () => {
       key: "lala",
       elements: {},
     };
-    const store = global.global.mockStore({
+    const store = global.mockStore({
       ...dfltStore,
-      app: {
-        ...dfltStore.app,
-        activeTopic: tpc,
-      },
+      app: { i18n: global.i18n, ...dfltStore.app, activeTopic: tpc },
     });
     let wrapper = null;
     await act(async () => {
@@ -127,9 +126,9 @@ describe("TopicElements", () => {
         fitExtent: false,
       },
     };
-    const store = global.global.mockStore({
+    const store = global.mockStore({
       ...dfltStore,
-      app: { ...dfltStore.app, activeTopic: tpc },
+      app: { i18n: global.i18n, ...dfltStore.app, activeTopic: tpc },
     });
     let wrapper = null;
     await act(async () => {
@@ -194,9 +193,9 @@ describe("TopicElements", () => {
         fitExtent: true,
       },
     };
-    const store = global.global.mockStore({
+    const store = global.mockStore({
       ...dfltStore,
-      app: { ...dfltStore.app, activeTopic: tpc },
+      app: { i18n: global.i18n, ...dfltStore.app, activeTopic: tpc },
     });
     let wrapper = null;
 

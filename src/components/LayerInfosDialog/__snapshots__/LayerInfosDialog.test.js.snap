@@ -17,11 +17,11 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
     >
       <div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiDialog-paper makeStyles-paper-2   MuiDialog-paperScrollPaper MuiDialog-paperWidthFalse react-draggable css-1e9859v-MuiPaper-root-MuiDialog-paper"
            role="dialog"
-           aria-labelledby=":r0:"
+           aria-labelledby="_r0_"
            style="transform: translate(0px,0px);"
       >
         <h2 class="MuiTypography-root MuiTypography-h4 MuiDialogTitle-root css-x5n03r-MuiTypography-root-MuiDialogTitle-root"
-            id="draggable-dialog-title"
+            id="_r0_"
             style="cursor: move;"
         >
           <span>
@@ -53,9 +53,11 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
         </button>
         <div class="makeStyles-dialogBody-7 makeStyles-dialogBodyDesktop-8 makeStyles-dialogBodyDesktop-11">
           <div>
-            description
-            <br>
-            break
+            <p>
+              description
+              <br>
+              break
+            </p>
           </div>
         </div>
       </div>

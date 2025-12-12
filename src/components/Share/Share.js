@@ -2,13 +2,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { TiImage, TiSocialFacebook } from "react-icons/ti";
 import { RiTwitterXLine } from "react-icons/ri";
 import { FaEnvelope } from "react-icons/fa";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
 import { IconButton } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 import SharePermalinkButton from "../SharePermalinkButton";
 import {
   TRACK_SHARE_DL_ACTION,

@@ -1,5 +1,5 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
 const linkMapset = (
   <a href="https://mapset.ch" target="_blank" rel="noopener noreferrer">

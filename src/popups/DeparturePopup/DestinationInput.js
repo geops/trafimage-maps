@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { compose } from "redux";
-import { withTranslation } from "react-i18next";
 import Autocomplete from "../../components/Autocomplete";
 
 import { ReactComponent as SearchIcon } from "../../img/search.svg";
@@ -155,12 +153,10 @@ class DestinationInput extends Component {
 
 const mapStateToProps = (state) => ({
   destinationUrl: state.app.destinationUrl,
+  t: state.app.t,
 });
 
 DestinationInput.propTypes = propTypes;
 DestinationInput.defaultProps = defaultProps;
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps, null),
-)(DestinationInput);
+export default connect(mapStateToProps, null)(DestinationInput);

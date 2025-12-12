@@ -28,9 +28,7 @@ describe("useUpdateFeatureInfoOnLayerToggle", () => {
   let store;
   beforeEach(() => {
     store = global.mockStore({
-      app: {
-        featureInfo,
-      },
+      app: { i18n: global.i18n, featureInfo },
     });
   });
   test("should remove featureInfo when layer is deactivated", () => {

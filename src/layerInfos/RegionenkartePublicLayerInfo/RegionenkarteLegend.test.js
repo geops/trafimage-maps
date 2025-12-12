@@ -1,8 +1,10 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material";
 import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+
 import theme from "../../themes/default";
-import RegionenkarteLegend from "./RegionenkarteLegend";
+import RegionenkarteLegendBase from "./RegionenkarteLegend";
 
 const mapping = {
   ost: "grun",
@@ -10,6 +12,14 @@ const mapping = {
   mitte: "lila",
   west: "gelb",
 };
+
+function RegionenkarteLegend(props) {
+  return (
+    <Provider store={global.store}>
+      <RegionenkarteLegendBase {...props} />
+    </Provider>
+  );
+}
 
 describe("RegionenkarteLegend", () => {
   test("should display all regions with correct colors", async () => {

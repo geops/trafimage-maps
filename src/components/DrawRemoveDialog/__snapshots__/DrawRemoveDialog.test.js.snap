@@ -22,10 +22,10 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
     >
       <div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiDialog-paper makeStyles-paperModal-6 tm-dialog-container makeStyles-dialogContainer-1 MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-1hvry59-MuiPaper-root-MuiDialog-paper"
            role="dialog"
-           aria-labelledby=":r0:"
+           aria-labelledby="_r0_"
       >
         <h2 class="MuiTypography-root MuiTypography-h4 MuiDialogTitle-root css-x5n03r-MuiTypography-root-MuiDialogTitle-root"
-            id="draggable-dialog-title"
+            id="_r0_"
             style="cursor: auto;"
         >
           <span>
@@ -68,7 +68,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
                        tabindex="0"
                        title
                        class="tm-permalink-input"
-                       value
+                       value="http://localhost/"
                 >
                 <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall tm-permalink-bt css-1y5s1zr-MuiButtonBase-root-MuiIconButton-root"
                         tabindex="0"

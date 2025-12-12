@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import { FaInfo } from "react-icons/fa";
+import useTranslation from "../../utils/useTranslation";
 import FeatureInformation from "../FeatureInformation";
 import MenuItem from "../Menu/MenuItem";
 import { setFeatureInfo, setMenuOpen } from "../../model/app/actions";

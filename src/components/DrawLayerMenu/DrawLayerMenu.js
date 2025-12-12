@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import LayerTree from "react-spatial/components/LayerTree";
+import useTranslation from "../../utils/useTranslation";
 import InfosButton from "../InfosButton";
 
 function DrawLayerMenu() {

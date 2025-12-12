@@ -4,11 +4,9 @@ import PropTypes from "prop-types";
 import { getBottomLeft, getTopRight } from "ol/extent";
 import { transform } from "ol/proj";
 import { IconButton, List, ListItem } from "@mui/material";
-import { compose } from "redux";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
 import { HiArrowUp, HiArrowDown } from "react-icons/hi2";
-import { withTranslation } from "react-i18next";
 import LayerService from "../../utils/LayerService";
 import { FLOOR_LEVELS } from "../../utils/constants";
 
@@ -359,11 +357,9 @@ const mapStateToProps = (state) => ({
   layers: state.map.layers,
   activeTopic: state.app.activeTopic,
   screenWidth: state.app.screenWidth,
+  t: state.app.t,
 });
 
 FloorSwitcher.propTypes = propTypes;
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps),
-)(FloorSwitcher);
+export default connect(mapStateToProps)(FloorSwitcher);

@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel, Typography } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 import Dialog from "../../components/Dialog";
 import ExportResolutionSelect from "../ExportMenu/ExportResolutionSelect";
 import { optionsA3, optionsA4, sizesByFormat } from "../../utils/exportUtils";

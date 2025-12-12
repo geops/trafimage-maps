@@ -1,8 +1,8 @@
 import React from "react";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import useTranslation from "../../utils/useTranslation";
 import { ReactComponent as Loader } from "../../img/loader.svg";
 import PermalinkInput from "../PermalinkInput";
 

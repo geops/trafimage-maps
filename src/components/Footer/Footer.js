@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import ScaleLine from "react-spatial/components/ScaleLine";
 import MousePosition from "react-spatial/components/MousePosition";
 import { Link } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 import ProjectionSelect from "../ProjectionSelect";
 import coordinateHelper from "../../utils/coordinateHelper";
 import { setDialogVisible } from "../../model/app/actions";

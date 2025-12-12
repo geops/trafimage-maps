@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { EventConsumer } from "@geops/create-react-web-component";
 import BaseLayerSwitcher from "react-spatial/components/BaseLayerSwitcher";
+import useTranslation from "../../utils/useTranslation";
 import ResizeHandler from "../ResizeHandler";
 import { setScreenDimensions } from "../../model/app/actions";
 import MainDialog from "../MainDialog";

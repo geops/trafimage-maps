@@ -1,3 +1,6 @@
-import layers from "../ch.sbb.geltungsbereiche.mvp";
+import { getGeltungsbereicheLayers } from "../ch.sbb.geltungsbereiche.mvp";
 
-export default layers;
+// eslint-disable-next-line import/prefer-default-export
+export const getGeltungsbereicheIframeLayers = () => {
+  return getGeltungsbereicheLayers();
+};

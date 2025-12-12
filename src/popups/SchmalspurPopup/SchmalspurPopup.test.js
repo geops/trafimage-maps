@@ -12,7 +12,7 @@ describe("SchmalspurPopup", () => {
   beforeEach(() => {
     store = global.mockStore({
       map: {},
-      app: {},
+      app: { i18n: global.i18n },
     });
   });
 

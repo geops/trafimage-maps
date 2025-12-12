@@ -46,13 +46,15 @@ describe("TopicsMenuHeader", () => {
         layers: topic2.layers,
       },
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         menuOpen: true,
         topics: [topic1, topic2],
         activeTopic: topic2,
         map: new Map(),
       },
     };
-    store = global.global.mockStore(state);
+    store = global.mockStore(state);
   });
 
   it("renders the active topic name and active layers", () => {
@@ -115,7 +117,7 @@ describe("TopicsMenuHeader", () => {
       name: "layer2<b>withHtmlTags</b>",
     });
     state.map.layers = [layer2, layerWithHtmlTags];
-    store = global.global.mockStore(state);
+    store = global.mockStore(state);
     render(
       <Provider store={store}>
         <TopicsMenuHeader />

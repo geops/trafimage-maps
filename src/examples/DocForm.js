@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { getLayersAsFlatArray } from "mobility-toolbox-js/ol";
-import { getTopicConfig } from "../config/topics";
+import { getTopicsFromAppName } from "../config/topics";
 
 const useStyles = makeStyles(() => {
   return {
@@ -100,7 +100,7 @@ function DocForm({
     const topicKey = url.pathname?.split("/")[1] || propConfig[0].defaultValue;
 
     if (topicKey) {
-      const topic = getTopicConfig("wkp").find((t) => t.key === topicKey);
+      const topic = getTopicsFromAppName("wkp").find((t) => t.key === topicKey);
 
       const layers = getLayersAsFlatArray(topic.layers || [])
         .filter(

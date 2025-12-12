@@ -2,15 +2,16 @@ import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import Feature from "ol/Feature";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import PopupElement from "./HandicapPopupElement";
 import Link from "../../components/Link";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  descId: PropTypes.string,
 };
 
-function HandicapPopup({ feature }) {
+function HandicapPopup({ feature, descId }) {
   const language = useSelector((state) => state.app.language);
   const properties = feature.getProperties();
   const { t } = useTranslation();
@@ -261,7 +262,7 @@ function HandicapPopup({ feature }) {
         minWidth: properties.noInfo ? "250px" : "350px",
       }}
     >
-      <div className="wkp-handicap-popup-body" id="wkp-popup-desc">
+      <div className="wkp-handicap-popup-body" id={descId}>
         {renderBody()}
       </div>
     </div>

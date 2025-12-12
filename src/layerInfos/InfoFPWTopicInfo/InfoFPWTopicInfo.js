@@ -1,13 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
-const propTypes = {
-  language: PropTypes.string.isRequired,
-  t: PropTypes.func.isRequired,
-};
+const propTypes = {};
 
-function InfoFPWTopicInfo({ language, t }) {
+function InfoFPWTopicInfo() {
+  const { language, t } = useTranslation();
   const desc = {
     de: (
       <p>
@@ -44,4 +41,4 @@ function InfoFPWTopicInfo({ language, t }) {
 
 InfoFPWTopicInfo.propTypes = propTypes;
 
-export default withTranslation()(InfoFPWTopicInfo);
+export default InfoFPWTopicInfo;

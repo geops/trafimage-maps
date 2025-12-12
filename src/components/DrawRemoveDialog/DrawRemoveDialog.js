@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import { Button } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 import PermalinkInput from "../PermalinkInput";
 import Dialog from "../Dialog";
 import { setDialogVisible, setDrawIds } from "../../model/app/actions";

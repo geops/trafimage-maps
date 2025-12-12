@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, {
   useState,
   useRef,
@@ -6,7 +7,6 @@ import React, {
   useCallback,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Trans } from "react-i18next";
 import { MenuItem as MuiMenuItem } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { unByKey } from "ol/Observable";
@@ -18,6 +18,7 @@ import {
   setSelectedForInfos,
   setFeatureInfo,
 } from "../../model/app/actions";
+import useTranslation from "../../utils/useTranslation";
 
 const useStyles = makeStyles(() => {
   const boxShadow = "7px 7px 10px -6px rgb(0 0 0 / 40%)";
@@ -79,6 +80,7 @@ const useStyles = makeStyles(() => {
 });
 
 function GeltungsbereicheTopicMenu() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const layers = useSelector((state) => state.map.layers);
   const drawLayer = useSelector((state) => state.map.drawLayer);
@@ -150,7 +152,7 @@ function GeltungsbereicheTopicMenu() {
               className={`wkp-gb-menu-current-value ${classes.currentValue}`}
             >
               <span style={{ flex: 2 }} ref={(textNode) => setNode(textNode)}>
-                <Trans i18nKey={value} />
+                <span dangerouslySetInnerHTML={{ __html: t(value) }} />
               </span>
             </span>
           )}
@@ -193,7 +195,7 @@ function GeltungsbereicheTopicMenu() {
             return (
               <MuiMenuItem key={layer.key} value={layer.name}>
                 <span>
-                  <Trans i18nKey={layer.name} />
+                  <span dangerouslySetInnerHTML={{ __html: t(layer.name) }} />
                 </span>
               </MuiMenuItem>
             );

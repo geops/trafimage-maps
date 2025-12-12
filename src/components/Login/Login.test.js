@@ -6,8 +6,8 @@ import Login from ".";
 describe("Login", () => {
   describe("matches snapshot", () => {
     test("displaying default text", () => {
-      const store = global.global.mockStore({
-        app: { appBaseUrl: "http://foo.de" },
+      const store = global.mockStore({
+        app: { i18n: global.i18n, appBaseUrl: "http://foo.de" },
       });
       const component = render(
         <Provider store={store}>
@@ -18,8 +18,12 @@ describe("Login", () => {
     });
 
     test("displaying user name", () => {
-      const store = global.global.mockStore({
-        app: { permissionInfos: { user: "bar" }, appBaseUrl: "http://foo.de" },
+      const store = global.mockStore({
+        app: {
+          i18n: global.i18n,
+          permissionInfos: { user: "bar" },
+          appBaseUrl: "http://foo.de",
+        },
       });
       const component = render(
         <Provider store={store}>

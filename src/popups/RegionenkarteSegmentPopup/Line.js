@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
 const useStyles = makeStyles((theme) => ({
   title: {

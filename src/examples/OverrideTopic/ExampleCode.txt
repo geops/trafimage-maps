@@ -1,6 +1,12 @@
 import 'trafimage-maps';
 import React, { useRef, useEffect } from 'react';
-import { netzkarte } from 'trafimage-maps/es/config/topics';
+import { getTopics } from 'trafimage-maps/es/config/topics';
+
+const topics = getTopics();
+
+const netzkarte = topics.wkp.find(
+  (topic) => topic.key === 'ch.sbb.netzkarte'
+);
 
 const topic = {
   ...netzkarte,

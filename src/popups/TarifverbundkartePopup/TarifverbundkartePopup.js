@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Feature from "ol/Feature";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import Link from "../../components/Link";
 import TarifverbundkarteLayer from "../../layers/TarifverbundkarteLayer";
 import TarifverbundPartner from "../../components/TarifverbundPartner";

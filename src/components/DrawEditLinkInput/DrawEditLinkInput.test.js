@@ -11,7 +11,7 @@ describe("DrawEditLinkInput", () => {
     test("return null if no admin_id value", () => {
       store = global.mockStore({
         map: {},
-        app: {},
+        app: { i18n: global.i18n },
       });
       const { container } = render(
         <Provider store={store}>
@@ -25,9 +25,7 @@ describe("DrawEditLinkInput", () => {
   test("display input text with the draw edit link", async () => {
     store = global.mockStore({
       map: {},
-      app: {
-        drawEditLink: "http://foo.ch",
-      },
+      app: { i18n: global.i18n, drawEditLink: "http://foo.ch" },
     });
     const { container } = render(
       <Provider store={store}>

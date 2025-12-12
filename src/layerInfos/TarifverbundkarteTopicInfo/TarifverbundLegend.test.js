@@ -26,6 +26,8 @@ describe("TarifverbundLegend", () => {
   beforeEach(() => {
     store = global.mockStore({
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         vectorTilesUrl: "http://tilefoo.ch",
         screenWidth: "lg",
       },

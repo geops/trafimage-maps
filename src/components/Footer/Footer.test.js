@@ -9,6 +9,7 @@ import Footer from ".";
 const dfltStore = {
   map: {},
   app: {
+    i18n: global.i18n,
     map: new Map({}),
     projection: {
       label: "WGS 84",
@@ -19,7 +20,7 @@ const dfltStore = {
 };
 describe("Footer", () => {
   test("renders default elements", () => {
-    const store = global.global.mockStore({ ...dfltStore });
+    const store = global.mockStore({ ...dfltStore });
     const { container } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
@@ -41,12 +42,9 @@ describe("Footer", () => {
   });
 
   test("renders cookies settings link if consentGiven is true", () => {
-    const store = global.global.mockStore({
+    const store = global.mockStore({
       ...dfltStore,
-      app: {
-        ...dfltStore.app,
-        consentGiven: true,
-      },
+      app: { i18n: global.i18n, ...dfltStore.app, consentGiven: true },
     });
     const { container } = render(
       <ThemeProvider theme={theme}>

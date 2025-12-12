@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { FaInfoCircle } from "react-icons/fa";
 import { IconButton } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 import { setSelectedForInfos } from "../../model/app/actions";
 import { trackEvent } from "../../utils/trackingUtils";
 

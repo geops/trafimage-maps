@@ -1,11 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState, useRef, forwardRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useId,
+  forwardRef,
+  useMemo,
+} from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import { Dialog as MuiDialog, DialogTitle, Paper } from "@mui/material";
 import Draggable from "react-draggable";
+import useTranslation from "../../utils/useTranslation";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 import { setDialogVisible, setDialogPosition } from "../../model/app/actions";
 import CloseButton from "../CloseButton";
@@ -81,14 +88,16 @@ const PaperComponent = forwardRef((props, ref) => {
   return <Paper square ref={ref} {...props} elevation={4} />;
 });
 
-function DraggablePaperComponent(props) {
+// eslint-disable-next-line react/prop-types
+function DraggablePaperComponent({ handleId, ...props }) {
   const dispatch = useDispatch();
   const dialogPosition = useSelector((state) => state.app.dialogPosition);
   const nodeRef = useRef(null);
   return (
     <Draggable
       nodeRef={nodeRef}
-      handle="#draggable-dialog-title"
+      // eslint-disable-next-line react/destructuring-assignment, react/prop-types
+      handle={`#${handleId}`}
       cancel={'[class*="MuiDialogContent-root"]'}
       defaultPosition={dialogPosition}
       position={dialogPosition}
@@ -129,6 +138,10 @@ function Dialog({
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const idd = useId();
+  // The id creates useID is not a valid selector so we make it
+  // valid by replacing colons with underscores
+  const id = useMemo(() => idd.replace(/:/g, "_"), [idd]);
   const classesProp = classes || {};
 
   const [dialogNode, setDialogNode] = useState(null);
@@ -177,6 +190,11 @@ function Dialog({
     PaperComponent: isSmallScreen
       ? PaperComponent
       : React.memo(DraggablePaperComponent),
+    PaperProps: !isSmallScreen // only for DraggeblePaper
+      ? {
+          handleId: id,
+        }
+      : undefined,
     classes: {
       ...classesProp,
       root: `${!isSmallScreen ? classesDialog.rootDesktop : ""}${classesProp.root ? ` ${classesProp.root}` : ""}`,
@@ -209,10 +227,11 @@ function Dialog({
         disablePortal
         open
         name={name}
+        aria-labelledby={id}
         {...dialogProps}
       >
         <DialogTitle
-          id="draggable-dialog-title"
+          id={id}
           variant="h4"
           style={{ cursor: isModal ? "auto" : "move" }}
         >

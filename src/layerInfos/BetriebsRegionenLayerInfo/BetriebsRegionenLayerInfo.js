@@ -1,5 +1,5 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import ostImg from "../../img/layers/Betriebsregionen/ost.png";
 import sudImg from "../../img/layers/Betriebsregionen/sud.png";
 import westImg from "../../img/layers/Betriebsregionen/west.png";
