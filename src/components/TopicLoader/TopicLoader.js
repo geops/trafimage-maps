@@ -2,7 +2,6 @@ import { MatomoContext } from "@jonkoops/matomo-tracker-react";
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import i18next from "i18next";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
 import LayerService from "../../utils/LayerService";
@@ -62,6 +61,7 @@ const propTypes = {
   dispatchSetMaxExtent: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
+  i18n: PropTypes.shape().isRequired,
 };
 
 const defaultProps = {
@@ -199,6 +199,7 @@ class TopicLoader extends PureComponent {
       activeTopic,
       dispatchSetFeatureInfo,
       dispatchSetSearchService,
+      i18n,
     } = this.props;
 
     // wait until all web components attributes are properly set
@@ -223,7 +224,7 @@ class TopicLoader extends PureComponent {
 
     if (activeTopic.translations) {
       Object.entries(activeTopic.translations).forEach(([lang, trans]) => {
-        i18next.addResourceBundle(lang, "translation", trans);
+        i18n.addResourceBundle(lang, "translation", trans);
       });
     }
 
@@ -465,6 +466,7 @@ const mapStateToProps = (state) => ({
   realtimeKey: state.app.realtimeKey,
   realtimeUrl: state.app.realtimeUrl,
   t: state.app.t,
+  i18n: state.app.i18n,
 });
 
 const mapDispatchToProps = {
