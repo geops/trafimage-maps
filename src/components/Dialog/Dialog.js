@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "auto",
   },
   dialogBodyDesktop: {
-    maxHeight: (props) => (props.isModal ? 620 : "none"),
+    maxHeight: (props) => (props.isModal ? 620 : 360),
   },
   dialogBodyMobile: {
     maxHeight: (props) => (props.isModal ? 360 : 280),
