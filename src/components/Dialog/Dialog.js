@@ -12,7 +12,7 @@ import CloseButton from "../CloseButton";
 
 const useStyles = makeStyles((theme) => ({
   rootDesktop: {
-    zIndex: "0!important",
+    zIndex: "100!important",
     pointerEvents: "none",
   },
 
@@ -92,6 +92,7 @@ function DraggablePaperComponent(props) {
       cancel={'[class*="MuiDialogContent-root"]'}
       defaultPosition={dialogPosition}
       position={dialogPosition}
+      bounds="parent"
       onStop={(evt, pos) => {
         dispatch(
           setDialogPosition({
@@ -225,7 +226,9 @@ function Dialog({
         />
         <div
           className={`${classesDialog.dialogBody} ${
-            isSmallScreen ? classesDialog.dialogBodyMobile : ""
+            isSmallScreen
+              ? classesDialog.dialogBodyMobile
+              : classesDialog.dialogBodyDesktop
           }`}
         >
           {body}

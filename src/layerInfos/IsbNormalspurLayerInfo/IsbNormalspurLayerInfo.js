@@ -42,7 +42,7 @@ const translations = {
       </>
     ),
     dataInfo1: "Datengrundlage: SBB",
-    dataInfo2: "Datenstand: Dezember 2023",
+    dataInfo2: "Datenstand: Dezember 2025",
   },
   fr: {
     description: (
@@ -92,7 +92,7 @@ const translations = {
       </>
     ),
     dataInfo1: "Base de données: CFF",
-    dataInfo2: "État des données: Décembre 2023",
+    dataInfo2: "État des données: Décembre 2025",
   },
   it: {
     description: (
@@ -136,7 +136,7 @@ const translations = {
       </>
     ),
     dataInfo1: "Base dati: FFS",
-    dataInfo2: "Aggiornamento dei dati: Dicembre 2023",
+    dataInfo2: "Aggiornamento dei dati: Dicembre 2025",
   },
   en: {
     description: (
@@ -170,7 +170,7 @@ const translations = {
       </>
     ),
     dataInfo1: "Data basis: SBB",
-    dataInfo2: "Data status: December 2023",
+    dataInfo2: "Data status: December 2025",
   },
 };
 

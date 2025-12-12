@@ -48,7 +48,7 @@ exports[`Dialog should match snapshot. 1`] = `
             </path>
           </svg>
         </button>
-        <div class="makeStyles-dialogBody-7 ">
+        <div class="makeStyles-dialogBody-7 makeStyles-dialogBodyDesktop-8 makeStyles-dialogBodyDesktop-11">
         </div>
       </div>
     </div>
