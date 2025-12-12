@@ -1,5 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState, useRef, useId, forwardRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useId,
+  forwardRef,
+  useMemo,
+} from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@mui/styles";
@@ -131,7 +138,10 @@ function Dialog({
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const id = useId();
+  const idd = useId();
+  // The id creates useID is not a valid selector so we make it
+  // valid by replacing colons with underscores
+  const id = useMemo(() => idd.replace(/:/g, "_"), [idd]);
   const classesProp = classes || {};
 
   const [dialogNode, setDialogNode] = useState(null);

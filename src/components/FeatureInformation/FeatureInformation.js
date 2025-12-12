@@ -19,8 +19,17 @@ function FeatureInformation({ featureInfo }) {
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
-  const id = useId();
-  const descId = useId();
+  const idd = useId();
+
+  const descIdd = useId();
+
+  // The id creates useID is not a valid selector so we make it
+  // valid by replacing colons with underscores
+  const id = useMemo(() => idd.replace(/:/g, "_"), [idd]);
+
+  // The id creates useID is not a valid selector so we
+  // valid by replacing colons with underscores
+  const descId = useMemo(() => descIdd.replace(/:/g, "_"), [descIdd]);
 
   // List of features, layers and coordinates available for pagination.
   const infoIndexed = useIndexedFeatureInfo(featureInfo);
