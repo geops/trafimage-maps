@@ -181,7 +181,7 @@ class TopicMenu extends PureComponent {
                     // eslint-disable-next-line no-param-reassign
                     layer.visible = !layer.visible;
                   }}
-                  aria-label={layer.get("name")}
+                  aria-label={layer.name}
                 >
                   <InputIcon
                     type={layer.get("group") && "radio"}
