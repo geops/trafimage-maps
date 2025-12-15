@@ -21,6 +21,7 @@ describe("actions", () => {
         updateDrawEditLink()(spy, () => ({
           map: {},
           app: {
+            i18n: global.i18n,
             mapsetUrl: "http://mapsetbar.ch",
             shortenerUrl: "http://shortenfoo.ch",
             drawIds: { admin_id: "foo" },
@@ -47,6 +48,7 @@ describe("actions", () => {
         updateDrawEditLink()(spy, () => ({
           map: {},
           app: {
+            i18n: global.i18n,
             mapsetUrl: "http://mapsetbar.ch",
             shortenerUrl: "http://shortenfoo.ch",
             drawIds: { admin_id: "foo" },
@@ -69,6 +71,7 @@ describe("actions", () => {
         updateDrawEditLink()(spy, () => ({
           map: {},
           app: {
+            i18n: global.i18n,
             mapsetUrl: "http://mapsetbar.ch",
             shortenerUrl: "http://shortenfoo.ch",
             drawIds: { admin_id: "fooch" },
@@ -108,6 +111,7 @@ describe("actions", () => {
         updateDrawEditLink()(spy, () => ({
           map: {},
           app: {
+            i18n: global.i18n,
             mapsetUrl: "http://mapsetbar.ch",
             shortenerUrl: "http://shortenfoo.ch",
             drawIds: { admin_id: "foo" },
@@ -136,7 +140,9 @@ describe("actions", () => {
         clearHighlight: jest.fn(),
         clearSelect: jest.fn(),
       };
-      const getState = jest.fn(() => ({ app: { searchService } }));
+      const getState = jest.fn(() => ({
+        app: { i18n: global.i18n, searchService },
+      }));
       const searchService1 = {
         clearHighlight: jest.fn(),
         clearSelect: jest.fn(),

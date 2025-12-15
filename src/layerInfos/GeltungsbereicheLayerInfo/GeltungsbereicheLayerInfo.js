@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from "react";
-import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { Divider, Typography } from "@mui/material";
 import { Layer } from "mobility-toolbox-js/ol";
+import useTranslation from "../../utils/useTranslation";
 import GeltungsbereicheLegend, {
   getLegends,
   defaultDashArray,

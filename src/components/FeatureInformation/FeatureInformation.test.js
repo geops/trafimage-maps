@@ -28,6 +28,8 @@ describe("FeatureInformation", () => {
     storeUnMocked = {
       map: { highlightLayer },
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         projection: { value: "EPSG:3857" },
         map: {
           renderSync: () => {},

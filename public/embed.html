@@ -13,6 +13,7 @@
         .then((response) => response.json())
         .then((data) => {
           document.getElementById('map').setAttribute('apiKey', data.key);
+          document.getElementById('map2').setAttribute('apiKey', data.key);
         });
     </script>
   </head>
@@ -20,8 +21,14 @@
     <div>
       <h1>Test web component in custom page</h1>
     </div>
-    <div id="root" style="width: 800px; height: 500px; border: solid 1px black">
-      <trafimage-maps id="map" embedded="true"></trafimage-maps>
+    <div id="root">
+      <div style="width: 1600px; height: 500px; border: solid 1px black;resize:both;">
+        <trafimage-maps id="map2" embedded="true" elements="permalink=false"></trafimage-maps>
+      </div>
+      <br/>
+      <div style="width: 1600px; height: 500px; border: solid 1px black;resize:both;">
+        <trafimage-maps id="map" embedded="true" elements="permalink=false"></trafimage-maps>
+      </div>
     </div>
   </body>
 </html>

@@ -1,12 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
-const propTypes = {
-  t: PropTypes.func.isRequired,
-};
+const propTypes = {};
 
-function NetzkarteTopicInfo({ t }) {
+function NetzkarteTopicInfo() {
+  const { t } = useTranslation();
   return (
     <div>
       <p>{`${t("ch.sbb.netzkarte-desc")} ${t(
@@ -26,4 +24,4 @@ function NetzkarteTopicInfo({ t }) {
 
 NetzkarteTopicInfo.propTypes = propTypes;
 
-export default withTranslation()(NetzkarteTopicInfo);
+export default NetzkarteTopicInfo;

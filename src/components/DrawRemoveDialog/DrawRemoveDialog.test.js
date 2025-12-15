@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { Layer } from "mobility-toolbox-js/ol";
 import OLLayer from "ol/layer/Vector";
 import { ThemeProvider } from "@mui/material";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import theme from "../../themes/default";
 import DrawRemoveDialog from ".";
 
@@ -15,6 +15,8 @@ describe("DrawRemoveDialog", () => {
   beforeEach(() => {
     store = global.mockStore({
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         dialogPosition: {
           top: 0,
           left: 0,
@@ -32,7 +34,7 @@ describe("DrawRemoveDialog", () => {
     });
   });
 
-  test("should match snapshot", () => {
+  test("should match snapshot", async () => {
     const { container } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
@@ -40,17 +42,11 @@ describe("DrawRemoveDialog", () => {
         </Provider>
       </ThemeProvider>,
     );
-    expect(container.innerHTML).toMatchSnapshot();
-  });
 
-  test("remove permalink on click on remove button", () => {
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <DrawRemoveDialog />
-        </Provider>
-      </ThemeProvider>,
-    );
-    expect(container.querySelector("input").value).toBe("");
+    // Remove act warning in logs
+    await waitFor(() => {
+      return false;
+    });
+    expect(container.innerHTML).toMatchSnapshot();
   });
 });

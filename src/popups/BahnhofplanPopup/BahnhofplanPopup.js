@@ -1,19 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
-import { withTranslation } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import { FaRegFilePdf } from "react-icons/fa";
 import Link from "../../components/Link";
+import useTranslation from "../../utils/useTranslation";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
-  language: PropTypes.string.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-function BahnhofplanPopup({ feature, language, t }) {
+function BahnhofplanPopup({ feature }) {
+  const { t, language } = useTranslation();
   const iabpUrl = feature.get("url_interactive_plan");
   const a4Url = feature.get("url_a4");
   const posterUrl = feature.get("url_poster");
@@ -77,16 +74,7 @@ function BahnhofplanPopup({ feature, language, t }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  language: state.app.language,
-});
-
 BahnhofplanPopup.propTypes = propTypes;
 
-const composed = compose(
-  withTranslation(),
-  connect(mapStateToProps),
-)(BahnhofplanPopup);
-
-composed.renderTitle = (feat) => feat.get("name");
-export default composed;
+BahnhofplanPopup.renderTitle = (feat) => feat.get("name");
+export default BahnhofplanPopup;

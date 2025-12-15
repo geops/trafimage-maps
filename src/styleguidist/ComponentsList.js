@@ -12,19 +12,12 @@ const propTypes = {
   useHashId: PropTypes.bool,
 };
 
-const defaultProps = {
-  classes: null,
-  hashPath: [],
-  useRouterLinks: false,
-  useHashId: true,
-};
-
 function ComponentsList({
-  classes,
+  classes = null,
   items,
   useRouterLinks = false,
-  useHashId,
-  hashPath,
+  useHashId = true,
+  hashPath = [],
 }) {
   const mappedItems = items.map((item) => ({
     ...item,
@@ -45,6 +38,5 @@ function ComponentsList({
 }
 
 ComponentsList.propTypes = propTypes;
-ComponentsList.defaultProps = defaultProps;
 
 export default ComponentsList;

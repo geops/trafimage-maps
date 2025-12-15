@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Layer } from "mobility-toolbox-js/ol";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import OperatorShortAndLongName from "../IsbTVSLayerInfo/OperatorShortAndLongName";
 
 const propTypes = {

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
 import { unByKey } from "ol/Observable";
 import DragPan from "ol/interaction/DragPan";
+import useTranslation from "../../utils/useTranslation";
 import { ReactComponent as NoDragPanWarningIcon } from "../../img/sbb/two-finger-tap-large.svg";
 
 const useStyles = makeStyles(() => ({

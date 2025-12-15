@@ -1,6 +1,6 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import useTranslation from "../../../utils/useTranslation";
 import MenuToggler from "../../../components/MapControls/MenuToggler";
 import useHasScreenSize from "../../../utils/useHasScreenSize";
 import { ReactComponent as MenuOpen } from "../../../img/sbb/040_hamburgermenu_102_36.svg";

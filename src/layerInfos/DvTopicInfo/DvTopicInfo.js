@@ -1,24 +1,32 @@
-import React from "react";
-import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
-import { dvDay, dvNight } from "../../config/ch.sbb.direktverbindungen";
+import React, { useMemo } from "react";
+import useTranslation from "../../utils/useTranslation";
+import {
+  DV_DAY_LAYER_KEY,
+  DV_NIGHT_LAYER_KEY,
+  getDirektverbindungenLayers,
+} from "../../config/ch.sbb.direktverbindungen";
 import DataLink from "../../components/DataLink";
 import DvLegendLine from "../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine";
 
-const useStyles = makeStyles({
-  legendItem: {
-    margin: "10px 0",
-    display: "flex",
-    alignItems: "center",
-    gap: 10,
-  },
-});
-
 function DvTopicInfo() {
   const { t, i18n } = useTranslation();
-  const classes = useStyles();
+
+  const layers = useMemo(() => {
+    return getDirektverbindungenLayers();
+  }, []);
+
+  const dvDay = layers.find((l) => l.key === DV_DAY_LAYER_KEY);
+  const dvNight = layers.find((l) => l.key === DV_NIGHT_LAYER_KEY);
   const legend = [dvDay, dvNight].map((layer) => (
-    <div className={classes.legendItem} key={layer.key}>
+    <div
+      style={{
+        margin: "10px 0",
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+      }}
+      key={layer.key}
+    >
       <DvLegendLine color={layer.get("color")} />
       {t(layer.name)}
     </div>

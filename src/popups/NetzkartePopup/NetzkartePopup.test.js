@@ -13,6 +13,8 @@ describe("NetzkartePopup", () => {
     store = global.mockStore({
       map: {},
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         projection: { value: "EPSG:3857" },
         language: "de",
       },

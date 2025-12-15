@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
 const useStyles = makeStyles((theme) => ({
   otherLines: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LineData({ lineData }) {
+function LineData({ lineData = [] }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -71,7 +71,4 @@ LineData.propTypes = {
   ),
 };
 
-LineData.defaultProps = {
-  lineData: [],
-};
 export default LineData;

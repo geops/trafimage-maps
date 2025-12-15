@@ -1,4 +1,14 @@
-import { isbOther, isbTVS } from "./index";
+import { getIsbLayers } from "./index";
+import LayerService from "../../utils/LayerService";
+
+const layers = getIsbLayers();
+
+const isbOther = new LayerService(layers)
+  .getLayersAsFlatArray()
+  .find((layer) => layer.key === "ch.sbb.isb.other");
+const isbTVS = new LayerService(layers)
+  .getLayersAsFlatArray()
+  .find((layer) => layer.key === "ch.sbb.isb.tvs");
 
 describe("ch.sbb.isb", () => {
   describe("isbOther", () => {

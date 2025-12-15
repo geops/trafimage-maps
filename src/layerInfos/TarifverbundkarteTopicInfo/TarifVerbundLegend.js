@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
 import TarifverbundPartner from "../../components/TarifverbundPartner";
 import useFetch from "../../utils/useFetch";

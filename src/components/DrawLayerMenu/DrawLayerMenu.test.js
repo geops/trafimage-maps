@@ -19,7 +19,7 @@ describe("DrawLayerMenu", () => {
           layers: [],
           drawLayer,
         },
-        app: {},
+        app: { i18n: global.i18n },
       });
       const { container } = render(
         <Provider store={store}>
@@ -31,13 +31,12 @@ describe("DrawLayerMenu", () => {
 
     test("using the layerService property", () => {
       store = global.mockStore({
+        i18n: global.i18n,
         map: {
           drawLayer,
           layers: [],
         },
-        app: {
-          drawIds: { admin_id: "foo" },
-        },
+        app: { i18n: global.i18n, drawIds: { admin_id: "foo" } },
       });
       const { container } = render(
         <Provider store={store}>
@@ -58,9 +57,7 @@ describe("DrawLayerMenu", () => {
         drawLayer,
         layers,
       },
-      app: {
-        drawIds: { admin_id: "foo" },
-      },
+      app: { i18n: global.i18n, drawIds: { admin_id: "foo" } },
     });
     const { container } = render(
       <Provider store={store}>

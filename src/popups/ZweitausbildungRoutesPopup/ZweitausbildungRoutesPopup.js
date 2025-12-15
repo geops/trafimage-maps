@@ -1,8 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
-import { withTranslation } from "react-i18next";
-import { compose } from "redux";
 import ZweitausbildungRoutesHighlightLayer from "../../layers/ZweitausbildungRoutesHighlightLayer";
 
 import "./ZweitausbildungRoutesPopup.scss";
@@ -94,7 +92,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
 
 ZweitausbildungRoutesPopup.propTypes = propTypes;
 
-const composed = compose(withTranslation())(ZweitausbildungRoutesPopup);
+const composed = ZweitausbildungRoutesPopup;
 
 composed.renderTitle = (feat, layer, t) => t("Detailinformationen");
 export default composed;

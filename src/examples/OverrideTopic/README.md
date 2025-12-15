@@ -1,12 +1,16 @@
 Example how to override an existing topic.
 
 ```jsx
-import 'trafimage-maps';
-import React, { useRef, useEffect, useState } from 'react';
-import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
-import { netzkarte } from 'trafimage-maps/es/config/topics';
-import getCodeWithApiKey from '../getCodeWithApiKey.js';
-import EditorCode from './ExampleCode.txt';
+import "trafimage-maps";
+import React, { useRef, useEffect, useState } from "react";
+import Editor from "react-styleguidist/lib/client/rsg-components/Editor";
+import getCodeWithApiKey from "../getCodeWithApiKey.js";
+import EditorCode from "./ExampleCode.txt";
+import { getTopics } from "trafimage-maps/es/config/topics";
+
+const topics = getTopics();
+
+const netzkarte = topics.wkp.find((topic) => topic.key === "ch.sbb.netzkarte");
 
 const apiKey = window.apiKey;
 

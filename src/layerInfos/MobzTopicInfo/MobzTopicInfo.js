@@ -1,16 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
 const propTypes = {
-  language: PropTypes.string.isRequired,
-  t: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
 };
 
-const defaultProps = {};
-
-function MobzTopicInfo({ language, t, properties }) {
+function MobzTopicInfo({ properties }) {
+  const { t, language } = useTranslation();
   const { infos } = properties;
   const desc = {
     de: (
@@ -61,6 +58,5 @@ function MobzTopicInfo({ language, t, properties }) {
 }
 
 MobzTopicInfo.propTypes = propTypes;
-MobzTopicInfo.defaultProps = defaultProps;
 
-export default withTranslation()(MobzTopicInfo);
+export default MobzTopicInfo;

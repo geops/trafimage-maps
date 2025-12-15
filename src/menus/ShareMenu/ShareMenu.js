@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { FaShareAlt } from "react-icons/fa";
+import useTranslation from "../../utils/useTranslation";
 import Share from "../../components/Share";
 import MenuItem from "../../components/Menu/MenuItem";
 

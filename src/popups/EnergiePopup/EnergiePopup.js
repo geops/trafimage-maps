@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
 import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import { Feature } from "ol";
 import { Divider, MenuItem, Tab, Tabs, Typography } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 import Select from "../../components/Select/Select";
 import Link from "../../components/Link";
 import { energieleitungenColorMapping } from "../../utils/constants";
@@ -144,7 +144,7 @@ EnergiePopupSubtitle.propTypes = {
   label: PropTypes.string,
 };
 
-function InterventionPersonCard({ person, segments }) {
+function InterventionPersonCard({ person, segments = [] }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -176,10 +176,6 @@ InterventionPersonCard.propTypes = {
   segments: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ),
-};
-
-InterventionPersonCard.defaultProps = {
-  segments: [],
 };
 
 const validatedParseProperty = (feature, property) => {

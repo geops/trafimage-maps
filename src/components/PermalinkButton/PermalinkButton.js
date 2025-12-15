@@ -1,10 +1,10 @@
 import React, { useRef, useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { FaLink } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import { Popover, IconButton, ToggleButton } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 
 const useStyles = makeStyles(() => ({
   content: {

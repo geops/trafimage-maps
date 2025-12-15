@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { unByKey } from "ol/Observable";
+import useTranslation from "../../utils/useTranslation";
 import getLayersAsFlatArray from "../../utils/getLayersAsFlatArray";
 import Button from "../Button";
 import { ReactComponent as MenuOpenImg } from "../../img/sbb/040_hamburgermenu_102_36.svg";

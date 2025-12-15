@@ -1,7 +1,16 @@
+import { Provider } from "react-redux";
 import React from "react";
 import { render } from "@testing-library/react";
 import { Layer } from "mobility-toolbox-js/ol";
-import IsbSchmalspurLayerInfo from ".";
+import IsbSchmalspurLayerInfoBase from ".";
+
+function IsbSchmalspurLayerInfo(props) {
+  return (
+    <Provider store={global.store}>
+      <IsbSchmalspurLayerInfoBase {...props} />
+    </Provider>
+  );
+}
 
 describe("IsbSchmalspurLayerInfo", () => {
   test("render something", () => {

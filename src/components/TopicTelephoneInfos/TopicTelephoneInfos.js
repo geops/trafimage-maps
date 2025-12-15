@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { Box } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 
 function TopicTelephoneInfos() {
   const { t } = useTranslation();

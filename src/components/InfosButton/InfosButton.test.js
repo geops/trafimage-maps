@@ -3,13 +3,12 @@ import React from "react";
 import { render, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import userEvent from "@testing-library/user-event";
+import getStore from "../../model/store";
 
 import InfosButton from ".";
-import getStore from "../../model/store";
 import { setSelectedForInfos } from "../../model/app/actions";
 
 describe("InfosButton", () => {
-  let store;
   delete global.window.location;
   global.window = Object.create(window);
   global.window.location = { hostname: "wkp-dev.foo" };
@@ -19,9 +18,8 @@ describe("InfosButton", () => {
 
   test("renders not selected info button  ", () => {
     const info = { key: "foo" };
-    store = getStore();
     const { container } = render(
-      <Provider store={store}>
+      <Provider store={global.store}>
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
@@ -33,9 +31,9 @@ describe("InfosButton", () => {
 
   test("renders selected info button ", () => {
     const info = { key: "foo" };
-    store = global.global.mockStore({
+    const store = global.mockStore({
       map: {},
-      app: { selectedForInfos: info },
+      app: { i18n: global.i18n, selectedForInfos: info },
     });
     const { container } = render(
       <Provider store={store}>
@@ -50,7 +48,8 @@ describe("InfosButton", () => {
   test("select on click ", async () => {
     const user = userEvent.setup();
     const info = { key: "foo" };
-    store = getStore();
+    global.window.location.search = ""; // Fix search null issue
+    const store = getStore();
     const { container } = render(
       <Provider store={store}>
         <InfosButton selectedInfo={info} />
@@ -74,7 +73,8 @@ describe("InfosButton", () => {
   test("deselect on click", async () => {
     const user = userEvent.setup();
     const info = { key: "foo" };
-    store = getStore();
+    const store = getStore();
+
     store.dispatch(setSelectedForInfos(info));
     const { container } = render(
       <Provider store={store}>
@@ -95,7 +95,7 @@ describe("InfosButton", () => {
   test("track click event on topic info button", async () => {
     const user = userEvent.setup();
     const info = { key: "foo" };
-    store = getStore();
+    const { store } = global;
     store.dispatch(setSelectedForInfos(info));
     const { container } = render(
       <Provider store={store}>
@@ -110,7 +110,7 @@ describe("InfosButton", () => {
   test("track click event on layer info button", async () => {
     const user = userEvent.setup();
     const info = { key: "bar", get: () => {} };
-    store = getStore();
+    const { store } = global;
     store.dispatch(setSelectedForInfos(info));
     const { container } = render(
       <Provider store={store}>

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { Trans, useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import Dialog from "../Dialog";
 import layerInfos from "../../layerInfos";
 import DataLink from "../DataLink/DataLink";
@@ -58,7 +58,8 @@ function LayerInfosDialog({ style, selectedForInfos, ...props }) {
       <div>
         {/* We use trans component when description contains html tags */}
         {/<.*>/.test(translated) ? (
-          <Trans i18nKey={description} />
+          // eslint-disable-next-line react/no-danger
+          <p dangerouslySetInnerHTML={{ __html: translated }} />
         ) : (
           <p>{translated}</p>
         )}

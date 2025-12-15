@@ -43,8 +43,8 @@ function PersonCard({
   email,
   phone,
   division,
-  otherDetails,
-  className,
+  otherDetails = [],
+  className = "",
 }) {
   const classes = useStyles();
   const formattedPhone = useMemo(() => formatPhone(phone), [phone]);
@@ -114,15 +114,6 @@ PersonCard.propTypes = {
     }),
   ),
   className: PropTypes.string,
-};
-
-PersonCard.defaultProps = {
-  title: undefined,
-  email: undefined,
-  phone: undefined,
-  division: undefined,
-  otherDetails: [],
-  className: "",
 };
 
 export default PersonCard;

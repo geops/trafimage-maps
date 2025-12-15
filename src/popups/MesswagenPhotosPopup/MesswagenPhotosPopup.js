@@ -1,9 +1,9 @@
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import makeStyles from "@mui/styles/makeStyles";
-import { useTranslation } from "react-i18next";
 import Typography from "@mui/material/Typography";
 import Feature from "ol/Feature";
+import useTranslation from "../../utils/useTranslation";
 import Dialog from "../../components/Dialog";
 import PhotoCarusel from "../../components/PhotoCarusel";
 
@@ -24,16 +24,16 @@ const useStylesDialog = makeStyles(() => ({
   },
 }));
 
-function MesswagenPhotosPopup({ feature }) {
+function MesswagenPhotosPopup({ feature = null }) {
   const classesDialog = useStylesDialog();
   const { t } = useTranslation();
   const [fullSize, setFullSize] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const properties = feature.getProperties();
+  const properties = feature?.getProperties() || {};
   const photos = useMemo(
     () =>
       Array.from(Array(7).keys()).reduce((allPhotos, key) => {
-        const featProps = feature.getProperties();
+        const featProps = feature?.getProperties() || {};
         const photo = featProps[`foto_${key + 1}`];
         if (photo) {
           allPhotos.push(photo);
@@ -93,9 +93,6 @@ function MesswagenPhotosPopup({ feature }) {
 
 MesswagenPhotosPopup.propTypes = {
   feature: PropTypes.instanceOf(Feature),
-};
-MesswagenPhotosPopup.defaultProps = {
-  feature: null,
 };
 MesswagenPhotosPopup.renderTitle = (feature) =>
   feature.get("bezeichnung") || "";
