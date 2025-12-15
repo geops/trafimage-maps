@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
 import { ScaleLine } from "ol/control";
 import html2canvas from "html2canvas";
+import useTranslation from "../../utils/useTranslation";
 import Button from "../Button";
 import { ReactComponent as Loader } from "./loader.svg";
 import {

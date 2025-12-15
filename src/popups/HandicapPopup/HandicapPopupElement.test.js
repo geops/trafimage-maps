@@ -1,7 +1,16 @@
+import { Provider } from "react-redux";
 import React from "react";
 import { render } from "@testing-library/react";
-import HandicapPopupElement from "./HandicapPopupElement";
+import HandicapPopupElementBase from "./HandicapPopupElement";
 import "react-app-polyfill/stable";
+
+function HandicapPopupElement(props) {
+  return (
+    <Provider store={global.store}>
+      <HandicapPopupElementBase {...props} />
+    </Provider>
+  );
+}
 
 describe("HandicapPopupElement", () => {
   const props = {

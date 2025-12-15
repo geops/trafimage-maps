@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Layer } from "mobility-toolbox-js/ol";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import OperatorShortAndLongName from "../IsbTVSLayerInfo/OperatorShortAndLongName";
 
 const propTypes = {
@@ -13,24 +13,24 @@ const translations = {
     description:
       "Infrastrukturbetreiberinnen, die Schmalspurstrecken betreiben.",
     dataInfo1: "Datengrundlage: SBB",
-    dataInfo2: "Datenstand: Dezember 2023",
+    dataInfo2: "Datenstand: Dezember 2025",
   },
   fr: {
     description:
       "Les gestionnaires d'infrastructure qui exploitent des lignes à voie étroite.",
     dataInfo1: "Base de données: CFF",
-    dataInfo2: "État des données: Décembre 2023",
+    dataInfo2: "État des données: Décembre 2025",
   },
   it: {
     description:
       "Gestori di infrastrutture che operano su linee a scartamento ridotto.",
     dataInfo1: "Base dati: FFS",
-    dataInfo2: "Aggiornamento dei dati: Dicembre 2023",
+    dataInfo2: "Aggiornamento dei dati: Dicembre 2025",
   },
   en: {
     description: "Infrastructure managers who operate narrow gauge lines.",
     dataInfo1: "Data basis: SBB",
-    dataInfo2: "Data status: December 2023",
+    dataInfo2: "Data status: December 2025",
   },
 };
 

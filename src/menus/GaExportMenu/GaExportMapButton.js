@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { BsDownload } from "react-icons/bs";
-import { useTranslation } from "react-i18next";
 import { unByKey } from "ol/Observable";
+import useTranslation from "../../utils/useTranslation";
 import MapButton from "../../components/MapButton";
 import GaExportMenu from "./GaExportMenu";
 import useHasScreenSize from "../../utils/useHasScreenSize";

@@ -1,8 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
-import { withTranslation } from "react-i18next";
-import { compose } from "redux";
 import ZweitausbildungPoisLayer from "../../layers/ZweitausbildungPoisLayer";
 
 import "./ZweitausbildungPoisPopup.scss";
@@ -53,7 +51,7 @@ class ZweitausbildungPoisPopup extends PureComponent {
 
 ZweitausbildungPoisPopup.propTypes = propTypes;
 
-const composed = compose(withTranslation())(ZweitausbildungPoisPopup);
+const composed = ZweitausbildungPoisPopup;
 
 composed.renderTitle = (feat, layer, t) => t("Detailinformationen");
 composed.hidePagination = true;

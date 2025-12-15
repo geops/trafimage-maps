@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { compose } from "redux";
 import { MdLoop } from "react-icons/md";
-import { withTranslation } from "react-i18next";
 import qs from "query-string";
 
 import DestinationInput from "./DestinationInput";
@@ -385,6 +383,7 @@ const mapStateToProps = (state) => ({
   departuresUrl: state.app.departuresUrl,
   destinationUrl: state.app.destinationUrl,
   apiKey: state.app.apiKey,
+  t: state.app.t,
 });
 
 const mapDispatchToProps = {
@@ -394,7 +393,7 @@ const mapDispatchToProps = {
 DeparturePopupContent.propTypes = propTypes;
 DeparturePopupContent.defaultProps = defaultProps;
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps, mapDispatchToProps),
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
 )(DeparturePopupContent);

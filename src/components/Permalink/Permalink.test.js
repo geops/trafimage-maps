@@ -36,6 +36,8 @@ describe("Permalink", () => {
         ],
       },
       app: {
+        i18n: global.i18n,
+        t: global.i18n.t,
         drawUrl: "http://drawfoo.ch/",
         language: "de",
         activeTopic: {

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { IconButton } from "@mui/material";
 import React from "react";
 import { MdClose } from "react-icons/md";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 
 function CloseButton({ children, ...props }) {
   const { t } = useTranslation();

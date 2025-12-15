@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import grun from "./grun.png";
 import gelb from "./gelb.png";
 import lila from "./lila.png";

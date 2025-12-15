@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { IconButton } from "@mui/material";
-import { useTranslation } from "react-i18next";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import WestOutlinedIcon from "@mui/icons-material/WestOutlined";
+import useTranslation from "../../utils/useTranslation";
 
 function CycleButton({ onClick, children, ...props }) {
   const { t } = useTranslation();

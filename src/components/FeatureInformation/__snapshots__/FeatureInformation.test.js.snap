@@ -2,14 +2,14 @@
 
 exports[`FeatureInformation should match snapshot. should display multiple features with pagination 1`] = `
 <div class="wkp-feature-information"
-     aria-labelledby="wkp-popup-label"
-     aria-describedby="wkp-popup-desc"
+     aria-labelledby="_rk_"
+     aria-describedby="_rl_"
      role="dialog"
 >
   <div class="wkp-feature-information-header"
        aria-live="assertive"
   >
-    <span id="wkp-popup-label">
+    <span id="_rk_">
     </span>
     <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1go4m0m-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
@@ -95,8 +95,8 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
 
 exports[`FeatureInformation should match snapshot. should not display header 1`] = `
 <div class="wkp-feature-information"
-     aria-labelledby="wkp-popup-label"
-     aria-describedby="wkp-popup-desc"
+     aria-labelledby="_rm_"
+     aria-describedby="_rn_"
      role="dialog"
 >
   <div class="wkp-feature-information-body">
@@ -108,14 +108,14 @@ exports[`FeatureInformation should match snapshot. should not display header 1`]
 
 exports[`FeatureInformation should match snapshot. using the info's popupComponent 1`] = `
 <div class="wkp-feature-information"
-     aria-labelledby="wkp-popup-label"
-     aria-describedby="wkp-popup-desc"
+     aria-labelledby="_ri_"
+     aria-describedby="_rj_"
      role="dialog"
 >
   <div class="wkp-feature-information-header"
        aria-live="assertive"
   >
-    <span id="wkp-popup-label">
+    <span id="_ri_">
     </span>
     <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1go4m0m-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
@@ -169,14 +169,14 @@ exports[`FeatureInformation should match snapshot. using the info's popupCompone
 
 exports[`FeatureInformation should match snapshot. using the layers's popupComponent 1`] = `
 <div class="wkp-feature-information"
-     aria-labelledby="wkp-popup-label"
-     aria-describedby="wkp-popup-desc"
+     aria-labelledby="_rg_"
+     aria-describedby="_rh_"
      role="dialog"
 >
   <div class="wkp-feature-information-header"
        aria-live="assertive"
   >
-    <span id="wkp-popup-label">
+    <span id="_rg_">
     </span>
     <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1go4m0m-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"

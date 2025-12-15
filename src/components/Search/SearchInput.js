@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Autosuggest from "react-autosuggest";
 import { FaSearch, FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
 import { IconButton, Typography } from "@mui/material";
+import useTranslation from "../../utils/useTranslation";
 import { setFeatureInfo, setSearchOpen } from "../../model/app/actions";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 
@@ -23,7 +23,6 @@ function SearchInput() {
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const embedded = useSelector((state) => state.app.embedded);
   const isMobile = useHasScreenSize();
-  const searchContainerRef = useRef();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isEmbedded = window !== window.parent || embedded;
@@ -55,6 +54,7 @@ function SearchInput() {
 
   return (
     <Autosuggest
+      isEmbedded
       multiSection
       shouldRenderSuggestions={(val) => val.trim().length > 2}
       suggestions={suggestions}
@@ -159,11 +159,7 @@ function SearchInput() {
       }}
       renderInputComponent={({ key, ...inputProps }) => {
         return (
-          <div
-            className="wkp-search-input"
-            ref={searchContainerRef}
-            data-testid="wkp-search-input"
-          >
+          <div className="wkp-search-input" data-testid="wkp-search-input">
             <input {...inputProps} key={key} />
             {value && (
               <CloseButton

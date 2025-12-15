@@ -31,7 +31,7 @@ describe("GeltungsbereicheTopicMenu", () => {
     });
     store = global.mockStore({
       map: { layers: [baseLayer, layer1, layer2] },
-      app: { map: new OLMap({}), menuOpen: false },
+      app: { i18n: global.i18n, map: new OLMap({}), menuOpen: false },
     });
     const { container } = render(
       <ThemeProvider theme={theme}>

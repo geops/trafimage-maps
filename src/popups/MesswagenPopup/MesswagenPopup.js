@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { unByKey } from "ol/Observable";
 import { Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import { MesswagenLayer } from "../../layers";
 import Link from "../../components/Link";
 

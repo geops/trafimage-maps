@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import makeStyles from "@mui/styles/makeStyles";
 import { ZoomIn } from "@mui/icons-material";
-import { useTranslation } from "react-i18next";
+import useTranslation from "../../utils/useTranslation";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 import Pagination from "../Pagination";
 import Loading from "../Loading";

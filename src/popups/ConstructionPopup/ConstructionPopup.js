@@ -1,21 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
-import { withTranslation } from "react-i18next";
 import Link from "../../components/Link";
 
 import "./ConstructionPopup.scss";
+import useTranslation from "../../utils/useTranslation";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
-  t: PropTypes.func.isRequired,
 };
-
-const defaultProps = {};
 
 const capitalize = (stg) => `${stg.charAt(0).toUpperCase()}${stg.slice(1)}`;
 
-function ConstructionPopup({ feature, t }) {
+function ConstructionPopup({ feature }) {
+  const { t } = useTranslation();
   let projektort;
   let ort;
   let artAndOrt;
@@ -85,9 +83,8 @@ function ConstructionPopup({ feature, t }) {
 }
 
 ConstructionPopup.propTypes = propTypes;
-ConstructionPopup.defaultProps = defaultProps;
 
-const composed = withTranslation()(ConstructionPopup);
+const composed = ConstructionPopup;
 
 composed.renderTitle = (feat) => feat.get("projektname");
 export default composed;

@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import RsFitExtent from "react-spatial/components/FitExtent";
+import useTranslation from "../../../utils/useTranslation";
 import MapButton from "../../MapButton";
 import { SWISS_EXTENT } from "../../../utils/constants";
 import { ReactComponent as SwissBounds } from "../../../img/swissbounds.svg";

@@ -1,6 +1,6 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { TiVideo } from "react-icons/ti";
+import useTranslation from "../../utils/useTranslation";
 import FeatureMenu from "../../components/FeatureMenu";
 
 /**

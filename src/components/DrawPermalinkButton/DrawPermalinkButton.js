@@ -1,9 +1,9 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import useTranslation from "../../utils/useTranslation";
 import PermalinkInput from "../PermalinkInput";
 import DrawEditLinkInput from "../DrawEditLinkInput";
 import PermalinkButton from "../PermalinkButton";

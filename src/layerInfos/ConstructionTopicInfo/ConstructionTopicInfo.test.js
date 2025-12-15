@@ -1,6 +1,15 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { render } from "@testing-library/react";
-import ConstructionTopicInfo from ".";
+import ConstructionTopicInfoBase from ".";
+
+function ConstructionTopicInfo(props) {
+  return (
+    <Provider store={global.store}>
+      <ConstructionTopicInfoBase {...props} />
+    </Provider>
+  );
+}
 
 describe("ConstructionTopicInfo", () => {
   test("should display link to data", () => {

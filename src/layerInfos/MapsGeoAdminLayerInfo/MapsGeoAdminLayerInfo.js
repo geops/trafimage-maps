@@ -1,14 +1,12 @@
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
 
 import "./MapsGeoAdminLayerInfo.scss";
+import useTranslation from "../../utils/useTranslation";
 
 const propTypes = {
-  language: PropTypes.string.isRequired,
   properties: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 const footer = {
@@ -62,7 +60,8 @@ const footer = {
   ),
 };
 
-function MapsGeoAdminLayerInfo({ language, t, properties }) {
+function MapsGeoAdminLayerInfo({ properties }) {
+  const { t, language } = useTranslation();
   const [legendHtml, setLegendHtml] = useState(null);
 
   useEffect(() => {
@@ -112,4 +111,4 @@ function MapsGeoAdminLayerInfo({ language, t, properties }) {
 
 MapsGeoAdminLayerInfo.propTypes = propTypes;
 
-export default withTranslation()(MapsGeoAdminLayerInfo);
+export default MapsGeoAdminLayerInfo;

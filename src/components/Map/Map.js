@@ -1,8 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
-import { compose } from "redux";
 import { always, touchOnly } from "ol/events/condition";
 import { Layer } from "mobility-toolbox-js/ol";
 import { unByKey } from "ol/Observable";
@@ -333,6 +331,7 @@ const mapStateToProps = (state) => ({
   showPopups: state.app.showPopups,
   activeTopic: state.app.activeTopic,
   zoomType: state.map.zoomType,
+  t: state.app.t,
 });
 
 const mapDispatchToProps = {
@@ -345,7 +344,4 @@ const mapDispatchToProps = {
   dispatchSetZoomType: setZoomType,
 };
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps, mapDispatchToProps),
-)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

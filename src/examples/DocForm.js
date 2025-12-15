@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { getLayersAsFlatArray } from "mobility-toolbox-js/ol";
-import { getTopicConfig } from "../config/topics";
+import { getTopicsFromAppName } from "../config/topics";
 
 const useStyles = makeStyles(() => {
   return {
@@ -83,9 +83,9 @@ const useStyles = makeStyles(() => {
 function DocForm({
   value,
   onChange,
-  filter,
-  isIframe,
-  propToggler,
+  filter = () => true,
+  isIframe = false,
+  propToggler = false,
   propConfig,
 }) {
   const [permalinkParams, setPermalinkParams] = useState(propConfig);
@@ -100,7 +100,7 @@ function DocForm({
     const topicKey = url.pathname?.split("/")[1] || propConfig[0].defaultValue;
 
     if (topicKey) {
-      const topic = getTopicConfig("wkp").find((t) => t.key === topicKey);
+      const topic = getTopicsFromAppName("wkp").find((t) => t.key === topicKey);
 
       const layers = getLayersAsFlatArray(topic.layers || [])
         .filter(
@@ -335,12 +335,6 @@ DocForm.propTypes = {
       description: PropTypes.func,
     }),
   ).isRequired,
-};
-
-DocForm.defaultProps = {
-  propToggler: false,
-  filter: () => true,
-  isIframe: false,
 };
 
 export default DocForm;

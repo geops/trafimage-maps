@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.31.0](https://github.com/geops/trafimage-maps/compare/v1.30.42...v1.31.0) (2025-12-15)
+
+### Features
+
+- allow multiple web components son the same page ([#1243](https://github.com/geops/trafimage-maps/issues/1243)) ([c078a5f](https://github.com/geops/trafimage-maps/commit/c078a5f33659964d8fc179b1bc3b0390fd8866bb))
+
+### Bug Fixes
+
+- update topic info and PDF dates ([#1236](https://github.com/geops/trafimage-maps/issues/1236)) ([889c01f](https://github.com/geops/trafimage-maps/commit/889c01f38fb50726d302a5dfd0b65728f588b559))
+
 ### [1.30.42](https://github.com/geops/trafimage-maps/compare/v1.30.41...v1.30.42) (2025-12-05)
 
 ### Bug Fixes

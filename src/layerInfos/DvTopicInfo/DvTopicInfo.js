@@ -1,24 +1,32 @@
-import React from "react";
-import { makeStyles } from "@mui/styles";
-import { useTranslation } from "react-i18next";
-import { dvDay, dvNight } from "../../config/ch.sbb.direktverbindungen";
+import React, { useMemo } from "react";
+import useTranslation from "../../utils/useTranslation";
+import {
+  DV_DAY_LAYER_KEY,
+  DV_NIGHT_LAYER_KEY,
+  getDirektverbindungenLayers,
+} from "../../config/ch.sbb.direktverbindungen";
 import DataLink from "../../components/DataLink";
 import DvLegendLine from "../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine";
 
-const useStyles = makeStyles({
-  legendItem: {
-    margin: "10px 0",
-    display: "flex",
-    alignItems: "center",
-    gap: 10,
-  },
-});
-
 function DvTopicInfo() {
   const { t, i18n } = useTranslation();
-  const classes = useStyles();
+
+  const layers = useMemo(() => {
+    return getDirektverbindungenLayers();
+  }, []);
+
+  const dvDay = layers.find((l) => l.key === DV_DAY_LAYER_KEY);
+  const dvNight = layers.find((l) => l.key === DV_NIGHT_LAYER_KEY);
   const legend = [dvDay, dvNight].map((layer) => (
-    <div className={classes.legendItem} key={layer.key}>
+    <div
+      style={{
+        margin: "10px 0",
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+      }}
+      key={layer.key}
+    >
       <DvLegendLine color={layer.get("color")} />
       {t(layer.name)}
     </div>
@@ -49,7 +57,7 @@ function DvTopicInfo() {
           </p>
           {legend}
           <p>
-            Datenstand Dezember 2024.
+            Datenstand Dezember 2025.
             <br />
             Die Karte wird jährlich zum Fahrplanwechsel aktualisiert.
             <br />
@@ -69,7 +77,7 @@ function DvTopicInfo() {
           </p>
           {legend}
           <p>
-            Mise à jour des données en décembre 2024.
+            Mise à jour des données en décembre 2025.
             <br />
             La carte est actualisée chaque année lors du changement
             d&apos;horaire.
@@ -89,7 +97,7 @@ function DvTopicInfo() {
           </p>
           {legend}
           <p>
-            Data updated in December 2024.
+            Data updated in December 2025.
             <br />
             The map is updated annually at the time of the timetable change.
             <br />
@@ -109,7 +117,7 @@ function DvTopicInfo() {
           </p>
           {legend}
           <p>
-            Stato dei dati dicembre 2024.
+            Stato dei dati dicembre 2025.
             <br />
             La mappa viene aggiornata ogni anno al momento del cambio
             d&apos;orario.

@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { FaTrash, FaInfoCircle } from "react-icons/fa";
 import { Grid, Typography, IconButton } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useMatomo } from "@jonkoops/matomo-tracker-react";
+import useTranslation from "../../utils/useTranslation";
 import { setDialogVisible } from "../../model/app/actions";
 import DrawButton from "../DrawButton";
 import { NAME } from "../DrawRemoveDialog";

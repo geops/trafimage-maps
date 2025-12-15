@@ -11,7 +11,6 @@ import KML from "react-spatial/utils/KML";
 import { Layer } from "mobility-toolbox-js/ol";
 import LayerService from "../../utils/LayerService";
 import { setCenter, setZoom } from "../../model/map/actions";
-import { stationsLayer, platformsLayer } from "../../config/ch.sbb.netzkarte";
 import {
   setDeparturesFilter,
   setFeatureInfo,
@@ -25,6 +24,8 @@ import {
   DRAW_OLD_PARAM,
   DRAW_REDIRECT_PARAM,
   MAPSET_PARENT_PARAM,
+  STATIONS_LAYER_NAME,
+  PLATFORMS_LAYER_NAME,
 } from "../../utils/constants";
 
 const propTypes = {
@@ -239,6 +240,7 @@ class Permalink extends PureComponent {
       dispatchUpdateDrawEditLink,
       readOnly,
     } = this.props;
+    const stationsLayer = this.getStationsLayer();
 
     if (!readOnly && history && activeTopic !== prevProps.activeTopic) {
       history.replace(`/${activeTopic.key}${window.location.search}`);
@@ -274,8 +276,20 @@ class Permalink extends PureComponent {
     dispatchUpdateDrawEditLink();
   }
 
+  getStationsLayer() {
+    const { layers } = this.props;
+    return layers.find((l) => l.name === STATIONS_LAYER_NAME);
+  }
+
+  getPlatformsLayer() {
+    const { layers } = this.props;
+    return layers.find((l) => l.name === PLATFORMS_LAYER_NAME);
+  }
+
   async openDepartureOnLoad() {
     const { dispatchSetFeatureInfo } = this.props;
+    const stationsLayer = this.getStationsLayer();
+    const platformsLayer = this.getPlatformsLayer();
     const { mbMap } = stationsLayer.mapboxLayer;
 
     const filter = ["all", ["==", ["get", "sbb_id"], this.departures]];

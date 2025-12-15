@@ -6,7 +6,10 @@ import { makeStyles } from "@mui/styles";
 import Link from "../../components/Link";
 import usePrevious from "../../utils/usePrevious";
 import GeltungsbereichePopup from "../../popups/GeltungsbereicheGaPopup/GeltungsbereicheGaPopup";
-import { otherRoutes, highlightRoutes } from "../../config/ch.sbb.sts";
+import {
+  OTHER_LAYER_KEY,
+  ROUTES_HIGHLIGHT_LAYER_KEY,
+} from "../../config/ch.sbb.sts";
 import { parseFeaturesInfos } from "./stsParseFeatureInfo";
 import { setFeatureInfo } from "../../model/app/actions";
 import useFetch from "../../utils/useFetch";
@@ -38,17 +41,18 @@ const useStyles = makeStyles(() => {
 function StsValidityFeatureInfo() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const layers = useSelector((state) => state.map.layers);
   const featureInfo = useSelector((state) => state.app.featureInfo);
 
   const [selectedFeature, setSelectedFeature] = useState();
   const previousSelectedFeature = usePrevious(selectedFeature);
 
   const mainFeatureInfos = useMemo(
-    () => featureInfo.filter((info) => info.layer.key !== otherRoutes.key),
+    () => featureInfo.filter((info) => info.layer.key !== OTHER_LAYER_KEY),
     [featureInfo],
   );
   const gbFeatureInfo = useMemo(
-    () => featureInfo.find((info) => info.layer.key === otherRoutes.key),
+    () => featureInfo.find((info) => info.layer.key === OTHER_LAYER_KEY),
     [featureInfo],
   );
 
@@ -58,6 +62,9 @@ function StsValidityFeatureInfo() {
 
   const select = useCallback(
     (feature) => {
+      const highlightRoutes = layers.find(
+        (l) => l.key === ROUTES_HIGHLIGHT_LAYER_KEY,
+      );
       if (previousSelectedFeature) {
         previousSelectedFeature.set("selected", false);
       }
@@ -71,7 +78,7 @@ function StsValidityFeatureInfo() {
       );
       setSelectedFeature(feature);
     },
-    [previousSelectedFeature],
+    [previousSelectedFeature, layers],
   );
 
   const mainFeatures = useMemo(() => {

@@ -5,22 +5,31 @@ import Municipalities from "../searches/Municipalities";
 import StopFinder from "../searches/StopFinder";
 import HandicapStopFinder from "../searches/HandicapStopFinder";
 
-export const betriebspunkte = new Betriebspunkte();
-
-export const lines = new Lines();
-
-export const locations = new Locations();
-
-export const municipalities = new Municipalities();
-
-export const stopFinder = new StopFinder();
-
-export const handicapStopFinder = new HandicapStopFinder();
-
-export default {
-  Stationen: stopFinder,
-  Gemeinden: municipalities,
-  Orte: locations,
-  Betriebspunkte: betriebspunkte,
-  Linien: lines,
+export const SearchName = {
+  Stationen: "Stationen",
+  Gemeinden: "Gemeinden",
+  Orte: "Orte",
+  Betriebspunkte: "Betriebspunkte",
+  Linien: "Linien",
+  HandicapStopFinder: "HandicapStopFinder",
 };
+
+export function getDefaultSearches() {
+  return {
+    [SearchName.Stationen]: new StopFinder(),
+    [SearchName.Gemeinden]: new Municipalities(),
+    [SearchName.Orte]: new Locations(),
+    [SearchName.Betriebspunkte]: new Betriebspunkte(),
+    [SearchName.Linien]: new Lines(),
+  };
+}
+
+export function getSearchByName(name) {
+  if (name === SearchName.Stationen) return new StopFinder();
+  if (name === SearchName.Gemeinden) return new Municipalities();
+  if (name === SearchName.Orte) return new Locations();
+  if (name === SearchName.Betriebspunkte) return new Betriebspunkte();
+  if (name === SearchName.Linien) return new Lines();
+  if (name === SearchName.HandicapStopFinder) return new HandicapStopFinder();
+  return null;
+}

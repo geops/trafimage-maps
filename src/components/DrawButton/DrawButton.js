@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import IconButton from "@mui/material/IconButton";
+import useTranslation from "../../utils/useTranslation";
 import { ReactComponent as Pencil } from "../../img/pencil.svg";
 
 function DrawButton({ children, onClick, ...buttonProps }) {
