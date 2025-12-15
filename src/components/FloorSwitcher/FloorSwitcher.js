@@ -38,7 +38,7 @@ const iconButtonStyle = (theme) => ({
 const propTypes = {
   // mapStateToProps
   center: PropTypes.arrayOf(PropTypes.number.isRequired),
-  zoom: PropTypes.number.isRequired,
+  zoom: PropTypes.number,
   map: PropTypes.object.isRequired,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
   activeTopic: PropTypes.object.isRequired,

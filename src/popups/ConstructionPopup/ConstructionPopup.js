@@ -10,8 +10,6 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-const defaultProps = {};
-
 const capitalize = (stg) => `${stg.charAt(0).toUpperCase()}${stg.slice(1)}`;
 
 function ConstructionPopup({ feature }) {
@@ -85,7 +83,6 @@ function ConstructionPopup({ feature }) {
 }
 
 ConstructionPopup.propTypes = propTypes;
-ConstructionPopup.defaultProps = defaultProps;
 
 const composed = ConstructionPopup;
 

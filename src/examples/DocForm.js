@@ -83,9 +83,9 @@ const useStyles = makeStyles(() => {
 function DocForm({
   value,
   onChange,
-  filter,
-  isIframe,
-  propToggler,
+  filter = () => true,
+  isIframe = false,
+  propToggler = false,
   propConfig,
 }) {
   const [permalinkParams, setPermalinkParams] = useState(propConfig);
@@ -335,12 +335,6 @@ DocForm.propTypes = {
       description: PropTypes.func,
     }),
   ).isRequired,
-};
-
-DocForm.defaultProps = {
-  propToggler: false,
-  filter: () => true,
-  isIframe: false,
 };
 
 export default DocForm;

@@ -70,7 +70,7 @@ function withResizing(MenuToBeResized) {
 
     render() {
       const { menuHeight } = this.state;
-      const { forwardedRef } = this.props;
+      const { forwardedRef = null } = this.props;
       return (
         <MenuToBeResized
           bodyElementRef={this.bodyElementRef}
@@ -83,9 +83,6 @@ function withResizing(MenuToBeResized) {
   }
 
   ResizedWrapper.propTypes = propTypes;
-  ResizedWrapper.defaultProps = {
-    forwardedRef: null,
-  };
 
   const mapStateToProps = (state) => ({
     menuOpen: state.app.menuOpen,

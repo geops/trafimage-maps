@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LineData({ lineData }) {
+function LineData({ lineData = [] }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -71,7 +71,4 @@ LineData.propTypes = {
   ),
 };
 
-LineData.defaultProps = {
-  lineData: [],
-};
 export default LineData;

@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function ExportResolutionSelect({ options, className }) {
+function ExportResolutionSelect({ options, className = "" }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -78,10 +78,6 @@ ExportResolutionSelect.propTypes = {
     }),
   ).isRequired,
   className: PropTypes.string,
-};
-
-ExportResolutionSelect.defaultProps = {
-  className: "",
 };
 
 export default ExportResolutionSelect;

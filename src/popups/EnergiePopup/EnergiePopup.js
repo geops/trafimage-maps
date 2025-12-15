@@ -144,7 +144,7 @@ EnergiePopupSubtitle.propTypes = {
   label: PropTypes.string,
 };
 
-function InterventionPersonCard({ person, segments }) {
+function InterventionPersonCard({ person, segments = [] }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -176,10 +176,6 @@ InterventionPersonCard.propTypes = {
   segments: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ),
-};
-
-InterventionPersonCard.defaultProps = {
-  segments: [],
 };
 
 const validatedParseProperty = (feature, property) => {

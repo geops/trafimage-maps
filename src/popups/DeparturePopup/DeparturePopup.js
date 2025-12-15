@@ -18,7 +18,6 @@ DeparturePopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   children: PropTypes.node,
 };
-DeparturePopup.defaultProps = { children: undefined };
 
 const composed = DeparturePopup;
 composed.renderTitle = (feat, layer, t) => {

@@ -144,10 +144,6 @@ export function StyleGuideRenderer({
   );
 }
 
-StyleGuideRenderer.defaultProps = {
-  version: null,
-};
-
 StyleGuideRenderer.propTypes = {
   classes: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,

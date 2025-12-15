@@ -22,8 +22,8 @@ function DvTopicInfo() {
   const { t, i18n } = useTranslation();
   const layers = useSelector((state) => state.map.layers);
   const classes = useStyles();
-  const dvDay = layers.find((l) => l.get("name") === DV_DAY_LAYER_KEY);
-  const dvNight = layers.find((l) => l.get("name") === DV_NIGHT_LAYER_KEY);
+  const dvDay = layers.find((l) => l.key === DV_DAY_LAYER_KEY);
+  const dvNight = layers.find((l) => l.key === DV_NIGHT_LAYER_KEY);
   const legend = [dvDay, dvNight].map((layer) => (
     <div className={classes.legendItem} key={layer.key}>
       <DvLegendLine color={layer.get("color")} />

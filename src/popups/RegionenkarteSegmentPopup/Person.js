@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Person({ isIntern, person }) {
+function Person({ isIntern, person = {} }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const { name, phone, email, division, unterrolle, kommentar } = person;
@@ -42,10 +42,6 @@ Person.propTypes = {
     kommentar: PropTypes.string,
   }),
   isIntern: PropTypes.bool.isRequired,
-};
-
-Person.defaultProps = {
-  person: {},
 };
 
 export default Person;

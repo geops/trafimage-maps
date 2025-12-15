@@ -31,8 +31,8 @@ export const GTTOS_LAYER_KEY = "ch.sbb.sts.validity.gttos";
 // eslint-disable-next-line import/prefer-default-export
 export const getStsLayers = () => {
   const dvLayers = getDirektverbindungenLayers();
-  const dvDay = dvLayers.find((l) => l.name === DV_DAY_LAYER_KEY);
-  const dvNight = dvLayers.find((l) => l.name === DV_NIGHT_LAYER_KEY);
+  const dvDay = dvLayers.find((l) => l.key === DV_DAY_LAYER_KEY);
+  const dvNight = dvLayers.find((l) => l.key === DV_NIGHT_LAYER_KEY);
 
   const stsValidityDataLayer = new TrafimageMapboxLayer({
     name: STS_VALIDITY_DATA_LAYER_KEY,

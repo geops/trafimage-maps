@@ -6,8 +6,6 @@ const propTypes = {
   properties: PropTypes.object.isRequired,
 };
 
-const defaultProps = {};
-
 function MobzTopicInfo({ properties }) {
   const { t, language } = useTranslation();
   const { infos } = properties;
@@ -60,6 +58,5 @@ function MobzTopicInfo({ properties }) {
 }
 
 MobzTopicInfo.propTypes = propTypes;
-MobzTopicInfo.defaultProps = defaultProps;
 
 export default MobzTopicInfo;

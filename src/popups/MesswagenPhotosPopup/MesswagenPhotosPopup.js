@@ -24,16 +24,16 @@ const useStylesDialog = makeStyles(() => ({
   },
 }));
 
-function MesswagenPhotosPopup({ feature }) {
+function MesswagenPhotosPopup({ feature = null }) {
   const classesDialog = useStylesDialog();
   const { t } = useTranslation();
   const [fullSize, setFullSize] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const properties = feature.getProperties();
+  const properties = feature?.getProperties() || {};
   const photos = useMemo(
     () =>
       Array.from(Array(7).keys()).reduce((allPhotos, key) => {
-        const featProps = feature.getProperties();
+        const featProps = feature?.getProperties() || {};
         const photo = featProps[`foto_${key + 1}`];
         if (photo) {
           allPhotos.push(photo);
@@ -93,9 +93,6 @@ function MesswagenPhotosPopup({ feature }) {
 
 MesswagenPhotosPopup.propTypes = {
   feature: PropTypes.instanceOf(Feature),
-};
-MesswagenPhotosPopup.defaultProps = {
-  feature: null,
 };
 MesswagenPhotosPopup.renderTitle = (feature) =>
   feature.get("bezeichnung") || "";

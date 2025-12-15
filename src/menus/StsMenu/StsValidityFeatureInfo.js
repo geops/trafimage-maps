@@ -62,10 +62,9 @@ function StsValidityFeatureInfo() {
 
   const select = useCallback(
     (feature) => {
-      const higlightRoutesLayer = layers.find(
+      const highlightRoutes = layers.find(
         (l) => l.key === ROUTES_HIGHLIGHT_LAYER_KEY,
       );
-      const highlightRoutes = higlightRoutesLayer.get("highlightRoutes");
       if (previousSelectedFeature) {
         previousSelectedFeature.set("selected", false);
       }

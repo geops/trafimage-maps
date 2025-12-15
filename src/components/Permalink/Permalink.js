@@ -278,12 +278,12 @@ class Permalink extends PureComponent {
 
   getStationsLayer() {
     const { layers } = this.props;
-    return layers.find((l) => l.get("name") === STATIONS_LAYER_NAME);
+    return layers.find((l) => l.name === STATIONS_LAYER_NAME);
   }
 
   getPlatformsLayer() {
     const { layers } = this.props;
-    return layers.find((l) => l.get("name") === PLATFORMS_LAYER_NAME);
+    return layers.find((l) => l.name === PLATFORMS_LAYER_NAME);
   }
 
   async openDepartureOnLoad() {

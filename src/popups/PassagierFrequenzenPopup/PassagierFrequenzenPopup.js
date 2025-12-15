@@ -9,8 +9,6 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-const defaultProps = {};
-
 function PassagierFrequenzenPopup({ feature }) {
   const { t, language } = useTranslation();
 
@@ -58,7 +56,6 @@ function PassagierFrequenzenPopup({ feature }) {
 }
 
 PassagierFrequenzenPopup.propTypes = propTypes;
-PassagierFrequenzenPopup.defaultProps = defaultProps;
 
 const composed = PassagierFrequenzenPopup;
 
