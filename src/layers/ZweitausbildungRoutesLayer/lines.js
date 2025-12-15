@@ -32,7 +32,12 @@ export default {
     shortname: "IC 61",
     color: "#EF59A1",
   },
-  "Basel SBB – Biel/Bienne": {
+  "Basel SBB – Biel/Bienne (BLS)": {
+    property: "hauptlinie",
+    shortname: "IR 56",
+    color: "#a34492",
+  },
+  "Basel SBB – Biel/Bienne – Lausanne": {
     property: "hauptlinie",
     shortname: "IC 51",
     color: "#B00D15",
@@ -87,6 +92,11 @@ export default {
     property: "hauptlinie",
     shortname: "IR 16",
     color: "#9F6F32",
+  },
+  "Biel/Bienne – Zürich HB  ": {
+    property: "hauptlinie",
+    shortname: "IR 55",
+    color: "#a49d19",
   },
   "Brig – Bern – Zürich HB – Romanshorn": {
     property: "hauptlinie",
