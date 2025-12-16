@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.31.2",
+  "version": "1.31.3",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
