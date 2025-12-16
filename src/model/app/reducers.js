@@ -56,6 +56,7 @@ import {
 import SearchService from "../../components/Search/SearchService";
 import { isOpenedByMapset } from "../../utils/redirectHelper";
 import { LS_SIZE_KEY } from "../../utils/constants";
+import isValidUrl from "../../utils/isValidUrl";
 
 const getInitialState = () => {
   const i18n = loadI18n();
@@ -209,6 +210,11 @@ export default function app(state = getInitialState(), action) {
         },
       };
     case SET_VECTOR_TILES_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid vectorTilesUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         vectorTilesUrl: action.data,
@@ -219,16 +225,31 @@ export default function app(state = getInitialState(), action) {
         vectorTilesKey: action.data,
       };
     case SET_LOGIN_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid loginUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         loginUrl: action.data,
       };
     case SET_MAPSET_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid loginUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         mapsetUrl: action.data,
       };
     case SET_SHORTENER_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid shortenerUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         shortenerUrl: action.data,
@@ -239,21 +260,41 @@ export default function app(state = getInitialState(), action) {
         realtimeKey: action.data,
       };
     case SET_REALTIME_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid realtimeUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         realtimeUrl: action.data,
       };
     case SET_DRAW_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid drawUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         drawUrl: action.data,
       };
     case SET_CARTARO_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid cartaroUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         cartaroUrl: action.data,
       };
     case SET_SEARCH_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid searchUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         searchUrl: action.data,
@@ -280,11 +321,21 @@ export default function app(state = getInitialState(), action) {
         drawEditLink: action.data,
       };
     case SET_DESTINATION_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid destinationUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         destinationUrl: action.data,
       };
     case SET_DEPARTURES_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid departuresUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         departuresUrl: action.data,
@@ -330,11 +381,21 @@ export default function app(state = getInitialState(), action) {
         searchInfoOpen: action.data,
       };
     case SET_APP_BASE_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid appBaseUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         appBaseUrl: action.data,
       };
     case SET_STATIC_FILES_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid staticFilesUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         staticFilesUrl: action.data,
@@ -345,6 +406,11 @@ export default function app(state = getInitialState(), action) {
         displayMenu: action.data,
       };
     case SET_STOPS_URL:
+      if (!isValidUrl(action.data)) {
+        // eslint-disable-next-line no-console
+        console.warn("Invalid stopsUrl:", action.data);
+        return state;
+      }
       return {
         ...state,
         stopsUrl: action.data,
