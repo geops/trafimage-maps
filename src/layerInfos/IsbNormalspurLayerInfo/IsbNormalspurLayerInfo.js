@@ -24,7 +24,7 @@ const translations = {
         <p>Besonders zu beachten:</p>
         <p>Netzanschlusspunkt SBB/SSB Schweizerhalle:</p>
         <ul>
-          <li>Km 8.062, nördliches Wiederlader der Autobahnbrücke</li>
+          <li>Km 8.062, nördliches Widerlager der Autobahnbrücke</li>
         </ul>
         <p>Netzanschlusspunkt SOB/SBB bei Wattwil ab 01.01.2026:</p>
         <ul>
@@ -62,7 +62,7 @@ const translations = {
         <p>À noter en particulier:</p>
         <p>Point de raccordement au réseau des CFF Schweizerhalle:</p>
         <ul>
-          <li>Km 8,062 Rechargeuse nord du pont autoroutier</li>
+          <li>Km 8,062 Culée nord du pont autoroutier</li>
         </ul>
         <p>
           Point de raccordement au réseau du SOB près de Wattwil à partir du 1er
@@ -111,9 +111,7 @@ const translations = {
         <p>Prestare particolare attenzione a quanto segue:</p>
         <p>Punto di raccordo alla rete FFS Schweizerhalle:</p>
         <ul>
-          <li>
-            Km 8.062, impianto di ricarico del ponte dell&apos;autostrada a nord
-          </li>
+          <li>Km 8.062 Spalla nord del ponte dell&apos;autostrada</li>
         </ul>
         <p>
           Punto di raccordo alla rete SOB presso Wattwil dal 1 gennaio 2026:
@@ -152,7 +150,7 @@ const translations = {
         <p>Particular attention should be paid to:</p>
         <p>SBB Schweizerhalle network connection point:</p>
         <ul>
-          <li>Km 8.062, northern reloader of the motorway bridge</li>
+          <li>Km 8.062 North abutment of the motorway bridge</li>
         </ul>
         <p>SOB network connection point near Wattwil from 1 January 2026:</p>
         <ul>
