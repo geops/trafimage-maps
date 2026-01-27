@@ -45,6 +45,8 @@ function PersonCard({
   division,
   otherDetails = [],
   className = "",
+  children,
+  ...props
 }) {
   const classes = useStyles();
   const formattedPhone = useMemo(() => formatPhone(phone), [phone]);
@@ -52,6 +54,7 @@ function PersonCard({
     <div
       key={`${title}-${name}`}
       className={`wkp-person-card ${classes.card}${` ${className}`}`}
+      {...props}
     >
       {title && <Typography paragraph>{title}</Typography>}
       {name && (
@@ -96,6 +99,7 @@ function PersonCard({
           <Typography>{detail.label}</Typography>
         </div>
       ))}
+      {children}
     </div>
   );
 }
@@ -114,6 +118,7 @@ PersonCard.propTypes = {
     }),
   ),
   className: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default PersonCard;

@@ -63,6 +63,7 @@ function TopicElements({ history = null }) {
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
 
   const loginUrl = useSelector((state) => state.app.loginUrl);
+  console.log("loginUrl", loginUrl);
   const map = useSelector((state) => state.app.map);
   const [tabFocus, setTabFocus] = useState(false);
   const [node, setNode] = useState(null);
