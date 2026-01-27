@@ -9,18 +9,16 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     border: "1px solid #dddddd",
     borderRadius: 2,
-    margin: 0,
-    marginTop: theme.spacing(2),
     padding: theme.spacing(1),
     minHeight: 100,
   },
 }));
 
-function LineData({ lineData = [] }) {
+function LineData({ lineData = [], ...props }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
-    <fieldset className={classes.otherLines}>
+    <fieldset className={classes.otherLines} {...props}>
       <legend>{t("Linien")}</legend>
       {lineData && lineData.length ? (
         <div>
