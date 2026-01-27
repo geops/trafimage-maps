@@ -225,7 +225,6 @@ export default function app(state = getInitialState(), action) {
         vectorTilesKey: action.data,
       };
     case SET_LOGIN_URL:
-      console.log("action.data", action.data);
       if (!isValidUrl(action.data)) {
         // eslint-disable-next-line no-console
         console.warn("Invalid loginUrl:", action.data);
