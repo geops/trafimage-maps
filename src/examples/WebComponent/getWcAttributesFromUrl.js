@@ -12,6 +12,12 @@ const getWcAttributesFromUrl = (urlString) => {
     attributes.activeTopicKey = activeTopicKey;
   }
 
+  // baselayer
+  const baseLayer = searchParams.get("baseLayer");
+  if (baseLayer) {
+    attributes.baseLayer = baseLayer;
+  }
+
   // layers
   let layersVisibility = "";
   const layers = searchParams.get("layersVisibility");
