@@ -22,6 +22,11 @@ const propTypes = {
   elements: PropTypes.string,
 
   /**
+   * Set the base layer.
+   */
+  baseLayer: PropTypes.string,
+
+  /**
    * Set the default visiblity of the layers in the topic. It will override all the topics configuration.
    * Warning: Used with caution if you also use Permalink functionnality.
    */
@@ -205,7 +210,8 @@ const attributes = {
   enableTracking: "true",
   disableCookies: null,
   elements: undefined,
-  layersVisibility: undefined,
+  baseLayer: undefined,
+  layersVisibility: "",
   embedded: undefined,
   domainConsent: undefined,
   domainConsentId: undefined,
@@ -239,6 +245,7 @@ function WebComponent(props) {
     enableTracking,
     elements,
     language,
+    baseLayer,
     layersVisibility,
     embedded,
     domainConsent,
@@ -321,10 +328,15 @@ function WebComponent(props) {
       if (activeTopicKey && topic.key !== activeTopicKey) {
         return;
       }
+      let topicLayersVisibility = layersVisibility;
+      if (baseLayer) {
+        topicLayersVisibility += `${baseLayer}=true`;
+      }
+
       // Override layers visiblity.
-      if (layersVisibility && topic.layers.length) {
+      if (topicLayersVisibility && topic.layers.length) {
         const obj = {};
-        layersVisibility.split(",").forEach((elt) => {
+        topicLayersVisibility.split(",").forEach((elt) => {
           const [key, value] = elt.split("=");
           obj[key] = value === "true";
         });
@@ -380,7 +392,7 @@ function WebComponent(props) {
         setLayersVisibilityApplied(true);
       }
     });
-  }, [appTopics, layersVisibility, activeTopicKey]);
+  }, [appTopics, layersVisibility, baseLayer, activeTopicKey]);
 
   if (!appTopics || !layersVisibilityApplied) {
     return null;

@@ -16,6 +16,16 @@ const defaultAttributes = [
     },
   },
   {
+    name: "baseLayer",
+    type: "string",
+    comp: "select",
+    defaultValue: "ch.sbb.netzkarte",
+    values: [],
+    description: () => {
+      return <span>Base layer to display.</span>;
+    },
+  },
+  {
     name: "layersVisibility",
     type: "array<string>",
     comp: "select",
