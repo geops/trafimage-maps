@@ -39,6 +39,7 @@ const translations = {
           <li>Richtung Bern SBB (rot)</li>
           <li>Richtung Bern West bis Holligen BLSN/SBB (grün/rot)</li>
         </ul>
+        <p>AMEG–Annemasse Grenze ISB SBB/SNCF, km 75.770</p>
       </>
     ),
     dataInfo1: "Datengrundlage: SBB",
@@ -89,6 +90,7 @@ const translations = {
             (vert/rouge)
           </li>
         </ul>
+        <p>AMEG - Annemasse Frontière GI CFF/SNCF, km 75.770</p>
       </>
     ),
     dataInfo1: "Base de données: CFF",
@@ -131,6 +133,7 @@ const translations = {
             In direzione di Berna Ovest fino a Holligen BLSN/FFS (verde/rosso)
           </li>
         </ul>
+        <p>AMEG–Annemasse Confine GI FFS/SNCF, km 75.770</p>
       </>
     ),
     dataInfo1: "Base dati: FFS",
@@ -165,6 +168,7 @@ const translations = {
           <li>Towards Bern SBB (red)</li>
           <li>Direction Bern West to Holligen BLSN/SBB (green/red)</li>
         </ul>
+        <p>AMEG–Annemasse border IM SBB/SNCF, km 75.770</p>
       </>
     ),
     dataInfo1: "Data basis: SBB",
