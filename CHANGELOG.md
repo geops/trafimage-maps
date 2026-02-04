@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 - **infrastrukturbetreiberinnen:** add detail in Normalspur layer info ([#1246](https://github.com/geops/trafimage-maps/issues/1246)) ([b89e29e](https://github.com/geops/trafimage-maps/commit/b89e29e1c9cc379a7097252e972bbd093c96747c))
 
+### [1.31.7](https://github.com/geops/trafimage-maps/compare/v1.31.6...v1.31.7) (2026-02-04)
+
+### Bug Fixes
+
+- **infrastrukturbetreiberinnen:** add detail in Normalspur layer info ([#1246](https://github.com/geops/trafimage-maps/issues/1246)) ([b89e29e](https://github.com/geops/trafimage-maps/commit/b89e29e1c9cc379a7097252e972bbd093c96747c))
+
 ### [1.31.6](https://github.com/geops/trafimage-maps/compare/v1.31.5...v1.31.6) (2026-01-27)
 
 ### Bug Fixes
