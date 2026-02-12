@@ -51,6 +51,7 @@ import {
   SET_GEOLOCATING,
   SET_FOLLOWING,
   SET_OVERLAY_ELEMENT,
+  SET_LINE_NAME,
 } from "./actions";
 
 import SearchService from "../../components/Search/SearchService";
@@ -223,6 +224,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         vectorTilesKey: action.data,
+      };
+    case SET_LINE_NAME:
+      return {
+        ...state,
+        lineName: action.data,
       };
     case SET_LOGIN_URL:
       if (!isValidUrl(action.data)) {

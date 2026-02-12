@@ -21,7 +21,6 @@ const DV_FILTER_UNSELECTED_REGEX = /^ipv_(day|night|all)$/;
 class DirektverbindungenLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     super({
-      ...options,
       queryRenderedLayersFilter: (layer) => {
         const clickRegex = new RegExp(
           `^ipv_(call_)?((station||full)_)?${this.getCurrentLayer()}`,
@@ -33,6 +32,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       },
       styleLayersFilter: (layer) =>
         DV_FILTER_UNSELECTED_REGEX.test(getTrafimageFilter(layer)),
+      ...options,
     });
     this.allFeatures = [];
     this.syncTimeout = null;

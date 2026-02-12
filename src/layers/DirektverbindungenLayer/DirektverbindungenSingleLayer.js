@@ -1,75 +1,89 @@
-/* eslint-disable no-param-reassign */
-import { LineString, MultiLineString } from "ol/geom";
-import { unByKey } from "ol/Observable";
-import { Feature } from "ol";
+import VectorSource from "ol/source/Vector";
+import DirektverbindungenLayer from ".";
 
-import MapboxStyleLayer from "../MapboxStyleLayer";
-import getTrafimageFilter from "../../utils/getTrafimageFilter";
-import { DV_KEY } from "../../utils/constants";
-
-const DV_TRIPS_SOURCELAYER_ID = "ch.sbb.direktverbindungen_trips";
-const DV_FILTER_REGEX = /^ipv_(.+)?(day|night|all)$/;
-const DV_FILTER_UNSELECTED_REGEX = /^ipv_(day|night|all)$/;
 /**
- * Layer for visualizing international train connections.
+ * Layer for visualizing international train connections by name
  *
  * @class
  * @param {Object} [options] Layer options.
  * @inheritdoc
  * @private
  */
-class DirektverbindungenSingleLayer extends MapboxStyleLayer {
-  constructor(options = {}) {
-    super({
-      ...options,
-    });
-  }
-
-  onLoad() {
-    super.onLoad();
-  }
-
+class DirektverbindungenSingleLayer extends DirektverbindungenLayer {
   /**
-   * Fetch features from Cartaro for the list view
+   * This function try to find fetaures to select on loading the page based a the line name.
    */
-  async fetchDvFeatures() {
-    try {
-      if (!this.mapboxLayer?.url || !this.mapboxLayer?.apiKey) {
-        // eslint-disable-next-line no-console
-        throw new Error("DirektVerbindungLayer: No url or apiKey defined.");
-      }
-      const response = await fetch(
-        `${this.mapboxLayer.url}/data/ch.sbb.direktverbindungen.public.json?key=${this.mapboxLayer.apiKey}`,
-      );
-      const data = await response.json();
-      this.allLines = data["geops.direktverbindungen"];
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
+  getFeaturesInfosFromLineName(lineName) {
+    const names = lineName?.split(",");
+    if (!names?.length) {
+      return Promise.resolve([]);
+    }
+
+    const getFeatureInfo = (features) => {
+      const found = features.filter((feature) => {
+        return (
+          feature.get("name") === lineName ||
+          feature.get("cartaro_id") === Number(lineName)
+        );
+      });
+      return [
+        {
+          features: found,
+          layer: this,
+        },
+      ];
+    };
+
+    if (this.allFeatures?.length) {
+      return Promise.resolve(getFeatureInfo(this.allFeatures));
+    }
+
+    const promise = new Promise((resolve) => {
+      this.on("sync:features", ({ features = [] }) => {
+        resolve(getFeatureInfo(features));
+      });
+    });
+    return promise;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  highlight() {}
+
+  select(features = []) {
+    const cartaroIds = features.map(
+      (feat) =>
+        feat.get("cartaro_id") || feat.get("direktverbindung_cartaro_id"),
+    );
+    if (cartaroIds.length) {
+      this.mapboxLayer?.mbMap?.getStyle()?.layers?.forEach((layer) => {
+        if (this.styleLayersFilter(layer)) {
+          this.mapboxLayer?.mbMap?.setFilter(layer.id, [
+            "any",
+            ...cartaroIds.map((id) => ["==", ["get", "cartaro_id"], id]),
+            ...cartaroIds.map((id) => [
+              "==",
+              ["get", "direktverbindung_cartaro_id"],
+              id,
+            ]),
+          ]);
+        }
+      });
+      const source = new VectorSource({ features });
+      const extent = source.getExtent();
+      this.map.getView().fit(extent, {
+        padding: [100, 100, 100, 100],
+      });
+      this.visible = true;
+    } else {
+      this.visible = false;
     }
   }
 
-  attachToMap(map) {
-    super.attachToMap(map);
-    this.fetchDvFeatures();
-  }
+  // eslint-disable-next-line class-methods-use-this
+  getCurrentLayer() {}
 
-  detachFromMap() {
-    super.detachFromMap();
-    unByKey(this.viewChangeListener);
-  }
-
-  highlightLine(cartaroId) {
-    this.mapboxLayer?.mbMap?.getStyle()?.layers?.forEach((layer) => {
-      if (this.styleLayersFilter(layer)) {
-        this.mapboxLayer?.mbMap?.setFilter(layer.id, [
-          "any",
-          ["==", ["get", "cartaro_id"], cartaroId],
-          ["==", ["get", "direktverbindung_cartaro_id"], cartaroId],
-        ]);
-      }
-    });
-  }
+  // eslint-disable-next-line class-methods-use-this
+  highlightStation() {}
 }
 
 export default DirektverbindungenSingleLayer;

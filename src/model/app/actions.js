@@ -47,8 +47,10 @@ export const SET_EXPORT_PRINT_OPTIONS = "SET_EXPORT_PRINT_OPTIONS";
 export const SET_GEOLOCATING = "SET_GEOLOCATING";
 export const SET_FOLLOWING = "SET_FOLLOWING";
 export const SET_OVERLAY_ELEMENT = "SET_OVERLAY_ELEMENT";
+export const SET_LINE_NAME = "SET_LINE_NAME";
 
 export const setActiveTopic = (data) => ({ type: SET_ACTIVE_TOPIC, data });
+export const setLineName = (data) => ({ type: SET_LINE_NAME, data });
 
 export const setTopics =
   (data = []) =>

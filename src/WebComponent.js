@@ -178,6 +178,8 @@ const propTypes = {
   embedded: PropTypes.string,
 
   children: PropTypes.node,
+
+  lineName: PropTypes.string,
 };
 
 const attributes = {
@@ -213,6 +215,7 @@ const attributes = {
   matomoSiteId: undefined,
   searchUrl: undefined,
   stops: undefined,
+  lineName: undefined, // only direktverbindungen-single topic for now,
 };
 
 const defaultProps = {

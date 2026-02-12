@@ -1,6 +1,4 @@
-import { Layer } from "mobility-toolbox-js/ol";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
-import DirektverbindungenLayer from "../../layers/DirektverbindungenLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import { DV_HIT_TOLERANCE, DV_KEY } from "../../utils/constants";
 import DirektverbindungenSingleLayer from "../../layers/DirektverbindungenLayer/DirektverbindungenSingleLayer";
@@ -67,31 +65,20 @@ export const getDirektverbindungenSingleLayers = () => {
   });
 
   const dvMain = new DirektverbindungenSingleLayer({
-    visible: true,
+    visible: false,
     key: `${DV_KEY}.main`,
     mapboxLayer: dataLayer,
     styleLayersFilter: ({ metadata }) => {
       return !!metadata && /^ipv_single/.test(metadata?.["trafimage.filter"]);
     },
+    queryRenderedLayersFilter: ({ metadata }) => {
+      return !!metadata && /^ipv_single/.test(metadata?.["trafimage.filter"]);
+    },
     properties: {
-      // isQueryable: true,
-      // hideInLegend: true,
-      // dayLayer: dvDay,
-      // nightLayer: dvNight,
-      // popupComponent: "DvPopup",
-      // useOverlay: true,
-      // priorityFeatureInfo: true, // This property will block display of others featureInfos
-      // highlightPointFeatureFilter: () => false,
+      popupComponent: "DvPopup",
+      useOverlay: true,
     },
   });
 
-  return [
-    dataLayer,
-    dvBaseLight,
-    dvBaseDark,
-    dvBaseAerial,
-    // dvNight,
-    // dvDay,
-    dvMain,
-  ];
+  return [dataLayer, dvBaseLight, dvBaseDark, dvBaseAerial, dvMain];
 };
