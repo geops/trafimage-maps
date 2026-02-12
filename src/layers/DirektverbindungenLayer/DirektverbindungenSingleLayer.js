@@ -21,6 +21,8 @@ class DirektverbindungenSingleLayer extends DirektverbindungenLayer {
 
     const getFeatureInfo = (features) => {
       const found = features.filter((feature) => {
+        console.log("select cartaroIds", lineName, feature.get("name"));
+
         return (
           feature.get("name") === lineName ||
           feature.get("cartaro_id") === Number(lineName)
@@ -55,19 +57,36 @@ class DirektverbindungenSingleLayer extends DirektverbindungenLayer {
         feat.get("cartaro_id") || feat.get("direktverbindung_cartaro_id"),
     );
     if (cartaroIds.length) {
-      this.mapboxLayer?.mbMap?.getStyle()?.layers?.forEach((layer) => {
-        if (this.styleLayersFilter(layer)) {
-          this.mapboxLayer?.mbMap?.setFilter(layer.id, [
-            "any",
-            ...cartaroIds.map((id) => ["==", ["get", "cartaro_id"], id]),
-            ...cartaroIds.map((id) => [
-              "==",
-              ["get", "direktverbindung_cartaro_id"],
-              id,
-            ]),
-          ]);
-        }
-      });
+      console.log("select cartaroIds", cartaroIds);
+
+      console.log(
+        " this.mapboxLayer?.mbMap",
+        this.mapboxLayer?.mbMap.getStyle(),
+      );
+
+      const applyFilter = () => {
+        this.mapboxLayer?.mbMap?.getStyle()?.layers?.forEach((layer) => {
+          if (this.styleLayersFilter(layer)) {
+            this.mapboxLayer?.mbMap?.setFilter(layer.id, [
+              "any",
+              ...cartaroIds.map((id) => ["==", ["get", "cartaro_id"], id]),
+              ...cartaroIds.map((id) => [
+                "==",
+                ["get", "direktverbindung_cartaro_id"],
+                id,
+              ]),
+            ]);
+          }
+        });
+      };
+
+      const style = this.mapboxLayer?.mbMap?.getStyle();
+      if (!style) {
+        this.mapboxLayer?.mbMap?.once("idle", () => {
+          applyFilter();
+        });
+      }
+
       const source = new VectorSource({ features });
       const extent = source.getExtent();
       this.map.getView().fit(extent, {

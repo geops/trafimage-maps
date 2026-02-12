@@ -108,6 +108,7 @@ class TopicLoader extends PureComponent {
       searchUrl,
       layers,
       language,
+      lineName,
     } = this.props;
     // Sometimes the array object is different but the content is the same as before.
     const areTopicsReallyUpdated =
@@ -138,7 +139,8 @@ class TopicLoader extends PureComponent {
         vectorTilesKey !== prevProps.vectorTilesKey ||
         vectorTilesUrl !== prevProps.vectorTilesUrl ||
         staticFilesUrl !== prevProps.staticFilesUrl ||
-        searchUrl !== prevProps.searchUrl)
+        searchUrl !== prevProps.searchUrl ||
+        lineName !== prevProps.lineName)
     ) {
       this.updateLayers(activeTopic.layers);
     }
@@ -430,6 +432,8 @@ class TopicLoader extends PureComponent {
       // Use to load features infos when opening the page
       // only use by direktverbindung layer for now but can be useful for other layers in the future
       if (flatLayers[i].getFeaturesInfosFromLineName) {
+        console.log("getFeaturesInfosFromLineName lineName", lineName);
+
         flatLayers[i]
           .getFeaturesInfosFromLineName(lineName)
           .then((featuresInfos) => {

@@ -138,6 +138,21 @@ const defaultAttributes = [
       type: "checkbox",
     },
   },
+  {
+    name: "lineName",
+    type: "string",
+    comp: "input",
+    defaultValue: "",
+    description: () => {
+      return (
+        <span>
+          Comma-separated list of line&apos;s name to display. Only works with
+          the topic ch.sbb.direktverbindungen.single.
+        </span>
+      );
+    },
+    props: { type: "text" },
+  },
 ];
 
 export default defaultAttributes;
