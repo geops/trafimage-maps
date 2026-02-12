@@ -46,6 +46,7 @@ import MesswagenFollowButton from "./ch.sbb.funkmesswagen/MesswagenFollowButton"
 import { MesswagenPopup } from "../popups";
 import StsMenuToggler from "./ch.sbb.sts/StsMenuToggler/StsMenuToggler";
 import MapboxStyleLayer from "../layers/MapboxStyleLayer";
+import { getDirektverbindungenSingleLayers } from "./ch.sbb.direktverbindungen.single";
 // // For backward compatibility
 // export {
 //   casaDataLayerWithoutLabels,
@@ -458,6 +459,35 @@ export const getTopics = () => {
     overlaySide: "left",
   };
 
+  const direktverbindungenSingle = {
+    name: `${DV_KEY}-single.topic`,
+    key: `${DV_KEY}-single`,
+    elements: {
+      ...defaultElements,
+      overlay: false,
+      popup: false,
+      shareMenu: false,
+      drawMenu: false,
+      permalink: true,
+      geolocationButton: true,
+      header: false,
+      search: false,
+      footer: false,
+      menu: false,
+      baseLayerSwitcher: true,
+      fitExtent: false,
+    },
+    maxZoom: 13,
+    minZoom: 6,
+    layers: getDirektverbindungenSingleLayers(),
+    enableFeatureClick: true,
+    only: false,
+    hideInLayerTree: false,
+    menu: <DvMenu />,
+    mapControls: <DvListButton />,
+    overlaySide: "left",
+  };
+
   const railPlus = {
     elements: {
       ...defaultElements,
@@ -523,6 +553,7 @@ export const getTopics = () => {
       geltungsbereicheMvp,
       direktverbindungen,
       direktverbindungenIframe,
+      direktverbindungenSingle,
       zweitausbildung,
       handicap,
       tarifverbundkarte,
