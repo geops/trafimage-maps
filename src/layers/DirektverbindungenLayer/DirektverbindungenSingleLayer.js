@@ -21,11 +21,11 @@ class DirektverbindungenSingleLayer extends DirektverbindungenLayer {
 
     const getFeatureInfo = (features) => {
       const found = features.filter((feature) => {
-        console.log("select cartaroIds", lineName, feature.get("name"));
+        // console.log("select cartaroIds", lineName, feature.get("name"));
 
         return (
-          feature.get("name") === lineName ||
-          feature.get("cartaro_id") === Number(lineName)
+          names.includes(feature.get("name")) ||
+          names.includes(String(feature.get("cartaro_id")))
         );
       });
       return [
@@ -57,12 +57,12 @@ class DirektverbindungenSingleLayer extends DirektverbindungenLayer {
         feat.get("cartaro_id") || feat.get("direktverbindung_cartaro_id"),
     );
     if (cartaroIds.length) {
-      console.log("select cartaroIds", cartaroIds);
+      // console.log("select cartaroIds", cartaroIds);
 
-      console.log(
-        " this.mapboxLayer?.mbMap",
-        this.mapboxLayer?.mbMap.getStyle(),
-      );
+      // console.log(
+      //   " this.mapboxLayer?.mbMap",
+      //   this.mapboxLayer?.mbMap.getStyle(),
+      // );
 
       const applyFilter = () => {
         this.mapboxLayer?.mbMap?.getStyle()?.layers?.forEach((layer) => {

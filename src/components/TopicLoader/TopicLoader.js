@@ -432,7 +432,7 @@ class TopicLoader extends PureComponent {
       // Use to load features infos when opening the page
       // only use by direktverbindung layer for now but can be useful for other layers in the future
       if (flatLayers[i].getFeaturesInfosFromLineName) {
-        console.log("getFeaturesInfosFromLineName lineName", lineName);
+        // console.log("getFeaturesInfosFromLineName lineName", lineName);
 
         flatLayers[i]
           .getFeaturesInfosFromLineName(lineName)
