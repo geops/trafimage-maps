@@ -115,12 +115,13 @@ function DvFeatureInfo({ filterByType = false }) {
           );
         });
       } else {
-        features = dvInfo.features.reduce((feats, feat) => {
-          const hasValidMapboxFeature =
+        features = dvInfo.features.filter((feat) => {
+          return (
+            !feat.get("mapboxFeature") ||
             feat?.get("mapboxFeature")?.sourceLayer ===
-            "ch.sbb.direktverbindungen_trips";
-          return hasValidMapboxFeature ? [...feats, feat] : feats;
-        }, []);
+              "ch.sbb.direktverbindungen_trips"
+          );
+        });
       }
     }
     features.sort((feat) => (feat.get("line") === "night" ? -1 : 1));

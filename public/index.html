@@ -228,6 +228,12 @@
           changeAttr('layersVisibility', layersVisibility);
         }
 
+        // lineName only direktverbindungen-single
+        var lineName = url.searchParams.get('lineName');
+        if (lineName) {
+          changeAttr('lineName', lineName);
+        }
+
         // All parameters using xxxUrl or xxxKey will replace the attributes of the same name
         url.searchParams.entries(([key,value])=>{
           if ([/(key|url)/i.test(key)]){
@@ -267,9 +273,10 @@
         zoom="8.5"
         center="[928460, 5908948]"
         appName="wkp"
-        activeTopicKey="ch.sbb.netzkarte"
+        activeTopicKey="ch.sbb.direktverbindungen-single"
         enableTracking="true"
         domainConsent=".*"
+        lineName="EuroNight Zürich HB–Praha hlavní nádraží"
       ></trafimage-maps>
       <!-- <div id="onetrust-consent-sdk">
         <div id="#onetrust-pc-sdk"></div>

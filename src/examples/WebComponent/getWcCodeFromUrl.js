@@ -9,6 +9,7 @@ const getWcCodeFromUrl = (urlString) => {
     activeTopicKey,
     embedded,
     layersVisibility,
+    lineName,
   } = getWcAttributesFromUrl(urlString);
 
   const code = [
@@ -47,6 +48,9 @@ const getWcCodeFromUrl = (urlString) => {
     code.push(`\n\tembedded="${embedded}"`);
   }
 
+  if (lineName) {
+    code.push(`\n\tlineName="${lineName}"`);
+  }
   code.push("/>");
   return code.join("");
 };

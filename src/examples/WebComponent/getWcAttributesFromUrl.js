@@ -63,6 +63,13 @@ const getWcAttributesFromUrl = (urlString) => {
   if (embedded === "true") {
     attributes.embedded = embedded;
   }
+
+  // lineName
+  const lineName = searchParams.get("lineName");
+  if (lineName) {
+    attributes.lineName = lineName;
+  }
+
   return attributes;
 };
 

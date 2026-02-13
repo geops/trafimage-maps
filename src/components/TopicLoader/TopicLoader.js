@@ -49,6 +49,7 @@ const propTypes = {
   staticFilesUrl: PropTypes.string,
   apiKey: PropTypes.string,
   apiKeyName: PropTypes.string,
+  lineName: PropTypes.string,
 
   // mapDispatchToProps
   // dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -107,6 +108,7 @@ class TopicLoader extends PureComponent {
       searchUrl,
       layers,
       language,
+      lineName,
     } = this.props;
     // Sometimes the array object is different but the content is the same as before.
     const areTopicsReallyUpdated =
@@ -137,7 +139,8 @@ class TopicLoader extends PureComponent {
         vectorTilesKey !== prevProps.vectorTilesKey ||
         vectorTilesUrl !== prevProps.vectorTilesUrl ||
         staticFilesUrl !== prevProps.staticFilesUrl ||
-        searchUrl !== prevProps.searchUrl)
+        searchUrl !== prevProps.searchUrl ||
+        lineName !== prevProps.lineName)
     ) {
       this.updateLayers(activeTopic.layers);
     }
@@ -328,7 +331,9 @@ class TopicLoader extends PureComponent {
       realtimeKey,
       realtimeUrl,
       layers,
+      dispatchSetFeatureInfo,
       searchUrl,
+      lineName,
     } = this.props;
 
     // wait until all web components attributes are properly set
@@ -407,17 +412,39 @@ class TopicLoader extends PureComponent {
           apiKeyName,
         );
       }
+
       if (flatLayers[i].setLanguage) {
         flatLayers[i].setLanguage(language);
       }
+
       if (flatLayers[i].setStaticFilesUrl) {
         flatLayers[i].setStaticFilesUrl(staticFilesUrl);
       }
+
       if (flatLayers[i].api) {
         flatLayers[i].api.apiKey = apiKey;
       }
+
       if (flatLayers[i].setSearchUrl) {
         flatLayers[i].setSearchUrl(searchUrl);
+      }
+
+      // Use to load features infos when opening the page
+      // only use by direktverbindung layer for now but can be useful for other layers in the future
+      if (flatLayers[i].getFeaturesInfosFromLineName) {
+        // console.log("getFeaturesInfosFromLineName lineName", lineName);
+
+        flatLayers[i]
+          .getFeaturesInfosFromLineName(lineName)
+          .then((featuresInfos) => {
+            if (featuresInfos?.length) {
+              if (activeTopic?.elements?.overlay) {
+                dispatchSetFeatureInfo(featuresInfos);
+              } else {
+                flatLayers[i].select(featuresInfos[0].features);
+              }
+            }
+          });
       }
 
       // Realtime layers
@@ -467,6 +494,7 @@ const mapStateToProps = (state) => ({
   realtimeUrl: state.app.realtimeUrl,
   t: state.app.t,
   i18n: state.app.i18n,
+  lineName: state.app.lineName,
 });
 
 const mapDispatchToProps = {

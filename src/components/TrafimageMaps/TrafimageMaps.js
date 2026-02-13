@@ -41,6 +41,7 @@ import {
   setRealtimeKey,
   setRealtimeUrl,
   setStopsUrl,
+  setLineName,
 } from "../../model/app/actions";
 import theme from "../../themes/default";
 
@@ -252,6 +253,8 @@ const propTypes = {
   elements: PropTypes.string,
 
   children: PropTypes.node,
+
+  lineName: PropTypes.string,
 };
 
 const defaultProps = {
@@ -270,6 +273,7 @@ const defaultProps = {
   embedded: false,
   elements: undefined,
   children: undefined,
+  lineName: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
@@ -422,6 +426,7 @@ class TrafimageMaps extends React.PureComponent {
       loginUrl,
       realtimeKey,
       realtimeUrl,
+      lineName,
     } = this.props;
     const { requireConsent } = this.state;
     const activeTopic = (topics || []).find(
@@ -547,6 +552,10 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setActiveTopic(newTopic));
       this.store.dispatch(setEmbedded(embedded || newTopic?.embedded));
     }
+
+    if (lineName) {
+      this.store.dispatch(setLineName(lineName));
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -577,6 +586,7 @@ class TrafimageMaps extends React.PureComponent {
       realtimeUrl,
       language,
       elements,
+      lineName,
     } = this.props;
 
     const activeTopic = (topics || []).find(
@@ -706,6 +716,11 @@ class TrafimageMaps extends React.PureComponent {
           elements: { ...defaultElements, ...newElements },
         }),
       );
+    }
+
+    if (lineName !== prevProps.lineName) {
+      // console.log("updat lineName", lineName);
+      this.store.dispatch(setLineName(lineName));
     }
   }
 
