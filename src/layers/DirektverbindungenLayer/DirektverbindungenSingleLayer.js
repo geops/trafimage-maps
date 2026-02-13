@@ -68,14 +68,20 @@ class DirektverbindungenSingleLayer extends DirektverbindungenLayer {
         this.mapboxLayer?.mbMap?.getStyle()?.layers?.forEach((layer) => {
           if (this.styleLayersFilter(layer)) {
             this.mapboxLayer?.mbMap?.setFilter(layer.id, [
-              "any",
-              ...cartaroIds.map((id) => ["==", ["get", "cartaro_id"], id]),
-              ...cartaroIds.map((id) => [
-                "==",
-                ["get", "direktverbindung_cartaro_id"],
-                id,
-              ]),
+              "all",
+              ["!=", ["get", "data_variant"], "night_and_day"],
+              [
+                "any",
+                ...cartaroIds.map((id) => ["==", ["get", "cartaro_id"], id]),
+                ...cartaroIds.map((id) => [
+                  "==",
+                  ["get", "direktverbindung_cartaro_id"],
+                  id,
+                ]),
+              ],
             ]);
+
+            this.visible = true;
           }
         });
       };
@@ -85,6 +91,8 @@ class DirektverbindungenSingleLayer extends DirektverbindungenLayer {
         this.mapboxLayer?.mbMap?.once("idle", () => {
           applyFilter();
         });
+      } else {
+        applyFilter();
       }
 
       const source = new VectorSource({ features });
@@ -92,7 +100,6 @@ class DirektverbindungenSingleLayer extends DirektverbindungenLayer {
       this.map.getView().fit(extent, {
         padding: [100, 100, 100, 100],
       });
-      this.visible = true;
     } else {
       this.visible = false;
     }
