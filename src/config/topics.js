@@ -204,10 +204,10 @@ export const getTopics = () => {
     exportConfig: {
       getTemplateValues: () => ({
         publisher: "tobias.hauser@sbb.ch",
-        publishedAt: "12/2024",
-        dateDe: "15.12.2024",
-        dateFr: "15.12.2024",
-        year: "2024",
+        publishedAt: "12/2025",
+        dateDe: "14.12.2025",
+        dateFr: "14.12.2025",
+        year: "2025",
       }),
       getOverlayImageUrl: () => tarifverbundkarteLegend,
     },
