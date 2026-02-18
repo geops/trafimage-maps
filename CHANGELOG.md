@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.32.0](https://github.com/geops/trafimage-maps/compare/v1.31.7...v1.32.0) (2026-02-18)
+
+### Features
+
+- highlight one direktverbindung line ([#1247](https://github.com/geops/trafimage-maps/issues/1247)) ([8fc7a6d](https://github.com/geops/trafimage-maps/commit/8fc7a6da55844523c5eb695e1cece47b04459082))
+
+### Bug Fixes
+
+- **tarifverbundkarte:** update release date in PDF export ([#1248](https://github.com/geops/trafimage-maps/issues/1248)) ([43a3376](https://github.com/geops/trafimage-maps/commit/43a3376aaab4623a6a32eb0b293ce41f9b4663ac))
+
 ### [1.31.7](https://github.com/geops/trafimage-maps/compare/v1.31.6...v1.31.7) (2026-02-04)
 
 ### Bug Fixes
