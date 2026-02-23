@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.1](https://github.com/geops/trafimage-maps/compare/v1.32.0...v1.32.1) (2026-02-23)
+
+### Bug Fixes
+
+- update date for gemeindegrenzen layer ([14e0909](https://github.com/geops/trafimage-maps/commit/14e090910b488a0a252873aa1a71813f29c17cbf))
+- update GeltungsbereicheTopicInfo datenstand ([0153d5f](https://github.com/geops/trafimage-maps/commit/0153d5f66e333446b703bcea7ec4c6556319d686))
+
 ## [1.32.0](https://github.com/geops/trafimage-maps/compare/v1.31.7...v1.32.0) (2026-02-18)
 
 ### Features
