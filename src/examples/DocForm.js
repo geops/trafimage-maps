@@ -113,11 +113,12 @@ function DocForm({
         .map((l) => l.key)
         .reverse();
 
+      // Apply base layers available
+      const baseLayers = getLayersAsFlatArray(topic.layers || [])
+        .filter((l) => l.get("isBaseLayer"))
+        .map((l) => l.key);
+
       if (isIframe) {
-        // Apply base layers available
-        const baseLayers = getLayersAsFlatArray(topic.layers || [])
-          .filter((l) => l.get("isBaseLayer"))
-          .map((l) => l.key);
         propConfig.find((p) => p.name === "baselayers").values =
           baseLayers.length > 1 ? baseLayers : [];
         // Apply layers available
@@ -125,8 +126,11 @@ function DocForm({
           layers.length > 1 ? layers : [];
       } else {
         // Apply layers available (TODO: update visible layers dynamically in styleguide, currently crashes the app)
-        propConfig.find((p) => p.name === "layersVisibility").values =
-          layers.length > 1 ? layers : [];
+        propConfig.find((p) => p.name === "layersVisibility").values = [
+          ...layers,
+          ...baseLayers,
+        ];
+        propConfig.find((p) => p.name === "baseLayer").values = baseLayers;
       }
 
       setPermalinkParams([...propConfig]);
