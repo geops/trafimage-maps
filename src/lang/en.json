@@ -651,7 +651,7 @@
   "station": "Station",
   "station_other": "Stations",
   "station_service_url": "https://www.sbb.ch/en/station-services/at-the-station/railway-stations/further-stations/station.{didok}.html",
-  "station_timetable_url": "https://www.sbb.ch/en/buying/pages/fahrplan/fahrplan.xhtml?nach={stationname}",
+  "station_timetable_url": "https://www.sbb.ch/en?nach={stationname}",
   "Stationen": "Stations",
   "Stationen ohne Informationen": "Stations without information",
   "Statistikportal": "SBB Statistics Portal",
