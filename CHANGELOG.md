@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.2](https://github.com/geops/trafimage-maps/compare/v1.32.1...v1.32.2) (2026-03-04)
+
+### Bug Fixes
+
+- **netzkarte:** update ticket shop link in station popup ([#1249](https://github.com/geops/trafimage-maps/issues/1249)) ([47f3544](https://github.com/geops/trafimage-maps/commit/47f3544f4412f990a67f72b4fd7f42e6a8c3f1e5))
+
 ### [1.32.1](https://github.com/geops/trafimage-maps/compare/v1.32.0...v1.32.1) (2026-02-23)
 
 ### Bug Fixes
