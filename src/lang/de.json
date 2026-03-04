@@ -609,7 +609,7 @@
   "station": "Station",
   "station_other": "Stationen",
   "station_service_url": "https://www.sbb.ch/de/bahnhof-services/am-bahnhof/bahnhoefe/bahnhof-finden/bahnhof.{didok}.html",
-  "station_timetable_url": "https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?nach={stationname}",
+  "station_timetable_url": "https://www.sbb.ch/de?nach={stationname}",
   "Stationen, Verbindungen, Orte": "Stationen, Verbindungen, Orte",
   "Statistikportal": "SBB Statistikportal",
   "Streckennetz": "Streckennetz",

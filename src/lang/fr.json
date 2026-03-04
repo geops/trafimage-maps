@@ -688,7 +688,7 @@
   "station": "Station",
   "station_other": "Stations",
   "station_service_url": "https://www.sbb.ch/fr/gare-services/a-la-gare/gares/autres-gares/gare.{didok}.html",
-  "station_timetable_url": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach={stationname}",
+  "station_timetable_url": "https://www.sbb.ch/fr?nach={stationname}",
   "Stationen": "Stations",
   "Stationen ohne Informationen": "Stations sans information",
   "Statistikportal": "Portail statistique CFF",

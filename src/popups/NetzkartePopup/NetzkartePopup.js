@@ -99,7 +99,7 @@ function NetzkartePopup({ feature, coordinate }) {
   if (name && !isAirport) {
     const stationTimetableUrl = t("station_timetable_url").replace(
       "{stationname}",
-      escape(name),
+      encodeURIComponent(name),
     );
     stationTimetableLink = (
       <div>
@@ -112,7 +112,7 @@ function NetzkartePopup({ feature, coordinate }) {
   if (Number.isFinite(didok) && styleLayer === "railway") {
     const stationServiceUrl = t("station_service_url").replace(
       "{didok}",
-      escape(didok),
+      encodeURIComponent(didok),
     );
     stationServiceLink = (
       <div>
