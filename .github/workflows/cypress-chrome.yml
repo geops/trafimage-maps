@@ -13,7 +13,6 @@ jobs:
       - uses: actions/checkout@v6
       - run: node --version
       - run: node -p 'os.cpus()'
-      - run: cp .env.dist .env
       - run: npx cypress cache clear
       - run: yarn install --frozen-lockfile
       - run: yarn cypress info
