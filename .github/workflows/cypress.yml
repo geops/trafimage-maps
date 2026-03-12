@@ -64,4 +64,4 @@ jobs:
       - run: yarn cypress info
       - run: node --version
       - run: node -p 'os.cpus()'
-      - run: yarn cy:test:edge
+      - run: yarn cy:test:firefox
