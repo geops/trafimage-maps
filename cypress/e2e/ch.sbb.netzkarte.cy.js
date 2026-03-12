@@ -21,10 +21,12 @@ describe("ch.sbb.netzkarte", () => {
         onBeforeLoad: (win) => {
           // Create mock server
           mockServer = new Server("wss://api.geops.io/tracker-ws/v1/ws");
-          // Stub out JS WebSocket
-          cy.stub(win, "WebSocket", (wsUrl) => {
-            return new WebSocket(wsUrl);
-          });
+
+          // Use mock-socket's constructor directly so the app receives a full
+          // WebSocket implementation (addEventListener, close, etc.).
+          // eslint-disable-next-line no-param-reassign
+          win.WebSocket = WebSocket;
+
           mockServer.emit("message", JSON.stringify(message));
         },
       });
