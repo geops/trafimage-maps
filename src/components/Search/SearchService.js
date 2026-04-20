@@ -150,7 +150,7 @@ class SearchService {
       padding,
       maxZoom: 15.6,
       callback: () => {
-        this.searches[selectedItem.section].openPopup(this.popupItem);
+        this.searches[selectedItem.section].openPopup(this.popupItem, this.map);
       },
     });
   }
