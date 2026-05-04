@@ -107,6 +107,7 @@ const getInitialState = () => {
     departuresUrl: null,
     apiKey: null,
     apiKeyName: "key",
+    defaultVectorTilesUrl: null,
     showPopups: true,
     embeddded: false,
     consentGiven: false,
@@ -169,6 +170,8 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         activeTopic: action.data,
+        vectorTilesUrl:
+          action.data?.vectorTilesUrl || state.defaultVectorTilesUrl,
       };
     case SET_MENU_OPEN:
       return {
@@ -218,7 +221,8 @@ export default function app(state = getInitialState(), action) {
       }
       return {
         ...state,
-        vectorTilesUrl: action.data,
+        defaultVectorTilesUrl: action.data,
+        vectorTilesUrl: state.activeTopic?.vectorTilesUrl || action.data,
       };
     case SET_VECTOR_TILES_KEY:
       return {
