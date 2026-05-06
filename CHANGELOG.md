@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.4](https://github.com/geops/trafimage-maps/compare/v1.32.3...v1.32.4) (2026-05-06)
+
+### Bug Fixes
+
+- **tilesUrl:** add vectorTilesUrl topic override in redux ([#1251](https://github.com/geops/trafimage-maps/issues/1251)) ([8bf5315](https://github.com/geops/trafimage-maps/commit/8bf53154559f40e2ce586d173d8a294fce164e21))
+
 ### [1.32.3](https://github.com/geops/trafimage-maps/compare/v1.32.2...v1.32.3) (2026-04-02)
 
 ### [1.32.2](https://github.com/geops/trafimage-maps/compare/v1.32.1...v1.32.2) (2026-03-04)
