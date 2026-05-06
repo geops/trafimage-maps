@@ -1,6 +1,7 @@
 import DragPan from "ol/interaction/DragPan";
 import DblClickDragZoom from "../../ol/interaction/DblClickDragZoom";
 import DblPointerClickZoomOut from "../../ol/interaction/DblPointerClickZoomOut";
+import { setActiveTopic, setVectorTilesUrl } from "./actions";
 import app from "./reducers";
 
 describe("reducers", () => {
@@ -40,5 +41,50 @@ describe("reducers", () => {
       (interaction) => interaction instanceof DblClickDragZoom,
     );
     expect(indexDragPan + 1).toBe(indexDragZoom);
+  });
+
+  test("uses topic vectorTilesUrl override when active topic changes", () => {
+    const stateWithDefaultTilesUrl = app(
+      undefined,
+      setVectorTilesUrl("https://default-tiles.example"),
+    );
+
+    const stateWithTopicOverride = app(
+      stateWithDefaultTilesUrl,
+      setActiveTopic({
+        key: "topic-with-override",
+        vectorTilesUrl: "https://topic-tiles.example",
+      }),
+    );
+
+    expect(stateWithTopicOverride.defaultVectorTilesUrl).toBe(
+      "https://default-tiles.example",
+    );
+    expect(stateWithTopicOverride.vectorTilesUrl).toBe(
+      "https://topic-tiles.example",
+    );
+  });
+
+  test("falls back to default vectorTilesUrl when topic has no override", () => {
+    const stateWithDefaultTilesUrl = app(
+      undefined,
+      setVectorTilesUrl("https://default-tiles.example"),
+    );
+    const stateWithTopicOverride = app(
+      stateWithDefaultTilesUrl,
+      setActiveTopic({
+        key: "topic-with-override",
+        vectorTilesUrl: "https://topic-tiles.example",
+      }),
+    );
+
+    const stateWithoutTopicOverride = app(
+      stateWithTopicOverride,
+      setActiveTopic({ key: "topic-without-override" }),
+    );
+
+    expect(stateWithoutTopicOverride.vectorTilesUrl).toBe(
+      "https://default-tiles.example",
+    );
   });
 });
