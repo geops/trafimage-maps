@@ -39,7 +39,7 @@ export const getCasaLayers = () => {
   const casaNetzkarteLayerWithLabels = new TrafimageMapboxLayer({
     name: "ch.sbb.netzkarte.labels",
     visible: true,
-    style: "base_bright_v2",
+    style: "basemap_bright",
     filters: [
       {
         field: "type",

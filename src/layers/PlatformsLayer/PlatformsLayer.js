@@ -1,3 +1,11 @@
+import {
+  MapsGeneralSubClass,
+  MapsGeneralSubClassValues,
+  MapsTrafimageFilter,
+  MapsTrafimageFilterValues,
+  PLATFORMS_POLYGON_HIGHLIGHT_LAYER_ID,
+  PLATFORMS_SOURCE_ID,
+} from "../../utils/constants";
 import MapboxStyleLayer from "../MapboxStyleLayer";
 
 /**
@@ -9,58 +17,11 @@ import MapboxStyleLayer from "../MapboxStyleLayer";
  */
 class PlatformsLayer extends MapboxStyleLayer {
   constructor(options = {}) {
-    const id = "platforms";
-    // const paint = {
-    //   'icon-opacity': [
-    //     'case',
-    //     ['boolean', ['feature-state', 'hover'], false],
-    //     0.5,
-    //     0,
-    //   ],
-    // };
-    // const layout = {
-    //   'icon-image': '111_circle-blue-big-01',
-    //   'icon-ignore-placement': true,
-    //   'icon-allow-overlap': true,
-    // };
+    const id = PLATFORMS_SOURCE_ID;
     super({
       styleLayersFilter: ({ metadata }) =>
-        !!metadata && metadata["trafimage.filter"] === "platforms",
-      // styleLayers: [
-      //   // Icons are not well placed on platform polygons because we don't
-      //   // have the exact same polygon as mapbox. So we can't use the new
-      //   // source to display the icons, we have to use the original source
-      //   // and set a filter (using uid) to the layer to display only rendered
-      //   // plaforms polygons.
-      //   {
-      //     id: `${id}_polygon`,
-      //     type: 'symbol',
-      //     source: 'openmaptiles',
-      //     'source-layer': 'platform',
-      //     filter: ['all', false],
-      //     paint,
-      //     layout,
-      //   },
-      //   {
-      //     id: `${id}_linestring`,
-      //     type: 'symbol',
-      //     source: id,
-      //     filter: ['==', ['geometry-type'], 'LineString'],
-      //     paint,
-      //     layout: {
-      //       ...layout,
-      //       'symbol-placement': 'line-center',
-      //     },
-      //   },
-      //   {
-      //     id: `${id}_point`,
-      //     type: 'symbol',
-      //     source: id,
-      //     filter: ['==', ['geometry-type'], 'Point'],
-      //     paint,
-      //     layout,
-      //   },
-      // ],
+        !!metadata &&
+        metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.PLATFORMS,
       properties: {
         hideInLegend: true,
         popupComponent: "StationPopup",
@@ -120,8 +81,11 @@ class PlatformsLayer extends MapboxStyleLayer {
       .getStyle()
       .layers.filter(
         ({ metadata }) =>
-          metadata && /^stop_position/.test(metadata["general.filter"]),
+          !!metadata &&
+          metadata[MapsGeneralSubClass] ===
+            MapsGeneralSubClassValues.STOP_POSITION,
       );
+    console.log(this.platformLayers);
 
     this.platformLayers = this.platformLayers.map((layer) => layer.id);
 
@@ -144,6 +108,11 @@ class PlatformsLayer extends MapboxStyleLayer {
     const source = mbMap.getSource(this.source.id);
 
     if (!this.platformLayers || !source) {
+      if (!source) {
+        console.warn(
+          `Source with id ${this.source.id} not found in the style, impossible to display platforms polygons highlight.`,
+        );
+      }
       return;
     }
     const uids = []; // ['==', 'uid', '496211a5d7ec6962'];
@@ -168,12 +137,19 @@ class PlatformsLayer extends MapboxStyleLayer {
         return good;
       });
 
-    // we display only visible platorm polygons
-    mbMap.setFilter("platforms_polygon_highlight", [
-      "all",
-      ["==", ["geometry-type"], "Polygon"],
-      ["in", ["get", "uid"], ["literal", uids]],
-    ]);
+    if (mbMap.getLayer(PLATFORMS_POLYGON_HIGHLIGHT_LAYER_ID)) {
+      // we display only visible platorm polygons
+      mbMap.setFilter(PLATFORMS_POLYGON_HIGHLIGHT_LAYER_ID, [
+        "all",
+        ["==", ["geometry-type"], "Polygon"],
+        ["in", ["get", "uid"], ["literal", uids]],
+      ]);
+    } else {
+      console.warn(
+        `Layer with id ${PLATFORMS_POLYGON_HIGHLIGHT_LAYER_ID} not found in the style, impossible to display platforms polygons highlight.`,
+      );
+    }
+
     source.setData({
       type: "FeatureCollection",
       features: pointsRendered,

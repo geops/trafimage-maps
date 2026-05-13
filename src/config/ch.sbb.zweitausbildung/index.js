@@ -12,7 +12,7 @@ export const getZweitausbildungLayers = () => {
     name: "ch.sbb.zweitausbildung",
     visible: true,
     zIndex: -1,
-    style: "base_bright_v2_ch.sbb.zweitausbildung",
+    style: "basemap_bright_ch.sbb.zweitausbildung",
     properties: {
       hideInLegend: true,
     },

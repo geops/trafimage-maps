@@ -37,6 +37,7 @@ export const GESCHOSSE_LAYER_NAME = "ch.sbb.geschosse";
 export const INFRASTRUKTUR_LAYER_NAME = "ch.sbb.infrastruktur";
 export const STS_OTHER_ROUTES_LAYER_NAME = "Other routes";
 export const STS_HIGHLIGHT_ROUTES_LAYER_NAME = "Highlight routes";
+
 // Direktverbindungen
 export const DV_KEY = "ch.sbb.direktverbindungen";
 export const DV_DAY_NIGHT_REGEX = new RegExp(`^${DV_KEY}.(day|night)$`);
@@ -79,3 +80,152 @@ export const ONLY_WHEN_NOT_LOGGED_IN = "onlyWhenNotLoggedIn";
 
 // Level layers
 export const FLOOR_LEVELS = [-6, -5, -4, -3, -2, -1, 0, "2D", 1, 2, 3, 4, 5, 6];
+
+// Maplibre Source and Layers ids
+export const PLATFORMS_POLYGON_HIGHLIGHT_LAYER_ID =
+  "platforms_polygon_highlight";
+export const PLATFORMS_SOURCE_ID = "platforms";
+export const STATIONS_SOURCE_ID = "stations";
+
+// MD_FILTER
+export const MapsGeneralClass = "general.class";
+export const MapsGeneralSubClass = "general.subclass";
+export const MapsGeneralMot = "general.mot";
+export const MapsGeneralFloor = "general.floor";
+export const MapsMapsetFilter = "mapset.filter";
+export const MapsTrafimageFilter = "trafimage.filter";
+export const MapsRoutingFilter = "routing.filter";
+export const MapsGeltungsbereicheFilter = "geltungsbereiche.filter";
+export const MapsStsFilter = "sts.filter";
+
+// ENum for each class
+export const MapsGeneralClassValues = Object.freeze({
+  RELIEF: "relief",
+  LANDCOVER: "landcover",
+  BORDERS: "borders",
+  WATER: "water",
+  BUILDINGS: "buildings",
+  STREETS: "streets",
+  ANCILLARY: "ancillary",
+  STATION_PLAN: "station_plan",
+  LABEL: "label",
+  POI: "poi",
+  STATIONS: "stations",
+  PERIMETER_MASK: "perimeter_mask",
+  LEVEL_GREYOUT: "level_greyout",
+  SLOT: "slot",
+});
+
+// General subclass types
+export const MapsGeneralSubClassValues = Object.freeze({
+  GREENS: "greens",
+  BUILTUP: "builtup",
+  NATIONAL: "national",
+  AREAS: "areas",
+  TUNNEL: "tunnel",
+  BRIDGE: "bridge",
+  ROOMS: "rooms",
+  PLATFORMS: "platforms",
+  ACCESS: "access",
+  STEPS: "steps",
+  TRACK_NUMBERS: "track_numbers",
+  STOP_POSITION: "stop_position",
+  PARKS: "parks",
+  PLACE_NAMES: "place_names",
+  WATER: "water",
+  ANCILLARY: "ancillary",
+  STATIONS: "stations",
+  ROUTING_EUROPE: "routing_europe",
+  ROUTING_DACH: "routing_dach",
+  JOURNEY: "journey",
+  EU: "eu",
+});
+
+// General mot (mode of transport)
+export const MapsGeneralMotValues = Object.freeze({
+  RAIL: "rail",
+  TRAM: "tram",
+  SUBWAY: "subway",
+  BUS: "bus",
+  FERRY: "ferry",
+  CABLEWAY: "cableway",
+  MIXED: "mixed",
+});
+
+// General floor
+export const MapsGeneralFloorValues = Object.freeze({
+  "2D": "2D",
+  LEVEL: "level",
+  LEVEL_GREYOUT: "level_greyout",
+});
+
+// Mapset filter
+export const MapsMapsetFilterValues = Object.freeze({
+  MAPSET_GREENAREAS: "mapset_greenareas",
+  MAPSET_STREET_NAMES: "mapset_street_names",
+  MAPSET_WATER: "mapset_water",
+  MAPSET_PLACE: "mapset_place",
+  MAPSET_STATION_PLAN: "mapset_station_plan",
+  MAPSET_POI: "mapset_poi",
+  MAPSET_STOP_POSITION: "mapset_stop_position",
+  MAPSET_HIGHLIGHT_BUS: "mapset_highlight_bus",
+  MAPSET_STATIONS: "mapset_stations",
+  MAPSET_UNDERGROUND: "mapset_underground",
+  MAPSET_TUNNEL_LABELS: "mapset_tunnel_labels",
+  NORMAL_STREETS: "normal_streets",
+  MAPSET_STATION_PANELS: "mapset_station_panels",
+});
+
+// Trafimage filter
+export const MapsTrafimageFilterValues = Object.freeze({
+  MUNICIPALITY_BORDERS: "municipality_borders",
+  BUS: "bus",
+  INTERAKTIV: "interaktiv",
+  PRINTPRODUKTE: "printprodukte",
+  STATIONS: "stations",
+  PLATFORMS: "platforms",
+  PASSAGIER_FREQ: "passagier_freq",
+  SWISSIMAGE: "swissimage",
+  PIXELKARTE_GRAU: "pixelkarte_grau",
+  PIXELKARTE_FARBE: "pixelkarte_farbe",
+  // From geltungsbereiche style
+  TRACKS: "tracks",
+  IPV_ALL: "ipv_all",
+  IPV_CALL_ALL: "ipv_call_all",
+  IPV_CALL_EDGE_ALL: "ipv_call_edge_all",
+  IPV_CALL_FULL_ALL: "ipv_call_full_all",
+  IPV_SELECTED_STATION_ALL: "ipv_selected_station_all",
+  IPV_NIGHT: "ipv_night",
+  IPV_CALL_NIGHT: "ipv_call_night",
+  IPV_CALL_EDGE_NIGHT: "ipv_call_edge_night",
+  IPV_CALL_FULL_NIGHT: "ipv_call_full_night",
+  IPV_SELECTED_STATION_NIGHT: "ipv_selected_station_night",
+  IPV_DAY: "ipv_day",
+  IPV_CALL_DAY: "ipv_call_day",
+  IPV_CALL_EDGE_DAY: "ipv_call_edge_day",
+  IPV_CALL_FULL_DAY: "ipv_call_full_day",
+  IPV_SELECTED_STATION_DAY: "ipv_selected_station_day",
+});
+
+// Routing filter
+export const MapsRoutingFilterValues = Object.freeze({
+  PERIMETER_MASK_ROUTING_EUROPE: "perimeter_mask_routing_europe",
+  PERIMETER_MASK_ROUTING_DACH: "perimeter_mask_routing_dach",
+});
+
+// Geltungsbereiche filters
+export const MapsGeltungsbereicheFilterValues = Object.freeze({
+  STS_LINE: "sts.line",
+  AT_LINE: "at.line",
+  HTA_LINE: "hta.line",
+  TK_LINE: "tk.line",
+  GA_LINE: "ga.line",
+});
+
+// Sts  filters
+export const MapsStsFilterValues = Object.freeze({
+  STS_HIGHLIGHT: "sts_highlight",
+  STS_GTTOS: "sts_gttos",
+  STS_OTHERS: "sts_others",
+  STS_PREMIUM: "sts_premium",
+});

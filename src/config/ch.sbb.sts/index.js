@@ -40,7 +40,7 @@ export const getStsLayers = () => {
     visible: true,
     preserveDrawingBuffer: false,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "base_bright_v2_ch.sbb.geltungsbereiche_ga",
+    style: "basemap_bright_ch.sbb.geltungsbereiche_ga",
     hitTolerance: STS_HIT_TOLERANCE,
     properties: {
       isQueryable: false,
@@ -55,7 +55,7 @@ export const getStsLayers = () => {
     visible: false,
     preserveDrawingBuffer: false,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "base_bright_v2_direktverbindungen",
+    style: "basemap_bright_direktverbindungen",
     hitTolerance: DV_HIT_TOLERANCE,
     properties: {
       isQueryable: false,

@@ -23,7 +23,7 @@ export const getConstructionLayers = () => {
     name: "ch.sbb.construction.data",
     visible: true,
     zIndex: -1,
-    style: "base_bright_v2_ch.sbb.bauprojekte",
+    style: "basemap_bright_ch.sbb.bauprojekte",
     properties: {
       hideInLegend: true,
       isBaseLayer: false,
@@ -314,11 +314,11 @@ export const getConstructionLayers = () => {
     constructionDataLayer,
     netzkarteLayer.clone({
       mapboxLayer: constructionDataLayer,
-      style: "base_bright_v2_ch.sbb.bauprojekte",
+      style: "basemap_bright_ch.sbb.bauprojekte",
     }),
     netzkarteAerial.clone({
       mapboxLayer: constructionDataLayer,
-      style: "aerial_sbb_sbbkey_ch.sbb.bauprojekte",
+      style: "basemap_aerial_sbbkey_ch.sbb.bauprojekte",
     }),
     constrUnterhalt,
     constrAusbau,

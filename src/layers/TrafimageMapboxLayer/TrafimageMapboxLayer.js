@@ -84,7 +84,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     if (this.style === newStyle || !newStyle) {
       return;
     }
-    this.style = this.stylePrefix + newStyle;
+    this.style = newStyle;
     this.setStyleConfig();
   }
 

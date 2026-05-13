@@ -1,3 +1,10 @@
+import {
+  MapsGeneralClass,
+  MapsGeneralClassValues,
+  MapsTrafimageFilter,
+  MapsTrafimageFilterValues,
+  STATIONS_SOURCE_ID,
+} from "../../utils/constants";
 import MapboxStyleLayer from "../MapboxStyleLayer";
 
 /**
@@ -11,7 +18,8 @@ class StationsLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     super({
       styleLayersFilter: ({ metadata }) =>
-        !!metadata && metadata["trafimage.filter"] === "stations",
+        !!metadata &&
+        metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.STATIONS,
       properties: {
         hideInLegend: true,
         popupComponent: "StationPopup",
@@ -21,7 +29,7 @@ class StationsLayer extends MapboxStyleLayer {
       ...options,
     });
 
-    this.sourceId = "stations";
+    this.sourceId = STATIONS_SOURCE_ID;
 
     this.onIdle = this.onIdle.bind(this);
     this.ready = false;
@@ -67,7 +75,8 @@ class StationsLayer extends MapboxStyleLayer {
       .getStyle()
       .layers.filter(
         ({ metadata }) =>
-          metadata && /^stations/.test(metadata["general.filter"]),
+          metadata &&
+          metadata[MapsGeneralClass] === MapsGeneralClassValues.STATIONS,
       )
       .map((layer) => layer.id);
 
@@ -101,6 +110,11 @@ class StationsLayer extends MapboxStyleLayer {
     const source = mbMap?.getSource(this.sourceId);
 
     if (!this.osmPointsLayers || !source) {
+      if (!source) {
+        console.warn(
+          "Source for stations layer not found, can't update source",
+        );
+      }
       return;
     }
 
@@ -117,6 +131,7 @@ class StationsLayer extends MapboxStyleLayer {
         };
         return good;
       });
+    console.log(osmPointsRendered);
 
     source.setData({
       type: "FeatureCollection",

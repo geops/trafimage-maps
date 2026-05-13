@@ -53,7 +53,7 @@ const topic = {
   },
   layers: [
     new TrafimageMapboxLayer({
-      style: 'base_bright_v2',
+      style: 'basemap_bright',
     }),
     new VectorLayer({
       olLayer: new OLVectorLayer({

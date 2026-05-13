@@ -15,7 +15,7 @@ const topic = {
     new TrafimageMapboxLayer({
       name: 'Netzkarte',
       visible: true,
-      style: 'base_bright_v2',
+      style: 'basemap_bright',
     }),
   ],
 };

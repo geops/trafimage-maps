@@ -29,7 +29,7 @@ export const getHandicapLayers = () => {
     name: "ch.sbb.handicap.data",
     visible: true,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "base_bright_v2_ch.sbb.handicap_v2",
+    style: "basemap_bright_ch.sbb.handicap_v2",
     properties: {
       hideInLegend: true,
     },
@@ -41,12 +41,12 @@ export const getHandicapLayers = () => {
 
   const handicapLight = netzkarteLayer.clone({
     mapboxLayer: handicapDataLayer,
-    style: "base_bright_v2_ch.sbb.handicap_v2",
+    style: "basemap_bright_ch.sbb.handicap_v2",
   });
 
   const handicapDark = netzkarteNight.clone({
     mapboxLayer: handicapDataLayer,
-    style: "base_dark_v2_ch.sbb.handicap_v2_dark",
+    style: "basemap_dark_ch.sbb.handicap_v2_dark",
   });
 
   const handicapHighlightStyleMain = new Style({
@@ -222,7 +222,7 @@ export const getHandicapLayers = () => {
     handicapDark,
     // netzkarteAerial.clone({
     //   mapboxLayer: handicapDataLayer,
-    //   style: 'aerial_sbb_sbbkey_ch.sbb.handicap_v2',
+    //   style: 'basemap_aerial_sbbkey_ch.sbb.handicap_v2',
     // }),
     // swisstopoLandeskarte.clone({
     //   mapboxLayer: handicapDataLayer,
