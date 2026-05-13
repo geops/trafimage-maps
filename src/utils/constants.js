@@ -101,6 +101,9 @@ export const MapsStsFilter = "sts.filter";
 // ENum for each class
 export const MapsGeneralClassValues = Object.freeze({
   RELIEF: "relief",
+  PUBLIC_TRANSPORT: "public_transport",
+  PERIMETER_MASK: "perimeter_mask",
+  LABEL: "label",
   LANDCOVER: "landcover",
   BORDERS: "borders",
   WATER: "water",
@@ -108,10 +111,8 @@ export const MapsGeneralClassValues = Object.freeze({
   STREETS: "streets",
   ANCILLARY: "ancillary",
   STATION_PLAN: "station_plan",
-  LABEL: "label",
   POI: "poi",
   STATIONS: "stations",
-  PERIMETER_MASK: "perimeter_mask",
   LEVEL_GREYOUT: "level_greyout",
   SLOT: "slot",
 });
@@ -139,6 +140,10 @@ export const MapsGeneralSubClassValues = Object.freeze({
   ROUTING_DACH: "routing_dach",
   JOURNEY: "journey",
   EU: "eu",
+  CONSTRUCTION: "construction",
+  CORRIDORS: "corridors",
+  SECTORS: "sectors",
+  BORDER: "border",
 });
 
 // General mot (mode of transport)
@@ -205,6 +210,22 @@ export const MapsTrafimageFilterValues = Object.freeze({
   IPV_CALL_EDGE_DAY: "ipv_call_edge_day",
   IPV_CALL_FULL_DAY: "ipv_call_full_day",
   IPV_SELECTED_STATION_DAY: "ipv_selected_station_day",
+
+  // From zweitausbildung style
+  STATIONS_AUFBAU_NOT_BORDER: "stations.aufbau.not.border",
+  STATIONS_AUFBAU_BORDER: "stations.aufbau.border",
+  STATIONS_BASIS_NOT_BORDER: "stations.basis.not.border",
+  STATIONS_BASIS_BORDER: "stations.basis.border",
+  CLUSTERS_NO_RAILAWAY: "clusters.no_railaway",
+  CLUSTERS_NO_RAILAWAY_NUMBER: "clusters.no_railaway.number",
+  NOCLUSTERS_NO_RAILAWAY: "noclusters.no_railaway",
+  CLUSTERS_RAILAWAY: "clusters.railaway",
+  CLUSTERS_RAILAWAY_NUMBER: "clusters.railaway.number",
+  NOCLUSTERS_RAILAWAY: "noclusters.railaway",
+  CLUSTERS: "clusters",
+  CLUSTERS_NUMBER: "clusters.number",
+  NOCLUSTERS: "noclusters",
+  POIS: "pois",
 });
 
 // Routing filter
