@@ -85,7 +85,6 @@ class PlatformsLayer extends MapboxStyleLayer {
           metadata[MapsGeneralSubClass] ===
             MapsGeneralSubClassValues.STOP_POSITION,
       );
-    console.log(this.platformLayers);
 
     this.platformLayers = this.platformLayers.map((layer) => layer.id);
 
@@ -109,6 +108,7 @@ class PlatformsLayer extends MapboxStyleLayer {
 
     if (!this.platformLayers || !source) {
       if (!source) {
+        // eslint-disable-next-line no-console
         console.warn(
           `Source with id ${this.source.id} not found in the style, impossible to display platforms polygons highlight.`,
         );
@@ -145,6 +145,7 @@ class PlatformsLayer extends MapboxStyleLayer {
         ["in", ["get", "uid"], ["literal", uids]],
       ]);
     } else {
+      // eslint-disable-next-line no-console
       console.warn(
         `Layer with id ${PLATFORMS_POLYGON_HIGHLIGHT_LAYER_ID} not found in the style, impossible to display platforms polygons highlight.`,
       );

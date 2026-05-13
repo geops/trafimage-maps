@@ -111,6 +111,7 @@ class StationsLayer extends MapboxStyleLayer {
 
     if (!this.osmPointsLayers || !source) {
       if (!source) {
+        // eslint-disable-next-line no-console
         console.warn(
           "Source for stations layer not found, can't update source",
         );
@@ -131,8 +132,6 @@ class StationsLayer extends MapboxStyleLayer {
         };
         return good;
       });
-    console.log(osmPointsRendered);
-
     source.setData({
       type: "FeatureCollection",
       features: osmPointsRendered,
