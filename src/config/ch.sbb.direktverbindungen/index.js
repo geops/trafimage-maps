@@ -48,7 +48,7 @@ export const getDirektverbindungenLayers = () => {
     },
     visible: false,
     mapboxLayer: dataLayer,
-    style: "basemap_dark_direktverbindungen_dark",
+    style: "basemap_dark_direktverbindungen",
   });
 
   const dvBaseAerial = new MapboxStyleLayer({

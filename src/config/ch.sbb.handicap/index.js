@@ -47,7 +47,7 @@ export const getHandicapLayers = () => {
 
   const handicapDark = netzkarteNight.clone({
     mapboxLayer: handicapDataLayer,
-    style: "basemap_dark_ch.sbb.handicap_v2_dark",
+    style: "basemap_dark_ch.sbb.handicap_v2",
   });
 
   const handicapHighlightStyleMain = new Style({
