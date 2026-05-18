@@ -49,12 +49,6 @@ import { MesswagenPopup } from "../popups";
 import StsMenuToggler from "./ch.sbb.sts/StsMenuToggler/StsMenuToggler";
 import MapboxStyleLayer from "../layers/MapboxStyleLayer";
 import { getDirektverbindungenSingleLayers } from "./ch.sbb.direktverbindungen.single";
-// // For backward compatibility
-// export {
-//   casaDataLayerWithoutLabels,
-//   casaNetzkarteLayerWithLabels,
-//   casaNetzkarteLayerWithoutLabels,
-// } from "./ch.sbb.casa";
 
 export const defaultElements = {
   header: true,
