@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.5](https://github.com/geops/trafimage-maps/compare/v1.32.4...v1.32.5) (2026-05-07)
+
+### Bug Fixes
+
+- **TrafimageMapboxLayer:** add compatibility for transformRequest option with style switch ([#1252](https://github.com/geops/trafimage-maps/issues/1252)) ([89463ef](https://github.com/geops/trafimage-maps/commit/89463efeb12f01758bdebfcdd8f6447827af383f))
+
 ### [1.32.4](https://github.com/geops/trafimage-maps/compare/v1.32.3...v1.32.4) (2026-05-06)
 
 ### Bug Fixes

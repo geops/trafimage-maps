@@ -233,7 +233,16 @@ class TrafimageMapboxLayer extends MaplibreLayer {
       this.abortController.abort();
     }
     this.abortController = new AbortController();
-    fetch(newStyleUrl, { signal: this.abortController.signal })
+    const transformRequest = this.options?.mapOptions?.transformRequest;
+    const transformedRequest = transformRequest
+      ? transformRequest(newStyleUrl, "Style")
+      : null;
+    const { url = newStyleUrl, ...requestOptions } = transformedRequest || {};
+
+    fetch(url, {
+      ...requestOptions,
+      signal: this.abortController.signal,
+    })
       .then((response) => {
         return response.json();
       })
