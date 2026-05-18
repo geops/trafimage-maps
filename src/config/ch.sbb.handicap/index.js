@@ -6,6 +6,7 @@ import { getNetzkarteLayers } from "../ch.sbb.netzkarte";
 
 import {
   BAHNHOFPLAENE_LAYER_NAME,
+  MapsHandicapFilter,
   NETZKARTE_DARK_LAYER_NAME,
   NETZKARTE_LAYER_NAME,
   STATIONS_LAYER_NAME,
@@ -73,7 +74,7 @@ export const getHandicapLayers = () => {
     name: "ch.sbb.barrierfreierbahnhoefe",
     mapboxLayer: handicapDataLayer,
     styleLayersFilter: ({ metadata }) =>
-      /^symbol.barrierefrei/.test(metadata?.["handicap.filter"]),
+      /^symbol.barrierefrei/.test(metadata?.[MapsHandicapFilter]),
     properties: {
       isQueryable: true,
       useOverlay: true,
@@ -89,7 +90,7 @@ export const getHandicapLayers = () => {
     name: "ch.sbb.nichtbarrierfreierbahnhoefe",
     mapboxLayer: handicapDataLayer,
     styleLayersFilter: ({ metadata }) =>
-      /^symbol.nichtbarrierefrei/.test(metadata?.["handicap.filter"]),
+      /^symbol.nichtbarrierefrei/.test(metadata?.[MapsHandicapFilter]),
     properties: {
       isQueryable: true,
       useOverlay: true,
@@ -105,7 +106,7 @@ export const getHandicapLayers = () => {
     name: "ch.sbb.teilbarrierefreiebahnhoefe",
     mapboxLayer: handicapDataLayer,
     styleLayersFilter: ({ metadata }) => {
-      return /^symbol.teilbarrierefrei/.test(metadata?.["handicap.filter"]);
+      return /^symbol.teilbarrierefrei/.test(metadata?.[MapsHandicapFilter]);
     },
     properties: {
       isQueryable: true,
@@ -123,7 +124,7 @@ export const getHandicapLayers = () => {
   //   name: "ch.sbb.shuttle",
   //   mapboxLayer: handicapDataLayer,
   //   styleLayersFilter: ({ metadata }) => {
-  //     return /^symbol.shuttle/.test(metadata?.["handicap.filter"]);
+  //     return /^symbol.shuttle/.test(metadata?.[MapsHandicapFilter]);
   //   },
   //   properties: {
   //     isQueryable: true,
@@ -137,10 +138,7 @@ export const getHandicapLayers = () => {
     name: "ch.sbb.status_unbekannt",
     mapboxLayer: handicapDataLayer,
     styleLayersFilter: ({ metadata }) => {
-      return /^symbol.statusunbekannt/.test(metadata?.["handicap.filter"]);
-    },
-    queryRenderedLayers: ({ metadata }) => {
-      return /^symbol.statusunbekannt$/.test(metadata?.["handicap.filter"]);
+      return /^symbol.statusunbekannt/.test(metadata?.[MapsHandicapFilter]);
     },
     properties: {
       isQueryable: true,

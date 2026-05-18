@@ -3,6 +3,7 @@ import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import SchmalspurLayer from "../../layers/SchmalspurLayer";
 import { KilometrageLayer } from "../../layers";
+import { MapsIsbFilter, MapsIsbFilterValues } from "../../utils/constants";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getIsbLayers = () => {
@@ -41,13 +42,13 @@ export const getIsbLayers = () => {
     name: "ch.sbb.isb.other",
     mapboxLayer: netzkarteIsb,
     styleLayersFilter: ({ metadata }) =>
-      metadata &&
-      metadata["isb.filter"] &&
-      /^(other(\.highlight)?|other_flag)$/.test(metadata["isb.filter"]),
+      [
+        MapsIsbFilterValues.OTHER,
+        MapsIsbFilterValues.OTHER_HIGHLIGHT,
+        MapsIsbFilterValues.OTHER_FLAG,
+      ].includes(metadata?.[MapsIsbFilter]),
     queryRenderedLayersFilter: ({ metadata }) =>
-      metadata &&
-      metadata["isb.filter"] &&
-      /^other$/.test(metadata["isb.filter"]),
+      metadata?.[MapsIsbFilter] === MapsIsbFilterValues.OTHER,
     properties: {
       isQueryable: true,
       hasInfos: true,
@@ -81,13 +82,13 @@ export const getIsbLayers = () => {
     name: "ch.sbb.isb.tvs",
     mapboxLayer: netzkarteIsb,
     styleLayersFilter: ({ metadata }) =>
-      metadata &&
-      metadata["isb.filter"] &&
-      /^(tvs(\.highlight)?|tvs_flag)$/.test(metadata["isb.filter"]),
+      [
+        MapsIsbFilterValues.TVS,
+        MapsIsbFilterValues.TVS_HIGHLIGHT,
+        MapsIsbFilterValues.TVS_FLAG,
+      ].includes(metadata?.[MapsIsbFilter]),
     queryRenderedLayersFilter: ({ metadata }) =>
-      metadata &&
-      metadata["isb.filter"] &&
-      /^tvs$/.test(metadata["isb.filter"]),
+      metadata?.[MapsIsbFilter] === MapsIsbFilterValues.TVS,
     properties: {
       isQueryable: true,
       hasInfos: true,
@@ -152,11 +153,14 @@ export const getIsbLayers = () => {
     mapboxLayer: netzkarteIsb,
     group: "ch.sbb.isb",
     styleLayersFilter: ({ metadata }) =>
-      /^schmalspur_(flag|line|stationen|stations)/.test(
-        metadata?.["isb.filter"],
-      ),
+      [
+        MapsIsbFilterValues.SCHMALSPUR_FLAG,
+        MapsIsbFilterValues.SCHMALSPUR_LINE,
+        MapsIsbFilterValues.SCHMALSPUR_LINE_HIGHLIGHT,
+        MapsIsbFilterValues.SCHMALSPUR_STATIONEN,
+      ].includes(metadata?.[MapsIsbFilter]),
     queryRenderedLayersFilter: ({ metadata }) =>
-      /^schmalspur_line$/.test(metadata?.["isb.filter"]),
+      metadata?.[MapsIsbFilter] === MapsIsbFilterValues.SCHMALSPUR_LINE,
     properties: {
       useOverlay: true,
       isQueryable: true,

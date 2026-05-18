@@ -2,7 +2,13 @@ import { Layer } from "mobility-toolbox-js/ol";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import KilometrageLayer from "../../layers/KilometrageLayer";
-import { INFRASTRUKTUR_LAYER_NAME } from "../../utils/constants";
+import {
+  INFRASTRUKTUR_LAYER_NAME,
+  MapsGeneralFilter,
+  MapsGeneralFilterValues,
+  MapsInfraFilter,
+  MapsInfraFilterValues,
+} from "../../utils/constants";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getInfrastrukturLayers = () => {
@@ -28,7 +34,8 @@ export const getInfrastrukturLayers = () => {
     visible: false,
     mapboxLayer: netzkarteEisenbahninfrastruktur,
     styleLayersFilter: ({ metadata }) =>
-      /^operational_regions$/.test(metadata?.["general.filter"]),
+      metadata?.[MapsGeneralFilter] ===
+      MapsGeneralFilterValues.OPERATIONAL_REGIONS,
     properties: {
       isQueryable: true,
       hasInfos: true,
@@ -43,7 +50,7 @@ export const getInfrastrukturLayers = () => {
     visible: true,
     mapboxLayer: netzkarteEisenbahninfrastruktur,
     styleLayersFilter: ({ metadata }) =>
-      /^sbb$/.test(metadata?.["infra.filter"]),
+      metadata?.[MapsInfraFilter] === MapsInfraFilterValues.SBB,
     properties: {
       hasInfos: true,
       description: "ch.sbb.infrastruktur.tochtergesellschaften.group-desc",
@@ -55,7 +62,7 @@ export const getInfrastrukturLayers = () => {
     visible: true,
     mapboxLayer: netzkarteEisenbahninfrastruktur,
     styleLayersFilter: ({ metadata }) =>
-      /^waters$/.test(metadata?.["general.filter"]),
+      metadata?.[MapsGeneralFilter] === MapsGeneralFilterValues.WATERS,
     properties: {
       hasInfos: true,
       description: "ch.sbb.infrastruktur.gewaesser.group-desc",
@@ -67,7 +74,7 @@ export const getInfrastrukturLayers = () => {
     visible: true,
     mapboxLayer: netzkarteEisenbahninfrastruktur,
     styleLayersFilter: ({ metadata }) =>
-      /^ktu$/.test(metadata?.["infra.filter"]),
+      metadata?.[MapsInfraFilter] === MapsInfraFilterValues.KTU,
     properties: {
       hasInfos: true,
       description: "ch.sbb.infrastruktur.uebrigebahnen.group-desc",
@@ -96,9 +103,8 @@ export const getInfrastrukturLayers = () => {
             isQueryable: false,
             mapboxLayer: netzkarteEisenbahninfrastruktur,
             styleLayersFilter: ({ metadata }) =>
-              /^border\.municipality\.green$/.test(
-                metadata?.["general.filter"],
-              ),
+              metadata?.[MapsGeneralFilter] ===
+              MapsGeneralFilterValues.BORDER_MUNICIPALITY_GREEN,
             group: "ch.sbb.infrastruktur.gemeindegrenzen.group",
             properties: {
               hasInfos: true,
@@ -111,7 +117,8 @@ export const getInfrastrukturLayers = () => {
             isQueryable: false,
             mapboxLayer: netzkarteEisenbahninfrastruktur,
             styleLayersFilter: ({ metadata }) =>
-              /^border\.municipality\.grey$/.test(metadata?.["general.filter"]),
+              metadata?.[MapsGeneralFilter] ===
+              MapsGeneralFilterValues.BORDER_MUNICIPALITY_GREY,
             group: "ch.sbb.infrastruktur.gemeindegrenzen.group",
             properties: {
               hasInfos: true,
@@ -133,7 +140,8 @@ export const getInfrastrukturLayers = () => {
             visible: false,
             mapboxLayer: netzkarteEisenbahninfrastruktur,
             styleLayersFilter: ({ metadata }) =>
-              /^border\.canton\.green$/.test(metadata?.["general.filter"]),
+              metadata?.[MapsGeneralFilter] ===
+              MapsGeneralFilterValues.BORDER_CANTON_GREEN,
             group: "ch.sbb.infrastruktur.kantonsgrenzen.group",
             properties: {
               hasInfos: true,
@@ -145,7 +153,8 @@ export const getInfrastrukturLayers = () => {
             visible: false,
             mapboxLayer: netzkarteEisenbahninfrastruktur,
             styleLayersFilter: ({ metadata }) =>
-              /^border\.canton\.grey$/.test(metadata?.["general.filter"]),
+              metadata?.[MapsGeneralFilter] ===
+              MapsGeneralFilterValues.BORDER_CANTON_GREY,
             group: "ch.sbb.infrastruktur.kantonsgrenzen.group",
             properties: {
               hasInfos: true,

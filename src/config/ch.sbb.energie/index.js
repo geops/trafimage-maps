@@ -1,6 +1,10 @@
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
-import { FORCE_EXPORT_PROPERTY } from "../../utils/constants";
+import {
+  FORCE_EXPORT_PROPERTY,
+  MapsEnergieFilter,
+  MapsEnergieFilterValues,
+} from "../../utils/constants";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getEnergieLayers = () => {
@@ -21,12 +25,13 @@ export const getEnergieLayers = () => {
     name: "ch.sbb.energie.public.leitungen",
     mapboxLayer: energieDataLayer,
     queryRenderedLayersFilter: ({ metadata }) =>
-      metadata && /^leitung$/.test(metadata["energie.filter"]),
+      metadata?.[MapsEnergieFilter] === MapsEnergieFilterValues.LEITUNG,
     styleLayersFilter: ({ metadata }) =>
-      metadata &&
-      /^(leitung|leitung.label|leitung.label.lc)$/.test(
-        metadata["energie.filter"],
-      ),
+      [
+        MapsEnergieFilterValues.LEITUNG,
+        MapsEnergieFilterValues.LEITUNG_LABEL,
+        MapsEnergieFilterValues.LEITUNG_LABEL_LC,
+      ].includes(metadata?.[MapsEnergieFilter]),
     properties: {
       isQueryable: true,
       hasInfos: true,
@@ -41,9 +46,12 @@ export const getEnergieLayers = () => {
     name: "ch.sbb.energie.public.unterwerke",
     mapboxLayer: energieDataLayer,
     queryRenderedLayersFilter: ({ metadata }) =>
-      metadata && /^anlagen.uw.icon$/.test(metadata["energie.filter"]),
+      metadata?.[MapsEnergieFilter] === MapsEnergieFilterValues.ANLAGEN_UW_ICON,
     styleLayersFilter: ({ metadata }) =>
-      metadata && /^anlagen.uw/.test(metadata["energie.filter"]),
+      [
+        MapsEnergieFilterValues.ANLAGEN_UW_ICON,
+        MapsEnergieFilterValues.ANLAGEN_UW_LABEL,
+      ].includes(metadata?.[MapsEnergieFilter]),
     properties: {
       isQueryable: true,
       hasInfos: true,

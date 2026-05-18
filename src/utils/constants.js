@@ -92,11 +92,18 @@ export const MapsGeneralClass = "general.class";
 export const MapsGeneralSubClass = "general.subclass";
 export const MapsGeneralMot = "general.mot";
 export const MapsGeneralFloor = "general.floor";
+export const MapsGeneralFilter = "general.filter";
+export const MapsInfraFilter = "infra.filter";
 export const MapsMapsetFilter = "mapset.filter";
 export const MapsTrafimageFilter = "trafimage.filter";
 export const MapsRoutingFilter = "routing.filter";
 export const MapsGeltungsbereicheFilter = "geltungsbereiche.filter";
 export const MapsStsFilter = "sts.filter";
+export const MapsHandicapFilter = "handicap.filter";
+export const MapsEnergieFilter = "energie.filter";
+export const MapsRteKlasse = "rte_klasse";
+export const MapsIsbFilter = "isb.filter";
+export const MapsFeatureFilter = "feature.filter";
 
 // ENum for each class
 export const MapsGeneralClassValues = Object.freeze({
@@ -109,6 +116,7 @@ export const MapsGeneralClassValues = Object.freeze({
   WATER: "water",
   BUILDINGS: "buildings",
   STREETS: "streets",
+  RAILWAYS: "railways",
   ANCILLARY: "ancillary",
   STATION_PLAN: "station_plan",
   POI: "poi",
@@ -144,6 +152,9 @@ export const MapsGeneralSubClassValues = Object.freeze({
   CORRIDORS: "corridors",
   SECTORS: "sectors",
   BORDER: "border",
+  MUNICIPAL: "municipal",
+  GRAVEL: "gravel",
+  STREETS: "streets",
 });
 
 // General mot (mode of transport)
@@ -164,6 +175,67 @@ export const MapsGeneralFloorValues = Object.freeze({
   LEVEL_GREYOUT: "level_greyout",
 });
 
+// General filter
+export const MapsGeneralFilterValues = Object.freeze({
+  BORDER_CANTON_GREEN: "border.canton.green",
+  BORDER_CANTON_GREY: "border.canton.grey",
+  BORDER_MUNICIPALITY_GREEN: "border.municipality.green",
+  BORDER_MUNICIPALITY_GREY: "border.municipality.grey",
+  BORDER_NATIONAL: "border.national",
+  OPERATIONAL_REGIONS: "operational_regions",
+  STATION: "station",
+  STATIONS: "stations",
+  TRACK: "track",
+  WATERS: "waters",
+});
+
+// Infra filter
+export const MapsInfraFilterValues = Object.freeze({
+  KTU: "ktu",
+  SBB: "sbb",
+});
+
+// Energie filter
+export const MapsEnergieFilterValues = Object.freeze({
+  ANLAGEN_UW_ICON: "anlagen.uw.icon",
+  ANLAGEN_UW_LABEL: "anlagen.uw.label",
+  LEITUNG: "leitung",
+  LEITUNG_HOVER: "leitung.hover",
+  LEITUNG_LABEL: "leitung.label",
+  LEITUNG_LABEL_LC: "leitung.label.lc",
+  LEITUNG_SELECT: "leitung.select",
+});
+
+// RTE Klasse
+export const MapsRteKlasseValues = Object.freeze({
+  KLASSE_1: "1",
+  KLASSE_2A: "2a",
+  KLASSE_2B: "2b",
+  KLASSE_3: "3",
+  KLASSE_4: "4",
+});
+
+// ISB filter
+export const MapsIsbFilterValues = Object.freeze({
+  OTHER: "other",
+  OTHER_HIGHLIGHT: "other.highlight",
+  OTHER_SELECT: "other.select",
+  OTHER_FLAG: "other_flag",
+  SCHMALSPUR_FLAG: "schmalspur_flag",
+  SCHMALSPUR_LINE: "schmalspur_line",
+  SCHMALSPUR_LINE_HIGHLIGHT: "schmalspur_line.highlight",
+  SCHMALSPUR_STATIONEN: "schmalspur_stationen",
+  TVS: "tvs",
+  TVS_HIGHLIGHT: "tvs.highlight",
+  TVS_SELECT: "tvs.select",
+  TVS_FLAG: "tvs_flag",
+});
+
+// Feature filter
+export const MapsFeatureFilterValues = Object.freeze({
+  STATIONS: "stations",
+});
+
 // Mapset filter
 export const MapsMapsetFilterValues = Object.freeze({
   MAPSET_GREENAREAS: "mapset_greenareas",
@@ -178,6 +250,7 @@ export const MapsMapsetFilterValues = Object.freeze({
   MAPSET_UNDERGROUND: "mapset_underground",
   MAPSET_TUNNEL_LABELS: "mapset_tunnel_labels",
   NORMAL_STREETS: "normal_streets",
+  PATH: "path",
   MAPSET_STATION_PANELS: "mapset_station_panels",
 });
 
@@ -193,6 +266,7 @@ export const MapsTrafimageFilterValues = Object.freeze({
   SWISSIMAGE: "swissimage",
   PIXELKARTE_GRAU: "pixelkarte_grau",
   PIXELKARTE_FARBE: "pixelkarte_farbe",
+
   // From geltungsbereiche style
   TRACKS: "tracks",
   IPV_ALL: "ipv_all",
@@ -226,12 +300,29 @@ export const MapsTrafimageFilterValues = Object.freeze({
   CLUSTERS_NUMBER: "clusters.number",
   NOCLUSTERS: "noclusters",
   POIS: "pois",
+
+  // From funkmesswagen style
+  FUNKMESSWAGEN_PHOTOS: "funkmesswagen.photos",
 });
 
 // Routing filter
 export const MapsRoutingFilterValues = Object.freeze({
   PERIMETER_MASK_ROUTING_EUROPE: "perimeter_mask_routing_europe",
   PERIMETER_MASK_ROUTING_DACH: "perimeter_mask_routing_dach",
+});
+
+// Handicap filters
+export const MapsHandicapFilterValues = Object.freeze({
+  SYMBOL_STATUSUNBEKANNT: "symbol.statusunbekannt",
+  SYMBOL_SHUTTLE: "symbol.shuttle",
+  SYMBOL_NICHTBARRIEREFREI: "symbol.nichtbarrierefrei",
+  SYMBOL_TEILBARRIEREFREI: "symbol.teilbarrierefrei",
+  SYMBOL_BARRIEREFREI: "symbol.barrierefrei",
+  SYMBOL_STATUSUNBEKANNT_LABEL: "symbol.statusunbekannt.label",
+  SYMBOL_SHUTTLE_LABEL: "symbol.shuttle.label",
+  SYMBOL_NICHTBARRIEREFREI_LABEL: "symbol.nichtbarrierefrei.label",
+  SYMBOL_TEILBARRIEREFREI_LABEL: "symbol.teilbarrierefrei.label",
+  SYMBOL_BARRIEREFREI_LABEL: "symbol.barrierefrei.label",
 });
 
 // Geltungsbereiche filters

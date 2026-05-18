@@ -30,6 +30,8 @@ import StsMenu from "../menus/StsMenu";
 import {
   DV_KEY,
   INFRASTRUKTUR_LAYER_NAME,
+  MapsGeneralFilter,
+  MapsGeneralFilterValues,
   ONLY_WHEN_NOT_LOGGED_IN,
   PDF_DOWNLOAD_EVENT_TYPE,
   RAILPLUS_EXPORTBTN_ID,
@@ -114,23 +116,6 @@ export const getTopics = () => {
     projection: "EPSG:3857",
   };
 
-  // const bauprojekte = {
-  //   name: "ch.sbb.construction",
-  //   key: "ch.sbb.construction",
-  //   elements: {
-  //     ...defaultElements,
-  //     shareMenu: true,
-  //     popup: true,
-  //     filter: true,
-  //     filters: true,
-  //   },
-  //   layers: constructionLayers,
-  //   projection: "EPSG:3857",
-  //   layerInfoComponent: "ConstructionTopicInfo",
-  //   searches: defaultSearches,
-  //   minZoom: 7,
-  // };
-
   const infrastruktur = {
     name: "ch.sbb.infrastruktur",
     key: "ch.sbb.infrastruktur",
@@ -155,7 +140,8 @@ export const getTopics = () => {
     visible: true,
     mapboxLayer: netzkarteEisenbahninfrastruktur,
     styleLayersFilter: ({ metadata }) =>
-      /^operational_regions$/.test(metadata?.["general.filter"]),
+      metadata?.[MapsGeneralFilter] ===
+      MapsGeneralFilterValues.OPERATIONAL_REGIONS,
     properties: {
       isQueryable: true,
       hasInfos: true,

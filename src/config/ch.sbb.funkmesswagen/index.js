@@ -6,6 +6,8 @@ import {
 import {
   NETZKARTE_AERIAL_LAYER_NAME,
   NETZKARTE_LAYER_NAME,
+  MapsTrafimageFilter,
+  MapsTrafimageFilterValues,
   STOPO_LANDESKARTE_GRAU_LAYER_NAME,
   STOPO_LANDESKARTE_LAYER_NAME,
 } from "../../utils/constants";
@@ -112,7 +114,8 @@ export const getFunkmesswagenLayers = () => {
     name: "ch.sbb.funkmesswagen.fotos",
     key: "ch.sbb.funkmesswagen.fotos",
     styleLayersFilter: ({ metadata }) =>
-      /^funkmesswagen.photos$/.test(metadata?.["trafimage.filter"]),
+      metadata?.[MapsTrafimageFilter] ===
+      MapsTrafimageFilterValues.FUNKMESSWAGEN_PHOTOS,
     visible: false,
     properties: {
       isBaseLayer: false,
