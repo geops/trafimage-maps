@@ -11,7 +11,7 @@ export const getEnergieLayers = () => {
   const energieDataLayer = new TrafimageMapboxLayer({
     name: "ch.sbb.energie.public.data",
     zIndex: -1,
-    style: "netzkarte_eisenbahninfrastruktur_v3_ch.sbb.energie.public",
+    style: "basemap_infra_bright_ch.sbb.energie.public",
     properties: {
       hideInLegend: true,
       isBaseLayer: true,

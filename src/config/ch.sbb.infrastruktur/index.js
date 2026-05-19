@@ -16,7 +16,7 @@ export const getInfrastrukturLayers = () => {
     name: INFRASTRUKTUR_LAYER_NAME,
     visible: true,
     zIndex: -1,
-    style: "netzkarte_eisenbahninfrastruktur_v3",
+    style: "basemap_infra_bright",
     properties: {
       isBaseLayer: true,
     },

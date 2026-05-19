@@ -10,7 +10,7 @@ export const getBeleuchtungsLayers = () => {
     name: "ch.sbb.beleuchtungsstaerken.data",
     visible: true,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "netzkarte_eisenbahninfrastruktur_v3_ch.sbb.beleuchtung",
+    style: "basemap_infra_bright_ch.sbb.beleuchtung",
     properties: {
       hideInLegend: true,
     },

@@ -11,7 +11,7 @@ export const getIsbLayers = () => {
     name: "ch.sbb.isb",
     visible: true,
     zIndex: -1,
-    style: "netzkarte_eisenbahninfrastruktur_v3_ch.sbb.infrastrukturbetreiber",
+    style: "basemap_infra_bright_ch.sbb.infrastrukturbetreiber",
     properties: {
       isBaseLayer: true,
     },
