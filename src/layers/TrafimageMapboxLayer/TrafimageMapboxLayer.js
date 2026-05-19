@@ -43,7 +43,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
 
     // TODO don't use process.env here it fails in Schulzug
     // this.stylePrefix = process?.env?.REACT_APP_STYLE_REVIEW_PREFIX || "";
-    this.stylePrefix = "review-geops-tgma-52zlyr.";
+    this.stylePrefix = "";
     this.style = options.style;
   }
 
