@@ -77,7 +77,7 @@ export const getNetzkarteLayers = () => {
     },
     visible: false,
     mapboxLayer: dataLayer,
-    style: "basemap_aerial_sbbkey_ch.sbb.netzkarte.aerial",
+    style: "basemap_aerial_sbbkey_ch.sbb.netzkarte",
   });
 
   const swisstopoLandeskarte = new MapboxStyleLayer({

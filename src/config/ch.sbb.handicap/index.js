@@ -151,85 +151,10 @@ export const getHandicapLayers = () => {
     },
   });
 
-  // TODO: keep this layer until we are sure we will not use it.
-  // export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
-  //   name: 'ch.sbb.stuetzpunktbahnhoefe',
-  //   key: 'ch.sbb.stuetzpunktbahnhoefe',
-  //   visible: true,
-  //   mapboxLayer: handicapDataLayer,
-  //   styleLayersFilter: ({ metadata }) =>
-  //     !!metadata && metadata['trafimage.filter'] === 'stuetzpunkt',
-  //   properties: {
-  //     isQueryable: true,
-  //     handicapType: 'stuetzpunkt',
-  //     hasInfos: true,
-  //     layerInfoComponent: 'HandicapLayerInfo',
-  //     popupComponent: 'HandicapPopup',
-  //     useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
-  //   },
-  //   hidePopup: (feat, layer, featureInfo) => {
-  //     const otherFeatsClicked = featureInfo
-  //       .filter((info) => info.layer !== layer)
-  //       .map((info) => info.features)
-  //       .flat()
-  //       .map((f) => f.get('stationsbezeichnung'));
-
-  //     return otherFeatsClicked.includes(feat.get('stationsbezeichnung'));
-  //   },
-  // });
-
-  // TODO: keep this layer until we are sure we will not use it.
-  // export const barrierfreierBahnhoefe = new MapboxStyleLayer({
-  //   name: 'ch.sbb.barrierfreierbahnhoefe',
-  //   key: 'ch.sbb.barrierfreierbahnhoefe',
-  //   visible: true,
-  //   mapboxLayer: handicapDataLayer,
-  //   styleLayersFilter: ({ metadata }) =>
-  //     !!metadata && metadata['trafimage.filter'] === 'barrierefrei',
-  //   properties: {
-  //     isQueryable: true,
-  //     handicapType: 'barrierfree',
-  //     hasInfos: true,
-  //     layerInfoComponent: 'HandicapLayerInfo',
-  //     popupComponent: 'HandicapPopup',
-  //     useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
-  //   },
-  // });
-
-  // TODO: keep this layer until we are sure we will not use it.
-  // export const nichtBarrierefreieBahnhoefe = new MapboxStyleLayer({
-  //   name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
-  //   key: 'ch.sbb.nichtbarrierfreierbahnhoefe',
-  //   visible: true,
-  //   mapboxLayer: handicapDataLayer,
-  //   styleLayersFilter: ({ metadata }) =>
-  //     !!metadata && metadata['trafimage.filter'] === 'nicht_barrierefrei',
-  //   properties: {
-  //     isQueryable: true,
-  //     handicapType: 'notBarrierfree',
-  //     hasInfos: true,
-  //     layerInfoComponent: 'HandicapLayerInfo',
-  //     popupComponent: 'HandicapPopup',
-  //     useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
-  //   },
-  // });
-
   return [
     handicapDataLayer,
     handicapLight,
     handicapDark,
-    // netzkarteAerial.clone({
-    //   mapboxLayer: handicapDataLayer,
-    //   style: 'basemap_aerial_sbbkey_ch.sbb.handicap_v2',
-    // }),
-    // swisstopoLandeskarte.clone({
-    //   mapboxLayer: handicapDataLayer,
-    //   style: 'ch.swisstopo.backgrounds_ch.sbb.handicap_v2',
-    // }),
-    // swisstopoLandeskarteGrau.clone({
-    //   mapboxLayer: handicapDataLayer,
-    //   style: 'ch.swisstopo.backgrounds_ch.sbb.handicap_v2',
-    // }),
     stationsLayer.clone({
       mapboxLayer: handicapDataLayer,
     }),
@@ -246,12 +171,8 @@ export const getHandicapLayers = () => {
       },
     }),
     statusUnbekannt,
-    // shuttle,
     nichtBarrierefrei,
     teilBarrierefrei,
     barrierefrei,
-    // nichtBarrierefreieBahnhoefe,
-    // barrierfreierBahnhoefe,
-    // stuetzpunktBahnhoefe,
   ];
 };
