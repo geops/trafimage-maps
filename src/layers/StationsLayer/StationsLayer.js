@@ -2,6 +2,7 @@ import {
   MapsGeneralClass,
   MapsGeneralClassValues,
   MapsTrafimageFilter,
+  MapsTrafimageFilterValues,
   STATIONS_SOURCE_ID,
 } from "../../utils/constants";
 import MapboxStyleLayer from "../MapboxStyleLayer";
@@ -18,7 +19,7 @@ class StationsLayer extends MapboxStyleLayer {
     super({
       styleLayersFilter: ({ metadata }) =>
         !!metadata &&
-        metadata[MapsTrafimageFilter] === MapsTrafimageFilter.STATIONS,
+        metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.STATIONS,
       properties: {
         hideInLegend: true,
         popupComponent: "StationPopup",
