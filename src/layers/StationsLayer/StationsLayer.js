@@ -1,6 +1,7 @@
 import {
+  MapsGeneralClass,
+  MapsGeneralClassValues,
   MapsTrafimageFilter,
-  MapsTrafimageFilterValues,
   STATIONS_SOURCE_ID,
 } from "../../utils/constants";
 import MapboxStyleLayer from "../MapboxStyleLayer";
@@ -17,7 +18,7 @@ class StationsLayer extends MapboxStyleLayer {
     super({
       styleLayersFilter: ({ metadata }) =>
         !!metadata &&
-        metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.STATIONS,
+        metadata[MapsTrafimageFilter] === MapsTrafimageFilter.STATIONS,
       properties: {
         hideInLegend: true,
         popupComponent: "StationPopup",
@@ -74,7 +75,7 @@ class StationsLayer extends MapboxStyleLayer {
       .layers.filter(
         ({ metadata }) =>
           metadata &&
-          metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.STATIONS,
+          metadata[MapsGeneralClass] === MapsGeneralClassValues.STATIONS,
       )
       .map((layer) => layer.id);
 
@@ -130,6 +131,7 @@ class StationsLayer extends MapboxStyleLayer {
         };
         return good;
       });
+
     source.setData({
       type: "FeatureCollection",
       features: osmPointsRendered,
