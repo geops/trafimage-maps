@@ -13,7 +13,7 @@ export const getDirektverbindungenLayers = () => {
     name: `${DV_KEY}.data`,
     visible: true,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "base_bright_v2_direktverbindungen",
+    style: "basemap_bright_direktverbindungen",
     hitTolerance: DV_HIT_TOLERANCE,
     properties: {
       hideInLegend: true,
@@ -34,7 +34,7 @@ export const getDirektverbindungenLayers = () => {
     },
     visible: true,
     mapboxLayer: dataLayer,
-    style: "base_bright_v2_direktverbindungen",
+    style: "basemap_bright_direktverbindungen",
   });
 
   const dvBaseDark = new MapboxStyleLayer({
@@ -48,7 +48,7 @@ export const getDirektverbindungenLayers = () => {
     },
     visible: false,
     mapboxLayer: dataLayer,
-    style: "base_dark_v2_direktverbindungen_dark",
+    style: "basemap_dark_direktverbindungen",
   });
 
   const dvBaseAerial = new MapboxStyleLayer({

@@ -1,18 +1,18 @@
 Example how to create your own topic.
 
 ```jsx
-import 'trafimage-maps';
-import React, { useRef, useEffect, useState } from 'react';
-import TrafimageMapboxLayer from 'trafimage-maps/es/layers/TrafimageMapboxLayer';
-import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
-import getCodeWithApiKey from '../getCodeWithApiKey.js';
-import EditorCode from './ExampleCode.txt';
+import "trafimage-maps";
+import React, { useRef, useEffect, useState } from "react";
+import TrafimageMapboxLayer from "trafimage-maps/es/layers/TrafimageMapboxLayer";
+import Editor from "react-styleguidist/lib/client/rsg-components/Editor";
+import getCodeWithApiKey from "../getCodeWithApiKey.js";
+import EditorCode from "./ExampleCode.txt";
 
 const apiKey = window.apiKey;
 
 const topic = {
-  name: 'Default',
-  key: 'default',
+  name: "Default",
+  key: "default",
   elements: {
     menu: false,
     header: true,
@@ -21,9 +21,9 @@ const topic = {
   },
   layers: [
     new TrafimageMapboxLayer({
-      name: 'Netzkarte',
+      name: "Netzkarte",
       visible: true,
-      style: 'base_bright_v2',
+      style: "basemap_bright",
     }),
   ],
 };

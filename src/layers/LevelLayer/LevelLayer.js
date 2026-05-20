@@ -1,4 +1,8 @@
 /* eslint-disable no-param-reassign */
+import {
+  MapsGeneralFloor,
+  MapsGeneralFloorValues,
+} from "../../utils/constants";
 import MapboxStyleLayer from "../MapboxStyleLayer";
 
 // Caching filters to reset to the original when toggle off the layer.
@@ -58,7 +62,10 @@ class LevelLayer extends MapboxStyleLayer {
       }
 
       // level 2D
-      if (metadata === "2D" && this.level === "2D") {
+      if (
+        metadata === MapsGeneralFloorValues["2D"] &&
+        this.level === MapsGeneralFloorValues["2D"]
+      ) {
         if (visible && styleLayer.layout.visibility === "none") {
           mbMap.setLayoutProperty(styleLayer.id, "visibility", "visible");
         } else if (!visible && styleLayer.layout.visibility === "visible") {
@@ -66,7 +73,10 @@ class LevelLayer extends MapboxStyleLayer {
         }
 
         // others levels
-      } else if (metadata === "level" && this.level !== "2D") {
+      } else if (
+        metadata === MapsGeneralFloorValues.LEVEL &&
+        this.level !== MapsGeneralFloorValues["2D"]
+      ) {
         // If visible apply the new level filter.
         if (visible) {
           const currentFilter = [...filterCache[styleLayer.id]];
@@ -87,7 +97,8 @@ class LevelLayer extends MapboxStyleLayer {
           // In that case change:visible events are not registered in the same order.
           if (
             !this.get("parent").children.find(
-              (child) => child.level !== "2D" && child.visible,
+              (child) =>
+                child.level !== MapsGeneralFloorValues["2D"] && child.visible,
             )
           ) {
             mbMap.setLayoutProperty(styleLayer.id, "visibility", "none");
@@ -95,8 +106,15 @@ class LevelLayer extends MapboxStyleLayer {
         }
       }
 
-      if (styleLayer.metadata?.["general.floor"] === "level_greyout") {
-        if (this.visible && this.level !== 0 && this.level !== "2D") {
+      if (
+        styleLayer.metadata?.[MapsGeneralFloor] ===
+        MapsGeneralFloorValues.LEVEL_GREYOUT
+      ) {
+        if (
+          this.visible &&
+          this.level !== 0 &&
+          this.level !== MapsGeneralFloorValues["2D"]
+        ) {
           mbMap.setLayoutProperty(styleLayer.id, "visibility", "visible");
         } else if (this.visible) {
           mbMap.setLayoutProperty(styleLayer.id, "visibility", "none");

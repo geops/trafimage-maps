@@ -1,5 +1,9 @@
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import GeltungsbereicheLayer from "../../layers/GeltungsbereicheLayer";
+import {
+  MapsGeltungsbereicheFilter,
+  MapsGeltungsbereicheFilterValues,
+} from "../../utils/constants";
 
 export const GA_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-ga_s25";
 export const TK_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-tk";
@@ -12,7 +16,7 @@ export const getGeltungsbereicheLayers = () => {
     visible: true,
     isQueryable: false,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "base_bright_v2_ch.sbb.geltungsbereiche_ga",
+    style: "basemap_bright_ch.sbb.geltungsbereiche",
     properties: {
       hideInLegend: true,
       isBaseLayer: true,
@@ -26,9 +30,15 @@ export const getGeltungsbereicheLayers = () => {
     name: GA_LAYER_KEY,
     mapboxLayer: geltungsbereicheDataLayer,
     queryRenderedLayersFilter: ({ metadata }) =>
-      metadata && metadata["geltungsbereiche.filter"]?.includes("ga.line"),
+      metadata &&
+      metadata[MapsGeltungsbereicheFilter]?.includes(
+        MapsGeltungsbereicheFilterValues.GA_LINE,
+      ),
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata["geltungsbereiche.filter"]?.includes("ga.line"),
+      metadata &&
+      metadata[MapsGeltungsbereicheFilter]?.includes(
+        MapsGeltungsbereicheFilterValues.GA_LINE,
+      ),
     group: "ch.sbb.geltungsbereiche.group",
     properties: {
       isQueryable: true,
@@ -53,10 +63,11 @@ export const getGeltungsbereicheLayers = () => {
     name: TK_LAYER_KEY,
     visible: false,
     mapboxLayer: geltungsbereicheDataLayer,
-    queryRenderedLayersFilter: ({ metadata }) =>
-      metadata && metadata["geltungsbereiche.filter"]?.includes("tk.line"),
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata["geltungsbereiche.filter"]?.includes("tk.line"),
+      metadata &&
+      metadata[MapsGeltungsbereicheFilter]?.includes(
+        MapsGeltungsbereicheFilterValues.TK_LINE,
+      ),
     group: "ch.sbb.geltungsbereiche.group",
     properties: {
       isQueryable: true,
@@ -80,10 +91,11 @@ export const getGeltungsbereicheLayers = () => {
     name: HTA_LAYER_KEY,
     visible: false,
     mapboxLayer: geltungsbereicheDataLayer,
-    queryRenderedLayersFilter: ({ metadata }) =>
-      metadata && metadata["geltungsbereiche.filter"]?.includes("hta.line"),
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata["geltungsbereiche.filter"]?.includes("hta.line"),
+      metadata &&
+      metadata[MapsGeltungsbereicheFilter]?.includes(
+        MapsGeltungsbereicheFilterValues.HTA_LINE,
+      ),
     group: "ch.sbb.geltungsbereiche.group",
     properties: {
       isQueryable: true,
@@ -108,10 +120,11 @@ export const getGeltungsbereicheLayers = () => {
     name: STS_LAYER_KEY,
     visible: false,
     mapboxLayer: geltungsbereicheDataLayer,
-    queryRenderedLayersFilter: ({ metadata }) =>
-      metadata && metadata["geltungsbereiche.filter"]?.includes("sts.line"),
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata["geltungsbereiche.filter"]?.includes("sts.line"),
+      metadata &&
+      metadata[MapsGeltungsbereicheFilter]?.includes(
+        MapsGeltungsbereicheFilterValues.STS_LINE,
+      ),
     group: "ch.sbb.geltungsbereiche.group",
     properties: {
       isQueryable: true,
@@ -144,7 +157,9 @@ export const getGeltungsbereicheLayers = () => {
     visible: false,
     mapboxLayer: geltungsbereicheDataLayer,
     styleLayersFilter: ({ metadata }) =>
-      metadata?.["geltungsbereiche.filter"]?.includes("at.line"),
+      metadata?.[MapsGeltungsbereicheFilter]?.includes(
+        MapsGeltungsbereicheFilterValues.AT_LINE,
+      ),
     group: "ch.sbb.geltungsbereiche.group",
     properties: {
       isQueryable: true,

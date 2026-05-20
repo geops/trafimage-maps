@@ -6,6 +6,8 @@ import {
 import {
   NETZKARTE_AERIAL_LAYER_NAME,
   NETZKARTE_LAYER_NAME,
+  MapsTrafimageFilter,
+  MapsTrafimageFilterValues,
   STOPO_LANDESKARTE_GRAU_LAYER_NAME,
   STOPO_LANDESKARTE_LAYER_NAME,
 } from "../../utils/constants";
@@ -33,7 +35,7 @@ export const getFunkmesswagenLayers = () => {
     name: "ch.sbb.funkmesswagen.data",
     visible: true,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "base_bright_v2_ch.sbb.funkmesswagen",
+    style: "basemap_bright_ch.sbb.funkmesswagen",
     properties: {
       hideInLegend: true,
     },
@@ -46,7 +48,7 @@ export const getFunkmesswagenLayers = () => {
     mapboxLayer: messwagenDataLayer,
     key: `ch.sbb.funkmesswagen.netzkarte`,
     visible: false,
-    style: "base_bright_v2_ch.sbb.funkmesswagen",
+    style: "basemap_bright_ch.sbb.funkmesswagen",
   });
 
   const messwagenNetzkarteNight = new MapboxStyleLayer({
@@ -59,12 +61,12 @@ export const getFunkmesswagenLayers = () => {
     },
     visible: false,
     mapboxLayer: messwagenDataLayer,
-    style: "base_dark_v2_ch.sbb.funkmesswagen",
+    style: "basemap_dark_ch.sbb.funkmesswagen",
   });
 
   const messwagenNetzkarteAerial = netzkarteAerial.clone({
     mapboxLayer: messwagenDataLayer,
-    style: "aerial_sbb_sbbkey_ch.sbb.funkmesswagen",
+    style: "basemap_aerial_sbbkey_ch.sbb.funkmesswagen",
   });
 
   const messwagenLandeskarte = swisstopoLandeskarte.clone({
@@ -112,7 +114,8 @@ export const getFunkmesswagenLayers = () => {
     name: "ch.sbb.funkmesswagen.fotos",
     key: "ch.sbb.funkmesswagen.fotos",
     styleLayersFilter: ({ metadata }) =>
-      /^funkmesswagen.photos$/.test(metadata?.["trafimage.filter"]),
+      metadata?.[MapsTrafimageFilter] ===
+      MapsTrafimageFilterValues.FUNKMESSWAGEN_PHOTOS,
     visible: false,
     properties: {
       isBaseLayer: false,

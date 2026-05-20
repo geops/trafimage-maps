@@ -2,6 +2,7 @@ import BeleuchtungsLayer from "../../layers/BeleuchtungsLayer";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import MapsGeoAdminLayer from "../../layers/MapsGeoAdminLayer";
+import { MapsRteKlasse, MapsRteKlasseValues } from "../../utils/constants";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getBeleuchtungsLayers = () => {
@@ -9,7 +10,7 @@ export const getBeleuchtungsLayers = () => {
     name: "ch.sbb.beleuchtungsstaerken.data",
     visible: true,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "netzkarte_eisenbahninfrastruktur_v3_ch.sbb.beleuchtung",
+    style: "basemap_infra_bright_ch.sbb.beleuchtung",
     properties: {
       hideInLegend: true,
     },
@@ -22,7 +23,7 @@ export const getBeleuchtungsLayers = () => {
     name: "ch.sbb.beleuchtungsstaerken1",
     mapboxLayer: beleuchtungDataLayer,
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata.rte_klasse === "1",
+      metadata?.[MapsRteKlasse] === MapsRteKlasseValues.KLASSE_1,
     properties: {
       hasInfos: true,
       useOverlay: true,
@@ -36,7 +37,7 @@ export const getBeleuchtungsLayers = () => {
     name: "ch.sbb.beleuchtungsstaerken2a",
     mapboxLayer: beleuchtungDataLayer,
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata.rte_klasse === "2a",
+      metadata?.[MapsRteKlasse] === MapsRteKlasseValues.KLASSE_2A,
     properties: {
       hasInfos: true,
       useOverlay: true,
@@ -50,7 +51,7 @@ export const getBeleuchtungsLayers = () => {
     name: "ch.sbb.beleuchtungsstaerken2b",
     mapboxLayer: beleuchtungDataLayer,
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata.rte_klasse === "2b",
+      metadata?.[MapsRteKlasse] === MapsRteKlasseValues.KLASSE_2B,
     properties: {
       hasInfos: true,
       useOverlay: true,
@@ -64,7 +65,7 @@ export const getBeleuchtungsLayers = () => {
     name: "ch.sbb.beleuchtungsstaerken3",
     mapboxLayer: beleuchtungDataLayer,
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata.rte_klasse === "3",
+      metadata?.[MapsRteKlasse] === MapsRteKlasseValues.KLASSE_3,
     properties: {
       hasInfos: true,
       useOverlay: true,
@@ -78,7 +79,7 @@ export const getBeleuchtungsLayers = () => {
     name: "ch.sbb.beleuchtungsstaerken4",
     mapboxLayer: beleuchtungDataLayer,
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata.rte_klasse === "4",
+      metadata?.[MapsRteKlasse] === MapsRteKlasseValues.KLASSE_4,
     properties: {
       hasInfos: true,
       useOverlay: true,

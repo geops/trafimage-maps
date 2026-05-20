@@ -5,6 +5,10 @@ import DirektverbindungenLayer from "../../layers/DirektverbindungenLayer";
 import {
   DV_HIT_TOLERANCE,
   DV_KEY,
+  MapsGeltungsbereicheFilter,
+  MapsGeltungsbereicheFilterValues,
+  MapsStsFilter,
+  MapsStsFilterValues,
   STS_HIT_TOLERANCE,
   SWISS_EXTENT,
 } from "../../utils/constants";
@@ -14,11 +18,11 @@ import {
   getDirektverbindungenLayers,
 } from "../ch.sbb.direktverbindungen";
 
-const FILTER_KEY = "sts.filter";
-const FILTER_GTTOS_VALUE = "sts_gttos";
-const FILTER_HIGHLIGHT_VALUE = "sts_highlight";
-const FILTER_OTHERS_VALUE = "sts_others";
-const FILTER_LINE_VALUE = "sts.line"; // style using nova daten
+const FILTER_KEY = MapsStsFilter;
+const FILTER_GTTOS_VALUE = MapsStsFilterValues.STS_GTTOS;
+const FILTER_HIGHLIGHT_VALUE = MapsStsFilterValues.STS_HIGHLIGHT;
+const FILTER_OTHERS_VALUE = MapsStsFilterValues.STS_OTHERS;
+const FILTER_LINE_VALUE = MapsGeltungsbereicheFilterValues.STS_LINE; // style using nova daten
 
 const STS_VALIDITY_DATA_LAYER_KEY = "ch.sbb.sts.validity.data";
 const STS_DIREKTVERBINDUNGEN_DATA_LAYER_KEY = "ch.sbb.direktverbindungen.data";
@@ -40,7 +44,7 @@ export const getStsLayers = () => {
     visible: true,
     preserveDrawingBuffer: false,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "base_bright_v2_ch.sbb.geltungsbereiche_ga",
+    style: "basemap_bright_ch.sbb.geltungsbereiche",
     hitTolerance: STS_HIT_TOLERANCE,
     properties: {
       isQueryable: false,
@@ -55,7 +59,7 @@ export const getStsLayers = () => {
     visible: false,
     preserveDrawingBuffer: false,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "base_bright_v2_direktverbindungen",
+    style: "basemap_bright_direktverbindungen",
     hitTolerance: DV_HIT_TOLERANCE,
     properties: {
       isQueryable: false,
@@ -89,8 +93,8 @@ export const getStsLayers = () => {
       /^gb_Fanas_Bus/.test(id) ||
       !!(
         metadata &&
-        metadata["geltungsbereiche.filter"] &&
-        /(hta|ga|tk)\.line/.test(metadata["geltungsbereiche.filter"] || "")
+        metadata[MapsGeltungsbereicheFilter] &&
+        /(hta|ga|tk)\.line/.test(metadata[MapsGeltungsbereicheFilter] || "")
       ),
     properties: {
       isQueryable: true,
@@ -107,8 +111,8 @@ export const getStsLayers = () => {
       return (
         metadata &&
         (metadata[FILTER_KEY] === FILTER_OTHERS_VALUE ||
-          (metadata["geltungsbereiche.filter"] &&
-            metadata["geltungsbereiche.filter"].includes(FILTER_LINE_VALUE)))
+          (metadata[MapsGeltungsbereicheFilter] &&
+            metadata[MapsGeltungsbereicheFilter].includes(FILTER_LINE_VALUE)))
       );
     },
     properties: {
