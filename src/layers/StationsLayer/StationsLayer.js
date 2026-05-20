@@ -1,6 +1,8 @@
 import {
   MapsGeneralClass,
   MapsGeneralClassValues,
+  MapsGeneralSubClass,
+  MapsGeneralSubClassValues,
   MapsTrafimageFilter,
   MapsTrafimageFilterValues,
   STATIONS_SOURCE_ID,
@@ -76,7 +78,9 @@ class StationsLayer extends MapboxStyleLayer {
       .layers.filter(
         ({ metadata }) =>
           metadata &&
-          metadata[MapsGeneralClass] === MapsGeneralClassValues.STATIONS,
+          metadata[MapsGeneralClass] === MapsGeneralClassValues.STATIONS &&
+          metadata[MapsGeneralSubClass] !==
+            MapsGeneralSubClassValues.STOP_POSITION,
       )
       .map((layer) => layer.id);
 
