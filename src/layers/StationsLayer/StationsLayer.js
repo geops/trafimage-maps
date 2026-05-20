@@ -1,6 +1,4 @@
 import {
-  MapsGeneralClass,
-  MapsGeneralClassValues,
   MapsTrafimageFilter,
   MapsTrafimageFilterValues,
   STATIONS_SOURCE_ID,
@@ -76,11 +74,10 @@ class StationsLayer extends MapboxStyleLayer {
       .layers.filter(
         ({ metadata }) =>
           metadata &&
-          metadata[MapsGeneralClass] === MapsGeneralClassValues.STATIONS,
+          metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.STATIONS,
       )
       .map((layer) => layer.id);
 
-    console.log("StationsLayer: osm points layers found", this.osmPointsLayers);
     this.addSource();
     super.onLoad();
     this.updateSource();
@@ -137,12 +134,6 @@ class StationsLayer extends MapboxStyleLayer {
       type: "FeatureCollection",
       features: osmPointsRendered,
     });
-    console.log(
-      "StationsLayer: source updated with ",
-      osmPointsRendered.length,
-      " features",
-      osmPointsRendered,
-    );
   }
 
   // Add source for stations.

@@ -151,13 +151,6 @@ class PlatformsLayer extends MapboxStyleLayer {
       );
     }
 
-    console.log(
-      "PlatformsLayer: source updated with ",
-      pointsRendered.length,
-      " features",
-      pointsRendered,
-    );
-
     source.setData({
       type: "FeatureCollection",
       features: pointsRendered,
