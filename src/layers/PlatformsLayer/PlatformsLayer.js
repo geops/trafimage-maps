@@ -120,7 +120,7 @@ class PlatformsLayer extends MapboxStyleLayer {
       .queryRenderedFeatures({
         layers: this.platformLayers,
       })
-      .map((feat) => {
+      .map((feat, index) => {
         const { geometry } = feat;
 
         if (geometry.type === "Polygon") {
@@ -129,7 +129,7 @@ class PlatformsLayer extends MapboxStyleLayer {
         }
 
         const good = {
-          id: (feat.id || Math.random()) * 1000,
+          id: index + 1,
           type: feat.type,
           properties: feat.properties,
           geometry,
@@ -150,6 +150,13 @@ class PlatformsLayer extends MapboxStyleLayer {
         `Layer with id ${PLATFORMS_POLYGON_HIGHLIGHT_LAYER_ID} not found in the style, impossible to display platforms polygons highlight.`,
       );
     }
+
+    console.log(
+      "PlatformsLayer: source updated with ",
+      pointsRendered.length,
+      " features",
+      pointsRendered,
+    );
 
     source.setData({
       type: "FeatureCollection",

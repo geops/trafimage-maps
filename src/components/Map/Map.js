@@ -253,6 +253,7 @@ class Map extends PureComponent {
             );
           });
 
+        console.log("Map: feature info at coordinate", infos);
         // Dispatch only infos with features found.
         dispatchSetFeatureInfo(infos);
 

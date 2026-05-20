@@ -80,6 +80,7 @@ class StationsLayer extends MapboxStyleLayer {
       )
       .map((layer) => layer.id);
 
+    console.log("StationsLayer: osm points layers found", this.osmPointsLayers);
     this.addSource();
     super.onLoad();
     this.updateSource();
@@ -123,9 +124,9 @@ class StationsLayer extends MapboxStyleLayer {
       .queryRenderedFeatures({
         layers: this.osmPointsLayers,
       })
-      .map((feat) => {
+      .map((feat, index) => {
         const good = {
-          id: feat.id * 1000,
+          id: index + 1,
           type: feat.type,
           properties: feat.properties,
           geometry: feat.geometry,
@@ -136,6 +137,12 @@ class StationsLayer extends MapboxStyleLayer {
       type: "FeatureCollection",
       features: osmPointsRendered,
     });
+    console.log(
+      "StationsLayer: source updated with ",
+      osmPointsRendered.length,
+      " features",
+      osmPointsRendered,
+    );
   }
 
   // Add source for stations.

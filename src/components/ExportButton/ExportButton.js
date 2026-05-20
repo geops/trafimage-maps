@@ -42,7 +42,7 @@ function ExportButton({
   exportCoordinates = null,
   exportZoom = null, // 10,
   exportExtent = [620000, 5741000, 1200000, 6058000],
-  exportCopyright = false,
+  exportCopyright = true,
   children = <DefaultChildren />,
   style = {},
   id = null,

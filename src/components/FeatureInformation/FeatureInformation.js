@@ -75,6 +75,7 @@ function FeatureInformation({ featureInfo }) {
   const { layers, features, coordinates } = infoIndexed;
   const { hideHeader, renderTitle, onCloseBtClick = () => {} } = PopupComponent;
 
+  console.log("FeatureInformation: feature info", infoIndexed);
   return (
     <div
       className="wkp-feature-information"
