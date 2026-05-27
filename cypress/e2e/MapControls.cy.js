@@ -7,6 +7,16 @@ describe("MapControls", () => {
   });
 
   it("should move to the left corresponding to the overlay width.", () => {
+    cy.intercept(
+      {
+        method: "GET",
+        pathname: /stops\/v1/,
+        path: /q=Bern/,
+      },
+      {
+        fixture: "search-stops-bern.json",
+      },
+    ).as("search");
     cy.viewport(1440, 900);
     cy.get('[data-testid="map-controls-wrapper"]')
       .then(($mapControlsEl) => window.getComputedStyle($mapControlsEl[0]))
@@ -16,6 +26,7 @@ describe("MapControls", () => {
       .focus()
       .type("Bern")
       .then(() => {
+        cy.wait("@search");
         cy.get("#react-autowhatever-1-section-0-item-0")
           .click({ force: true })
           .then(() => {

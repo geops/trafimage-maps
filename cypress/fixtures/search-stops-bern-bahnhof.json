@@ -1,0 +1,1889 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "496211a5d7ec6962",
+                "name": "Bern, Bahnhof",
+                "matched_name": "Bern, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.5731399705645742,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "bus": [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                        "F",
+                        "G",
+                        "H",
+                        "H",
+                        "I",
+                        "J",
+                        "K1",
+                        "K2",
+                        "L",
+                        "M",
+                        "Q",
+                        "Z"
+                    ],
+                    "tram": [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "J",
+                        "N"
+                    ]
+                },
+                "ifopt": "CH:1:SLOID:76646",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8576646",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.440209,
+                    46.948105
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "28cf4f55b5c12c51",
+                "name": "Bern Felsenau",
+                "matched_name": "Bern Felsenau, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6004242890530874,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "CH:1:SLOID:8051",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8508051",
+                "code": "BNFE"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.44425,
+                    46.9685
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "8a5be589a20396ee",
+                "name": "Bern Tiefenau",
+                "matched_name": "Bern Tiefenau, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6004242890530874,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "CH:1:SLOID:8052",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8508052",
+                "code": "BNTI"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.4502,
+                    46.97274
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "868fc2dac6111bc3",
+                "name": "G\u00fcmligen",
+                "matched_name": "G\u00fcmligen Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6039022722582126,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2",
+                        "3"
+                    ]
+                },
+                "ifopt": "CH:1:SLOID:7003",
+                "municipality_name": "Muri bei Bern",
+                "ident_source": "sbb",
+                "id": "8507003",
+                "code": "GUE"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.505505,
+                    46.934322
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "d1905a855d5a2e56",
+                "name": "Bernau (b Berlin)",
+                "matched_name": "Bernau, S-Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6077813172192409,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2",
+                        "2",
+                        "4",
+                        "5"
+                    ]
+                },
+                "ifopt": "DE:12060:900350160",
+                "municipality_name": "Bernau",
+                "ident_source": "sbb",
+                "id": "8003328",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.5926414,
+                    52.6755689
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "e553ed5bf3014e08",
+                "name": "Wabern (Bz Kassel)",
+                "matched_name": "Wabern Bahnhof",
+                "country_code": "DE",
+                "rank": 0.611768686659499,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "3",
+                        "4",
+                        "5",
+                        "6"
+                    ]
+                },
+                "ifopt": "DE:06634:204729",
+                "municipality_name": "Wabern",
+                "ident_source": "sbb",
+                "id": "8005374",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.35804,
+                    51.103134
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "8f9d0a5eab728c4e",
+                "name": "Bern Wankdorf, Bahnhof",
+                "matched_name": "Bern Wankdorf, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6138820506121884,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:90129",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8590129",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.464386,
+                    46.966597
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "52f00b06c4635bc2",
+                "name": "Bad Bergzabern",
+                "matched_name": "Bad Bergzabern, Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6161829532430492,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "DE:07337:4561",
+                "municipality_name": "Bad Bergzabern",
+                "ident_source": "sbb",
+                "id": "8019469",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.002787,
+                    49.103209
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "909a946edc534f49",
+                "name": "Bern Felsenau, Bahnhof",
+                "matched_name": "Bern Felsenau, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6176389037652201,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:7638",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8507638",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.444025,
+                    46.968307
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "de093c47178224db",
+                "name": "Bern Tiefenau, Bahnhof",
+                "matched_name": "Bern Tiefenau, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6176389037652201,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:7636",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8507636",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.450474,
+                    46.972963
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "2c4cd2f2ceff757f",
+                "name": "Bern Riedbach, Bahnhof",
+                "matched_name": "Bern Riedbach, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6177664630894608,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:80427",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8580427",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.334338,
+                    46.941077
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "42e6e47a4a041138",
+                "name": "Strassgr\u00e4bchen-Bernsdorf (Ob.)",
+                "matched_name": "Bernsdorf Bahnhof",
+                "country_code": "DE",
+                "rank": 0.619151888919808,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:14625:6921",
+                "municipality_name": "Bernsdorf",
+                "ident_source": "sbb",
+                "id": "8006179",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.052047,
+                    51.361469
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "4372f15ba1ff8337",
+                "name": "Bern Europaplatz, Bahnhof",
+                "matched_name": "Bern Europaplatz, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6225494601180207,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "bus": [
+                        "A",
+                        "B",
+                        "C"
+                    ],
+                    "tram": [
+                        "A",
+                        "B"
+                    ]
+                },
+                "ifopt": "CH:1:SLOID:80939",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8580939",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.406309,
+                    46.943252
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "72d51bb26916809b",
+                "name": "Berne, Bahnhof",
+                "matched_name": "Berne, Bahnhof",
+                "country_code": "DE",
+                "rank": 0.623064545788893,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:03461:8941",
+                "municipality_name": "Berne",
+                "ident_source": "delfi",
+                "id": null,
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.47591505,
+                    53.1841535
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "feeb281e12048f44",
+                "name": "Rheinzabern",
+                "matched_name": "Rheinzabern Bahnhof",
+                "country_code": "DE",
+                "rank": 0.624274020657489,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "DE:07334:35003",
+                "municipality_name": "Rheinzabern",
+                "ident_source": "sbb",
+                "id": "8019101",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.274166,
+                    49.119537
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "d5ef52cf54cf07ab",
+                "name": "Bern B\u00fcmpliz S\u00fcd, Bahnhof",
+                "matched_name": "Bern B\u00fcmpliz S\u00fcd, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6244735520252447,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "bus": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                    ]
+                },
+                "ifopt": "CH:1:SLOID:89226",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8589226",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.395557,
+                    46.937537
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "811ca26e8f395b8a",
+                "name": "Bern Weissenb\u00fchl, Bahnhof",
+                "matched_name": "Bern Weissenb\u00fchl, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6245897766180082,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:95931",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8595931",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.430162,
+                    46.935836
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "0a9952a2f33c97b3",
+                "name": "Bern B\u00fcmpliz Nord, Bahnhof",
+                "matched_name": "Bern B\u00fcmpliz Nord, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6246029423445703,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:79523",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8579523",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.39031,
+                    46.94572
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "72e70ce3d0fc583b",
+                "name": "Bern Wankdorf, Bahnhof Nord",
+                "matched_name": "Bern Wankdorf, Bahnhof Nord",
+                "country_code": "CH",
+                "rank": 0.6260413576023309,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:95543",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8595543",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.464256,
+                    46.967766
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "803abe697f7b79ac",
+                "name": "Bern Br\u00fcnnen Westside, Bahnhof",
+                "matched_name": "Bern Br\u00fcnnen Westside, Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6293298225569423,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:82262",
+                "municipality_name": "Bern",
+                "ident_source": "sbb",
+                "id": "8582262",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.374983,
+                    46.944417
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "e22f33b717f66f38",
+                "name": "G\u00fcmligen, Bahnhof (Tram)",
+                "matched_name": "G\u00fcmligen Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6294082937748621,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": false,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "tram": [
+                        "E",
+                        "F"
+                    ]
+                },
+                "ifopt": "CH:1:SLOID:95488",
+                "municipality_name": "Muri bei Bern",
+                "ident_source": "sbb",
+                "id": "8595488",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.505748,
+                    46.9344
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "e430c0377cbaa398",
+                "name": "G\u00fcmligen, Bahnhof (Bus)",
+                "matched_name": "G\u00fcmligen Bahnhof",
+                "country_code": "CH",
+                "rank": 0.6295636667863432,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:77014",
+                "municipality_name": "Muri bei Bern",
+                "ident_source": "sbb",
+                "id": "8577014",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.505387,
+                    46.933647
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "89b7852a46591267",
+                "name": "Berlin Ostbahnhof",
+                "matched_name": "Berlin Schlesischer Bahnhof",
+                "country_code": "DE",
+                "rank": 0.632538055704598,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2",
+                        "3",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11"
+                    ]
+                },
+                "ifopt": "DE:11000:900120005",
+                "municipality_name": "Berlin",
+                "ident_source": "sbb",
+                "id": "8003005",
+                "code": "BEOS"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.4346807,
+                    52.5104881
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "0a4c4c5b9abe5ab9",
+                "name": "Berlin S\u00fcdkreuz (S-Bahn)",
+                "matched_name": "S S\u00fcdkreuz Bhf (Berlin)",
+                "country_code": "DE",
+                "rank": 0.6325921022290721,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2",
+                        "11",
+                        "12"
+                    ]
+                },
+                "ifopt": "DE:11000:900058101",
+                "municipality_name": "Berlin",
+                "ident_source": "sbb",
+                "id": "8003068",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.365144,
+                    52.476134
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "3ec4979930e0c243",
+                "name": "Bernau-Friedenstal",
+                "matched_name": "Bernau-Friedenstal, S-Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6330452275043958,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "1"
+                    ],
+                    "tram": [
+                        "1",
+                        "1"
+                    ]
+                },
+                "ifopt": "DE:12060:900350161",
+                "municipality_name": "Bernau",
+                "ident_source": "sbb",
+                "id": "8007863",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.564578,
+                    52.668385
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "f93904694f70f530",
+                "name": "D\u00f6bern, Bahnhof",
+                "matched_name": "D\u00f6bern, Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6335297063806495,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:12071:900445315",
+                "municipality_name": "D\u00f6bern",
+                "ident_source": "delfi",
+                "id": null,
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.58933895,
+                    51.62298715
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "c445d179472aac23",
+                "name": "Bad Bergzabern, Bahnhof",
+                "matched_name": "Bad Bergzabern, Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6337154207755167,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "bus": [
+                        "5"
+                    ]
+                },
+                "ifopt": null,
+                "municipality_name": "Bad Bergzabern",
+                "ident_source": null,
+                "id": null,
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.00306215,
+                    49.1028754
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "05e394827a7664f1",
+                "name": "Wiednitz",
+                "matched_name": "Wiednitz Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6344296665320173,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:14625:6905",
+                "municipality_name": "Bernsdorf",
+                "ident_source": "sbb",
+                "id": "8006178",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.039241,
+                    51.393167
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "0aecfd5c2dcf0311",
+                "name": "Berlin Ostkreuz",
+                "matched_name": "S Ostkreuz Bhf (Berlin)",
+                "country_code": "DE",
+                "rank": 0.6349899918991667,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2",
+                        "7",
+                        "8",
+                        "13",
+                        "14"
+                    ]
+                },
+                "ifopt": "DE:11000:900120003",
+                "municipality_name": "Berlin",
+                "ident_source": "db",
+                "id": "8011162",
+                "code": "BOKN"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.469105,
+                    52.503037
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "2deeccb1a0ab1d44",
+                "name": "Achern",
+                "matched_name": "Achern Bahnhof",
+                "country_code": "DE",
+                "rank": 0.636300223242062,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2",
+                        "3",
+                        "10"
+                    ]
+                },
+                "ifopt": "DE:08317:33013",
+                "municipality_name": "Achern",
+                "ident_source": "sbb",
+                "id": "8014283",
+                "code": "ACHR"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.065324,
+                    48.63399
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "c009dda197151b59",
+                "name": "Bernsdorf Bahnhof",
+                "matched_name": "Bernsdorf Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6363095230289868,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:14625:6921",
+                "municipality_name": "Bernsdorf",
+                "ident_source": "osm",
+                "id": null,
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.0521852,
+                    51.3632095
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "0fc098cb9040663e",
+                "name": "Berlin Zoologischer Garten (S)",
+                "matched_name": "S+U Zoologischer Garten Bhf (Berlin)",
+                "country_code": "DE",
+                "rank": 0.6367577668460301,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:11000:900023201",
+                "municipality_name": "Berlin",
+                "ident_source": "sbb",
+                "id": "8089046",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.331786,
+                    52.50706
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "623524d4f249d718",
+                "name": "Lauter (Sachs)",
+                "matched_name": "Lauter (Sachs), Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6371837710474277,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:14521:52176",
+                "municipality_name": "Lauter-Bernsbach",
+                "ident_source": "sbb",
+                "id": "8006662",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.749028,
+                    50.568051
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "de342043326cb52f",
+                "name": "Altd\u00f6bern",
+                "matched_name": "Altd\u00f6bern, Bahnhof",
+                "country_code": "DE",
+                "rank": 0.638775439733108,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:12066:900435209",
+                "municipality_name": "Luckaitztal",
+                "ident_source": "sbb",
+                "id": "8004218",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.009236,
+                    51.65278
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "fe1adee48fb8f093",
+                "name": "Bernried",
+                "matched_name": "Bernried, Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6403579868447735,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1"
+                    ]
+                },
+                "ifopt": "DE:09190:90040",
+                "municipality_name": "Bernried am Starnberger See",
+                "ident_source": "sbb",
+                "id": "8020311",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.283658,
+                    47.861387
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "fd8cb5c3514817b2",
+                "name": "Pommern(Mosel)",
+                "matched_name": "Pommern, Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6404347925177093,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "DE:07135:070004",
+                "municipality_name": "Pommern",
+                "ident_source": "sbb",
+                "id": "8025105",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.269836,
+                    50.169298
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "8d37cd312223f6e7",
+                "name": "Bernau, S-Bahnhof (Bus)",
+                "matched_name": "Bernau, S-Bahnhof (Bus)",
+                "country_code": "DE",
+                "rank": 0.6408928549715451,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "bus": [
+                        "G",
+                        "G"
+                    ]
+                },
+                "ifopt": null,
+                "municipality_name": "Bernau",
+                "ident_source": null,
+                "id": null,
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.59234935,
+                    52.676655
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "793db123f8160671",
+                "name": "Berzhahn",
+                "matched_name": "Berzhahn Bf",
+                "country_code": "DE",
+                "rank": 0.6420488751050941,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:07143:040020",
+                "municipality_name": "Berzhahn",
+                "ident_source": "sbb",
+                "id": "8019544",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.006031,
+                    50.539891
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "a5964d35ac3d8a57",
+                "name": "Dogern",
+                "matched_name": "Dogern Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6420606966781515,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "DE:08337:6686",
+                "municipality_name": "Dogern",
+                "ident_source": "sbb",
+                "id": "8014181",
+                "code": "DOG"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.167356,
+                    47.608887
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "7b9a2278ba067c4f",
+                "name": "Berlin Friedrichstrasse",
+                "matched_name": "S+U Friedrichstr. Bhf (Berlin)",
+                "country_code": "DE",
+                "rank": 0.6420678973762246,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:11000:900100001",
+                "municipality_name": "Berlin",
+                "ident_source": "sbb",
+                "id": "8003137",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.3872056,
+                    52.520373
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "4cfbbe05335d8fd0",
+                "name": "Geldern",
+                "matched_name": "Geldern Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6422508010770058,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "DE:05154:36117",
+                "municipality_name": "Geldern",
+                "ident_source": "sbb",
+                "id": "8015025",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.319336,
+                    51.513289
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "eb2c3544fb4ea5cf",
+                "name": "Rheinzabern, Bahnhof",
+                "matched_name": "Rheinzabern, Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6428571394511632,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "CH:1:SLOID:1105798",
+                "municipality_name": "Rheinzabern",
+                "ident_source": "sbb",
+                "id": "1105798",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.274339655,
+                    49.119199143
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "09f52a3cc4ee135a",
+                "name": "Berlin-Spandau (S)",
+                "matched_name": "S Spandau Bhf (Berlin)",
+                "country_code": "DE",
+                "rank": 0.6429810387439787,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": true,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:11000:900029101",
+                "municipality_name": "Berlin",
+                "ident_source": "sbb",
+                "id": "8001875",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.1974528,
+                    52.5347721
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "7abafc26bf6881ce",
+                "name": "Bergheim(Erft)",
+                "matched_name": "Bergheim Bf",
+                "country_code": "DE",
+                "rank": 0.6429906345241765,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "DE:05362:88101",
+                "municipality_name": "Bergheim",
+                "ident_source": "sbb",
+                "id": "8015293",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.646302,
+                    50.951706
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "f086d5019042facd",
+                "name": "Nievern",
+                "matched_name": "Nievern Bf",
+                "country_code": "DE",
+                "rank": 0.6443579964744733,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "DE:07141:050111",
+                "municipality_name": "Nievern",
+                "ident_source": "sbb",
+                "id": "8019600",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.681876,
+                    50.337385
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "a2cf6da5169ab64d",
+                "name": "Ostbevern (D)",
+                "matched_name": "Ostbevern, Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6445758477629066,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "ifopt": "DE:05570:33341",
+                "municipality_name": "Ostbevern",
+                "ident_source": "sbb",
+                "id": "8021019",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.809287,
+                    52.070117
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "f6bbde342c02b0be",
+                "name": "Bernhardsthal Bahnhof",
+                "matched_name": "Bernhardsthal Bahnhof",
+                "country_code": "AT",
+                "rank": 0.6446428558656148,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": null,
+                "municipality_name": "Bernhardsthal",
+                "ident_source": null,
+                "id": null,
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    16.8783625,
+                    48.6875524
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "039cc5749e348048",
+                "name": "Bernhardswald Bahnhof",
+                "matched_name": "Bernhardswald Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6446428558656148,
+                "translated_names": [],
+                "mot": {
+                    "bus": true,
+                    "rail": false,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:09375:80",
+                "municipality_name": "Bernhardswald",
+                "ident_source": "delfi",
+                "id": null,
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.23104065,
+                    49.0909375
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "cccc5faba322a88f",
+                "name": "Moselkern",
+                "matched_name": "Moselkern Bf",
+                "country_code": "DE",
+                "rank": 0.6446536731188672,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {
+                    "rail": [
+                        "2",
+                        "4"
+                    ]
+                },
+                "ifopt": "DE:07135:070001",
+                "municipality_name": "Moselkern",
+                "ident_source": "sbb",
+                "id": "8025102",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.371357,
+                    50.195483
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "uid": "7f38ef04951c3aa4",
+                "name": "Kandern",
+                "matched_name": "Kandern Bahnhof",
+                "country_code": "DE",
+                "rank": 0.6447362868123077,
+                "translated_names": [],
+                "mot": {
+                    "bus": false,
+                    "rail": true,
+                    "tram": false,
+                    "ferry": false,
+                    "subway": false,
+                    "gondola": false,
+                    "cable_car": false,
+                    "funicular": false
+                },
+                "platforms": {},
+                "ifopt": "DE:08336:6759",
+                "municipality_name": "Kandern",
+                "ident_source": "sbb",
+                "id": "8064079",
+                "code": null
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.656905,
+                    47.713491
+                ]
+            }
+        }
+    ]
+}
