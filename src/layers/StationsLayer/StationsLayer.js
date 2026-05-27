@@ -80,7 +80,8 @@ class StationsLayer extends MapboxStyleLayer {
           metadata &&
           metadata[MapsGeneralClass] === MapsGeneralClassValues.STATIONS &&
           metadata[MapsGeneralSubClass] !==
-            MapsGeneralSubClassValues.STOP_POSITION,
+            MapsGeneralSubClassValues.STOP_POSITION &&
+          metadata[MapsGeneralSubClass] !== MapsGeneralSubClassValues.SECTORS,
       )
       .map((layer) => layer.id);
 
