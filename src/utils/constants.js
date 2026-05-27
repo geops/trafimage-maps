@@ -63,6 +63,9 @@ export const energieleitungenColorMapping = {
   ausserhalb: "black",
 };
 
+// Kilomtrage layer
+export const KM_SOURCE_ID = "basemap";
+
 // Handicap
 export const HANDICAP_SOURCE = "stop_places";
 

@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
 import { Feature } from "ol";
+import { KM_SOURCE_ID } from "../../utils/constants";
 
 /**
  * Layer for kilometrage popup
@@ -15,7 +16,7 @@ class KilometrageLayer extends MapboxStyleLayer {
       name: "ch.sbb.kilometrage",
       key: "ch.sbb.kilometrage",
       queryRenderedLayersFilter: ({ type, source }) =>
-        type === "line" && source === "base",
+        type === "line" && source === KM_SOURCE_ID,
       visible: true,
       ...options,
       properties: {
