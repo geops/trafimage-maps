@@ -146,9 +146,9 @@ class PlatformsLayer extends MapboxStyleLayer {
       ]);
     } else {
       // eslint-disable-next-line no-console
-      console.warn(
-        `Layer with id ${PLATFORMS_POLYGON_HIGHLIGHT_LAYER_ID} not found in the style, impossible to display platforms polygons highlight.`,
-      );
+      // console.warn(
+      //   `Layer with id ${PLATFORMS_POLYGON_HIGHLIGHT_LAYER_ID} not found in the style, impossible to display platforms polygons highlight.`,
+      // );
     }
 
     source.setData({
