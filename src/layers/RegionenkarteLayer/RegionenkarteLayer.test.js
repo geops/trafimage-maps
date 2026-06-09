@@ -29,7 +29,7 @@ describe("RegionenkarteLayer", () => {
         "line-width": 13,
       },
       source: "ch.sbb.anlagenverantwortliche",
-      "source-layer": "ch.sbb.anlagenverantwortliche",
+      "source-layer": "ch.sbb.anlagenverantwortliche_public",
       type: "line",
     };
     layer = new RegionenkarteLayer({
