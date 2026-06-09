@@ -64,8 +64,6 @@ function Av({ layer, feature, onChangeRole }) {
     const newPerson = str && JSON.parse(str);
     setPerson(newPerson);
 
-    console.log(feature, role);
-
     if (newPerson?.sbb_uid) {
       fetch(
         `${cartaroUrl}anlagenverantwortliche/items/other_lines/?role=${
