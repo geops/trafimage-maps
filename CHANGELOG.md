@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.6](https://github.com/geops/trafimage-maps/compare/v1.32.5...v1.32.6) (2026-06-09)
+
+### Bug Fixes
+
+- **regionenkarte:** update anlagenverantwortliche style url, use sbb uid in other_lines request ([#1254](https://github.com/geops/trafimage-maps/issues/1254)) ([0971095](https://github.com/geops/trafimage-maps/commit/097109555b71ec6ea0af2329feedde16a7e88689))
+
 ### [1.32.5](https://github.com/geops/trafimage-maps/compare/v1.32.4...v1.32.5) (2026-05-07)
 
 ### Bug Fixes

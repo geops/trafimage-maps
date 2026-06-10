@@ -64,11 +64,11 @@ function Av({ layer, feature, onChangeRole }) {
     const newPerson = str && JSON.parse(str);
     setPerson(newPerson);
 
-    if (newPerson && newPerson.email) {
+    if (newPerson?.sbb_uid) {
       fetch(
         `${cartaroUrl}anlagenverantwortliche/items/other_lines/?role=${
           role.split("_")[1]
-        }&email=${newPerson.email}&format=json`,
+        }&sbb_uid=${newPerson.sbb_uid}&format=json`,
         {
           signal: abortController.signal,
         },
