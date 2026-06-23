@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.9](https://github.com/geops/trafimage-maps/compare/v1.32.8...v1.32.9) (2026-06-23)
+
+### Bug Fixes
+
+- select first base layer hwen no visible ([e20d4a1](https://github.com/geops/trafimage-maps/commit/e20d4a1b2e0ebe4dd501336b40afa58e14190b05))
+
 ### [1.32.8](https://github.com/geops/trafimage-maps/compare/v1.32.7...v1.32.8) (2026-06-23)
 
 ### Bug Fixes
