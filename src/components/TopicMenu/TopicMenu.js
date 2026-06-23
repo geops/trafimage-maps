@@ -207,7 +207,8 @@ class TopicMenu extends PureComponent {
     });
 
     const baseLayers = new LayerService(layers).getBaseLayers();
-    const currentBaseLayer = baseLayers.find((l) => l.visible);
+    const currentBaseLayer =
+      baseLayers.find((l) => l.visible) || baseLayers?.[0];
 
     return (
       <div className="wkp-topic-menu">
