@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.7](https://github.com/geops/trafimage-maps/compare/v1.32.6...v1.32.7) (2026-06-23)
+
+### Bug Fixes
+
+- avoid clicking on wrong station by deactivating map interactions ([#1235](https://github.com/geops/trafimage-maps/issues/1235)) ([3c0ce17](https://github.com/geops/trafimage-maps/commit/3c0ce179ba2c11b12cf7e19cb4a7dfeaa69c94bb))
+- use shortbread refactoring ([#1253](https://github.com/geops/trafimage-maps/issues/1253)) ([6b106d1](https://github.com/geops/trafimage-maps/commit/6b106d18d8bbe5c749c9d730d74dad9479bbc92c))
+
 ### [1.32.6](https://github.com/geops/trafimage-maps/compare/v1.32.5...v1.32.6) (2026-06-09)
 
 ### Bug Fixes
