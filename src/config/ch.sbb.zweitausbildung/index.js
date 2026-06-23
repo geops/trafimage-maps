@@ -5,6 +5,7 @@ import ZweitausbildungAbroadLayer from "../../layers/ZweitausbildungAbroadLayer"
 import ZweitausbildungPoisLayer from "../../layers/ZweitausbildungPoisLayer";
 import ZweitausbildungRoutesLayer from "../../layers/ZweitausbildungRoutesLayer";
 import ZweitausbildungRoutesHighlightLayer from "../../layers/ZweitausbildungRoutesHighlightLayer";
+import { MapsTrafimageFilter } from "../../utils/constants";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getZweitausbildungLayers = () => {
@@ -12,7 +13,7 @@ export const getZweitausbildungLayers = () => {
     name: "ch.sbb.zweitausbildung",
     visible: true,
     zIndex: -1,
-    style: "base_bright_v2_ch.sbb.zweitausbildung",
+    style: "basemap_bright_ch.sbb.zweitausbildung",
     properties: {
       hideInLegend: true,
     },
@@ -61,7 +62,7 @@ export const getZweitausbildungLayers = () => {
         zIndex: 3,
         mapboxLayer: zweitausbildungDataLayer,
         styleLayersFilter: ({ metadata }) =>
-          !!metadata && /stations\.aufbau/.test(metadata["trafimage.filter"]),
+          !!metadata && /stations\.aufbau/.test(metadata[MapsTrafimageFilter]),
         properties: {
           hasInfos: true,
           layerInfoComponent: "ZweitausbildungSubLayerInfo",
@@ -87,7 +88,7 @@ export const getZweitausbildungLayers = () => {
         zIndex: 3,
         mapboxLayer: zweitausbildungDataLayer,
         styleLayersFilter: ({ metadata }) =>
-          !!metadata && /stations\.basis/.test(metadata["trafimage.filter"]),
+          !!metadata && /stations\.basis/.test(metadata[MapsTrafimageFilter]),
         properties: {
           hasInfos: true,
           layerInfoComponent: "ZweitausbildungSubLayerInfo",
@@ -134,7 +135,7 @@ export const getZweitausbildungLayers = () => {
           return (
             !!metadata &&
             /(clusters|noclusters)\.no_railaway/.test(
-              metadata["trafimage.filter"],
+              metadata[MapsTrafimageFilter],
             )
           );
         },
@@ -167,7 +168,9 @@ export const getZweitausbildungLayers = () => {
         styleLayersFilter: ({ metadata }) => {
           return (
             !!metadata &&
-            /(clusters|noclusters)\.railaway/.test(metadata["trafimage.filter"])
+            /(clusters|noclusters)\.railaway/.test(
+              metadata[MapsTrafimageFilter],
+            )
           );
         },
         properties: {

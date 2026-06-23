@@ -42,7 +42,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     this.filters = options.filters;
 
     // TODO don't use process.env here it fails in Schulzug
-    // this.stylePrefix = process?.env?.REACT_APP_STYLE_REVIEW_PREFIX || '';
+    // this.stylePrefix = process?.env?.REACT_APP_STYLE_REVIEW_PREFIX || "";
     this.stylePrefix = "";
     this.style = options.style;
   }
@@ -84,7 +84,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     if (this.style === newStyle || !newStyle) {
       return;
     }
-    this.style = this.stylePrefix + newStyle;
+    this.style = newStyle;
     this.setStyleConfig();
   }
 

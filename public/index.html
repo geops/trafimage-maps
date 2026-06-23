@@ -137,7 +137,7 @@
       window.onload = function () {
         var map = document.getElementById('map');
         var url = new URL(window.location.href);
-        fetch('https://backend.developer.geops.io/publickey')
+        fetch('https://developer.geops.io/publickey')
           .then(function (response) {
             return response.json();
           })

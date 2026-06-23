@@ -8,8 +8,7 @@ import RegionenkarteLayer from "../../layers/RegionenkarteLayer";
 export const getRegionenkartePublicLayers = () => {
   const anlagenverantwortliche = new TrafimageMapboxLayer({
     name: "ch.sbb.anlagenverantwortliche",
-    style:
-      "netzkarte_eisenbahninfrastruktur_v3_ch.sbb.anlagenverantwortliche_public",
+    style: "basemap_infra_bright_ch.sbb.anlagenverantwortliche_public",
     visible: true,
     zIndex: -1,
     properties: {

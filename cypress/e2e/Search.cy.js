@@ -7,6 +7,17 @@ describe("Search", () => {
   });
 
   it("should open a popup on station search.", () => {
+    cy.intercept(
+      {
+        method: "GET",
+        pathname: /stops\/v1/,
+        path: /q=Bern/,
+      },
+      {
+        fixture: "search-stops-bern-bahnhof.json",
+      },
+    ).as("search");
+
     cy.viewport(1440, 900);
     cy.get(".wkp-feature-information").should("not.exist");
 
@@ -17,12 +28,37 @@ describe("Search", () => {
       .type("r")
       .type("n");
 
-    cy.wait(1000);
+    cy.wait("@search");
 
     cy.get("#react-autowhatever-1-section-0-item-0").click({ force: true });
 
     // Popup is opened.
     cy.get(".wkp-feature-information", { timeout: 40000 }).should("be.visible");
+  });
+
+  it("should open a popup on station search using a station that appears after zoom 15.5", () => {
+    cy.viewport(1440, 900);
+    // https://api.geops.io/stops/v1/?&q=Bern%20Ba&key=5cc87b12d7c5370001c1d6554840ecb89d2743d2b0aad0588b8ba7eb&limit=50
+    cy.intercept(
+      {
+        method: "GET",
+        pathname: /stops\/v1/,
+        path: /q=Bern%20Bahnhof/,
+      },
+      {
+        fixture: "search-stops-bern-bahnhof.json",
+      },
+    ).as("search");
+    cy.get(".wkp-feature-information").should("not.exist");
+
+    cy.get(".wkp-search-input input").focus().type("Bern Bahnhof");
+
+    cy.wait("@search");
+
+    cy.get("#react-autowhatever-1-section-0-item-0").click({ force: true });
+
+    // Popup is opened.
+    cy.get(".wkp-feature-information", { timeout: 20000 }).should("be.visible");
   });
 
   it("should not open a popup on station search because we click on the clear button", () => {
@@ -44,20 +80,6 @@ describe("Search", () => {
 
     // Popup is opened.
     cy.get(".wkp-feature-information", { timeout: 20000 }).should("not.exist");
-  });
-
-  it("should open a popup on station search using a station that appears after zoom 15.5", () => {
-    cy.viewport(1440, 900);
-    cy.get(".wkp-feature-information").should("not.exist");
-
-    cy.get(".wkp-search-input input").focus().type("Bern Bahnhof");
-
-    cy.wait(1000);
-
-    cy.get("#react-autowhatever-1-section-0-item-0").click({ force: true });
-
-    // Popup is opened.
-    cy.get(".wkp-feature-information", { timeout: 20000 }).should("be.visible");
   });
 
   it("should not open a popup on station search using a station that appears after zoom 15.5 because we click on the clear button", () => {

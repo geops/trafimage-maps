@@ -9,7 +9,7 @@ export const getRailplusLayers = () => {
     name: "ch.railplus.mitglieder.data",
     visible: true,
     zIndex: -1,
-    style: "base_bright_v2_ch.railplus.meterspurbahnen",
+    style: "basemap_bright_ch.railplus.meterspurbahnen",
     properties: {
       hideInLegend: true,
       isBaseLayer: true,

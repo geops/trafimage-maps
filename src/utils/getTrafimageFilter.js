@@ -1,6 +1,8 @@
+import { MapsTrafimageFilter } from "./constants";
+
 const getTrafimageFilter = (
   stylelayer,
-  filterAttribute = "trafimage.filter",
+  filterAttribute = MapsTrafimageFilter,
 ) => {
   return stylelayer?.metadata && stylelayer.metadata[filterAttribute];
 };

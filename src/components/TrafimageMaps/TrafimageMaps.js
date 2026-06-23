@@ -719,7 +719,6 @@ class TrafimageMaps extends React.PureComponent {
     }
 
     if (lineName !== prevProps.lineName) {
-      // console.log("updat lineName", lineName);
       this.store.dispatch(setLineName(lineName));
     }
   }

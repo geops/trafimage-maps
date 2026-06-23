@@ -11,8 +11,8 @@ describe("SchmalspurLayer", () => {
   });
 
   describe("on load", () => {
-    test("should fetch source info and set the tuInfos variable", async () => {
-      const spy = fetchMock.once(/data\/ch\.sbb\.isb\.schmalspur\.json/g, {
+    test.only("should fetch source info and set the tuInfos variable", async () => {
+      const spy = fetchMock.once(/data\/infrastrukturbetreiberinnen\.json/g, {
         "geops.isb.schmalspur.tu_info": {
           1: {
             logo_url: null,

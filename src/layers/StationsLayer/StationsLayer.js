@@ -1,3 +1,12 @@
+import {
+  MapsGeneralClass,
+  MapsGeneralClassValues,
+  MapsGeneralSubClass,
+  MapsGeneralSubClassValues,
+  MapsTrafimageFilter,
+  MapsTrafimageFilterValues,
+  STATIONS_SOURCE_ID,
+} from "../../utils/constants";
 import MapboxStyleLayer from "../MapboxStyleLayer";
 
 /**
@@ -11,7 +20,8 @@ class StationsLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     super({
       styleLayersFilter: ({ metadata }) =>
-        !!metadata && metadata["trafimage.filter"] === "stations",
+        !!metadata &&
+        metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.STATIONS,
       properties: {
         hideInLegend: true,
         popupComponent: "StationPopup",
@@ -21,7 +31,7 @@ class StationsLayer extends MapboxStyleLayer {
       ...options,
     });
 
-    this.sourceId = "stations";
+    this.sourceId = STATIONS_SOURCE_ID;
 
     this.onIdle = this.onIdle.bind(this);
     this.ready = false;
@@ -67,7 +77,11 @@ class StationsLayer extends MapboxStyleLayer {
       .getStyle()
       .layers.filter(
         ({ metadata }) =>
-          metadata && /^stations/.test(metadata["general.filter"]),
+          metadata &&
+          metadata[MapsGeneralClass] === MapsGeneralClassValues.STATIONS &&
+          metadata[MapsGeneralSubClass] !==
+            MapsGeneralSubClassValues.STOP_POSITION &&
+          metadata[MapsGeneralSubClass] !== MapsGeneralSubClassValues.SECTORS,
       )
       .map((layer) => layer.id);
 
@@ -101,6 +115,12 @@ class StationsLayer extends MapboxStyleLayer {
     const source = mbMap?.getSource(this.sourceId);
 
     if (!this.osmPointsLayers || !source) {
+      if (!source) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          "Source for stations layer not found, can't update source",
+        );
+      }
       return;
     }
 
@@ -108,9 +128,9 @@ class StationsLayer extends MapboxStyleLayer {
       .queryRenderedFeatures({
         layers: this.osmPointsLayers,
       })
-      .map((feat) => {
+      .map((feat, index) => {
         const good = {
-          id: feat.id * 1000,
+          id: index + 1,
           type: feat.type,
           properties: feat.properties,
           geometry: feat.geometry,

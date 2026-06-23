@@ -10,6 +10,9 @@ import {
   DATA_LAYER_NAME,
   FLOOR_LEVELS,
   GESCHOSSE_LAYER_NAME,
+  MapsGeneralFloor,
+  MapsTrafimageFilter,
+  MapsTrafimageFilterValues,
   NETZKARTE_AERIAL_LAYER_NAME,
   NETZKARTE_DARK_LAYER_NAME,
   NETZKARTE_LAYER_NAME,
@@ -25,7 +28,7 @@ export const getNetzkarteLayers = () => {
     name: DATA_LAYER_NAME,
     visible: true,
     zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-    style: "base_bright_v2_ch.sbb.netzkarte",
+    style: "basemap_bright_ch.sbb.netzkarte",
     properties: {
       hideInLegend: true,
     },
@@ -44,11 +47,9 @@ export const getNetzkarteLayers = () => {
       hasLevels: true,
       hideInLegend: true,
     },
-    visible: true,
+    visible: false,
     mapboxLayer: dataLayer,
-    styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "perimeter_mask",
-    style: "base_bright_v2_ch.sbb.netzkarte",
+    style: "basemap_bright_ch.sbb.netzkarte",
   });
 
   const netzkarteNight = new MapboxStyleLayer({
@@ -63,7 +64,7 @@ export const getNetzkarteLayers = () => {
     },
     visible: false,
     mapboxLayer: dataLayer,
-    style: "base_dark_v2_ch.sbb.netzkarte",
+    style: "basemap_dark_ch.sbb.netzkarte",
   });
 
   const netzkarteAerial = new MapboxStyleLayer({
@@ -76,23 +77,8 @@ export const getNetzkarteLayers = () => {
     },
     visible: false,
     mapboxLayer: dataLayer,
-    style: "aerial_sbb_sbbkey_ch.sbb.netzkarte.aerial",
+    style: "basemap_aerial_sbbkey_ch.sbb.netzkarte",
   });
-
-  // const swisstopoSwissImage = new MapboxStyleLayer({
-  //   name: "ch.sbb.netzkarte.luftbild.group",
-  //   key: "ch.sbb.netzkarte.luftbild.group.old",
-  //   group: "baseLayer",
-  //   properties: {
-  //     isBaseLayer: true,
-  //     previewImage: "ch.sbb.netzkarte.luftbild.group",
-  //   },
-  //   visible: false,
-  //   mapboxLayer: dataLayer,
-  //   style: "ch.swisstopo.backgrounds_ch.sbb.netzkarte.swisstopo",
-  //   styleLayersFilter: ({ metadata }) =>
-  //     !!metadata && metadata["trafimage.filter"] === "swissimage",
-  // });
 
   const swisstopoLandeskarte = new MapboxStyleLayer({
     name: STOPO_LANDESKARTE_LAYER_NAME,
@@ -106,7 +92,9 @@ export const getNetzkarteLayers = () => {
     mapboxLayer: dataLayer,
     style: "ch.swisstopo.backgrounds_ch.sbb.netzkarte.swisstopo",
     styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "pixelkarte_farbe",
+      !!metadata &&
+      metadata[MapsTrafimageFilter] ===
+        MapsTrafimageFilterValues.PIXELKARTE_FARBE,
   });
 
   const swisstopoLandeskarteGrau = new MapboxStyleLayer({
@@ -121,7 +109,9 @@ export const getNetzkarteLayers = () => {
     mapboxLayer: dataLayer,
     style: "ch.swisstopo.backgrounds_ch.sbb.netzkarte.swisstopo",
     styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "pixelkarte_grau",
+      !!metadata &&
+      metadata[MapsTrafimageFilter] ===
+        MapsTrafimageFilterValues.PIXELKARTE_GRAU,
   });
 
   const passagierfrequenzen = new MapboxStyleLayer({
@@ -129,7 +119,9 @@ export const getNetzkarteLayers = () => {
     visible: false,
     mapboxLayer: dataLayer,
     styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "passagier_freq",
+      !!metadata &&
+      metadata[MapsTrafimageFilter] ===
+        MapsTrafimageFilterValues.PASSAGIER_FREQ,
     properties: {
       isQueryable: true,
       hasInfos: true,
@@ -146,7 +138,8 @@ export const getNetzkarteLayers = () => {
     visible: false,
     mapboxLayer: dataLayer,
     styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "interaktiv",
+      !!metadata &&
+      metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.INTERAKTIV,
     group: "bahnhofplaene",
     properties: {
       isQueryable: true,
@@ -161,7 +154,8 @@ export const getNetzkarteLayers = () => {
     visible: false,
     mapboxLayer: dataLayer,
     styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "printprodukte",
+      !!metadata &&
+      metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.PRINTPRODUKTE,
     group: "bahnhofplaene",
     properties: {
       isQueryable: true,
@@ -296,7 +290,8 @@ export const getNetzkarteLayers = () => {
     name: "ch.sbb.netzkarte.buslinien",
     mapboxLayer: dataLayer,
     styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "bus",
+      !!metadata &&
+      metadata[MapsTrafimageFilter] === MapsTrafimageFilterValues.BUS,
     visible: false,
     properties: {
       isQueryable: (map) => {
@@ -318,7 +313,9 @@ export const getNetzkarteLayers = () => {
     mapboxLayer: dataLayer,
     visible: false,
     styleLayersFilter: ({ metadata }) =>
-      metadata && metadata["trafimage.filter"] === "municipality_borders",
+      metadata &&
+      metadata[MapsTrafimageFilter] ===
+        MapsTrafimageFilterValues.MUNICIPALITY_BORDERS,
     properties: {
       hasInfos: true,
       description: "ch.sbb.ch_gemeinden-desc",
@@ -338,7 +335,8 @@ export const getNetzkarteLayers = () => {
       name: `ch.sbb.geschosse${level}`,
       visible: level === "2D",
       mapboxLayer: dataLayer,
-      styleLayersFilter: ({ metadata }) => metadata && metadata["geops.filter"],
+      styleLayersFilter: ({ metadata }) =>
+        metadata && metadata[MapsGeneralFloor],
       level,
       group: "ch.sbb.geschosse-layer",
       properties: {

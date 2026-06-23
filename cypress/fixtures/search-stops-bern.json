@@ -1,0 +1,1642 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "7e7dbbe3be4bc3a6",
+        "name": "Bern",
+        "matched_name": "Bern",
+        "country_code": "CH",
+        "rank": 0.5286462589362072,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "12",
+            "13",
+            "49",
+            "50"
+          ]
+        },
+        "ifopt": "CH:1:SLOID:7000",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8507000",
+        "code": "BN"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.439131, 46.948832]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "496211a5d7ec6962",
+        "name": "Bern, Bahnhof",
+        "matched_name": "Bern, Bahnhof",
+        "country_code": "CH",
+        "rank": 0.5731399705645742,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "H",
+            "I",
+            "J",
+            "K1",
+            "K2",
+            "L",
+            "M",
+            "Q",
+            "Z"
+          ],
+          "tram": ["A", "B", "C", "D", "J", "N"]
+        },
+        "ifopt": "CH:1:SLOID:76646",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8576646",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.440209, 46.948105]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "330f843a069c7623",
+        "name": "Bern, Hauptbahnhof",
+        "matched_name": "Bern, Hauptbahnhof",
+        "country_code": "CH",
+        "rank": 0.5851137193264728,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["R", "S", "T", "U", "V", "W"]
+        },
+        "ifopt": "CH:1:SLOID:7785",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8507785",
+        "code": "BNHO"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.438527, 46.948996]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "0de283afdd72f1e9",
+        "name": "Bern Wankdorf",
+        "matched_name": "Bern Wankdorf",
+        "country_code": "CH",
+        "rank": 0.6035023595219695,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2", "3", "5", "6", "7"]
+        },
+        "ifopt": "CH:1:SLOID:16161",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8516161",
+        "code": "BNWD"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.465478, 46.967826]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "0b10797cae0d66ae",
+        "name": "Bern B\u00fcmpliz S\u00fcd",
+        "matched_name": "Bern B\u00fcmpliz",
+        "country_code": "CH",
+        "rank": 0.6082954640295585,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2"]
+        },
+        "ifopt": "CH:1:SLOID:4106",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8504106",
+        "code": "BNBS"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.395238, 46.937487]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "58b64d5b6dead060",
+        "name": "Bern Europaplatz",
+        "matched_name": "Bern Europaplatz",
+        "country_code": "CH",
+        "rank": 0.6145264758091753,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2", "3", "4"]
+        },
+        "ifopt": "CH:1:SLOID:4108",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8504108",
+        "code": "BNAS"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.406118, 46.94421]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "b5d10cf5ddb9b4f0",
+        "name": "Bern Riedbach",
+        "matched_name": "Bern Riedbach",
+        "country_code": "CH",
+        "rank": 0.6163134912957001,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2"]
+        },
+        "ifopt": "CH:1:SLOID:4488",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8504488",
+        "code": "RCH"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.33405, 46.941154]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "28cf4f55b5c12c51",
+        "name": "Bern Felsenau",
+        "matched_name": "Bern Felsenau",
+        "country_code": "CH",
+        "rank": 0.6164957189017584,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2"]
+        },
+        "ifopt": "CH:1:SLOID:8051",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8508051",
+        "code": "BNFE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.44425, 46.9685]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "8a5be589a20396ee",
+        "name": "Bern Tiefenau",
+        "matched_name": "Bern Tiefenau",
+        "country_code": "CH",
+        "rank": 0.6164957189017584,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2"]
+        },
+        "ifopt": "CH:1:SLOID:8052",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8508052",
+        "code": "BNTI"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.4502, 46.97274]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "3e6614fc41e84518",
+        "name": "Ittigen bei Bern",
+        "matched_name": "Ittigen bei Bern",
+        "country_code": "CH",
+        "rank": 0.6173172811483536,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:7069",
+        "municipality_name": "Ittigen",
+        "ident_source": "sbb",
+        "id": "8507069",
+        "code": "ITT"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.48413, 46.97331]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "868fc2dac6111bc3",
+        "name": "G\u00fcmligen",
+        "matched_name": "G\u00fcmligen Bahnhof",
+        "country_code": "CH",
+        "rank": 0.617891297612598,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2", "3"]
+        },
+        "ifopt": "CH:1:SLOID:7003",
+        "municipality_name": "Muri bei Bern",
+        "ident_source": "sbb",
+        "id": "8507003",
+        "code": "GUE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.505505, 46.934322]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "d89de464c77581c4",
+        "name": "Bern (Marzilibahn)",
+        "matched_name": "Bern DMB",
+        "country_code": "CH",
+        "rank": 0.6190470939193448,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": true
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:30257",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8530257",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.442205, 46.945964]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "5efc24456e966f44",
+        "name": "Wabern bei Bern",
+        "matched_name": "Wabern bei Bern",
+        "country_code": "CH",
+        "rank": 0.6198810443904665,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2"]
+        },
+        "ifopt": "CH:1:SLOID:7078",
+        "municipality_name": "K\u00f6niz",
+        "ident_source": "sbb",
+        "id": "8507078",
+        "code": "WBB"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.445889, 46.928663]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "24b7a2eac0d0bc03",
+        "name": "Bern Weissenb\u00fchl",
+        "matched_name": "Bern Weissenb\u00fchl",
+        "country_code": "CH",
+        "rank": 0.6198810443904665,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2"]
+        },
+        "ifopt": "CH:1:SLOID:7079",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8507079",
+        "code": "BNWE"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.430019, 46.935779]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "7496ea488003bd33",
+        "name": "Bern, Parkstrasse",
+        "matched_name": "HMI2",
+        "country_code": "CH",
+        "rank": 0.6207408729254535,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:89000",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8589000",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.458471, 46.959474]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "9a91c86719ccb997",
+        "name": "Bern B\u00fcmpliz Nord",
+        "matched_name": "Bern B\u00fcmpliz Nord",
+        "country_code": "CH",
+        "rank": 0.6212063360708899,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["2", "4", "5"]
+        },
+        "ifopt": "CH:1:SLOID:4489",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8504489",
+        "code": "BNBZ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.389756, 46.945829]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "aebb247a14d218fa",
+        "name": "Bern, Wyleregg",
+        "matched_name": "WYPA",
+        "country_code": "CH",
+        "rank": 0.6214816412226165,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:89008",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8589008",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.44892, 46.960968]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "dee62c3bde55c6bc",
+        "name": "Bern, Markuskirche",
+        "matched_name": "HMI1",
+        "country_code": "CH",
+        "rank": 0.6214837337884277,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:76997",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8576997",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.456633, 46.963657]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "e89014c89398e2b4",
+        "name": "Bern St\u00f6ckacker",
+        "matched_name": "Bern St\u00f6ckacker",
+        "country_code": "CH",
+        "rank": 0.6215126018864768,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:4495",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8504495",
+        "code": "BNST"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.401178544, 46.946360317]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "72c14722d2c97d9f",
+        "name": "Bern, Zent",
+        "matched_name": "Bern, Zent",
+        "country_code": "CH",
+        "rank": 0.6231473236083275,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:77001",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8577001",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.475339, 46.957455]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "88420482c87d2962",
+        "name": "Bern, Salem",
+        "matched_name": "Bern, Salem",
+        "country_code": "CH",
+        "rank": 0.6247432029908557,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:87483",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8587483",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.45441, 46.953897]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "0d3c4e9764ca12d1",
+        "name": "Bern, Wyler",
+        "matched_name": "Bern, Wyler",
+        "country_code": "CH",
+        "rank": 0.6248928214463562,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:89007",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8589007",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.463676, 46.96532]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "cf2ccf2b641afee7",
+        "name": "Bern Br\u00fcnnen Westside",
+        "matched_name": "Bern Br\u00fcnnen Westside",
+        "country_code": "CH",
+        "rank": 0.6249942142265982,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": true,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "rail": ["1", "2"]
+        },
+        "ifopt": "CH:1:SLOID:16154",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8516154",
+        "code": "BNB"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.375278, 46.944037]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "1400c610c8cd45ca",
+        "name": "Bern Matte",
+        "matched_name": "Bern Matte",
+        "country_code": "CH",
+        "rank": 0.6257591436921908,
+        "translated_names": [],
+        "mot": {
+          "bus": false,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": true
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:249",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8500249",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.45257, 46.94663]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "7ac72e6675e7b687",
+        "name": "Bern, Saali",
+        "matched_name": "Bern, Saali",
+        "country_code": "CH",
+        "rank": 0.6263662493481637,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:89002",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8589002",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.485583, 46.937743]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "54958dbbabe901e1",
+        "name": "Macau - Bern",
+        "matched_name": "Macau - Bern",
+        "country_code": "FR",
+        "rank": 0.6266233733722142,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": null,
+        "municipality_name": "Macau",
+        "ident_source": null,
+        "id": null,
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-0.630522, 45.0066308]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "986921d2bcf4e95b",
+        "name": "Bern, Wander",
+        "matched_name": "Bern, Wander",
+        "country_code": "CH",
+        "rank": 0.6277636430217115,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["A", "C", "D"],
+          "tram": ["A"]
+        },
+        "ifopt": "CH:1:SLOID:89993",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8589993",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.436334, 46.936924]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "193db69af1a0e22e",
+        "name": "Bern, Beaumont",
+        "matched_name": "Bern, Beaumont",
+        "country_code": "CH",
+        "rank": 0.6283353494393784,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90016",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590016",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.432211, 46.937509]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "b931cd2c6fe2e542",
+        "name": "Bern, Hasler",
+        "matched_name": "Bern, Hasler",
+        "country_code": "CH",
+        "rank": 0.6287828969522476,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90015",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590015",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.432525, 46.944273]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "9a623fdf9f6205a0",
+        "name": "Bern, Nydegg",
+        "matched_name": "Bern, Nydegg",
+        "country_code": "CH",
+        "rank": 0.6290489143809957,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90033",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590033",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.456352, 46.948617]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "ad46a2e0be6cffca",
+        "name": "Muri bei Bern",
+        "matched_name": "Muri bei Bern",
+        "country_code": "CH",
+        "rank": 0.6290679218537808,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:7062",
+        "municipality_name": "Muri bei Bern",
+        "ident_source": "sbb",
+        "id": "8507062",
+        "code": "MIBN"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.48641, 46.93141]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "b407e315194f6708",
+        "name": "Bern, G\u00fcterbahnhof",
+        "matched_name": "Bern, G\u00fcterbahnhof",
+        "country_code": "CH",
+        "rank": 0.6291347095792548,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90025",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590025",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.422606, 46.951351]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "af0aebf7ddff0cd6",
+        "name": "Bern, Monbijou",
+        "matched_name": "Bern, Monbijou",
+        "country_code": "CH",
+        "rank": 0.6291523765161403,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["A", "B", "C", "D"],
+          "tram": ["A", "B"]
+        },
+        "ifopt": "CH:1:SLOID:89991",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8589991",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.436019, 46.943761]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "0357ad8dde9995f7",
+        "name": "Bern, Bollwerk",
+        "matched_name": "Bern, Bollwerk",
+        "country_code": "CH",
+        "rank": 0.6291525018356703,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["A", "B", "C"]
+        },
+        "ifopt": "CH:1:SLOID:88990",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8588990",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.441365, 46.95164]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "e320ce4e280cb603",
+        "name": "Bern, Zytglogge",
+        "matched_name": "Bern, Zytglogge",
+        "country_code": "CH",
+        "rank": 0.6298239715462666,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["A", "B", "C", "D", "E", "F", "G", "H"],
+          "tram": ["A", "B", "E", "F", "F"]
+        },
+        "ifopt": "CH:1:SLOID:7110",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8507110",
+        "code": "BNZY"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.4475, 46.94784]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "8f9d0a5eab728c4e",
+        "name": "Bern Wankdorf, Bahnhof",
+        "matched_name": "Bern Wankdorf, Bahnhof",
+        "country_code": "CH",
+        "rank": 0.6299534804608594,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90129",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590129",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.464386, 46.966597]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "1a103f8cb6a9ade4",
+        "name": "Bern, Kursaal",
+        "matched_name": "Bern, Kursaal",
+        "country_code": "CH",
+        "rank": 0.6303175378510529,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["A", "B"],
+          "tram": ["A", "B"]
+        },
+        "ifopt": "CH:1:SLOID:90020",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590020",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.449615, 46.95289]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "f38b31ec24bac6db",
+        "name": "Bern, Breitfeld",
+        "matched_name": "Bern, Breitfeld",
+        "country_code": "CH",
+        "rank": 0.6310429225363127,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["A", "B", "C", "D"]
+        },
+        "ifopt": "CH:1:SLOID:88991",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8588991",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.452205, 46.96256]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "f0917e11e5ff52aa",
+        "name": "Bern, Elfenau",
+        "matched_name": "Bern, Elfenau",
+        "country_code": "CH",
+        "rank": 0.631091787201195,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90063",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590063",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.472775, 46.932638]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "39d406039c61f9ae",
+        "name": "Bern, Rathaus",
+        "matched_name": "Bern, Rathaus",
+        "country_code": "CH",
+        "rank": 0.631208970886622,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90032",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590032",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.452661, 46.948051]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "3966d1aaea8455b9",
+        "name": "Bern, Jaunweg",
+        "matched_name": "Bern, Jaunweg",
+        "country_code": "CH",
+        "rank": 0.6312748867096746,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90024",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590024",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.448264, 46.967975]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "6dd7a655c3fa9398",
+        "name": "Bern, Brunnhof",
+        "matched_name": "Bern, Brunnhof",
+        "country_code": "CH",
+        "rank": 0.6313491727959719,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["A", "A", "C"],
+          "tram": ["A", "B"]
+        },
+        "ifopt": "CH:1:SLOID:90010",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590010",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.427206, 46.944498]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "45ac67460c7daf6e",
+        "name": "Bern, D\u00fcbystrasse",
+        "matched_name": "Bern, D\u00fcbystrasse",
+        "country_code": "CH",
+        "rank": 0.6313568074079918,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90054",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590054",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.425172, 46.93624]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "53461b72c86cb639",
+        "name": "Bern, Seminar",
+        "matched_name": "Bern, Seminar",
+        "country_code": "CH",
+        "rank": 0.6314459539647397,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90036",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590036",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.461303, 46.944784]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "0c48cd562c027092",
+        "name": "Bern, B\u00fcmpliz",
+        "matched_name": "Bern, B\u00fcmpliz",
+        "country_code": "CH",
+        "rank": 0.6314460411549818,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90044",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590044",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.380848, 46.937575]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "d366bfb57c76a1f2",
+        "name": "Bern, Liebegg",
+        "matched_name": "Bern, Liebegg",
+        "country_code": "CH",
+        "rank": 0.6314527548036261,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90035",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590035",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.458952, 46.944677]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "3c5a4e852ba9badc",
+        "name": "Bern, Ostring",
+        "matched_name": "Bern, Ostring",
+        "country_code": "CH",
+        "rank": 0.6315119569780345,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["858748002", "B"],
+          "tram": ["858748002"]
+        },
+        "ifopt": "CH:1:SLOID:87480",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8587480",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.471469, 46.945124]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "dd8b456891e7e555",
+        "name": "Bern, Sulgenau",
+        "matched_name": "Bern, Sulgenau",
+        "country_code": "CH",
+        "rank": 0.6315253461460352,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": true,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {
+          "bus": ["B", "C", "D"],
+          "tram": ["B"]
+        },
+        "ifopt": "CH:1:SLOID:89992",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8589992",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.435901, 46.939974]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "02510fcc6848ff5f",
+        "name": "Bern, Badgasse",
+        "matched_name": "Bern, Badgasse",
+        "country_code": "CH",
+        "rank": 0.6316243452001441,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:90113",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8590113",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.452726, 46.946054]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "uid": "a1ad8a946c9d4987",
+        "name": "Bern, Huberstrasse",
+        "matched_name": "Bern, Huberstrasse",
+        "country_code": "CH",
+        "rank": 0.6317671628167582,
+        "translated_names": [],
+        "mot": {
+          "bus": true,
+          "rail": false,
+          "tram": false,
+          "ferry": false,
+          "subway": false,
+          "gondola": false,
+          "cable_car": false,
+          "funicular": false
+        },
+        "platforms": {},
+        "ifopt": "CH:1:SLOID:2905",
+        "municipality_name": "Bern",
+        "ident_source": "sbb",
+        "id": "8502905",
+        "code": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.416029, 46.942076]
+      }
+    }
+  ]
+}
