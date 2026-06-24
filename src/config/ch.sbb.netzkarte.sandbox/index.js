@@ -33,8 +33,8 @@ export const getSandboxLayers = () => {
     visible: false,
     mapboxLayer: sandboxDataLayer,
     styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "perimeter_mask",
-    style: "temp_entwicklungsstyle",
+      !!metadata && metadata["general.class"] === "perimeter_mask",
+    style: "ch.sbb.temp_entwicklungsstyle",
   });
 
   const sandboxGeschosseLayer = geschosseLayer.clone({
