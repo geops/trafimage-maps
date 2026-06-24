@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- select first base layer hwen no visible ([e20d4a1](https://github.com/geops/trafimage-maps/commit/e20d4a1b2e0ebe4dd501336b40afa58e14190b05))
+- select first base layer when no visible ([e20d4a1](https://github.com/geops/trafimage-maps/commit/e20d4a1b2e0ebe4dd501336b40afa58e14190b05))
 
 ### [1.32.8](https://github.com/geops/trafimage-maps/compare/v1.32.7...v1.32.8) (2026-06-23)
 
