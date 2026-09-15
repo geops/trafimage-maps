@@ -3,6 +3,7 @@ import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import { KilometrageLayer } from "../../layers";
 import RegionenkarteLayer from "../../layers/RegionenkarteLayer";
+import { MapsInfraFilter, MapsInfraFilterValues } from "../../utils/constants";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getRegionenkartePublicLayers = () => {
@@ -88,9 +89,8 @@ export const getRegionenkartePublicLayers = () => {
         visible: true,
         isQueryable: false,
         mapboxLayer: anlagenverantwortliche,
-        styleLayersFilter: ({ id }) => {
-          // We select all stations
-          return /FanasStation/.test(id);
+        styleLayersFilter: ({ metadata }) => {
+          return metadata?.[MapsInfraFilter] === MapsInfraFilterValues.Ktu;
         },
         properties: {
           hasInfos: true,
@@ -102,8 +102,8 @@ export const getRegionenkartePublicLayers = () => {
         visible: true,
         isQueryable: false,
         mapboxLayer: anlagenverantwortliche,
-        styleLayersFilter: ({ id }) => {
-          return /FanasLine|DFA/.test(id);
+        styleLayersFilter: ({ metadata }) => {
+          return metadata?.[MapsInfraFilter] === MapsInfraFilterValues.Sbb;
         },
         properties: {
           hasInfos: true,
