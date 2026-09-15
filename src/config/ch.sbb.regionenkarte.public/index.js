@@ -90,7 +90,7 @@ export const getRegionenkartePublicLayers = () => {
         isQueryable: false,
         mapboxLayer: anlagenverantwortliche,
         styleLayersFilter: ({ metadata }) => {
-          return metadata?.[MapsInfraFilter] === MapsInfraFilterValues.Ktu;
+          return metadata?.[MapsInfraFilter] === MapsInfraFilterValues.KTU;
         },
         properties: {
           hasInfos: true,
@@ -103,7 +103,7 @@ export const getRegionenkartePublicLayers = () => {
         isQueryable: false,
         mapboxLayer: anlagenverantwortliche,
         styleLayersFilter: ({ metadata }) => {
-          return metadata?.[MapsInfraFilter] === MapsInfraFilterValues.Sbb;
+          return metadata?.[MapsInfraFilter] === MapsInfraFilterValues.SBB;
         },
         properties: {
           hasInfos: true,
