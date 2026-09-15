@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.12](https://github.com/geops/trafimage-maps/compare/v1.32.11...v1.32.12) (2026-09-15)
+
+### Bug Fixes
+
+- use proper infra filter ([#1255](https://github.com/geops/trafimage-maps/issues/1255)) ([0980d46](https://github.com/geops/trafimage-maps/commit/0980d4652b8660476266f78e8769e35339d06edf))
+
 ### [1.32.11](https://github.com/geops/trafimage-maps/compare/v1.32.10...v1.32.11) (2026-06-25)
 
 ### Bug Fixes
