@@ -24,7 +24,7 @@
     "i18next": "23.14.0",
     "i18next-browser-languagedetector": "8.0.0",
     "i18next-xhr-backend": "3.2.2",
-    "jspdf": "2.5.1",
+    "jspdf": "4.2.1",
     "mapbox-gl": "1.13.3",
     "maplibre-gl": "4.5.1",
     "mobility-toolbox-js": "2.4.3",
