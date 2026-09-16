@@ -3,7 +3,10 @@ import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import { KilometrageLayer } from "../../layers";
 import RegionenkarteLayer from "../../layers/RegionenkarteLayer";
-import { MapsInfraFilter, MapsInfraFilterValues } from "../../utils/constants";
+import {
+  MapsGeneralFilter,
+  MapsGeneralFilterValues,
+} from "../../utils/constants";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getRegionenkartePublicLayers = () => {
@@ -90,7 +93,9 @@ export const getRegionenkartePublicLayers = () => {
         isQueryable: false,
         mapboxLayer: anlagenverantwortliche,
         styleLayersFilter: ({ metadata }) => {
-          return metadata?.[MapsInfraFilter] === MapsInfraFilterValues.KTU;
+          return (
+            metadata?.[MapsGeneralFilter] === MapsGeneralFilterValues.STATION
+          );
         },
         properties: {
           hasInfos: true,
@@ -103,7 +108,9 @@ export const getRegionenkartePublicLayers = () => {
         isQueryable: false,
         mapboxLayer: anlagenverantwortliche,
         styleLayersFilter: ({ metadata }) => {
-          return metadata?.[MapsInfraFilter] === MapsInfraFilterValues.SBB;
+          return (
+            metadata?.[MapsGeneralFilter] === MapsGeneralFilterValues.TRACK
+          );
         },
         properties: {
           hasInfos: true,
