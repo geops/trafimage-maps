@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.13](https://github.com/geops/trafimage-maps/compare/v1.32.12...v1.32.13) (2026-09-16)
+
+### Bug Fixes
+
+- update browsers-list ([63a6923](https://github.com/geops/trafimage-maps/commit/63a69230c7938deb402f0aa5369a91ae2b42731d))
+- use better filter for regionenkarte ([ab6dee3](https://github.com/geops/trafimage-maps/commit/ab6dee32628fb33be009d18a89492dfa37ec98fb))
+
 ### [1.32.12](https://github.com/geops/trafimage-maps/compare/v1.32.11...v1.32.12) (2026-09-15)
 
 ### Bug Fixes
